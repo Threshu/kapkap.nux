@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: *s=
+Disallow: /shop/
+Disallow: /prywatnosc/
+Disallow: /my-account/
+Disallow: /dostawa/
+Disallow: /v1/*
