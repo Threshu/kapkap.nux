@@ -6,7 +6,7 @@ export default {
   head: {
     title: 'KapKap',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'pl'
     },
     meta: [
       { charset: 'utf-8' },
@@ -25,10 +25,16 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/preview.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: {
+    dirs: [
+      '~/components',
+      '~/components/Common'
+    ]
+  },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
