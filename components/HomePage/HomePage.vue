@@ -5,16 +5,11 @@
         <h1 class="home-title">
           Sklep z personalizowanymi<br>gadżetami i prezentami
         </h1>
-        <VueSlickCarousel
-          class="center"
-          :center-mode="true"
-          :infinite="true"
-          center-padding="60px"
-          slides-to-show="3"
-          speed="500"
-          :dots="true"
-          :responsive="slickOptions"
-        >
+        <VueSlickCarousel v-bind="settings">
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
           <!--          {topSlider && topSlider.map((image, key) =>-->
           <!--          <div class="home-slider-item" key={key}>-->
           <!--            {image.news && <div class="new">Nowość</div>}-->
@@ -32,24 +27,34 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { useBrowserLocation } from '@vueuse/core'
-import { Ref } from '@vue/composition-api'
+// import { Ref } from '@vue/composition-api'
 import { Component, Vue } from 'nuxt-property-decorator'
+import VueSlickCarousel from 'vue-slick-carousel'
 
 @Component({
   components: { VueSlickCarousel }
 })
 export default class HomePage extends Vue {
   location = ''
-  slickOptions = {
-    breakpoint: 800,
-    settings: {
-      className: 'center',
-      centerMode: true,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    }
+  settings = {
+    class: 'center',
+    centerMode: true,
+    infinite: true,
+    centerPadding: '60px',
+    slidesToShow: 3,
+    speed: 500,
+    dots: true,
+    // responsive: {
+    //   breakpoint: 800,
+    //   settings: {
+    //     className: 'center',
+    //     centerMode: true,
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1
+    //   }
+    // }
   }
 
   head () {
@@ -73,7 +78,7 @@ export default class HomePage extends Vue {
   }
 
   mounted () {
-    const location: Ref = useBrowserLocation()
+    const location = useBrowserLocation()
     this.location = location.value.href
   }
 
