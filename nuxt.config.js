@@ -21,11 +21,15 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/scss/font-awesome.scss',
+    '~/assets/scss/bootstrap.scss',
+    '~/assets/scss/style.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/preview.client.js'
+    '~/plugins/preview.client.js',
+    '~/plugins/jsonld'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -49,8 +53,18 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-i18n'
   ],
+
+  i18n: {
+    locales: ['pl', 'en'],
+    defaultLocale: 'pl',
+    ueI18n: {
+      fallbackLocale: 'en'
+    },
+    vueI18nLoader: true
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

@@ -2,9 +2,8 @@
   <div class="header-container">
     <div class="overlay" />
     <header
-      v-if="headerMessage && showMessage"
       id="sticky"
-      class="sticky open-messages-box"
+      :class="`sticky ${headerMessage && showMessage ? 'open-messages-box' : ''}`"
     >
       <div
         v-if="headerMessage && showMessage"
@@ -44,8 +43,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import LogoImage from '~/components/Common/LogoImage.vue'
+import CartWidget from '~/components/Common/CartWidget.vue'
+import NavBar from '~/components/Common/NavBar.vue'
+import TopBar from '~/components/Common/TopBar.vue'
 
-@Component
+@Component({
+  components: { TopBar, NavBar, CartWidget, LogoImage }
+})
 export default class Header extends Vue {
   headerMessage = ''
   showMessage = true
