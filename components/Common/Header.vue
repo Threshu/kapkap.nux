@@ -49,13 +49,34 @@ import NavBar from '~/components/Common/NavBar.vue'
 import TopBar from '~/components/Common/TopBar.vue'
 
 @Component({
-  components: { TopBar, NavBar, CartWidget, LogoImage }
+  components: { TopBar, NavBar, CartWidget, LogoImage },
 })
 export default class Header extends Vue {
   headerMessage = ''
   showMessage = true
   logoName = ''
+  messageIndex = 0
 
-  closeBox () {}
+  get headerMessages () {
+    return this.$store.state.defaults.headerMessages
+  }
+
+  mounted () {
+    this.$store.watch(state => state.defaults.status, (newValue: string) => {
+      if (newValue === 'loaded') {
+        this.headerMessage = this.headerMessages[0]
+        setInterval(() => {
+          if (this.messageIndex >= this.headerMessages.length) {
+            this.messageIndex = 0
+          }
+          this.headerMessage = this.headerMessages[this.messageIndex++]
+        }, 5000)
+      }
+    })
+  }
+
+  closeBox () {
+    this.showMessage = false
+  }
 }
 </script>

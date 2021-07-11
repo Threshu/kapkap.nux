@@ -5,5 +5,6 @@ export default {
     state.defaultPetImageUrl = defaults.defaultPetImageUrl
     state.headerMessages = defaults.headerMessages
     state.basket = defaults.basket
+    state.status = 'loaded'
   }
 }
