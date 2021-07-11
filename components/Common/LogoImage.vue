@@ -1,37 +1,44 @@
 <template>
   <div>
-    <Helmet>
-      <script type="application/ld+json">{structuredData}</script>
-    </Helmet>
     <NuxtLink to="/">
-      <picture>
-        <source srcSet={`${process.env.PUBLIC_URL}/assets/images/logos/${props.logo}`} type="image/webp" />
-        <img src={`${process.env.PUBLIC_URL}/assets/images/logos/${pngLogo}`}
-             alt="personalizowane prezenty KapKap"
-             className="img-fluid logo"
-        />
-      </picture>
+      <Picture
+        path="images/logo/kapkap-logo-114x100.png"
+        alt="personalizowane prezenty KapKap"
+        class-name="img-fluid logo"
+      />
     </NuxtLink>
-    <img src={petImage}
-         alt="personalizowane prezenty KapKap"
-         className={`img-fluid logo dog ${petImage ? 'show' : null}`}
+    <Picture
+      :path="petImage"
+      alt="personalizowane prezenty KapKap"
+      :class-name="`img-fluid logo dog ${petImage ? 'show' : ''}`"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import { Jsonld } from 'nuxt-jsonld';
+import { Component, Vue } from 'nuxt-property-decorator'
+import { Jsonld } from 'nuxt-jsonld'
+import { useBrowserLocation } from '@vueuse/core'
+import Picture from '~/components/Common/Picture.vue'
 
 @Jsonld
-@Component
+@Component({
+  components: { Picture }
+})
 export default class LogoImage extends Vue {
+  petImage = ''
+
+  mounted () {
+    this.petImage = this.$store.state.defaults.defaultPetImageUrl
+  }
+
   jsonld () {
+    const location = useBrowserLocation()
     return {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       url: 'https://www.kapkap.eu',
-      logo: `${process.env.PUBLIC_URL}/assets/images/logos/${props.logo}`
+      logo: `${location.value.origin}/images/logo/kapkap-logo-114x100.png`
     }
   }
 }

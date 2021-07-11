@@ -6,18 +6,29 @@
     >
     <img
       :src="path"
-      class="img-fluid"
+      :class="className"
       :alt="alt"
     >
   </picture>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
-
-@Component
-export default class Picture extends Vue {
-  @Prop({ type: String, required: true }) readonly path: String = ''
-  @Prop({ type: String, required: false, default: '' }) readonly alt: String = ''
+export default {
+  props: {
+    path: {
+      type: String,
+      required: true
+    },
+    alt: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    className: {
+      type: String,
+      required: false,
+      default: 'img-fluid'
+    }
+  }
 }
 </script>
