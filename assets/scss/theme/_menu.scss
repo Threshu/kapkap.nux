@@ -2,6 +2,8 @@
     27.Menu css start
 ========================== */
 
+@use "sass:list";
+
 @mixin round_corner($amount, $chainable: 'ul > li:last-child > ', $level: 4, $chain_prefix: '> li:last-child > ', $chain: '', $selector: '') {
   $chain: $chain_prefix;
   $selector: $chain + 'a, ' + $chain + '*:not(ul) a, ' + $chain + 'ul';
@@ -758,13 +760,13 @@ header {
     .sub-arrow {
       position: absolute;
       top: 50%;
-      margin-top: -(ceil($theme-deafult__toggle-size / 2));
+      margin-top: -(ceil($theme-deafult__toggle-size * 0.5));
       left: auto;
       right: 15px;
       width: $theme-deafult__toggle-size;
       height: $theme-deafult__toggle-size;
       overflow: hidden;
-      font: bold #{$theme-deafult__font-size-small}/#{$theme-deafult__toggle-size} monospace !important;
+      font: bold list.slash($theme-deafult__font-size-small, $theme-deafult__toggle-size) monospace !important;
       text-align: center;
       text-shadow: none;
       border-radius: $theme-deafult__border-radius-small;

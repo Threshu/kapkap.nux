@@ -1,10 +1,12 @@
+@use "sass:math";
+
 $ti-font-path: "/assets/fonts" !default;
 
 $borderColor: #eee !default;
 $iconMuted: #eee !default;
 $iconLight: white !default;
 $iconDark: #333 !default;
-$icons-li-width: (30em/14);
+$icons-li-width: math.div(30em, 14);
 
 $wand : "\e600";
 $volume : "\e601";

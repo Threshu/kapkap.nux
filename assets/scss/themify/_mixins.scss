@@ -2,6 +2,8 @@
 // --------------------------
 
 // FONT / MARGINS / FONT SIZE / COLOUR
+@use "sass:math";
+
 @mixin icon($i, $m:10px, $fs:18px, $c:inherit) {
   &::before {
     @include icon-themify-icons();
@@ -66,7 +68,7 @@
 
     .icon-stack-base {
       font-size: $base-font-size;
-      *line-height: #{$height / $base-font-size}em;
+      *line-height: #{math.div($height, $base-font-size)}em;
     }
   }
 }
