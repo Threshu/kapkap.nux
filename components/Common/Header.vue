@@ -12,7 +12,7 @@
         <span>{{ headerMessage }}</span>
         <button
           class="close"
-          @click="closeBox"
+          @click="onCloseBox"
         />
       </div>
 
@@ -24,7 +24,7 @@
             <div class="main-menu">
               <div class="menu-left">
                 <div class="brand-logo">
-                  <LogoImage :logo="logoName" />
+                  <LogoImage />
                 </div>
               </div>
               <div class="menu-right pull-right">
@@ -54,7 +54,6 @@ import TopBar from '~/components/Common/TopBar.vue'
 export default class Header extends Vue {
   headerMessage: string = ''
   showMessage: boolean = true
-  logoName: string = ''
   messageIndex: number = 0
 
   get headerMessages () {
@@ -75,7 +74,7 @@ export default class Header extends Vue {
     })
   }
 
-  closeBox () {
+  onCloseBox () {
     this.showMessage = false
   }
 }

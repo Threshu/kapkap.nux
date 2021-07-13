@@ -11,7 +11,7 @@ pl:
           <div class="header-contact">
             <ul>
               <li>{{ $t('topbar_title') }}:</li>
-              <li><i class="fa fa-phone" aria-hidden="true"/> <a href="tel:+48694051344">694 051 344</a></li>
+              <li><i class="fa fa-phone" aria-hidden="true" /> <a :href="`tel:${phone}`">{{ phoneFormatted }}</a></li>
             </ul>
           </div>
         </div>
@@ -21,3 +21,13 @@ pl:
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class TopBar extends Vue {
+  phone: string = <string>process.env.phone
+  phoneFormatted: string = <string>process.env.phoneFormatted
+}
+</script>

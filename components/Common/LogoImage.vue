@@ -2,7 +2,7 @@
   <div>
     <NuxtLink to="/">
       <Picture
-        path="images/logo/kapkap-logo-114x100.png"
+        :path="logoPath"
         alt="personalizowane prezenty KapKap"
         class-name="img-fluid logo"
       />
@@ -26,10 +26,19 @@ import Picture from '~/components/Common/Picture.vue'
   components: { Picture }
 })
 export default class LogoImage extends Vue {
+  logoPath = '/images/logo/kapkap-logo-114x100.png'
   petImage = ''
 
+  get petUrl () {
+    return this.$store.state.defaults.defaultPetImageUrl
+  }
+
   mounted () {
-    this.petImage = this.$store.state.defaults.defaultPetImageUrl
+    this.$store.watch(state => state.defaults.status, (newValue: string) => {
+      if (newValue === 'loaded') {
+        this.petImage = this.petUrl
+      }
+    })
   }
 
   jsonld () {
@@ -38,7 +47,7 @@ export default class LogoImage extends Vue {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       url: 'https://www.kapkap.eu',
-      logo: `${location.value.origin}/images/logo/kapkap-logo-114x100.png`
+      logo: `${location.value.origin}${this.logoPath}`
     }
   }
 }

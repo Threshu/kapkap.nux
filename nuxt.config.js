@@ -23,7 +23,12 @@ export default {
   css: [
     '~/assets/scss/font-awesome.scss',
     '~/assets/scss/bootstrap.scss',
-    '~/assets/scss/style.scss'
+    '~/assets/scss/style.scss',
+    '~/assets/scss/slick.scss',
+    '~/assets/scss/slick-theme.scss',
+    '~/assets/scss/animate.scss',
+    '~/assets/scss/themify.scss',
+    '~/assets/scss/color1.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -74,5 +79,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  env: {
+    phone: process.env.PHONE,
+    phoneFormatted: process.env.PHONE_FORMATTED
   }
 }
