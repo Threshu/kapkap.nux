@@ -52,10 +52,10 @@ import TopBar from '~/components/Common/TopBar.vue'
   components: { TopBar, NavBar, CartWidget, LogoImage },
 })
 export default class Header extends Vue {
-  headerMessage = ''
-  showMessage = true
-  logoName = ''
-  messageIndex = 0
+  headerMessage: string = ''
+  showMessage: boolean = true
+  logoName: string = ''
+  messageIndex: number = 0
 
   get headerMessages () {
     return this.$store.state.defaults.headerMessages
