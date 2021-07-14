@@ -4,28 +4,28 @@
 
 @use "sass:list";
 
-@mixin round_corner($amount, $chainable: 'ul > li:last-child > ', $level: 4, $chain_prefix: '> li:last-child > ', $chain: '', $selector: '') {
-  $chain: $chain_prefix;
-  $selector: $chain + 'a, ' + $chain + '*:not(ul) a, ' + $chain + 'ul';
-
-  @for $i from 1 through $level {
-    $chain: $chain + $chainable;
-    $selector: $selector + ', ' + $chain + ' a, ' + $chain + '*: not(ul) a, ' + $chain + ' ul ';
-  }
-  #{$selector} {
-    border-radius: 0 0 0 0;
-  }
-  $chain: $chain_prefix;
-  $selector: $chain + 'a.highlighted, ' + $chain + '*:not(ul) a.highlighted';
-
-  @for $i from 1 through $level {
-    $chain: $chain + $chainable;
-    $selector: $selector + ', ' + $chain + ' a. highlighted, ' + $chain + '*: not(ul) a. highlighted ';
-  }
-  #{$selector} {
-    border-radius: 0;
-  }
-}
+//@mixin round_corner($amount, $chainable: 'ul > li:last-child > ', $level: 4, $chain_prefix: '> li:last-child > ', $chain: '', $selector: '') {
+//  $chain: $chain_prefix;
+//  $selector: $chain + 'a, ' + $chain + '*:not(ul) a, ' + $chain + 'ul';
+//
+//  @for $i from 1 through $level {
+//    $chain: $chain + $chainable;
+//    $selector: $selector + ', ' + $chain + ' a, ' + $chain + '*: not(ul) a, ' + $chain + ' ul ';
+//  }
+//  #{$selector} {
+//    border-radius: 0 0 0 0;
+//  }
+//  $chain: $chain_prefix;
+//  $selector: $chain + 'a.highlighted, ' + $chain + '*:not(ul) a.highlighted';
+//
+//  @for $i from 1 through $level {
+//    $chain: $chain + $chainable;
+//    $selector: $selector + ', ' + $chain + ' a. highlighted, ' + $chain + '*: not(ul) a. highlighted ';
+//  }
+//  #{$selector} {
+//    border-radius: 0;
+//  }
+//}
 
 @mixin sub_items($amount, $chainable: 'ul ', $level: 4, $chain: '') {
   @for $i from 1 through $level {
@@ -773,7 +773,7 @@ header {
     }
   }
 
-  @include round_corner($theme-deafult__collapsible-border-radius);
+  //@include round_corner($theme-deafult__collapsible-border-radius);
 
   ul {
     background: $theme-deafult__collapsible-sub-bg;

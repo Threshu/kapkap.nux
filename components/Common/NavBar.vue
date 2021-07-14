@@ -21,10 +21,10 @@
         </li>
 
         <template
-          v-for="[option, key] in menuOptions"
+          v-for="(option, key) in menuOptions"
         >
           <li
-            v-if="option.children"
+            v-if="option && typeof option.children !== undefined"
             :key="key"
             class="mega-menu"
           >
@@ -52,7 +52,7 @@
                   >
 
                   <template
-                    v-for="[suboption, groupKey] in option.children"
+                    v-for="(suboption, groupKey) in option.children"
                   >
                     <div
                       :key="groupKey"
@@ -66,10 +66,13 @@
                             {{ suboption.title }}
                           </h5>
                         </div>
-                        <div class="menu-content">
+                        <div
+                          v-if="suboption && typeof suboption.children !== undefined"
+                          class="menu-content"
+                        >
                           <ul>
                             <template
-                              v-for="[productOption, optionKey] in suboption.children"
+                              v-for="(productOption, optionKey) in suboption.children"
                             >
                               <li :key="optionKey">
                                 <NuxtLink
@@ -110,19 +113,19 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
+import { default as menu } from './menu.json'
 
-type menuItem = {
-  title: string,
-  link?: string,
-  children?: menuItem[]
-}
-
+@Component
 export default class NavBar extends Vue {
-  menuOptions: menuItem[] = []
-  mobileNav: boolean = false
+  menuOptions: any = []
+  mobileNav = false
 
-  // onSwitchNav () {
+  mounted () {
+    this.menuOptions = menu
+  }
+
+  onSwitchNav () {
   //   if (event.target.parentElement.parentElement.parentElement.classList.contains('open-submenu')) {
   //     document.querySelector('.mega-menu-container').classList.remove('opensubmenu')
   //     event.target.parentElement.parentElement.parentElement.classList.remove('open-submenu')
@@ -130,9 +133,9 @@ export default class NavBar extends Vue {
   //     changeMobileNav(!mobileNav)
   //     setOverlayShown(false)
   //   }
-  // }
+  }
 
-  // setOverlayShown (event) {
+  setOverlayShown (event: any) {
   //   if (window.innerWidth > 1200) {
   //     const overlay = document.querySelector('.overlay')
   //     const menu = document.querySelector('.mega-menu-container')
@@ -144,9 +147,9 @@ export default class NavBar extends Vue {
   //       menu.style.display = 'none'
   //     }
   //   }
-  // }
-  //
-  // handleSubmenu (event) {
+  }
+
+  handleSubmenu (event: any) {
   //   if (event.target.classList.contains('sub-arrow')) { return }
   //
   //   if (event.target.nextElementSibling.classList.contains('opensubmenu')) { event.target.nextElementSibling.classList.remove('opensubmenu') } else {
@@ -157,9 +160,9 @@ export default class NavBar extends Vue {
   //     event.target.nextElementSibling.classList.add('opensubmenu')
   //     event.target.parentElement.parentElement.classList.add('open-submenu')
   //   }
-  // }
-  //
-  // handleMegaSubmenu (event) {
+  }
+
+  handleMegaSubmenu (event: any) {
   //   if (event.target.classList.contains('sub-arrow')) { return }
   //
   //   if (event.target.parentNode.nextElementSibling.classList.contains('opensubmegamenu')) { event.target.parentNode.nextElementSibling.classList.remove('opensubmegamenu') } else {
@@ -168,6 +171,6 @@ export default class NavBar extends Vue {
   //     })
   //     event.target.parentNode.nextElementSibling.classList.add('opensubmegamenu')
   //   }
-  // }
+  }
 }
 </script>

@@ -25,10 +25,12 @@
     },
     "types": [
       "@nuxt/types",
+      "@nuxt/content",
       "@nuxtjs/axios",
       "@types/node",
       "nuxt-i18n"
-    ]
+    ],
+    "resolveJsonModule": true
   },
   "exclude": [
     "node_modules",
