@@ -1,6 +1,9 @@
 <template>
   <div class="header-container">
-    <div class="overlay" />
+    <div
+      v-if="showOverlay"
+      class="overlay"
+    />
     <header
       id="sticky"
       :class="`sticky ${headerMessage && showMessage ? 'open-messages-box' : ''}`"
@@ -28,7 +31,10 @@
                 </div>
               </div>
               <div class="menu-right pull-right">
-                <NavBar />
+                <NavBar
+                  @showOverlay="showOverlay = true"
+                  @hideOverlay="showOverlay = false"
+                />
                 <div class="icon-nav">
                   <CartWidget />
                 </div>
@@ -55,6 +61,7 @@ export default class Header extends Vue {
   headerMessage: string = ''
   showMessage: boolean = true
   messageIndex: number = 0
+  showOverlay: boolean = false
 
   get headerMessages () {
     return this.$store.state.defaults.headerMessages

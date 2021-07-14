@@ -1,3 +1,13 @@
+<i18n lang="yaml">
+pl:
+  freeShipping: 'darmowa dostawa'
+  freeShippingWorldwide: 'darmowa dostawa na terenie Polski'
+  service24h7days: 'jesteśmy dostępni 24/7'
+  helpForNew: 'nasz sklep jest do twojej dyspozycji'
+  specialOffers: 'słuchamy, gdy mówisz'
+  newSpecialOffers: 'dostosowujemy się do twoich potrzeb'
+</i18n>
+
 <template>
   <div>
     <section class="home-page section-b-space">
@@ -5,40 +15,262 @@
         <h1 class="home-title">
           Sklep z personalizowanymi<br>gadżetami i prezentami
         </h1>
-        <VueSlickCarousel v-bind="settings">
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <!--          {topSlider && topSlider.map((image, key) =>-->
-          <!--          <div class="home-slider-item" key={key}>-->
-          <!--            {image.news && <div class="new">Nowość</div>}-->
-          <!--            <NuxtLink :to="image.url">-->
-          <!--              <Picture-->
-          <!--                :path="`/assets/images/main-page/top-slider/${image.filename}`"-->
-          <!--                :alt="image.alt"-->
-          <!--              />-->
-          <!--            </NuxtLink>-->
-          <!--          </div>-->
-          <!--          )}-->
+        <VueSlickCarousel
+          v-if="topSlider && topSlider.length"
+          v-bind="topSliderSettings"
+        >
+          <template
+            v-for="(image, key) in topSlider"
+          >
+            <div
+              :key="key"
+              class="home-slider-item"
+            >
+              <div
+                v-if="image.news"
+                class="new"
+              >
+                Nowość
+              </div>
+              <NuxtLink :to="image.url">
+                <Picture
+                  :path="`/images/main-page/top-slider/${image.filename}`"
+                  :alt="image.alt"
+                />
+              </NuxtLink>
+            </div>
+          </template>
         </VueSlickCarousel>
       </div>
+
+      <div class="article-photo-box no-padding">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 service-block about">
+              <div class="media">
+                <svgFreeShipping />
+                <div class="media-body">
+                  <h4>{{ $t('freeShipping') }}</h4>
+                  <p>{{ $t('freeShippingWorldwide') }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 service-block about">
+              <div class="media">
+                <svgService />
+                <div class="media-body">
+                  <h4>{{ $t('service24h7days') }}</h4>
+                  <p>{{ $t('helpForNew') }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 service-block about">
+              <div class="media">
+                <svgOffer />
+                <div class="media-body">
+                  <h4>{{ $t('specialOffers') }}</h4>
+                  <p>{{ $t('newSpecialOffers') }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-product-slider">
+        <h3 class="styled-page-header">
+          Nowości
+        </h3>
+        <VueSlickCarousel
+          v-if="news && news.length"
+          v-bind="sliderSettings"
+        >
+          <template
+            v-for="(image, key) in news"
+          >
+            <div
+              :key="key"
+              class="bestseller-item"
+            >
+              <span
+                v-if="image.news"
+                class="promotion new"
+              >
+                Nowość
+              </span>
+              <NuxtLink
+                :to="image.url"
+              >
+                <Picture
+                  :path="`/images/main-page/news/${image.filename}`"
+                  :alt="image.alt"
+                />
+              </NuxtLink>
+              <h3>{{ image.title }}</h3>
+
+              <NuxtLink
+                class="ch2-btn ch2-allow-all-btn ch2-btn-primary ch2-btn-text-xs"
+                :to="image.url"
+              >
+                Personalizuj
+              </NuxtLink>
+            </div>
+          </template>
+        </VueSlickCarousel>
+      </div>
+
+      <div class="article-photo-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 static-article">
+              <h5 class="styled-small-header">
+                Wyjątkowa grafika
+              </h5>
+              <article>
+                Każdy z naszych kubków otrzymuje unikalny projekt graficzny, dzięki możliwości
+                błyskawicznego personalizowania.
+                Użytkownik nie musi tworzyć, czy też pozycjonować poszczególnych elementów na kubku.
+                Wszystko jest realizowane w tle przez aplikację, aby uzyskać najlepszy możliwy
+                efekt.
+                Położyliśmy nacisk na jakość grafiki, dlatego też zaprojektowaliśmy od nowa
+                każde tło, każdą z ras psów, wiele różnych postaci, które również można
+                personalizować oraz każdy cytat.
+                Prześledziliśmy najpopularniejsze rasy psów, aby nie zabrało żadnych dostępnych w Polsce, ale narysowaliśmy również bardziej egzotyczne, jak np. Łajki. Uwielbiamy psy, więc na pewno każdy znajdzie coś ciekawego dla siebie.
+                Jesteśmy otwarci na wszelkie sugestie, więc jeżeli uważasz, że coś trzeba poprawić, albo masz własny pomysł na grafikę, daj nam znać przez formularz kontaktowy, mailem lub za pomocą telefonu, a chętnie zaprojektujemy coś specjalnie dla ciebie.
+                W planach mamy stworzenie projektów dla sympatyków kotów. Mamy również interesujące projekty w głowie dla motocyklistów.
+                Zatem zaprojektuj z nami swój spersonalizowany, zabawny kubek, który umili Ci poranną kawę i zawsze będzie ci przypominać o ulubionych chwilach z twoim psem lub kotem.
+              </article>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="banner-section">
+                <NuxtLink
+                  to="/ja-i-pies/latem-nad-morzem"
+                >
+                  <Picture
+                    path="/images/main-page/28718_120027_front_clipped_rev_1.png"
+                    alt="Zabawny kubek z dziewczyną i jej corgi"
+                  />
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-product-slider">
+        <h3 class="styled-page-header">
+          Cytaty
+        </h3>
+        <VueSlickCarousel
+          v-if="quotes && quotes.length"
+          v-bind="sliderSettings"
+        >
+          <template
+            v-for="(image, key) in quotes"
+          >
+            <div
+              :key="key"
+              class="bestseller-item"
+            >
+              <span
+                v-if="image.news"
+                class="promotion new">
+                Nowość
+              </span>
+              <NuxtLink :to="image.url">
+                <Picture
+                  :path="`/images/main-page/quotes/${image.filename}`"
+                  :alt="image.alt"
+                />
+              </NuxtLink>
+            </div>
+          </template>
+        </VueSlickCarousel>
+      </div>
+
+      <section class="faq-section section-b-space">
+        <h3 class="styled-page-header">
+          FAQ
+        </h3>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="accordion theme-accordion">
+                <template
+                  v-for="(faqItem, key) in faqs"
+                >
+                  <div
+                    :key="key"
+                    class="card"
+                  >
+                    <div class="card-header">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link"
+                          type="button"
+                          aria-controls="`card-${key}`"
+                          @click="onChangeSelected(index)"
+                        >
+                          {{ faqItem.question }}
+                        </button>
+                      </h2>
+                    </div>
+                    <AnimateHeight
+                      id="`card-${key}`"
+                      duration="130"
+                      :height="`selected === key ? 'auto' : 0`"
+                    >
+                      <p class="card-body">
+                        {{ faqItem.answer }}
+                      </p>
+                    </AnimateHeight>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
   </div>
 </template>
 
 <script>
 import { useBrowserLocation } from '@vueuse/core'
-// import { Ref } from '@vue/composition-api'
 import { Component, Vue } from 'nuxt-property-decorator'
 import VueSlickCarousel from 'vue-slick-carousel'
 
+import svgFreeShipping from '@/components/HomePage/icons/svgFreeShipping'
+import svgOffer from '@/components/HomePage/icons/svgOffer'
+import svgService from '@/components/HomePage/icons/svgService'
+import Picture from '@/components/Common/Picture'
+
+// eslint-disable-next-line import/no-named-default
+import { default as topSliderJSON } from './topSlider.json'
+// eslint-disable-next-line import/no-named-default
+import { default as newsJSON } from './news.json'
+// eslint-disable-next-line import/no-named-default
+import { default as quotesJSON } from './quotes.json'
+// eslint-disable-next-line import/no-named-default
+import { default as faqJSON } from '~/components/faq.json'
+
 @Component({
-  components: { VueSlickCarousel }
+  components: {
+    Picture,
+    VueSlickCarousel,
+    svgFreeShipping,
+    svgOffer,
+    svgService
+  }
 })
 export default class HomePage extends Vue {
+  topSlider = []
+  news = []
+  faqs = []
+  quotes = []
   location = ''
-  settings = {
+  topSliderSettings = {
     class: 'center',
     centerMode: true,
     infinite: true,
@@ -46,15 +278,59 @@ export default class HomePage extends Vue {
     slidesToShow: 3,
     speed: 500,
     dots: true,
-    // responsive: {
-    //   breakpoint: 800,
-    //   settings: {
-    //     className: 'center',
-    //     centerMode: true,
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1
-    //   }
-    // }
+    responsive: [{
+      breakpoint: 800,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }]
+  }
+
+  sliderSettings = {
+    arrows: true,
+    centerMode: false,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    touchThreshold: 5,
+    speed: 500,
+    focusOnSelect: true,
+    dots: true,
+    responsive: [{
+      breakpoint: 4000,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 4,
+        slidesToScroll: 4
+      }
+    }, {
+      breakpoint: 1500,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    }, {
+      breakpoint: 1024,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    }, {
+      breakpoint: 600,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }]
   }
 
   head () {
@@ -80,6 +356,10 @@ export default class HomePage extends Vue {
   mounted () {
     const location = useBrowserLocation()
     this.location = location.value.href
+    this.topSlider = topSliderJSON
+    this.news = newsJSON
+    this.quotes = quotesJSON
+    this.faqs = faqJSON
   }
 
   structuredData () {

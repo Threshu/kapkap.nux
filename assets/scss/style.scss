@@ -1743,7 +1743,6 @@ span.breed {
   width: 100%;
   height: 100%;
   z-index: 99;
-  display: none;
 }
 
 header {
@@ -1879,7 +1878,7 @@ header {
 .carousel-right {
   width: 68px;
   height: 68px;
-  background-image: url('/assets/images/slider_arrow.svg');
+  background-image: url('/images/slider_arrow.svg');
   background-color: transparent;
   right: 0;
   position: absolute;
@@ -1889,7 +1888,7 @@ header {
 .carousel-left {
   width: 68px;
   height: 68px;
-  background-image: url('/assets/images/slider_arrow.svg');
+  background-image: url('/images/slider_arrow.svg');
   background-color: transparent;
   left: 0;
   position: absolute;

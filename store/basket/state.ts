@@ -1,10 +1,10 @@
-type Dog = {
+export type Dog = {
   id: string,
   variantIndex: number,
   name: string
 }
 
-type Product = {
+export type Product = {
   id: string,
   previewId: string,
   productSetName: string,
