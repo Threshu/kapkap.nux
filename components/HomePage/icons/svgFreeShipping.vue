@@ -6,3 +6,10 @@
     />
   </svg>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class svgFreeShipping extends Vue {}
+</script>

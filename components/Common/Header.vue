@@ -27,7 +27,7 @@
             <div class="main-menu">
               <div class="menu-left">
                 <div class="brand-logo">
-                  <LogoImage />
+                  <LogoImage :enable-json-ld="true" />
                 </div>
               </div>
               <div class="menu-right pull-right">
@@ -49,13 +49,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import LogoImage from '~/components/Common/LogoImage.vue'
-import CartWidget from '~/components/Common/CartWidget.vue'
-import NavBar from '~/components/Common/NavBar.vue'
-import TopBar from '~/components/Common/TopBar.vue'
+import LogoImage from './LogoImage.vue'
+import CartWidget from './Header/CartWidget.vue'
+import NavBar from './Header/NavBar.vue'
+import TopBar from './Header/TopBar.vue'
 
 @Component({
-  components: { TopBar, NavBar, CartWidget, LogoImage },
+  components: { TopBar, NavBar, CartWidget, LogoImage }
 })
 export default class Header extends Vue {
   headerMessage: string = ''

@@ -23,12 +23,12 @@ export default {
   css: [
     '~/assets/scss/font-awesome.scss',
     '~/assets/scss/bootstrap.scss',
-    '~/assets/scss/style.scss',
     '~/assets/scss/slick.scss',
     '~/assets/scss/slick-theme.scss',
     '~/assets/scss/animate.scss',
     '~/assets/scss/themify.scss',
-    '~/assets/scss/color1.scss'
+    '~/assets/scss/color1.scss',
+    '~/assets/scss/style.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -83,6 +83,11 @@ export default {
 
   env: {
     phone: process.env.PHONE,
-    phoneFormatted: process.env.PHONE_FORMATTED
+    phoneFormatted: process.env.PHONE_FORMATTED,
+    companyName: process.env.COMPANY_NAME,
+    companyStreet: process.env.COMPANY_STREET,
+    companyZip: process.env.COMPANY_ZIP,
+    companyCity: process.env.COMPANY_CITY,
+    companyMail: process.env.COMPANY_MAIL,
   }
 }

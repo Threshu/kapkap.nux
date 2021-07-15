@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
 import { useBrowserLocation } from '@vueuse/core'
 import Picture from '~/components/Common/Picture.vue'
@@ -26,6 +26,8 @@ import Picture from '~/components/Common/Picture.vue'
   components: { Picture }
 })
 export default class LogoImage extends Vue {
+  @Prop({ type: Boolean, default: false, required: false }) enableJsonLd: any
+
   logoPath = '/images/logo/kapkap-logo-114x100.png'
   petImage = ''
 
@@ -34,6 +36,8 @@ export default class LogoImage extends Vue {
   }
 
   mounted () {
+    this.petImage = this.petUrl
+
     this.$store.watch(state => state.defaults.status, (newValue: string) => {
       if (newValue === 'loaded') {
         this.petImage = this.petUrl
@@ -42,13 +46,17 @@ export default class LogoImage extends Vue {
   }
 
   jsonld () {
-    const location = useBrowserLocation()
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      url: 'https://www.kapkap.eu',
-      logo: `${location.value.origin}${this.logoPath}`
+    if (this.enableJsonLd) {
+      const location = useBrowserLocation()
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        url: 'https://www.kapkap.eu',
+        logo: `${location.value.origin}${this.logoPath}`
+      }
     }
+
+    return {}
   }
 }
 </script>

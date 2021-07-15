@@ -24,3 +24,10 @@
     </g>
   </svg>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class svgService extends Vue {}
+</script>

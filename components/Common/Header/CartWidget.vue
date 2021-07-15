@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import CartSmallItem from '~/components/Common/CartSmallItem.vue'
+import CartSmallItem from '~/components/Common/Header/CartSmallItem.vue'
 
 @Component({
   components: { CartSmallItem }

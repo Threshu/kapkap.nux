@@ -40,6 +40,16 @@ pl:
               </NuxtLink>
             </div>
           </template>
+          <!--          <template #prevArrow="">-->
+          <!--            <div-->
+          <!--              class="carousel-left"-->
+          <!--            />-->
+          <!--          </template>-->
+          <!--          <template #nextArrow="">-->
+          <!--            <div-->
+          <!--              class="carousel-right"-->
+          <!--            />-->
+          <!--          </template>-->
         </VueSlickCarousel>
       </div>
 
@@ -175,7 +185,8 @@ pl:
             >
               <span
                 v-if="image.news"
-                class="promotion new">
+                class="promotion new"
+              >
                 Nowość
               </span>
               <NuxtLink :to="image.url">
@@ -246,6 +257,7 @@ import svgOffer from '@/components/HomePage/icons/svgOffer'
 import svgService from '@/components/HomePage/icons/svgService'
 import Picture from '@/components/Common/Picture'
 
+import { Jsonld } from 'nuxt-jsonld'
 // eslint-disable-next-line import/no-named-default
 import { default as topSliderJSON } from './topSlider.json'
 // eslint-disable-next-line import/no-named-default
@@ -255,6 +267,7 @@ import { default as quotesJSON } from './quotes.json'
 // eslint-disable-next-line import/no-named-default
 import { default as faqJSON } from '~/components/faq.json'
 
+@Jsonld
 @Component({
   components: {
     Picture,
@@ -272,6 +285,7 @@ export default class HomePage extends Vue {
   location = ''
   topSliderSettings = {
     class: 'center',
+    arrows: true,
     centerMode: true,
     infinite: true,
     centerPadding: '60px',
@@ -291,7 +305,7 @@ export default class HomePage extends Vue {
 
   sliderSettings = {
     arrows: true,
-    centerMode: false,
+    centerMode: true,
     slidesToShow: 4,
     slidesToScroll: 4,
     touchThreshold: 5,
@@ -356,22 +370,105 @@ export default class HomePage extends Vue {
   mounted () {
     const location = useBrowserLocation()
     this.location = location.value.href
-    this.topSlider = topSliderJSON
+    this.topSlider = ((arr) => {
+      const newArr = arr.slice()
+      for (let i = newArr.length - 1; i > 0; i--) {
+        const rand = Math.floor(Math.random() * (i + 1));
+        [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]]
+      }
+      return newArr
+    })(topSliderJSON)
     this.news = newsJSON
     this.quotes = quotesJSON
     this.faqs = faqJSON
   }
 
-  structuredData () {
-
+  jsonld () {
+    return [this.structuredData, this.faqStructuredData, this.localStructuredData]
   }
 
-  faqStructuredData () {
-
+  get localStructuredData () {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Store',
+      image: [
+        'https://kapkap.eu/assets/adv/K_1P_swieta_1200x628kolor.png',
+        'https://kapkap.eu/assets/adv/K_1P_zima_1200x628.png',
+        'https://kapkap.eu/assets/adv/K_1P_zima_1200x628kolor.png',
+        'https://kapkap.eu/assets/adv/K_2P_zima_1200x628.png',
+        'https://kapkap.eu/assets/adv/K_2P_zima_1200x628kolor.png',
+        'https://kapkap.eu/assets/adv/K_3P_morze_1200x628.png',
+        'https://kapkap.eu/assets/adv/K_3P_morze_1200x628kolor.png',
+        'https://kapkap.eu/assets/adv/M_1P_jezioro_1200x628.png',
+        'https://kapkap.eu/assets/adv/M_1P_jezioro_1200x628kolor.png',
+        'https://kapkap.eu/assets/adv/M_1P_las_1200x628.png',
+        'https://kapkap.eu/assets/adv/M_1P_las_1200x628kolor.png',
+        'https://kapkap.eu/assets/adv/M_2P_miasto_1200x628kolor.png',
+        'https://kapkap.eu/assets/adv/M_2P_swieta_1200x628kolor.png'
+      ],
+      '@id': 'https://kapkap.eu',
+      name: 'KapKap - Personalizowane gadżety i prezenty',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Długa 43',
+        addressLocality: 'Chorzów',
+        postalCode: '41-506',
+        addressCountry: 'PL'
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 50.2773439,
+        longitude: 18.9529832
+      },
+      url: 'https://kapkap.eu',
+      telephone: '+48694051344',
+      priceRange: '59.99',
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday'
+          ],
+          opens: '10:00',
+          closes: '18:00'
+        }
+      ]
+    }
   }
 
-  localStructuredData () {
+  get structuredData () {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      url: 'https://kapkap.eu',
+      logo: 'https://kapkap.eu/assets/images/logos/kapkap-logo-114x100.png'
+    }
+  }
 
+  get faqStructuredData () {
+    const mainEntity = []
+    Object.keys(faqJSON).forEach(function (key) {
+      if (faqJSON[key].question) {
+        mainEntity.push({
+          '@type': 'Question',
+          name: faqJSON[key].question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faqJSON[key].answer
+          }
+        })
+      }
+    })
+
+    return {
+      '@context': 'http://schema.org',
+      '@type': 'FAQPage',
+      mainEntity
+    }
   }
 }
 </script>
