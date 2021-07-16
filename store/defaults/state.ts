@@ -7,8 +7,11 @@ type Defaults = {
   basket: Basket
 }
 
+export const STATUS_PENDING = 'pending'
+export const STATUS_LOADED = 'loaded'
+
 export default () => (<Defaults>{
-  status: 'pending',
+  status: STATUS_PENDING,
   defaultPetImageUrl: '',
   headerMessages: [],
   basket: <Basket>{}

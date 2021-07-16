@@ -1,3 +1,5 @@
+import { STATUS_LOADED } from '~/store/defaults/state'
+
 export const SET_DEFAULTS = 'setDefaults'
 
 export default {
@@ -5,6 +7,6 @@ export default {
     state.defaultPetImageUrl = defaults.defaultPetImageUrl
     state.headerMessages = defaults.headerMessages
     state.basket = defaults.basket
-    state.status = 'loaded'
+    state.status = STATUS_LOADED
   }
 }

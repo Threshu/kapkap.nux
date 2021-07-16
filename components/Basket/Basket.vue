@@ -223,13 +223,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import SmallLoader from '~/components/Common/SmallLoader.vue'
+import { BASKET } from '~/store/basket/getters'
+
 @Component({
   components: { SmallLoader, Breadcrumb }
 })
 export default class Basket extends Vue {
-  cart: any = {}
+  @Getter(BASKET) cart
+  @Action('preview/fetchCartPreviews') fetchCartPreviews
+
+  mounted () {
+    this.fetchCartPreviews(this.store, this.cart)
+  }
 }
 </script>
