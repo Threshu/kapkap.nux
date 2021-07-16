@@ -265,7 +265,7 @@ import { default as newsJSON } from './news.json'
 // eslint-disable-next-line import/no-named-default
 import { default as quotesJSON } from './quotes.json'
 // eslint-disable-next-line import/no-named-default
-import { default as faqJSON } from '~/components/faq.json'
+import { default as faqJSON } from '~/components/Faq/faq.json'
 
 @Jsonld
 @Component({
