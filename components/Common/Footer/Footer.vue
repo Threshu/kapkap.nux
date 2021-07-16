@@ -233,9 +233,10 @@ pl:
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 
-import svgFreeShipping from '~/components/HomePage/icons/svgFreeShipping'
-import svgOffer from '~/components/HomePage/icons/svgOffer'
-import svgService from '~/components/HomePage/icons/svgService'
+import svgFreeShipping from '~/components/HomePage/icons/svgFreeShipping.vue'
+import svgOffer from '~/components/HomePage/icons/svgOffer.vue'
+import svgService from '~/components/HomePage/icons/svgService.vue'
+
 import LogoImage from '~/components/Common/LogoImage.vue'
 
 type menuItem = {
@@ -255,6 +256,7 @@ export default class Footer extends Vue {
   companyCity: string = <string>process.env.companyCity
   companyMail: string = <string>process.env.companyMail
   email: string = ''
+
   menuOptions: menuItem[] = [
     { link: 'ja-i-pies/latem-nad-morzem', title: 'Nad morzem' },
     { link: 'ja-i-pies/nad-jeziorem', title: 'Nad jeziorem' },

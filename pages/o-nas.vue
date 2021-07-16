@@ -1,18 +1,18 @@
 <template>
-  <HomePage />
+  <AboutUs />
 </template>
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import HomePage from '~/components/HomePage/HomePage.vue'
+import AboutUs from '~/components/AboutUs/AboutUs.vue'
 
 export default {
-  components: { HomePage },
+  components: { AboutUs },
   head () {
     const location = useBrowserLocation()
 
     return {
-      title: 'Strona główna - Sklep KapKap.eu',
+      title: 'O nas - Sklep KapKap.eu',
       meta: [],
       link: [
         {

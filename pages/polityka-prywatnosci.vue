@@ -1,18 +1,18 @@
 <template>
-  <HomePage />
+  <Privacy />
 </template>
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import HomePage from '~/components/HomePage/HomePage.vue'
+import Privacy from '~/components/Privacy/Privacy.vue'
 
 export default {
-  components: { HomePage },
+  components: { Privacy },
   head () {
     const location = useBrowserLocation()
 
     return {
-      title: 'Strona główna - Sklep KapKap.eu',
+      title: 'Polityka prywatności - Sklep KapKap.eu',
       meta: [],
       link: [
         {

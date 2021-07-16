@@ -49,10 +49,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import LogoImage from './LogoImage.vue'
-import CartWidget from './Header/CartWidget.vue'
-import NavBar from './Header/NavBar.vue'
-import TopBar from './Header/TopBar.vue'
+import LogoImage from '../LogoImage.vue'
+import CartWidget from './CartWidget.vue'
+import NavBar from './NavBar.vue'
+import TopBar from './TopBar.vue'
 
 @Component({
   components: { TopBar, NavBar, CartWidget, LogoImage }

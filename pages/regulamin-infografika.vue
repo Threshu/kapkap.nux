@@ -1,18 +1,18 @@
 <template>
-  <HomePage />
+  <RegulationsInfographics />
 </template>
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import HomePage from '~/components/HomePage/HomePage.vue'
+import RegulationsInfographics from '~/components/Regulations/RegulationsInfographics.vue'
 
 export default {
-  components: { HomePage },
+  components: { RegulationsInfographics },
   head () {
     const location = useBrowserLocation()
 
     return {
-      title: 'Strona główna - Sklep KapKap.eu',
+      title: 'Regulamin - infografika - Sklep KapKap.eu',
       meta: [],
       link: [
         {

@@ -1,18 +1,18 @@
 <template>
-  <HomePage />
+  <Regulations />
 </template>
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import HomePage from '~/components/HomePage/HomePage.vue'
+import Regulations from '~/components/Regulations/Regulations.vue'
 
 export default {
-  components: { HomePage },
+  components: { Regulations },
   head () {
     const location = useBrowserLocation()
 
     return {
-      title: 'Strona główna - Sklep KapKap.eu',
+      title: 'Regulamin - Sklep KapKap.eu',
       meta: [],
       link: [
         {

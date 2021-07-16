@@ -26,7 +26,7 @@ import Picture from '~/components/Common/Picture.vue'
   components: { Picture }
 })
 export default class LogoImage extends Vue {
-  @Prop({ type: Boolean, default: false, required: false }) enableJsonLd: any
+  @Prop({ type: Boolean, default: false, required: false }) enableJsonLd!: any
 
   logoPath = '/images/logo/kapkap-logo-114x100.png'
   petImage = ''

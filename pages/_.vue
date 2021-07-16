@@ -1,18 +1,18 @@
 <template>
-  <HomePage />
+  <Page404 />
 </template>
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import HomePage from '~/components/HomePage/HomePage.vue'
+import Page404 from '~/components/Page404.vue'
 
 export default {
-  components: { HomePage },
+  components: { Page404 },
   head () {
     const location = useBrowserLocation()
 
     return {
-      title: 'Strona główna - Sklep KapKap.eu',
+      title: 'KapKap - najładniejsze kubki w Polsce',
       meta: [],
       link: [
         {

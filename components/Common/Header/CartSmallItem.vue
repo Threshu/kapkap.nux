@@ -22,7 +22,7 @@ import { BASKET_REMOVE_ITEM } from '~/store/basket/mutations'
 
 @Component
 export default class CartSmallItem extends Vue {
-  @Prop({ required: true }) item: any
+  @Prop({ required: true }) item!: any
 
   onRemoveFromCart () {
     this.$store.commit(BASKET_REMOVE_ITEM, this.item.id)

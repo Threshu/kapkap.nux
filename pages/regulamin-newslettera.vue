@@ -1,18 +1,18 @@
 <template>
-  <HomePage />
+  <RegulationsNewsletter />
 </template>
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import HomePage from '~/components/HomePage/HomePage.vue'
+import RegulationsNewsletter from '~/components/Regulations/RegulationsNewsletter.vue'
 
 export default {
-  components: { HomePage },
+  components: { RegulationsNewsletter },
   head () {
     const location = useBrowserLocation()
 
     return {
-      title: 'Strona główna - Sklep KapKap.eu',
+      title: 'Regulamin newslettera - Sklep KapKap.eu',
       meta: [],
       link: [
         {

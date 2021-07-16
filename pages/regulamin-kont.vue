@@ -1,18 +1,18 @@
 <template>
-  <HomePage />
+  <RegulationsAccounts />
 </template>
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import HomePage from '~/components/HomePage/HomePage.vue'
+import RegulationsAccounts from '~/components/Regulations/RegulationsAccounts.vue'
 
 export default {
-  components: { HomePage },
+  components: { RegulationsAccounts },
   head () {
     const location = useBrowserLocation()
 
     return {
-      title: 'Strona główna - Sklep KapKap.eu',
+      title: 'Regulamin kont - Sklep KapKap.eu',
       meta: [],
       link: [
         {
