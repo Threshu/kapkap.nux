@@ -221,7 +221,7 @@ pl:
                           class="btn btn-link"
                           type="button"
                           aria-controls="`card-${key}`"
-                          @click="onChangeSelected(index)"
+                          @click="changeSelectedFaq(index)"
                         >
                           {{ faqItem.question }}
                         </button>
@@ -230,7 +230,7 @@ pl:
                     <AnimateHeight
                       id="`card-${key}`"
                       duration="130"
-                      :height="`selected === key ? 'auto' : 0`"
+                      :height="`selectedFaq === key ? 'auto' : 0`"
                     >
                       <p class="card-body">
                         {{ faqItem.answer }}
@@ -283,6 +283,8 @@ export default class HomePage extends Vue {
   faqs = []
   quotes = []
   location = ''
+  selectedFaq = 0
+
   topSliderSettings = {
     class: 'center',
     arrows: true,
@@ -361,6 +363,10 @@ export default class HomePage extends Vue {
     this.news = newsJSON
     this.quotes = quotesJSON
     this.faqs = faqJSON
+  }
+
+  changeSelectedFaq (faqIndex) {
+    this.selectedFaq = faqIndex
   }
 
   jsonld () {

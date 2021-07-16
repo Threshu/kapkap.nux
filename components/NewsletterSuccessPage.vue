@@ -28,10 +28,15 @@ pl:
 </template>
 
 <script lang="ts">
-export default {
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class NewsletterSuccessPage extends Vue {
+  @Prop({ type: string, required: true }) hash!: string
+
   async mounted () {
     try {
-      await this.$axios.post(`/newsletter/${hash}`)
+      await this.$axios.post(`/newsletter/${this.hash}`)
     } catch (err) {
       this.$root.$emit('popup', {
         title: 'Przepraszamy',
