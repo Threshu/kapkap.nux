@@ -32,7 +32,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class NewsletterSuccessPage extends Vue {
-  @Prop({ type: string, required: true }) hash!: string
+  @Prop({ type: String, required: true }) hash!: string
 
   async mounted () {
     try {

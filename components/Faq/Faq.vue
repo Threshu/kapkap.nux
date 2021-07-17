@@ -59,27 +59,27 @@ import Breadcrumb from '~/components/Common/Breadcrumb.vue'
   components: { Breadcrumb }
 })
 export default class Faq extends Vue {
-  faqs = []
-  selectedFaq = 0
+  faqs: any = []
+  selectedFaq: number = 0
 
   mounted () {
     this.faqs = faqJSON
   }
 
-  changeSelected (faqNumber) {
+  changeSelected (faqNumber: number) {
     this.selectedFaq = faqNumber
   }
 
   jsonld () {
-    const mainEntity = []
-    Object.keys(faqJSON).forEach(function (key) {
-      if (faqJSON[key].question) {
+    const mainEntity: any = []
+    Object.keys(faqJSON).forEach((value: any) => {
+      if (value.question) {
         mainEntity.push({
           '@type': 'Question',
-          name: faqJSON[key].question,
+          name: value.question,
           acceptedAnswer: {
             '@type': 'Answer',
-            text: faqJSON[key].answer
+            text: value.answer
           }
         })
       }
@@ -88,7 +88,7 @@ export default class Faq extends Vue {
     return {
       '@context': 'http://schema.org',
       '@type': 'FAQPage',
-      mainEntity
+      ...mainEntity
     }
   }
 }

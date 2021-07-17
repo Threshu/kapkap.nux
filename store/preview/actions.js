@@ -1,15 +1,23 @@
 import { $axios } from '~/utils/api'
 
-export const fetchCartPreviews = async ({ commit, cart }) => {
-  try {
-    const { data: { backImageUrl, frontImageUrl } } = await getProductPreview({
-      product: cartItem,
-      previewId: cartItem.previewId,
-      setName: cartItem.setName,
-    });
-    dispatch(setProductPreview(cartItem.id, [frontImageUrl, backImageUrl]));
-    if (items.length > 0) return dispatch(fetchCartPreviews(items));
-  } catch (err) {
-    onServerConnectionError(dispatch, get(err, 'response.data', {}), FETCH_CART_PREVIEWS);
+export const getProductPreview = async (apiData) => {
+  await $axios.post('/preview', apiData)
+}
+
+export const fetchCartPreviews = ({ commit }, cart) => {
+  if (cart?.products) {
+    cart.products.forEach((cartItem) => {
+      getProductPreview({
+        product: cartItem,
+        previewId: cartItem.previewId,
+        setName: cartItem.setName
+      }).then((data) => {
+        commit('basket/setPreviewImage', {
+          cartItemId: cartItem.id,
+          frontImageUrl: data.frontImageUrl,
+          backImageUrl: data.backImageUrl
+        })
+      })
+    })
   }
 }

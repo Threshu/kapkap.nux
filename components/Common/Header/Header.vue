@@ -48,37 +48,45 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Vue } from 'nuxt-property-decorator'
 import LogoImage from '../LogoImage.vue'
 import CartWidget from './CartWidget.vue'
 import NavBar from './NavBar.vue'
 import TopBar from './TopBar.vue'
+import { STATUS_LOADED } from '~/store/defaults/types'
 
 @Component({
   components: { TopBar, NavBar, CartWidget, LogoImage }
 })
 export default class Header extends Vue {
+  @Getter('defaults/headerMessages') headerMessages!: string[]
+  @Getter('defaults/isLoaded') isLoaded!: boolean
+
   headerMessage: string = ''
   showMessage: boolean = true
   messageIndex: number = 0
   showOverlay: boolean = false
 
-  get headerMessages () {
-    return this.$store.state.defaults.headerMessages
+  mounted () {
+    if (this.isLoaded) {
+      this.processMessages()
+    } else {
+      this.$store.watch(state => state.defaults.status, (newValue: string) => {
+        if (newValue === STATUS_LOADED) {
+          this.processMessages()
+        }
+      })
+    }
   }
 
-  mounted () {
-    this.$store.watch(state => state.defaults.status, (newValue: string) => {
-      if (newValue === 'loaded') {
-        this.headerMessage = this.headerMessages[0]
-        setInterval(() => {
-          if (this.messageIndex >= this.headerMessages.length) {
-            this.messageIndex = 0
-          }
-          this.headerMessage = this.headerMessages[this.messageIndex++]
-        }, 5000)
+  processMessages () {
+    this.headerMessage = this.headerMessages[0]
+    setInterval(() => {
+      if (this.messageIndex >= this.headerMessages.length) {
+        this.messageIndex = 0
       }
-    })
+      this.headerMessage = this.headerMessages[this.messageIndex++]
+    }, 5000)
   }
 
   onCloseBox () {

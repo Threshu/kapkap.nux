@@ -8,10 +8,14 @@
 import { useBrowserLocation } from '@vueuse/core'
 import NewsletterSuccessPage from '../../components/NewsletterSuccessPage.vue'
 
+type Params = {
+  hash: string
+}
+
 export default {
   components: { NewsletterSuccessPage },
 
-  asyncData ({ params }) {
+  asyncData (params: Params) {
     const hash = params.hash
     return { hash }
   },

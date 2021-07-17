@@ -2,10 +2,10 @@
   <div>
     <Breadcrumb title="Twój koszyk" />
     <SmallLoader
-      v-if="!cart || cart.status === LOADING_STATUS"
+      v-if="!isLoaded"
     />
     <section
-      v-if="cart && cart.status === LOADED_STATUS && cart.cartItems.length"
+      v-if="isLoaded && cart && cart.products.length"
       class="cart-section section-b-space"
     >
       <div class="container">
@@ -34,7 +34,7 @@
               </thead>
               <tbody key="index">
                 <tr
-                  v-for="(item, index) in cart.cartItems"
+                  v-for="(item, index) in cart.products"
                   :key="index"
                 >
                   <!-- PREVIEWS -->
@@ -44,12 +44,14 @@
                     >
                       <div class="small-preview cart">
                         <template
-                          v-if="item.preview"
+                          v-if="item.frontImageUrl && item.backImageUrl"
                         >
                           <img
-                            v-for="(p, previewIndex) in item.preview"
-                            :key="previewIndex"
-                            src="p"
+                            :src="item.frontImageUrl"
+                            alt="thumbnail"
+                          >
+                          <img
+                            :src="item.backImageUrl"
                             alt="thumbnail"
                           >
                         </template>
@@ -58,12 +60,10 @@
                           v-else
                         >
                           <img
-                            key="1"
                             src="/images/cart/kubek-lewy-90.webp"
                             alt="thumbnail"
-                          >,
+                          >
                           <img
-                            key="2"
                             src="/images/cart/kubek-prawy-90.webp"
                             alt="thumbnail"
                           >
@@ -75,7 +75,7 @@
                   <!-- PRODUCT NAME -->
                   <td>
                     <NuxtLink
-                      :to="`/edytuj-produkt${item.id}`"
+                      :to="`/edytuj-produkt/${item.id}`"
                     >
                       {{ item.title }}
                     </NuxtLink>
@@ -226,17 +226,43 @@
 import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import SmallLoader from '~/components/Common/SmallLoader.vue'
-import { BASKET } from '~/store/basket/getters'
+import { STATUS_LOADED } from '~/store/defaults/types'
 
 @Component({
   components: { SmallLoader, Breadcrumb }
 })
 export default class Basket extends Vue {
-  @Getter(BASKET) cart
-  @Action('preview/fetchCartPreviews') fetchCartPreviews
+  @Getter('defaults/isLoaded') isLoaded!: boolean
+  @Getter('basket/basket') cart!: any
+
+  @Action('preview/fetchCartPreviews') fetchCartPreviews!: any
 
   mounted () {
-    this.fetchCartPreviews(this.store, this.cart)
+    if (this.isLoaded) {
+      this.processCartPreviews()
+    } else {
+      this.$store.watch(state => state.defaults.status, (newValue: string) => {
+        if (newValue === STATUS_LOADED) {
+          this.processCartPreviews()
+        }
+      })
+    }
+  }
+
+  removeFromCart () {
+
+  }
+
+  changeProductQuantity () {
+
+  }
+
+  calculateTotal () {
+
+  }
+
+  processCartPreviews () {
+    this.fetchCartPreviews(this.cart)
   }
 }
 </script>

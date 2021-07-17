@@ -17,6 +17,8 @@ export type Product = {
   maleBodyIds: string[],
   femaleBodyIds: string[],
   humanNames: string[]
+  frontImageUrl: string,
+  backImageUrl: string
 }
 
 export type Basket = {

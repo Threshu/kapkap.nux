@@ -1,12 +1,12 @@
-import { STATUS_LOADED } from '~/store/defaults/state'
-
-export const SET_DEFAULTS = 'setDefaults'
+import { STATUS_LOADED } from '~/store/defaults/types'
 
 export default {
-  [SET_DEFAULTS] (state, defaults) {
+  setDefaults (state, defaults) {
     state.defaultPetImageUrl = defaults.defaultPetImageUrl
     state.headerMessages = defaults.headerMessages
-    state.basket = defaults.basket
+    if (defaults.basket) {
+      this.commit('basket/setBasket', defaults.basket)
+    }
     state.status = STATUS_LOADED
   }
 }

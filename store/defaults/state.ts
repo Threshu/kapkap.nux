@@ -1,4 +1,5 @@
 import { Basket } from '@/store/basket/state'
+import { STATUS_PENDING } from '~/store/defaults/types'
 
 type Defaults = {
   status: string,
@@ -6,9 +7,6 @@ type Defaults = {
   headerMessages: string[],
   basket: Basket
 }
-
-export const STATUS_PENDING = 'pending'
-export const STATUS_LOADED = 'loaded'
 
 export default () => (<Defaults>{
   status: STATUS_PENDING,

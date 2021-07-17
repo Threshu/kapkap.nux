@@ -437,14 +437,14 @@ export default class HomePage extends Vue {
 
   get faqStructuredData () {
     const mainEntity = []
-    Object.keys(faqJSON).forEach(function (key) {
-      if (faqJSON[key].question) {
+    Object.keys(faqJSON).forEach((value) => {
+      if (value.question) {
         mainEntity.push({
           '@type': 'Question',
-          name: faqJSON[key].question,
+          name: value.question,
           acceptedAnswer: {
             '@type': 'Answer',
-            text: faqJSON[key].answer
+            text: value.answer
           }
         })
       }

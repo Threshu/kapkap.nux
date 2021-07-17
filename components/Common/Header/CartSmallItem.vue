@@ -17,15 +17,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { BASKET_REMOVE_ITEM } from '~/store/basket/mutations'
+import { Component, Mutation, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class CartSmallItem extends Vue {
   @Prop({ required: true }) item!: any
+  @Mutation('basket/removeItem') removeItem!: any
 
   onRemoveFromCart () {
-    this.$store.commit(BASKET_REMOVE_ITEM, this.item.id)
+    this.removeItem(this.item.id)
   }
 }
 </script>
