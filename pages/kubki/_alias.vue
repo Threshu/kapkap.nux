@@ -5,7 +5,8 @@
 </template>
 
 <script lang="ts">
-import Category from '@/components/Category/Category'
+import Category from '@/components/Category/Category.vue'
+import { useBrowserLocation } from '@vueuse/core'
 
 type Params = {
   alias: string

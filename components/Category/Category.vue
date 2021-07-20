@@ -76,23 +76,24 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { formatters } from 'stylelint'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
-
-const names = {
-  'dla-par': 'Kubki dla par',
-  'z-kotami': 'Kubki z kotami',
-  'z-psami': 'Kubki z psami',
-  'ze-znajomymi': 'Kubki ze znajomymi'
-}
 
 @Component({
   components: { Breadcrumb }
 })
 export default class Category extends Vue {
-  @Prop({ type: String, required: true }) categoryName!: string
+  @Prop({ type: String, required: true }) alias!: string
 
   get categoryName () {
-    return names[alias]
+    const names: Record<string, string> = {
+      'dla-par': 'Kubki dla par',
+      'z-kotami': 'Kubki z kotami',
+      'z-psami': 'Kubki z psami',
+      'ze-znajomymi': 'Kubki ze znajomymi'
+    }
+
+    return names[this.alias]
   }
 }
 </script>
