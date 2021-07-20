@@ -252,7 +252,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
-import { scrollToElement } from '~/components/helpers'
+import { scrollToElement } from '~/utils/helpers'
 import RegulationsContactSection from '~/components/Regulations/RegulationsContactSection.vue'
 import ItemsList from '~/components/Regulations/ItemsList.vue'
 

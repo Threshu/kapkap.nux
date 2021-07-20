@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { scrollToElement } from '../helpers'
+import { scrollToElement } from '../../utils/helpers'
 
 @Component
 export default class ItemsList extends Vue {

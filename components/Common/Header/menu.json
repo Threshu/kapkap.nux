@@ -4,105 +4,20 @@
     "link": "/"
   },
   {
-    "title": "Kubki personalizowane",
-    "children": [
-      {
-        "title": "Pory roku",
-        "children": [
-          {
-            "link": "ja-i-pies/latem-nad-morzem",
-            "title": "Lato"
-          },
-          {
-            "link": "ja-i-pies/w-parku",
-            "title": "Jesień"
-          },
-          {
-            "link": "ja-i-pies/zima",
-            "title": "Zima"
-          }
-        ]
-      },
-      {
-        "title": "Miejsca",
-        "children": [
-          {
-            "link": "ja-i-pies/gory-zima",
-            "title": "Góry"
-          },
-          {
-            "link": "ja-i-pies/na-ksiezycu",
-            "title": "Księżyc"
-          },
-          {
-            "link": "ja-i-pies/w-parku",
-            "title": "Park"
-          },
-          {
-            "link": "ja-i-pies/latem-nad-morzem",
-            "title": "Morze"
-          },
-          {
-            "link": "ja-i-pies/nad-jeziorem",
-            "title": "Jezioro"
-          },
-          {
-            "link": "ja-i-pies/w-lesie",
-            "title": "Las"
-          },
-          {
-            "link": "ja-i-pies/w-miescie",
-            "title": "Miasto"
-          }
-        ]
-      },
-      {
-        "title": "Krajobrazy",
-        "children": [
-          {
-            "link": "ja-i-pies/altanka-noca",
-            "title": "Altanka nocą"
-          },
-          {
-            "link": "ja-i-pies/altanka-za-dnia",
-            "title": "Altanka za dnia"
-          },
-          {
-            "link": "ja-i-pies/gory-zima",
-            "title": "Góry zimą"
-          },
-          {
-            "link": "ja-i-pies/na-ksiezycu",
-            "title": "Na księżycu"
-          },
-          {
-            "link": "ja-i-pies/w-parku",
-            "title": "W parku"
-          },
-          {
-            "link": "ja-i-pies/wenecja",
-            "title": "Wenecja"
-          },
-          {
-            "link": "ja-i-pies/pomost-nad-morzem",
-            "title": "Na pomoście"
-          },
-          {
-            "link": "ja-i-pies/zachod-slonca",
-            "title": "Zachód słońca"
-          }
-        ]
-      },
-      {
-        "title": "Okazje i świeta",
-        "children": [
-          {
-            "link": "ja-i-pies/na-swieta",
-            "title": "Na święta"
-          }
-        ]
-      }
-    ]
+    "title": "Kubki z psami",
+    "link": "kubki/z-psami"
+  },
+  {
+    "title": "Kubki z kotami",
+    "link": "kubki/z-kotami"
+  },
+  {
+    "title": "Kubki dla par",
+    "link": "kubki/dla-par"
+  },
+  {
+    "title": "Kubki ze znajomymi",
+    "link": "kubki/ze-znajomymi"
   },
   {
     "link": "kontakt",
