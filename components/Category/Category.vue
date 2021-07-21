@@ -7,7 +7,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-3">
-<!--              <Sidebar @allFilters="allfilter" @priceVal="pricefilterArray" @categoryfilter="getCategoryFilter" />-->
+              <Sidebar @allFilters="allfilter" @priceVal="pricefilterArray" @categoryfilter="getCategoryFilter" />
             </div>
             <div class="collection-content col">
               <div class="page-main-content">
@@ -222,10 +222,10 @@
 import { Component, Getter, Prop, Vue } from 'nuxt-property-decorator'
 import { mapGetters } from 'vuex'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
-// import Sidebar from '~/components/Category/Sidebar.vue'
+import Sidebar from '~/components/Category/Sidebar.vue'
 
 @Component({
-  components: { Breadcrumb },
+  components: { Breadcrumb, Sidebar },
   computed: {
     ...mapGetters({
       tags: 'filter.js/setTags',
@@ -347,33 +347,33 @@ export default class Category extends Vue {
   //   this.allfilters.splice(0, this.allfilters.length)
   // }
   //
-  // getCategoryFilter () {
-  //   this.updatePaginate(1)
-  //   this.$store.dispatch('filter.js/getCategoryFilter', this.$route.params.id)
-  // }
-  //
-  // allfilter (selectedVal: any) {
-  //   this.allfilters = selectedVal
-  //   this.$store.dispatch('filter.js/setTags', selectedVal)
-  //   this.getPaginate()
-  //   this.updatePaginate(1)
-  // }
-  //
-  // pricefilterArray (item: any) {
-  //   this.getCategoryFilter()
-  //   this.$store.dispatch('filter.js/priceFilter', item)
-  //   this.getPaginate()
-  //   this.updatePaginate(1)
-  // }
-  //
-  // getPaginate () {
-  //   // this.paginates = Math.round(this.filterProduct.length / this.paginate)
-  //   this.pages = []
-  //   for (let i = 0; i < this.paginates; i++) {
-  //     this.pages.push(i + 1)
-  //   }
-  // }
-  //
+  getCategoryFilter () {
+    this.updatePaginate(1)
+    this.$store.dispatch('filter.js/getCategoryFilter', this.$route.params.id)
+  }
+
+  allfilter (selectedVal: any) {
+    this.allfilters = selectedVal
+    this.$store.dispatch('filter.js/setTags', selectedVal)
+    this.getPaginate()
+    this.updatePaginate(1)
+  }
+
+  pricefilterArray (item: any) {
+    this.getCategoryFilter()
+    this.$store.dispatch('filter.js/priceFilter', item)
+    this.getPaginate()
+    this.updatePaginate(1)
+  }
+
+  getPaginate () {
+    // this.paginates = Math.round(this.filterProduct.length / this.paginate)
+    this.pages = []
+    for (let i = 0; i < this.paginates; i++) {
+      this.pages.push(i + 1)
+    }
+  }
+
   // setPaginate (i: any) {
   //   if (this.current === 1) {
   //     return i < this.paginate
@@ -381,31 +381,31 @@ export default class Category extends Vue {
   //     return (i >= (this.paginate * (this.current - 1)) && i < (this.current * this.paginate))
   //   }
   // }
-  //
-  // updatePaginate (i: number) {
-  //   this.current = i
-  //   let start: number = 0
-  //   let end: number = 0
-  //   if (this.current < this.paginateRange - 1) {
-  //     start = 1
-  //     end = start + this.paginateRange - 1
-  //   } else {
-  //     start = this.current - 1
-  //     end = this.current + 1
-  //   }
-  //   if (start < 1) {
-  //     start = 1
-  //   }
-  //   if (end > this.paginates) {
-  //     end = this.paginates
-  //   }
-  //   this.pages = []
-  //   for (let i: number = start; i <= end; i++) {
-  //     this.pages.push(i)
-  //   }
-  //   return this.pages
-  // }
-  //
+
+  updatePaginate (i: number) {
+    this.current = i
+    let start: number = 0
+    let end: number = 0
+    if (this.current < this.paginateRange - 1) {
+      start = 1
+      end = start + this.paginateRange - 1
+    } else {
+      start = this.current - 1
+      end = this.current + 1
+    }
+    if (start < 1) {
+      start = 1
+    }
+    if (end > this.paginates) {
+      end = this.paginates
+    }
+    this.pages = []
+    for (let i: number = start; i <= end; i++) {
+      this.pages.push(i)
+    }
+    return this.pages
+  }
+
   // alert (item: any) {
   //   this.dismissCountDown = item
   // }

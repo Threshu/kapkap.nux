@@ -11,7 +11,7 @@ import { useBrowserLocation } from '@vueuse/core'
 export default {
   components: { Category },
 
-  asyncData ({ params }) {
+  asyncData ({ params }: any) {
     const alias = params.alias
     return { alias }
   },

@@ -208,36 +208,22 @@ pl:
           <div class="row">
             <div class="col-sm-12">
               <div class="accordion theme-accordion">
-                <template
-                  v-for="(faqItem, key) in faqs"
-                >
-                  <div
-                    :key="key"
-                    class="card"
-                  >
-                    <div class="card-header">
-                      <h2 class="mb-0">
-                        <button
-                          class="btn btn-link"
-                          type="button"
-                          aria-controls="`card-${key}`"
-                          @click="changeSelectedFaq(index)"
-                        >
-                          {{ faqItem.question }}
-                        </button>
-                      </h2>
-                    </div>
-                    <AnimateHeight
-                      id="`card-${key}`"
-                      duration="130"
-                      :height="`selectedFaq === key ? 'auto' : 0`"
-                    >
-                      <p class="card-body">
-                        {{ faqItem.answer }}
-                      </p>
-                    </AnimateHeight>
-                  </div>
-                </template>
+
+                <b-card v-for="(item, index) in faqs" :key="index" no-body class="mb-1">
+                  <b-card-header header-tag="header" class="p-1" role="tab">
+                    <b-button v-b-toggle="'accordion-' + index" block href="#" variant="light">
+                      {{ item.question }}
+                    </b-button>
+                  </b-card-header>
+                  <b-collapse :id="'accordion-' + index" visible accordion="my-accordion" role="tabpanel">
+                    <b-card-body>
+                      <b-card-text>
+                        <p>{{ item.answer }}</p>
+                      </b-card-text>
+                    </b-card-body>
+                  </b-collapse>
+                </b-card>
+
               </div>
             </div>
           </div>
@@ -258,14 +244,10 @@ import svgService from '@/components/HomePage/icons/svgService'
 import Picture from '@/components/Common/Picture'
 
 import { Jsonld } from 'nuxt-jsonld'
-// eslint-disable-next-line import/no-named-default
-import { default as topSliderJSON } from './topSlider.json'
-// eslint-disable-next-line import/no-named-default
-import { default as newsJSON } from './news.json'
-// eslint-disable-next-line import/no-named-default
-import { default as quotesJSON } from './quotes.json'
-// eslint-disable-next-line import/no-named-default
-import { default as faqJSON } from '~/components/Faq/faq.json'
+import topSliderJSON from '~/data/topSlider.json'
+import newsJSON from '~/data/news.json'
+import quotesJSON from '~/data/quotes.json'
+import faqJSON from '~/data/faq.json'
 
 @Jsonld
 @Component({

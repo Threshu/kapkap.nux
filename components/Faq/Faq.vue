@@ -6,38 +6,22 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="accordion theme-accordion">
-              <template
-                v-for="(faqItem, index) in faqs"
-              >
-                <div
-                  :key="index"
-                  class="card"
-                >
-                  <div class="card-header">
-                    <h2 class="mb-0">
-                      <button
-                        class="btn btn-link"
-                        type="button"
-                        :aria-controls="`card-${index}`"
-                        @click="changeSelected(index)"
-                      >
-                        {{ faqItem.question }}
-                      </button>
-                    </h2>
-                  </div>
-                  <AnimateHeight
-                    :id="`card-${index}`"
-                    duration="130"
-                    :height="selectedFaq === index ? 'auto' : 0"
-                  >
-                    <div class="card-body">
-                      <p>
-                        {{ faqItem.answer }}>
-                      </p>
-                    </div>
-                  </AnimateHeight>
-                </div>
-              </template>
+
+              <b-card v-for="(item, index) in faqs" :key="index" no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                  <b-button v-b-toggle="'accordion-' + index" block href="#" variant="light">
+                    {{ item.question }}
+                  </b-button>
+                </b-card-header>
+                <b-collapse :id="'accordion-' + index" visible accordion="my-accordion" role="tabpanel">
+                  <b-card-body>
+                    <b-card-text>
+                      <p>{{ item.answer }}</p>
+                    </b-card-text>
+                  </b-card-body>
+                </b-collapse>
+              </b-card>
+
             </div>
           </div>
         </div>
@@ -51,7 +35,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
 
 // eslint-disable-next-line import/no-named-default
-import { default as faqJSON } from '~/components/Faq/faq.json'
+import faqJSON from '~/data/faq.json'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 
 @Jsonld

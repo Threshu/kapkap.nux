@@ -11,7 +11,7 @@ import NewsletterSuccessPage from '../../components/NewsletterSuccessPage.vue'
 export default {
   components: { NewsletterSuccessPage },
 
-  asyncData ({ params }) {
+  asyncData ({ params }: any) {
     const hash = params.hash
     return { hash }
   },
