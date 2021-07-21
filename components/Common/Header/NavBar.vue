@@ -116,8 +116,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { useWindowSize } from '@vueuse/core'
-// eslint-disable-next-line import/no-named-default
-import { default as menu } from './menu.json'
+import menu from '~/data/menu.json'
 
 @Component
 export default class NavBar extends Vue {

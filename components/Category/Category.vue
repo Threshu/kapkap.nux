@@ -7,7 +7,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-3">
-              <Sidebar @allFilters="allfilter" @priceVal="pricefilterArray" @categoryfilter="getCategoryFilter" />
+<!--              <Sidebar @allFilters="allfilter" @priceVal="pricefilterArray" @categoryfilter="getCategoryFilter" />-->
             </div>
             <div class="collection-content col">
               <div class="page-main-content">
