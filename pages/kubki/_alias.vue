@@ -8,14 +8,10 @@
 import Category from '@/components/Category/Category.vue'
 import { useBrowserLocation } from '@vueuse/core'
 
-type Params = {
-  alias: string
-}
-
 export default {
   components: { Category },
 
-  asyncData (params: Params) {
+  asyncData ({ params }) {
     const alias = params.alias
     return { alias }
   },
