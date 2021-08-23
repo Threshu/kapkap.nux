@@ -132,6 +132,46 @@
 					font-weight: bold;
 					font-size: 36px;
 					font-family: 'Segoe UI Bold';
+					margin-bottom: 0;
+				}
+
+				.bgList {
+					text-align: center;
+					height: 420px;
+
+					.bgItem {
+						width: 115px;
+						height: 115px;
+						display: inline-block;
+						margin: 12px 10px;
+						overflow: hidden;
+						opacity: 0.3;
+						position: relative;
+						cursor: pointer;
+						transition: all 0.3s;
+
+						&:hover {
+							opacity: 1;
+						}
+
+						&.selected {
+							opacity: 1;
+
+							&:before {
+								content: '✓';
+								display: block;
+								width: 28px;
+								height: 28px;
+								background: #81BC32;
+								border-radius: 50%;
+								color: #fff;
+								font-size: 18px;
+								position: absolute;
+								right: 15px;
+								bottom: 15px;
+							}
+						}
+					}
 				}
 
 				.cupsList {
@@ -142,8 +182,15 @@
 						margin: 0 25px 15px;
 						cursor: pointer;
 						position: relative;
+						opacity: 0.4;
+						transition: all 0.3s;
+
+						&:hover {
+							opacity: 1;
+						}
 
 						&.selected {
+							opacity: 1;
 							&:before {
 								content: '✓';
 								display: block;
@@ -162,6 +209,211 @@
 						img {
 							width: 200px;
 						    height: auto;
+						}
+					}
+				}
+
+				.objectsList {
+					margin: 0 42px;
+					.addNew {
+						top: 535px;
+						left: 743px;
+						width: 142px;
+						height: 48px;
+						background: #61A552 0% 0% no-repeat padding-box;
+						font-family: 'Segoe UI Bold';
+						font-size: 14px;
+						border: 0;
+						letter-spacing: 0px;
+						color: #FFFFFF;
+						float: right;
+						margin-top: 25px;
+					}
+					.objectItem {
+						display: flex;
+					    align-items: center;
+					    border-bottom: 1px solid #f1f1f1;
+					    padding-bottom: 14px;
+					    margin-top: 14px;
+
+						.objImage {
+							width: 36px;
+							height: 38px;
+						}
+
+						.objName {
+							font-family: 'Segoe UI Bold';
+							font-size: 14px;
+							color: #414141;
+							margin-left: 35px;
+						}
+
+						.objActions {
+							margin-left: auto;
+
+							.edit {
+								background-image: url("static/images/category/edit.svg");
+								background-position: center;
+								background-repeat: no-repeat;
+								background-color: transparent;
+								margin-right: 17px;
+								margin-top: 5px;
+								width: 19px;
+								height: 19px;
+								border: 0;
+							}
+
+							.remove {
+								background-image: url("static/images/category/remove.svg");
+								background-position: center;
+								background-repeat: no-repeat;
+								background-color: transparent;
+								margin-right: 17px;
+								margin-top: 5px;
+								width: 19px;
+								height: 19px;
+								border: 0;
+							}
+
+							.top {
+								background-image: url("static/images/category/up.svg");
+								background-position: center;
+								background-repeat: no-repeat;
+								background-color: transparent;
+								margin-right: 17px;
+								margin-top: 5px;
+								width: 19px;
+								height: 19px;
+								border: 0;
+							}
+
+							.down {
+								background-image: url("static/images/category/down.svg");
+								background-position: center;
+								background-repeat: no-repeat;
+								background-color: transparent;
+								margin-right: 17px;
+								margin-top: 5px;
+								width: 19px;
+								height: 19px;
+								border: 0;
+							}
+						}
+					}
+				}
+
+				.quotesList {
+					text-align: center;
+					height: 420px;
+					.quoteItem {
+						width: 135px;
+						height: 115px;
+						display: inline-block;
+						margin: 8px 20px;
+						opacity: 0.3;
+						transition: all 0.3s;
+						position: relative;
+						cursor: pointer;
+
+						&:hover {
+							opacity: 1;
+						}
+
+						&.selected {
+							opacity: 1;
+							&:before {
+								content: url("static/images/category/tick.svg");
+								display: block;
+								position: absolute;
+								margin: auto;
+								left: 0;
+								right:0;
+								top: 35%;
+							}
+						}
+					}
+				}
+
+				.paginationBox {
+					display: block;
+					text-align: center;
+					margin-top: 12px;
+
+					.pagination {
+						width: auto;
+						height: 34px;
+						background: #FFFFFF 0% 0% no-repeat padding-box;
+						box-shadow: 0px 0px 10px rgba(0,0,0,0.0902);
+						border-radius: 10px;
+						margin: auto;
+						display: inline-block;
+						color: #BCBCBC;
+
+						.next {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							border-right: 1px solid #ececec;
+							height: 35px;
+							width: 35px;
+							&:hover,
+							&.active {
+								color: #505050;
+							}
+						}
+
+						.nextAll {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							height: 35px;
+							width: 35px;
+							text-align: center;
+							&:hover,
+							&.active {
+								color: #505050;
+							}
+						}
+
+						.prev {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							border-right: 1px solid #ececec;
+							height: 35px;
+							width: 35px;
+							&:hover,
+							&.active {
+								color: #505050;
+							}
+						}
+
+						.prevAll {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							border-right: 1px solid #ececec;
+							height: 35px;
+							width: 35px;
+							&:hover,
+							&.active {
+								color: #505050;
+							}
+						}
+
+						.page {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							border-right: 1px solid #ececec;
+							height: 35px;
+							width: 35px;
+							transition: all 0.3s;
+
+							&:hover,
+							&.active {
+								color: #505050;
+							}
 						}
 					}
 				}
@@ -292,6 +544,28 @@
 						text-transform: uppercase;
 						font-family: 'Lato';
 						font-size: 24px;
+					}
+
+					.reset {
+						position: absolute;
+						left: 0;
+						bottom: -30px;
+						border: 0;
+						background: transparent;
+						color: #414141;
+						font-family: 'Lato';
+						font-size: 12px;
+						padding-left: 20px;
+						text-decoration: underline;
+
+						&:before {
+							content: '✕';
+							color: #414141;
+							font-size: 18px;
+							position: absolute;
+							left: 0;
+							top: -4px;
+						}
 					}
 				}
 			}
