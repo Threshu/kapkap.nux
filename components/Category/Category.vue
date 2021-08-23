@@ -2,13 +2,114 @@
   <div>
     <Breadcrumb :title="categoryName" />
 
-    <section class="section-b-space ratio_asos">
-      <div class="collection-wrapper">
+    <section class="categoryBox">
+      <div class="collection-wrapper productBoxBg">
+        <div class="container">
+          <div class="row">
+            <div class="productBox">
+
+              <div class="productConfBox" id="productConfBox">
+                  <div class="confMenu">
+                    <div class="confMenu1 active" v-on:click="confMenu = 1"></div>
+                    <div class="confMenu2" v-on:click="confMenu = 2"></div>
+                    <div class="confMenu3" v-on:click="confMenu = 3"></div>
+                    <div class="confMenu4" v-on:click="confMenu = 4"></div>
+                  </div>
+                  
+                <div v-if="confMenu == 1">
+                  <h3 class="productConfBoxTitle">Wybierz Kubek</h3>
+
+                  <div class="cupsList">
+
+                    <div class="cupItem selected">
+                      <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
+                    </div>
+
+                    <div class="cupItem">
+                      <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
+                    </div>
+
+                    <div class="cupItem">
+                      <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
+                    </div>
+
+                    <div class="cupItem">
+                      <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
+                    </div>
+
+                  </div>
+
+                  <div class="summary">
+                    <div class="qty-box">
+                      <span class="qty-label">Sztuk:</span>
+                      <button class="qty-minus">-</button>
+                      <input type="number" class="qty-input"/>
+                      <button class="qty-plus">+</button>
+                    </div>
+
+                    <span class="price-sep">x</span>
+
+                    <div class="price-box">
+                      <span class="price-label">Cena za sztukę:</span>
+                      <div class="price-val">59.99 zł</div>
+                    </div>
+
+                    <span class="sum-sep">=</span>
+
+                    <div class="sum-box">
+                      <span class="sum-label">Cena sumaryczna:</span>
+                      <div class="sum-val">119.98 zl</div>
+                    </div>
+                  </div>
+
+                  <div class="confButtons">
+                    <button class="back">Wstecz</button>
+                    <button class="next">Dalej</button>
+                  </div>
+                </div>
+
+                <div v-if="confMenu == 2">
+                  2222222222222222
+                </div>
+              </div>
+
+              
+
+
+              <div class="productViewBox">
+                <button class="frontCup active">Przód kubka</button>
+                <button class="backCup">Tył kubka</button>
+
+                <div class="productView">
+                  <div class="productPreview">
+                    <img src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"/>
+                  </div>
+
+                  <div class="shareBox">
+                    <button class="share"></button>
+                    <button class="search"></button>
+                  </div>    
+
+                  <span class="cupInfo">
+                    Przedstawione zdjęcia mają jedynie charakter poglądowy. </br>
+                    Docelowy kubek może różnić się kolorostycznie.
+                  </span>
+                </div>  
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
         <div class="container">
           <div class="row">
             <div class="col-lg-3">
 <!--              <Sidebar @allFilters="allfilter" @priceVal="pricefilterArray" @categoryfilter="getCategoryFilter" />-->
             </div>
+
+
             <div class="collection-content col">
               <div class="page-main-content">
                 <div class="row">
@@ -21,19 +122,7 @@
                           alt
                         >
                       </a>
-                      <div class="top-banner-content small-section">
-                        <h4>fashion</h4>
-                        <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
-                        <p>
-                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                          been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                          galley of type and scrambled it to make a type specimen book. It has survived not only five
-                          centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It
-                          was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                          passages, and more recently with desktop publishing software like Aldus PageMaker including
-                          versions of Lorem Ipsum.
-                        </p>
-                      </div>
+
                     </div>
                     <ul class="product-filter-tags">
                       <li
@@ -224,6 +313,14 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import Sidebar from '~/components/Category/Sidebar.vue'
 
+var productConfBox = new Vue({
+  el: '#productConfBox',
+  data: {
+    confMenu: 1
+  }
+})
+
+
 @Component({
   components: { Breadcrumb, Sidebar },
   computed: {
@@ -282,6 +379,8 @@ export default class Category extends Vue {
 
     return names[this.alias]
   }
+
+
 
   // mounted () {
   //   this.updatePaginate(1)

@@ -28,7 +28,8 @@ export default {
     '~/assets/scss/animate.scss',
     '~/assets/scss/themify.scss',
     '~/assets/scss/color1.scss',
-    '~/assets/scss/style.scss'
+    '~/assets/scss/style.scss',
+    '~/assets/scss/category.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -48,9 +49,9 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
+    '@nuxt/typescript-build'
     // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module'
+    // '@nuxtjs/stylelint-module'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
