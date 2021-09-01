@@ -29,7 +29,16 @@
 	font-weight: normal;
 	src: local('Segoe UI Bold Italic'), url('static/fonts/segoe_bold_italic.woff') format('woff');
 }
-
+.overflow {
+	position: absolute;
+	background: #000;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0.75;
+	z-index: 8888888;
+}
 .categoryBox {
 	padding: 0;
 
@@ -53,6 +62,7 @@
 		.productBox {
 			display: block;
 			width: 100%;
+			margin: 50px 0;
 
 			.productConfBox {
 				float: left;
@@ -131,6 +141,46 @@
 					font-weight: bold;
 					font-size: 36px;
 					font-family: 'Segoe UI Bold';
+					margin-bottom: 0;
+				}
+
+				.bgList {
+					text-align: center;
+					height: 420px;
+
+					.bgItem {
+						width: 115px;
+						height: 115px;
+						display: inline-block;
+						margin: 12px 10px;
+						overflow: hidden;
+						opacity: 0.3;
+						position: relative;
+						cursor: pointer;
+						transition: all 0.3s;
+
+						&:hover {
+							opacity: 1;
+						}
+
+						&.selected {
+							opacity: 1;
+
+							&:before {
+								content: '✓';
+								display: block;
+								width: 28px;
+								height: 28px;
+								background: #81BC32;
+								border-radius: 50%;
+								color: #fff;
+								font-size: 18px;
+								position: absolute;
+								right: 15px;
+								bottom: 15px;
+							}
+						}
+					}
 				}
 
 				.cupsList {
@@ -141,8 +191,15 @@
 						margin: 0 25px 15px;
 						cursor: pointer;
 						position: relative;
+						opacity: 0.4;
+						transition: all 0.3s;
+
+						&:hover {
+							opacity: 1;
+						}
 
 						&.selected {
+							opacity: 1;
 							&:before {
 								content: '✓';
 								display: block;
@@ -165,6 +222,372 @@
 					}
 				}
 
+				.objectsList {
+					margin: 0 42px;
+					.modal {
+						top: 0;
+						bottom: 0;
+						right: 0;
+						left: 0;
+						margin: auto;
+						display: block;
+						position: fixed;
+						z-index: 999999999;
+						width: 657px;
+						min-height: 486px;
+						max-height: 80%;
+						background: #FFFFFF 0% 0% no-repeat padding-box;
+						box-shadow: 0px 3px 40px #00000014;
+
+						.closeModal {
+							position: absolute;
+							right: 20px;
+							top: 20px;
+							border: 0;
+							background: transparent;
+							color: #414141;
+							font-size: 20px;
+						}
+
+						.modalTitle {
+							font-family: "Segoe UI Bold";
+							color: #414141;
+							font-size: 36px;
+							display: block;
+							margin-top: 35px;
+							margin-left: 52px;
+						}
+
+						.cancel {
+							width: 50%;
+							background: #989898;
+							height: 53px;
+							position: absolute;
+							bottom: 0;
+							left: 0;
+							font: normal normal normal 17px/14px Lato;
+							letter-spacing: 0px;
+							color: #FFFFFF;
+							text-transform: uppercase;
+							border: 0;
+						}
+
+						.add {
+							width: 50%;
+							background: #61A552;
+							height: 53px;
+							position: absolute;
+							bottom: 0;			
+							right: 0;
+							font: normal normal normal 17px/14px Lato;
+							letter-spacing: 0px;
+							color: #FFFFFF;
+							text-transform: uppercase;
+							border: 0;
+						}
+
+						.modalContent {
+							text-align: center;
+							margin: 40px 50px;
+
+							&.edit {
+								margin: 25px 50px;
+
+								.objectsBox {
+									text-align: left;
+									margin-bottom: 20px;
+
+									.objItem {
+										margin-left: 0;
+										height: auto;
+
+										.colorItem {
+											width: 52px;
+											height: 52px;
+											border-radius: 50%;
+										}
+									}
+								}
+							}
+
+							.objectName {
+								width: 179px;
+								height: 36px;
+								background: #F3F3F3 0% 0% no-repeat padding-box;
+								border-radius: 5px;
+								border: 0;
+								display: block;
+								margin-bottom: 25px;
+								font-family: 'Segoe UI Regular';
+								color: #414141;
+								padding-left: 13px;
+								font-size: 14px;
+							}
+
+							.objectTitle {
+								font-family: 'Segoe UI Bold';
+								color: #414141;
+								text-align: left;
+								display: block;
+								font-size: 20px;
+								margin-bottom: 20px;
+							}
+
+							.objectsBox {
+								overflow: hidden;
+							}
+
+							.objItem {
+							    width: 45px;
+							    height: 120px;
+							    text-align: center;
+							    margin: 5px 20px;
+							    display: inline-block;
+							    opacity: 0.3;
+							    transition: all 0.3s;
+							    cursor: pointer;
+							    position: relative;
+
+							    &:hover {
+							    	opacity: 1;
+							    }
+
+							    &.selected {
+							    	opacity: 1;
+
+							    	&:before {
+								    	content: "✓";
+								    	display: block;
+								    	width: 14px;
+								    	height: 14px;
+								    	background: #81BC32;
+								    	border-radius: 50%;
+								    	color: #fff;
+								    	font-size: 16px;
+								    	position: absolute;
+								    	line-height: 13px;
+								    	right: 3px;
+								    	top: 42px;
+							    	}
+							    }
+
+							    .name {
+							    	color: #414141;
+							    	font-family: 'Lato';
+							    	font-size: 12px;
+							    }
+
+							    img {
+							    	height: auto;
+							    }
+							}
+
+						}
+					}
+
+					.addNew {
+						top: 535px;
+						left: 743px;
+						width: 142px;
+						height: 48px;
+						background: #61A552 0% 0% no-repeat padding-box;
+						font-family: 'Segoe UI Bold';
+						font-size: 14px;
+						border: 0;
+						letter-spacing: 0px;
+						color: #FFFFFF;
+						float: right;
+						margin-top: 25px;
+					}
+					.objectItem {
+						display: flex;
+					    align-items: center;
+					    border-bottom: 1px solid #f1f1f1;
+					    padding-bottom: 14px;
+					    margin-top: 14px;
+
+						.objImage {
+							width: 36px;
+							height: 38px;
+						}
+
+						.objName {
+							font-family: 'Segoe UI Bold';
+							font-size: 14px;
+							color: #414141;
+							margin-left: 35px;
+						}
+
+						.objActions {
+							margin-left: auto;
+
+							.edit {
+								background-image: url("static/images/category/edit.svg");
+								background-position: center;
+								background-repeat: no-repeat;
+								background-color: transparent;
+								margin-right: 17px;
+								margin-top: 5px;
+								width: 19px;
+								height: 19px;
+								border: 0;
+							}
+
+							.remove {
+								background-image: url("static/images/category/remove.svg");
+								background-position: center;
+								background-repeat: no-repeat;
+								background-color: transparent;
+								margin-right: 17px;
+								margin-top: 5px;
+								width: 19px;
+								height: 19px;
+								border: 0;
+							}
+
+							.top {
+								background-image: url("static/images/category/up.svg");
+								background-position: center;
+								background-repeat: no-repeat;
+								background-color: transparent;
+								margin-right: 17px;
+								margin-top: 5px;
+								width: 19px;
+								height: 19px;
+								border: 0;
+							}
+
+							.down {
+								background-image: url("static/images/category/down.svg");
+								background-position: center;
+								background-repeat: no-repeat;
+								background-color: transparent;
+								margin-right: 17px;
+								margin-top: 5px;
+								width: 19px;
+								height: 19px;
+								border: 0;
+							}
+						}
+					}
+				}
+
+				.quotesList {
+					text-align: center;
+					height: 420px;
+					.quoteItem {
+						width: 135px;
+						height: 115px;
+						display: inline-block;
+						margin: 8px 20px;
+						opacity: 0.3;
+						transition: all 0.3s;
+						position: relative;
+						cursor: pointer;
+
+						&:hover {
+							opacity: 1;
+						}
+
+						&.selected {
+							opacity: 1;
+							&:before {
+								content: url("static/images/category/tick.svg");
+								display: block;
+								position: absolute;
+								margin: auto;
+								left: 0;
+								right:0;
+								top: 35%;
+							}
+						}
+					}
+				}
+
+				.paginationBox {
+					display: block;
+					text-align: center;
+					margin-top: 12px;
+
+					.pagination {
+						width: auto;
+						height: 34px;
+						background: #FFFFFF 0% 0% no-repeat padding-box;
+						box-shadow: 0px 0px 10px rgba(0,0,0,0.0902);
+						border-radius: 10px;
+						margin: auto;
+						display: inline-block;
+						color: #BCBCBC;
+
+						.next {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							border-right: 1px solid #ececec;
+							height: 35px;
+							width: 35px;
+							&:hover,
+							&.active {
+								color: #505050;
+							}
+						}
+
+						.nextAll {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							height: 35px;
+							width: 35px;
+							text-align: center;
+							&:hover,
+							&.active {
+								color: #505050;
+							}
+						}
+
+						.prev {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							border-right: 1px solid #ececec;
+							height: 35px;
+							width: 35px;
+							&:hover,
+							&.active {
+								color: #505050;
+							}
+						}
+
+						.prevAll {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							border-right: 1px solid #ececec;
+							height: 35px;
+							width: 35px;
+							&:hover,
+							&.active {
+								color: #505050;
+							}
+						}
+
+						.page {
+							border: 0;
+							background: none;
+							color: #BCBCBC;
+							border-right: 1px solid #ececec;
+							height: 35px;
+							width: 35px;
+							transition: all 0.3s;
+
+							&:hover,
+							&.active {
+								color: #505050;
+							}
+						}
+					}
+				}
+
 				.summary {
 					border-top: 1px solid #ebebeb;
 					position: absolute;
@@ -176,6 +599,7 @@
 					display: flex;
 					justify-content: space-around;
 					align-items: center;
+					white-space: nowrap;
 
 					.price-sep {
 						color: #414141;
@@ -274,7 +698,7 @@
 					.back {
 						background: #989898;
 						height: 67px;
-						width: 49.7%;
+						width: 49.6%;
 						color: #fff;
 						border: 0;
 						text-transform: uppercase;
@@ -285,12 +709,34 @@
 					.next {
 						background: #58a557;
 						height: 67px;
-						width: 49.7%;
+						width: 49.6%;
 						color: #fff;
 						border: 0;
 						text-transform: uppercase;
 						font-family: 'Lato';
 						font-size: 24px;
+					}
+
+					.reset {
+						position: absolute;
+						left: 0;
+						bottom: -30px;
+						border: 0;
+						background: transparent;
+						color: #414141;
+						font-family: 'Lato';
+						font-size: 12px;
+						padding-left: 20px;
+						text-decoration: underline;
+
+						&:before {
+							content: '✕';
+							color: #414141;
+							font-size: 18px;
+							position: absolute;
+							left: 0;
+							top: -4px;
+						}
 					}
 				}
 			}
@@ -389,4 +835,212 @@
 		}
 	}
 
+}
+
+
+@media (max-width: 1200px) {
+	.categoryBox {
+		.productBoxBg {
+			.productBox {
+				margin-top: 20px;
+
+				.productConfBox {
+					float: none;
+					width: auto;
+					height: auto;
+					margin-top: 40px;
+
+					.productConfBoxTitle {
+						padding-top: 18px;
+						font-size: 20px;
+						margin-bottom: 20px;
+					}
+
+					.confMenu {
+						top: -67px;
+						left: 0;
+
+						.confMenu1,
+						.confMenu2,
+						.confMenu3,
+						.confMenu4 {
+							display: inline-block;
+							border-top-left-radius: 10px;
+							border-top-right-radius: 10px;
+							border-bottom-left-radius: 0;
+							width: 54px;
+							height: 52px;
+							background-size: 60%;
+							margin-left: 20px;
+						}
+					}
+
+					.quotesList,
+					.bgList {
+						overflow: auto;
+					}
+
+					.objectsList {
+						overflow: hidden;
+						margin: 0 21px;
+
+						.modal {
+							width: 90%;
+							.modalContent {
+								max-height: 320px;
+								overflow: auto;
+							}
+							.modalTitle {
+								font-size: 20px;
+							}
+						}
+					}
+
+					.cupsList {
+						.cupItem {
+							img {
+								width: 100px;
+							}
+						}
+					}
+
+					.summary {
+						position: static;
+						margin: 10px;
+						
+						.price-box {
+							text-align: center;
+							white-space: nowrap;
+
+							.price-val {
+								font-size: 18px;
+							}
+
+							.price-label {
+								font-size: 12px;
+							}
+						}
+
+						.sum-box {
+							whites-space: nowrap;
+							text-align: right;
+
+							.sum-label {
+								font-size: 12px;
+							}
+
+							.sum-val {
+								font-size: 18px;
+							}
+						}
+
+						.qty-box {
+							white-space: nowrap;
+
+							.qty-label {
+								font-size: 12px;
+							}
+
+							.qty-plus,
+							.qty-minus {
+								width: 30px;
+								height:35px;
+							}
+
+							.qty-input {
+								width: 40px;
+								height:35px;
+							}
+						}
+					}
+
+					.confButtons {
+						position: static;
+						white-space: nowrap;
+						text-align: center;
+						padding: 7px;
+
+						.next,
+						.back {
+							width: 49%;
+							font-size: 17px;
+						}
+
+						.reset {
+							margin-left: 10px;
+						}
+					}
+				}
+
+				.productViewBox {
+					float: none;
+					width: auto;
+					padding: 0 12px;
+
+					.productView {
+						position: relative;
+
+						.productPreview {
+							position: relative;
+						}
+					}
+
+					
+					.backCup {
+						width: auto;
+						height: auto;
+						padding: 3px 7px;
+						float: right;
+					}
+
+					.frontCup {
+						width: auto;
+						height: auto;
+						padding: 3px 7px;
+					}
+
+					.cupInfo {
+						font-size: 0;
+						padding: 0;
+						width: 36px;
+						height: 36px;
+						display: flex;
+						position: absolute;
+						right: 0;
+						bottom: 100px;
+						transition: all 0.3s;
+						cursor: pointer;
+
+						&:hover {
+							font-size: 12px;
+							width: auto;
+							background: #fff;
+							padding-left: 35px;
+						}
+
+						&:after {
+							left: 12px;
+							top: 4px;
+						}
+					}
+
+					.shareBox {
+						position: absolute;
+						right: 0;
+						bottom: 40px;
+
+						.search {
+							display: none;
+						}
+
+						.share {
+							width: 36px;
+							height: 36px;
+							background-size: 75%;
+						}
+					}
+				}
+			}
+		}
+	} 
 }
