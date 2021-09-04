@@ -24,7 +24,8 @@
     "nuxt-jsonld": "^1.5.1",
     "nuxt-property-decorator": "^2.9.1",
     "vue-slick-carousel": "^1.0.6",
-    "vue-slider-component": "^3.2.13"
+    "vue-slider-component": "^3.2.13",
+    "vuejs-magnifier": "^0.1.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
