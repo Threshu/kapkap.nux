@@ -4,7 +4,7 @@
     <div class="collection-wrapper productBoxBg">
       <div class="container">
         <div class="row">
-            <div class="productBox">
+            <div class="productBox" ref="productBox">
                 <div class="productViewBox">
                     <button class="frontCup active">Przód kubka</button>
                     <button class="backCup">Tył kubka</button>
@@ -55,7 +55,7 @@
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
                   </div>
 
-                  <div class="cupItem">
+                  <div class="cupItem" v-on:click="scrollToElement()">
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
                   </div>
 
@@ -157,9 +157,11 @@
                   <div class="summary">
                     <div class="qty-box">
                       <span class="qty-label">Sztuk:</span>
-                      <button class="qty-minus">-</button>
-                      <input type="number" class="qty-input"/>
-                      <button class="qty-plus">+</button>
+                      <div class="qty-flex">
+                          <button class="qty-minus">-</button>
+                          <input type="number" class="qty-input"/>
+                          <button class="qty-plus">+</button>
+                      </div>
                     </div>
 
                     <span class="price-sep">x</span>
@@ -400,9 +402,11 @@
                 <div class="summary">
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
-                    <button class="qty-minus">-</button>
-                    <input type="number" class="qty-input"/>
-                    <button class="qty-plus">+</button>
+                    <div class="qty-flex">
+                        <button class="qty-minus">-</button>
+                        <input type="number" class="qty-input"/>
+                        <button class="qty-plus">+</button>
+                    </div>
                   </div>
 
                   <span class="price-sep">x</span>
@@ -476,9 +480,11 @@
               <div class="summary">
                 <div class="qty-box">
                   <span class="qty-label">Sztuk:</span>
-                  <button class="qty-minus">-</button>
-                  <input type="number" class="qty-input"/>
-                  <button class="qty-plus">+</button>
+                  <div class="qty-flex">
+                      <button class="qty-minus">-</button>
+                      <input type="number" class="qty-input"/>
+                      <button class="qty-plus">+</button>
+                  </div>
                 </div>
 
                 <span class="price-sep">x</span>
@@ -498,14 +504,11 @@
 
               <div class="confButtons">
                 <button class="next">Dodaj do koszyka</button>
-                <button class="next">Dalej</button>
+                <button class="next fl">Dalej</button>
                 <button class="reset">Resetuj i zacznij od nowa</button>
               </div>
             </div>
         </div>
-
-
-
 
 
 
@@ -563,23 +566,20 @@
 
 </div>
 
-<script lang="ts">
+<script>
 import { Component, Vue } from 'nuxt-property-decorator'
 import Magnifier from 'vuejs-magnifier'
 import VueSlickCarousel from 'vue-slick-carousel'
 import newsJSON from '~/data/news.json'
 import Picture from '@/components/Common/Picture'
 
-
-
 Vue.use(Magnifier)
 @Component({
   components: {
-    Picture,
-    VueSlickCarousel
+    VueSlickCarousel,
+    Picture
   }
 })
-
 
 export default class Cup extends Vue {
   confMenu = 1
@@ -632,10 +632,10 @@ export default class Cup extends Vue {
     }]
   }
 
-
+  mounted() {
+    let scrollHeight = this.$refs["productBox"].offsetTop
+    window.scrollTo(0, scrollHeight - 50)
+  }
 
 }
-
-
-
 </script>

@@ -717,6 +717,9 @@
 						}
 
 						.qty-flex {
+							display: flex;
+							align-items: center;
+
 							.qty-minus {
 								width: 39px;
 								height: 39px;
@@ -811,6 +814,10 @@
 						font-family: 'Lato';
 						font-size: 24px;
 						float: right;
+
+						&.fl {
+							float: left;
+						}
 					}
 
 					.reset {
