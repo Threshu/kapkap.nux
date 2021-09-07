@@ -4,19 +4,31 @@
     <div class="collection-wrapper productBoxBg">
       <div class="container">
         <div class="row">
-            <div class="productBox">
+            <div class="productBox" ref="productBox">
                 <div class="productViewBox">
                     <button class="frontCup active">Przód kubka</button>
                     <button class="backCup">Tył kubka</button>
 
                     <div class="productView">
                         <div class="productPreview">
-                            <img src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"/>
+                            <img
+                                v-if="search == false"
+                                src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"/>
+
+                            <magnifier 
+                                v-if="search == true"
+                                src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png" 
+                                :glass-width="150" 
+                                :glass-height="150"
+                                :width="580"
+                                :height="500"
+                                :zoom-level="3"
+                                />
                         </div>
 
                         <div class="shareBox">
                             <button class="share"></button>
-                            <button class="search"></button>
+                            <button class="search" v-on:click="search = true"></button>
                         </div>
 
                         <span class="cupInfo">
@@ -43,7 +55,7 @@
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
                   </div>
 
-                  <div class="cupItem">
+                  <div class="cupItem" v-on:click="scrollToElement()">
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
                   </div>
 
@@ -59,9 +71,11 @@
                 <div class="summary">
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
-                    <button class="qty-minus">-</button>
-                    <input type="number" class="qty-input"/>
-                    <button class="qty-plus">+</button>
+                    <div class="qty-flex">
+                        <button class="qty-minus">-</button>
+                        <input type="number" class="qty-input"/>
+                        <button class="qty-plus">+</button>
+                    </div>
                   </div>
 
                   <span class="price-sep">x</span>
@@ -143,9 +157,11 @@
                   <div class="summary">
                     <div class="qty-box">
                       <span class="qty-label">Sztuk:</span>
-                      <button class="qty-minus">-</button>
-                      <input type="number" class="qty-input"/>
-                      <button class="qty-plus">+</button>
+                      <div class="qty-flex">
+                          <button class="qty-minus">-</button>
+                          <input type="number" class="qty-input"/>
+                          <button class="qty-plus">+</button>
+                      </div>
                     </div>
 
                     <span class="price-sep">x</span>
@@ -386,9 +402,11 @@
                 <div class="summary">
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
-                    <button class="qty-minus">-</button>
-                    <input type="number" class="qty-input"/>
-                    <button class="qty-plus">+</button>
+                    <div class="qty-flex">
+                        <button class="qty-minus">-</button>
+                        <input type="number" class="qty-input"/>
+                        <button class="qty-plus">+</button>
+                    </div>
                   </div>
 
                   <span class="price-sep">x</span>
@@ -462,9 +480,11 @@
               <div class="summary">
                 <div class="qty-box">
                   <span class="qty-label">Sztuk:</span>
-                  <button class="qty-minus">-</button>
-                  <input type="number" class="qty-input"/>
-                  <button class="qty-plus">+</button>
+                  <div class="qty-flex">
+                      <button class="qty-minus">-</button>
+                      <input type="number" class="qty-input"/>
+                      <button class="qty-plus">+</button>
+                  </div>
                 </div>
 
                 <span class="price-sep">x</span>
@@ -484,7 +504,7 @@
 
               <div class="confButtons">
                 <button class="next">Dodaj do koszyka</button>
-                <button class="next">Dalej</button>
+                <button class="next fl">Dalej</button>
                 <button class="reset">Resetuj i zacznij od nowa</button>
               </div>
             </div>
@@ -492,13 +512,53 @@
 
 
 
-
-
-
           </div>
         </div>
       </div>
     </div>
+
+    <div class="similar">
+      <h3 class="styled-page-header">
+        Powiązane produkty
+      </h3>
+      <VueSlickCarousel
+        v-if="news && news.length"
+        v-bind="sliderSettings"
+      >
+        <template
+          v-for="(image, key) in news"
+        >
+          <div
+            :key="key"
+            class="bestseller-item"
+          >
+            <span
+              v-if="image.news"
+              class="promotion new"
+            >
+              Nowość
+            </span>
+            <NuxtLink
+              :to="image.url"
+            >
+              <Picture
+                :path="`/images/main-page/news/${image.filename}`"
+                :alt="image.alt"
+              />
+            </NuxtLink>
+            <h3>{{ image.title }}</h3>
+
+            <NuxtLink
+              class="ch2-btn"
+              :to="image.url"
+            >
+              Personalizuj
+            </NuxtLink>
+          </div>
+        </template>
+      </VueSlickCarousel>
+    </div>
+
   </section>
 </template>
 
@@ -506,14 +566,76 @@
 
 </div>
 
-<script lang="ts">
+<script>
 import { Component, Vue } from 'nuxt-property-decorator'
+import Magnifier from 'vuejs-magnifier'
+import VueSlickCarousel from 'vue-slick-carousel'
+import newsJSON from '~/data/news.json'
+import Picture from '@/components/Common/Picture'
 
-@Component
+Vue.use(Magnifier)
+@Component({
+  components: {
+    VueSlickCarousel,
+    Picture
+  }
+})
+
 export default class Cup extends Vue {
   confMenu = 1
   showModal = false
-  showEditModal = false;
-}
+  search = false
+  showEditModal = false
+  news = newsJSON
 
+  sliderSettings = {
+    arrows: true,
+    centerMode: true,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    touchThreshold: 5,
+    speed: 500,
+    focusOnSelect: true,
+    dots: true,
+    responsive: [{
+      breakpoint: 4000,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 4,
+        slidesToScroll: 4
+      }
+    }, {
+      breakpoint: 1500,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    }, {
+      breakpoint: 1024,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    }, {
+      breakpoint: 600,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }]
+  }
+
+  mounted() {
+    let scrollHeight = this.$refs["productBox"].offsetTop
+    window.scrollTo(0, scrollHeight - 50)
+  }
+
+}
 </script>

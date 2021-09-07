@@ -55,7 +55,97 @@
 	  -moz-appearance: textfield;
 	}
 
-	
+	.similar {
+		padding-bottom: 50px;
+		.bestseller-item {
+		  width: 290px;
+		  //height: 362px;
+		  background: #fff;
+		  display: inline-block;
+		  padding: 20px 0 0;
+		  border-radius: 12px;
+		  color: #fff;
+		  height: auto;
+		  padding-bottom: 25px;
+		  position: relative;
+		  margin-bottom: 20px;
+
+		  &:hover {
+		    box-shadow: 0 3px 30px #0000001a;
+		    cursor: pointer;
+		  }
+
+		  .promotion {
+		    background: #31a745;
+		    width: 78px;
+		    display: flex;
+		    height: 78px;
+		    border-radius: 50%;
+		    align-items: center;
+		    justify-content: center;
+		    transform: matrix(0.87, -0.5, 0.5, 0.87, 0, 0);
+		    font: normal normal bold 18px/13px Lato;
+		    position: absolute;
+		    top: 15px;
+		    right: 45px;
+
+		    &.new {
+		      background: #de1c70;
+		      font: normal normal bold 11px/13px Lato;
+		      text-transform: uppercase;
+		    }
+
+		    &.bestseller {
+		      background: #f1cc15;
+		      transform: matrix(0.87, -0.5, 0.5, 0.87, 0, 0);
+		      font: normal normal bold 11px/13px Lato;
+		      text-transform: uppercase;
+		    }
+		  }
+
+		  img {
+		    width: 90%;
+		    height: auto;
+		  }
+
+		  h3 {
+		    color: #555;
+		    text-align: center;
+		    padding-bottom: 10px;
+		    margin: 20px 0 10px;
+		    font: normal normal bold 24px/19px Lato;
+		    text-transform: uppercase;
+		  }
+
+		  .stars-price-line {
+		    display: flex;
+		    padding: 0 20px;
+		    align-items: center;
+		    justify-content: space-between;
+
+		    .price {
+		      font-size: 14px;
+		    }
+		  }
+
+		  .reviews-count {
+		    font-size: 13px;
+		  }
+
+		  .ch2-btn {
+		    padding: 10px;
+		    width: 130px;
+		    border-radius: 0;
+		    background: #31a745;
+		    color: #fff;
+		    margin: 15px auto 0;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    font: normal normal bold 14px/19px Lato;
+		  }
+		}
+	}
 	.productBoxBg {
 		background: #f8f8f8;
 		
@@ -626,33 +716,40 @@
 							letter-spacing: 0px;
 						}
 
-						.qty-minus {
-							width: 39px;
-							height: 39px;
-							background: #FFFFFF 0% 0% no-repeat padding-box;
-							border: 1px solid #C3C3C3;
-							color: #414141;
-						}
+						.qty-flex {
+							display: flex;
+							align-items: center;
 
-						.qty-input {
-							width: 80px;
-							height: 39px;
-							background: #FFFFFF 0% 0% no-repeat padding-box;
-							border: 1px solid #BFBFBF;
-							text-align: center;
-							margin: 0 -5px 0 -5px;
-
-							&:focus {
-								outline: 0;
+							.qty-minus {
+								width: 39px;
+								height: 39px;
+								background: #FFFFFF 0% 0% no-repeat padding-box;
+								border: 1px solid #C3C3C3;
+								color: #414141;
+								font-size: 18px;
 							}
-						}
 
-						.qty-plus {
-							width: 39px;
-							height: 39px;
-							background: #FFFFFF 0% 0% no-repeat padding-box;
-							border: 1px solid #C3C3C3;
-							color: #414141;
+							.qty-input {
+								width: 80px;
+								height: 39px;
+								background: #FFFFFF 0% 0% no-repeat padding-box;
+								border: 1px solid #BFBFBF;
+								text-align: center;
+								margin: 0 -5px 0 -5px;
+
+								&:focus {
+									outline: 0;
+								}
+							}
+
+							.qty-plus {
+								width: 39px;
+								height: 39px;
+								background: #FFFFFF 0% 0% no-repeat padding-box;
+								border: 1px solid #C3C3C3;
+								color: #414141;
+								font-size: 18px;
+							}
 						}
 
 					}
@@ -698,23 +795,29 @@
 					.back {
 						background: #989898;
 						height: 67px;
-						width: 49.6%;
+						width: calc(50% - 0.5px);
 						color: #fff;
 						border: 0;
 						text-transform: uppercase;
 						font-family: 'Lato';
 						font-size: 24px;
+						float: left;
 					}
 
 					.next {
 						background: #58a557;
 						height: 67px;
-						width: 49.6%;
+						width: calc(50% - 0.5px);
 						color: #fff;
 						border: 0;
 						text-transform: uppercase;
 						font-family: 'Lato';
 						font-size: 24px;
+						float: right;
+
+						&.fl {
+							float: left;
+						}
 					}
 
 					.reset {
@@ -1044,3 +1147,4 @@
 		}
 	} 
 }
+

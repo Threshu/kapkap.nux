@@ -10890,6 +10890,11 @@
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"
 
+"vuejs-magnifier@^0.1.1":
+  "integrity" "sha512-0tbt2NF2W5jj2p1MCLWCnT5LNzqEwINLncjQdoRN+VbtpjRlkpRjFiK3Az4G/QBDtGTfzRV/rje3n8CX2rxAPQ=="
+  "resolved" "https://registry.npmjs.org/vuejs-magnifier/-/vuejs-magnifier-0.1.1.tgz"
+  "version" "0.1.1"
+
 "vuex-class@^0.3.2":
   "integrity" "sha512-m0w7/FMsNcwJgunJeM+wcNaHzK2KX1K1rw2WUQf7Q16ndXHo7pflRyOV/E8795JO/7fstyjH3EgqBI4h4n4qXQ=="
   "resolved" "https://registry.npmjs.org/vuex-class/-/vuex-class-0.3.2.tgz"
