@@ -11,24 +11,15 @@
 
                     <div class="productView">
                         <div class="productPreview">
-                            <img
-                                v-if="search == false"
-                                src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"/>
-
-                            <magnifier 
-                                v-if="search == true"
-                                src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png" 
-                                :glass-width="150" 
-                                :glass-height="150"
-                                :width="580"
-                                :height="500"
-                                :zoom-level="3"
-                                />
+                            <image-zoom 
+                              regular="https://vifus.webd.pl/kubek.png"
+                              zoom="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
+                              :zoom-amount="2">        
+                            </image-zoom>
                         </div>
 
                         <div class="shareBox">
                             <button class="share"></button>
-                            <button class="search" v-on:click="search = true"></button>
                         </div>
 
                         <span class="cupInfo">
@@ -190,44 +181,72 @@
                 <div class="objectsList">
 
                   <div class="objectItem">
+                    <div class="objectRow">
                       <div class="objImage">
                           <img src="https://kapkap.eu/static/media/one-dog.02c1a9bb.webp"/>
                       </div>
                       <div class="objName">Fafik</div>
                       <div class="objActions">
                           <button class="edit" v-on:click="showEditModal = true"></button>
-                          <button class="remove"></button>
+                          <button class="remove" v-on:click="removeBox = true"></button>
                           <button class="top"></button>
                           <button class="down"></button>
                       </div>
+                    </div>
+                    <div class="removeBox" v-if="removeBox == true">
+                      <button class="cancelRemove" v-on:click="removeBox = false">Anuluj</button>
+                      <button class="acceptRemove">Usun</button>
+                    </div>
                   </div>
 
                   <div class="objectItem">
+                    <div class="objectRow">
                       <div class="objImage">
                           <img src="https://kapkap.eu/static/media/one-dog.02c1a9bb.webp"/>
                       </div>
                       <div class="objName">Fafik</div>
                       <div class="objActions">
                           <button class="edit" v-on:click="showEditModal = true"></button>
-                          <button class="remove"></button>
+                          <button class="remove" v-on:click="removeBox = true"></button>
                           <button class="top"></button>
                           <button class="down"></button>
                       </div>
+                    </div>
                   </div>
 
                   <div class="objectItem">
+                    <div class="objectRow">
                       <div class="objImage">
                           <img src="https://kapkap.eu/static/media/one-dog.02c1a9bb.webp"/>
                       </div>
                       <div class="objName">Fafik</div>
                       <div class="objActions">
                           <button class="edit" v-on:click="showEditModal = true"></button>
-                          <button class="remove"></button>
+                          <button class="remove" v-on:click="removeBox = true"></button>
                           <button class="top"></button>
                           <button class="down"></button>
                       </div>
+                    </div>
                   </div>
-                  <button class="addNew" v-on:click="showModal = true">+ Dodaj</button>
+
+                  <div class="objectItem">
+                    <div class="objectRow">
+                      <div class="objImage">
+                          <img src="https://kapkap.eu/static/media/one-dog.02c1a9bb.webp"/>
+                      </div>
+                      <div class="objName">Fafik</div>
+                      <div class="objActions">
+                          <button class="edit" v-on:click="showEditModal = true"></button>
+                          <button class="remove" v-on:click="removeBox = true"></button>
+                          <button class="top"></button>
+                          <button class="down"></button>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <button class="addNew" v-on:click="showModal = true">Dodaj</button>
   
                     <div class="modal" v-if="showEditModal == true">
                       <button class="closeModal" v-on:click="showEditModal = false">✕</button>
@@ -568,24 +587,26 @@
 
 <script>
 import { Component, Vue } from 'nuxt-property-decorator'
-import Magnifier from 'vuejs-magnifier'
+import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css';
+import imageZoom from 'vue-image-zoomer';
 import VueSlickCarousel from 'vue-slick-carousel'
 import newsJSON from '~/data/news.json'
 import Picture from '@/components/Common/Picture'
 
-Vue.use(Magnifier)
+
 @Component({
   components: {
     VueSlickCarousel,
-    Picture
+    Picture,
+    imageZoom
   }
 })
 
 export default class Cup extends Vue {
   confMenu = 1
   showModal = false
-  search = false
   showEditModal = false
+  removeBox = false
   news = newsJSON
 
   sliderSettings = {
