@@ -324,9 +324,9 @@
 						position: fixed;
 						z-index: 999999999;
 						width: 657px;
-						min-height: 486px;
-						max-height: 80%;
-						background: #FFFFFF 0% 0% no-repeat padding-box;
+						overflow-y: auto;
+						max-height: 75%;
+						background: transparent 0% 0% no-repeat padding-box;
 						box-shadow: 0px 3px 40px #00000014;
 
 						.closeModal {
@@ -344,17 +344,16 @@
 							color: #414141;
 							font-size: 36px;
 							display: block;
-							margin-top: 35px;
-							margin-left: 52px;
+							padding-top: 35px;
+							padding-left: 52px;
+							background: #fff;
+							margin: 0;
 						}
 
 						.cancel {
 							width: 50%;
 							background: #989898;
 							height: 53px;
-							position: absolute;
-							bottom: 0;
-							left: 0;
 							font: normal normal normal 17px/14px Lato;
 							letter-spacing: 0px;
 							color: #FFFFFF;
@@ -366,9 +365,7 @@
 							width: 50%;
 							background: #61A552;
 							height: 53px;
-							position: absolute;
-							bottom: 0;			
-							right: 0;
+							float: right;
 							font: normal normal normal 17px/14px Lato;
 							letter-spacing: 0px;
 							color: #FFFFFF;
@@ -378,10 +375,11 @@
 
 						.modalContent {
 							text-align: center;
-							margin: 40px 50px;
+							padding: 40px 50px;
+							background: #fff;
 
 							&.edit {
-								margin: 25px 50px;
+								padding: 25px 50px;
 
 								.objectsBox {
 									text-align: left;
@@ -476,8 +474,6 @@
 					}
 
 					.addNew {
-						top: 535px;
-						left: 743px;
 						width: 142px;
 						height: 48px;
 						background: #61A552 0% 0% no-repeat padding-box;
@@ -488,76 +484,119 @@
 						color: #FFFFFF;
 						float: right;
 						margin-top: 25px;
+						position: relative;
+						text-transform: uppercase;
+						padding-left: 15px;
+
+						&:after {
+							display: block;
+							content: '+';
+							font-size: 22px;
+							position: absolute;
+							left: 28px;
+							top: 5px;
+						}
 					}
 					.objectItem {
-						display: flex;
-					    align-items: center;
+						display: block;
 					    border-bottom: 1px solid #f1f1f1;
 					    padding-bottom: 14px;
 					    margin-top: 14px;
 
-						.objImage {
-							width: 36px;
-							height: 38px;
-						}
+						.objectRow {
+							display: flex;
+						    align-items: center;
+						    width: 100%;
 
-						.objName {
-							font-family: 'Segoe UI Bold';
+							.objImage {
+								width: 36px;
+								height: 38px;
+							}
+
+							.objName {
+								font-family: 'Segoe UI Bold';
+								font-size: 14px;
+								color: #414141;
+								margin-left: 35px;
+							}
+
+							.objActions {
+								margin-left: auto;
+
+								.edit {
+									background-image: url("static/images/category/edit.svg");
+									background-position: center;
+									background-repeat: no-repeat;
+									background-color: transparent;
+									margin-right: 17px;
+									margin-top: 5px;
+									width: 19px;
+									height: 19px;
+									border: 0;
+								}
+
+								.remove {
+									background-image: url("static/images/category/remove.svg");
+									background-position: center;
+									background-repeat: no-repeat;
+									background-color: transparent;
+									margin-right: 17px;
+									margin-top: 5px;
+									width: 19px;
+									height: 19px;
+									border: 0;
+								}
+
+								.top {
+									background-image: url("static/images/category/up.svg");
+									background-position: center;
+									background-repeat: no-repeat;
+									background-color: transparent;
+									margin-right: 17px;
+									margin-top: 5px;
+									width: 19px;
+									height: 19px;
+									border: 0;
+								}
+
+								.down {
+									background-image: url("static/images/category/down.svg");
+									background-position: center;
+									background-repeat: no-repeat;
+									background-color: transparent;
+									margin-right: 17px;
+									margin-top: 5px;
+									width: 19px;
+									height: 19px;
+									border: 0;
+								}
+							}
+						}
+					}
+
+					.removeBox {
+						display: block;
+						text-align: right;
+						margin-top: 15px;
+
+						.cancelRemove {
+							border: 1px solid #989898;
+							color: #989898;
 							font-size: 14px;
-							color: #414141;
-							margin-left: 35px;
+							font-family: 'Segoe UI Bold';
+							text-transform: uppercase;
+							background: #fff;
+							padding: 14px 44px;
 						}
 
-						.objActions {
-							margin-left: auto;
-
-							.edit {
-								background-image: url("static/images/category/edit.svg");
-								background-position: center;
-								background-repeat: no-repeat;
-								background-color: transparent;
-								margin-right: 17px;
-								margin-top: 5px;
-								width: 19px;
-								height: 19px;
-								border: 0;
-							}
-
-							.remove {
-								background-image: url("static/images/category/remove.svg");
-								background-position: center;
-								background-repeat: no-repeat;
-								background-color: transparent;
-								margin-right: 17px;
-								margin-top: 5px;
-								width: 19px;
-								height: 19px;
-								border: 0;
-							}
-
-							.top {
-								background-image: url("static/images/category/up.svg");
-								background-position: center;
-								background-repeat: no-repeat;
-								background-color: transparent;
-								margin-right: 17px;
-								margin-top: 5px;
-								width: 19px;
-								height: 19px;
-								border: 0;
-							}
-
-							.down {
-								background-image: url("static/images/category/down.svg");
-								background-position: center;
-								background-repeat: no-repeat;
-								background-color: transparent;
-								margin-right: 17px;
-								margin-top: 5px;
-								width: 19px;
-								height: 19px;
-								border: 0;
-							}
+						.acceptRemove {
+							border: 1px solid #61A552;
+							color: #fff;
+							font-size: 14px;
+							font-family: 'Segoe UI Bold';
+							text-transform: uppercase;
+							background: #61A552;
+							padding: 14px 44px;
 						}
 					}
 				}
@@ -854,7 +893,10 @@
 					text-align: center;
 
 					img {
-						max-width: 580px;
+						//max-width: 580px;
+						width: auto;
+						height: auto;
+						cursor: pointer;
 					}
 				}
 
@@ -870,6 +912,7 @@
 					color: #959595;
 					opacity: 0.59;
 					margin: 0 5px;
+					background: #fff;
 
 					&.active {
 						color: #61A552;
@@ -941,7 +984,7 @@
 }
 
 
-@media (max-width: 1200px) {
+@media (max-width: 1350px) {
 	.categoryBox {
 		.productBoxBg {
 			.productBox {
