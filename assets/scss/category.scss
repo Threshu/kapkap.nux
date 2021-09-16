@@ -43,6 +43,14 @@
 	padding: 0;
 
 
+	.desktop {
+		display: block !important;
+	}
+
+	.mobile {
+		display: none !important;
+	}
+
 	/* Chrome, Safari, Edge, Opera */
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
@@ -587,6 +595,7 @@
 							text-transform: uppercase;
 							background: #fff;
 							padding: 14px 44px;
+							margin-right: 10px;
 						}
 
 						.acceptRemove {
@@ -868,16 +877,16 @@
 						color: #414141;
 						font-family: 'Lato';
 						font-size: 12px;
-						padding-left: 20px;
+						padding-left: 15px;
 						text-decoration: underline;
 
 						&:before {
 							content: '✕';
 							color: #414141;
-							font-size: 18px;
+							font-size: 14px;
 							position: absolute;
 							left: 0;
-							top: -4px;
+							top: -1px;
 						}
 					}
 				}
@@ -891,6 +900,7 @@
 					display: block;
 					margin-top: 70px;
 					text-align: center;
+					max-height: 468px;
 
 					img {
 						//max-width: 580px;
@@ -974,7 +984,9 @@
 						background-position: center;
 						background-repeat: no-repeat;
 						float: right;
-						background-color: transparent;
+						background-color: #fff;
+						position: relative;
+						z-index:99999;
 					}
 				}
 			}
@@ -986,25 +998,36 @@
 
 @media (max-width: 1350px) {
 	.categoryBox {
+		.desktop {
+			display: none !important;
+		}
+
+		.mobile {
+			display: block !important;
+			margin: auto;
+		}
+
 		.productBoxBg {
 			.productBox {
-				margin-top: 20px;
+				margin-top: 0;
 
 				.productConfBox {
 					float: none;
 					width: auto;
 					height: auto;
-					margin-top: 40px;
+					margin-top: 10px;
 
 					.productConfBoxTitle {
 						padding-top: 18px;
 						font-size: 20px;
-						margin-bottom: 20px;
+						margin-bottom: 10px;
 					}
 
 					.confMenu {
 						top: -67px;
 						left: 0;
+						right: 0;
+						text-align: center;
 
 						.confMenu1,
 						.confMenu2,
@@ -1023,10 +1046,32 @@
 
 					.quotesList,
 					.bgList {
-						overflow: auto;
+						overflow: visible;
+						height: auto;
+
+						.bgItem {
+							width: 115px !important;
+							margin: 0 10px 15px;
+
+							&.selected {
+								&:before {
+									right: 25px;
+									bottom: 5px;
+
+								}
+							}
+							img {
+								width: 80%;
+							}
+						}
+
+						.quoteItem {
+							margin: 0px 20px 20px;
+						}
 					}
 
 					.objectsList {
+						padding-bottom: 25px;
 						overflow: hidden;
 						margin: 0 21px;
 
@@ -1044,6 +1089,7 @@
 
 					.cupsList {
 						.cupItem {
+							width: auto !important;
 							img {
 								width: 100px;
 							}
@@ -1052,8 +1098,9 @@
 
 					.summary {
 						position: static;
-						margin: 10px;
-						
+						margin: -15px 10px 10px;
+						padding-top: 5px;
+
 						.price-box {
 							text-align: center;
 							white-space: nowrap;
@@ -1104,15 +1151,17 @@
 						position: static;
 						white-space: nowrap;
 						text-align: center;
-						padding: 7px;
+						padding: 0 7px;
 
 						.next,
 						.back {
+							height: 47px;
 							width: 49%;
 							font-size: 17px;
 						}
 
 						.reset {
+							bottom: -80px;
 							margin-left: 10px;
 						}
 					}
@@ -1125,9 +1174,15 @@
 
 					.productView {
 						position: relative;
+						top: -10px;
 
 						.productPreview {
+							margin-top: 0;
 							position: relative;
+
+							img {
+								width: 75%;
+							}
 						}
 					}
 

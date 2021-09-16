@@ -11,11 +11,14 @@
 
                     <div class="productView">
                         <div class="productPreview">
-                            <image-zoom 
+
+                            <image-zoom class="desktop"
                               regular="https://vifus.webd.pl/kubek.png"
                               zoom="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
                               :zoom-amount="2">        
                             </image-zoom>
+
+                            <img class="mobile" src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"/>
                         </div>
 
                         <div class="shareBox">
@@ -41,20 +44,45 @@
               <div v-if="confMenu == 1">
                 <h3 class="productConfBoxTitle">Wybierz Kubek</h3>
 
-                <div class="cupsList">
+                <div class="cupsList mobile">
+                  <VueSlickCarousel
+                    v-if="news && news.length"
+                    v-bind="cupSettings"
+                  >
+                      <template>
+                        <div class="cupItem ">
+                          <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
+                        </div>
+                      </template>
+                      <template>
+                        <div class="cupItem selected">
+                          <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
+                        </div>
+                      </template>
+                      <template>
+                        <div class="cupItem ">
+                          <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
+                        </div>
+                      </template>
+                      <template>
+                        <div class="cupItem ">
+                          <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
+                        </div>
+                      </template>
+                  </VueSlickCarousel>
+                </div>
+
+                <div class="cupsList desktop">
+                  <div class="cupItem ">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
+                  </div>
                   <div class="cupItem selected">
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
                   </div>
-
-                  <div class="cupItem" v-on:click="scrollToElement()">
+                  <div class="cupItem ">
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
                   </div>
-
-                  <div class="cupItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
-                  </div>
-
-                  <div class="cupItem">
+                  <div class="cupItem ">
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png"/>
                   </div>
                 </div>
@@ -92,7 +120,7 @@
 
               <div v-if="confMenu == 2">
                   <h3 class="productConfBoxTitle">Wybierz tlo</h3>
-                  <div class="bgList">
+                  <div class="bgList desktop">
                       <div class="bgItem">
                           <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp"/>
                       </div>
@@ -131,19 +159,50 @@
                       </div>
                   </div>
 
-                  <div class="paginationBox">
-                    <div class="pagination">
-                      <button class="prevAll"><<</button>
-                      <button class="prev"><</button>
-                      <button class="page">1</button>
-                      <button class="page active">2</button>
-                      <button class="page">3</button>
-                      <button class="page">4</button>
-                      <button class="page">5</button>
-                      <button class="next">></button>
-                      <button class="nextAll">>></button>
-                    </div>
+
+                  <div class="bgList mobile">
+                    <VueSlickCarousel
+                      v-if="news && news.length"
+                      v-bind="cupSettings"
+                    >
+                        <template>
+                          <div class="bgItem">
+                              <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp"/>
+                          </div>
+                        </template>
+                        <template>
+                          <div class="bgItem">
+                              <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp"/>
+                          </div>
+                        </template>
+                        <template>
+                          <div class="bgItem">
+                              <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp"/>
+                          </div>
+                        </template>
+                        <template>
+                          <div class="bgItem selected">
+                              <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp"/>
+                          </div>
+                        </template>
+                        <template>
+                          <div class="bgItem selected">
+                              <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp"/>
+                          </div>
+                        </template>
+                        <template>
+                          <div class="bgItem selected">
+                              <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp"/>
+                          </div>
+                        </template>
+                        <template>
+                          <div class="bgItem selected">
+                              <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp"/>
+                          </div>
+                        </template>
+                    </VueSlickCarousel>
                   </div>
+
 
                   <div class="summary">
                     <div class="qty-box">
@@ -452,7 +511,7 @@
             <div v-if="confMenu == 4">
               <h3 class="productConfBoxTitle">Dodaj cytat</h3>
 
-              <div class="quotesList">
+              <div class="quotesList desktop">
                 <div class="quoteItem">
                   <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png"/>
                 </div>
@@ -482,18 +541,37 @@
                 </div>
               </div>
 
-              <div class="paginationBox">
-                <div class="pagination">
-                  <button class="prevAll"><<</button>
-                  <button class="prev"><</button>
-                  <button class="page">1</button>
-                  <button class="page active">2</button>
-                  <button class="page">3</button>
-                  <button class="page">4</button>
-                  <button class="page">5</button>
-                  <button class="next">></button>
-                  <button class="nextAll">>></button>
-                </div>
+              <div class="quotesList mobile">
+                <VueSlickCarousel
+                  v-if="news && news.length"
+                  v-bind="cupSettings"
+                >
+                    <template>
+                      <div class="quoteItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png"/>
+                      </div>
+                    </template>
+                    <template>
+                      <div class="quoteItem selected">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png"/>
+                      </div>
+                    </template>
+                    <template>
+                      <div class="quoteItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png"/>
+                      </div>
+                    </template>
+                    <template>
+                      <div class="quoteItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png"/>
+                      </div>
+                    </template>
+                    <template>
+                      <div class="quoteItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png"/>
+                      </div>
+                    </template>
+                </VueSlickCarousel>
               </div>
 
               <div class="summary">
@@ -648,6 +726,52 @@ export default class Cup extends Vue {
         class: 'center',
         centerMode: true,
         slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }]
+  }
+
+
+  cupSettings = {
+    arrows: true,
+    centerMode: true,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    touchThreshold: 5,
+    speed: 250,
+    focusOnSelect: true,
+    dots: false,
+    responsive: [{
+      breakpoint: 4000,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 4,
+        slidesToScroll: 4
+      }
+    }, {
+      breakpoint: 1500,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    }, {
+      breakpoint: 1024,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    }, {
+      breakpoint: 600,
+      settings: {
+        arrows: true,
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 2,
         slidesToScroll: 1
       }
     }]
