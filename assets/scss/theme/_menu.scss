@@ -2733,8 +2733,9 @@ header {
 
         .mobile-cart {
           display: absolute;
-          bottom: 15px;
-          right: 18px;
+          bottom: unset;
+          right: 78px;
+          top: 15px;
           padding: 15px;
           border: 1px solid;
           border-radius: 50%;

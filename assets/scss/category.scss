@@ -829,6 +829,7 @@
 
 						.sum-val {
 							font-family: 'Segoe UI Bold';
+							font-weight: bold;
 							color: #61A552;
 							font-size: 26px;
 						}
@@ -997,6 +998,16 @@
 
 
 @media (max-width: 1350px) {
+	
+	header {
+		&.sticky {
+			position: fixed;
+			width: 100%;
+			border-bottom: 1px solid #ebebeb;
+			z-index: 9999900;
+		}
+	}
+
 	.categoryBox {
 		.desktop {
 			display: none !important;
@@ -1005,6 +1016,10 @@
 		.mobile {
 			display: block !important;
 			margin: auto;
+		}
+
+		.similar {
+			overflow: hidden;
 		}
 
 		.productBoxBg {
@@ -1016,11 +1031,17 @@
 					width: auto;
 					height: auto;
 					margin-top: 10px;
+					border-top: 1px solid #ebebeb;
 
 					.productConfBoxTitle {
-						padding-top: 18px;
-						font-size: 20px;
-						margin-bottom: 10px;
+						padding-top: 0;
+						border-bottom: 0;
+						margin: 10px 0 0px;
+						text-align: center;
+						font-family: 'Segoe UI Regular';
+						font-size: 16px;
+						font-weight: normal;
+						padding-bottom: 13px;
 					}
 
 					.confMenu {
@@ -1066,7 +1087,8 @@
 						}
 
 						.quoteItem {
-							margin: 0px 20px 20px;
+							padding: 0 20px;
+							margin: 0px 0 20px;
 						}
 					}
 
@@ -1076,18 +1098,26 @@
 						margin: 0 21px;
 
 						.modal {
+							top: 50px;
 							width: 90%;
+							.closeModal {
+								right: 6px;
+								top: 6px;
+							}
 							.modalContent {
 								max-height: 320px;
 								overflow: auto;
 							}
 							.modalTitle {
 								font-size: 20px;
+								text-align: center;
+								padding-left: 0;
 							}
 						}
 					}
 
 					.cupsList {
+						overflow: hidden;
 						.cupItem {
 							width: auto !important;
 							img {
@@ -1098,8 +1128,17 @@
 
 					.summary {
 						position: static;
-						margin: -15px 10px 10px;
-						padding-top: 5px;
+						margin: -15px 0 10px;
+						padding: 5px 10px 0;
+						background: #f9f9f9;
+
+						.price-sep {
+							font-size: 18px;
+						}
+
+						.sum-sep {
+							font-size: 18px;
+						}
 
 						.price-box {
 							text-align: center;
@@ -1134,15 +1173,20 @@
 								font-size: 12px;
 							}
 
-							.qty-plus,
-							.qty-minus {
-								width: 30px;
-								height:35px;
-							}
+							.qty-flex {
+								.qty-plus,
+								.qty-minus {
+									width: 30px;
+									height:28px;
+									padding: 0;
+									color: #474747;
+								}
 
-							.qty-input {
-								width: 40px;
-								height:35px;
+								.qty-input {
+									width: 59px;
+									height:28px;
+									color: #474747;
+								}
 							}
 						}
 					}
@@ -1151,13 +1195,20 @@
 						position: static;
 						white-space: nowrap;
 						text-align: center;
-						padding: 0 7px;
+						padding: 0;
+						overflow: hidden;
+						background: #f3f3f3;
 
 						.next,
 						.back {
-							height: 47px;
-							width: 49%;
-							font-size: 17px;
+							height: 42px;
+							width: 50%;
+							font-size: 14px;
+							line-height: 0;
+
+							&.fl{
+								width: calc(50% - 1px);
+							}
 						}
 
 						.reset {
@@ -1170,7 +1221,7 @@
 				.productViewBox {
 					float: none;
 					width: auto;
-					padding: 0 12px;
+					padding: 8px 12px 0;
 
 					.productView {
 						position: relative;
@@ -1192,12 +1243,16 @@
 						height: auto;
 						padding: 3px 7px;
 						float: right;
+						margin: 0;
+						font-size: 12px;
 					}
 
 					.frontCup {
 						width: auto;
 						height: auto;
 						padding: 3px 7px;
+						margin: 0;
+						font-size: 12px;
 					}
 
 					.cupInfo {
@@ -1209,7 +1264,6 @@
 						position: absolute;
 						right: 0;
 						bottom: 100px;
-						transition: all 0.3s;
 						cursor: pointer;
 
 						&:hover {
@@ -1217,6 +1271,7 @@
 							width: auto;
 							background: #fff;
 							padding-left: 35px;
+							height: auto;
 						}
 
 						&:after {
