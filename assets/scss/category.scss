@@ -1098,13 +1098,20 @@
 						margin: 0 21px;
 
 						.modal {
+							top: 50px;
 							width: 90%;
+							.closeModal {
+								right: 6px;
+								top: 6px;
+							}
 							.modalContent {
 								max-height: 320px;
 								overflow: auto;
 							}
 							.modalTitle {
 								font-size: 20px;
+								text-align: center;
+								padding-left: 0;
 							}
 						}
 					}
