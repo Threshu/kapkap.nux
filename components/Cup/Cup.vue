@@ -108,7 +108,7 @@
 
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
-                    <div class="sum-val">119.98 zl</div>
+                    <div class="sum-val">119.98 zł</div>
                   </div>
                 </div>
 
@@ -119,7 +119,7 @@
               </div>
 
               <div v-if="confMenu == 2">
-                  <h3 class="productConfBoxTitle">Wybierz tlo</h3>
+                  <h3 class="productConfBoxTitle">Wybierz tło</h3>
                   <div class="bgList desktop">
                       <div class="bgItem">
                           <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp"/>
@@ -225,7 +225,7 @@
 
                     <div class="sum-box">
                       <span class="sum-label">Cena sumaryczna:</span>
-                      <div class="sum-val">119.98 zl</div>
+                      <div class="sum-val">119.98 zł</div>
                     </div>
                   </div>
 
@@ -498,7 +498,7 @@
 
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
-                    <div class="sum-val">119.98 zl</div>
+                    <div class="sum-val">119.98 zł</div>
                   </div>
                 </div>
 
@@ -595,7 +595,7 @@
 
                 <div class="sum-box">
                   <span class="sum-label">Cena sumaryczna:</span>
-                  <div class="sum-val">119.98 zl</div>
+                  <div class="sum-val">119.98 zł</div>
                 </div>
               </div>
 
@@ -784,3 +784,4 @@ export default class Cup extends Vue {
 
 }
 </script>
+  
