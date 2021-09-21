@@ -998,13 +998,32 @@
 
 
 @media (max-width: 1350px) {
-	
 	header {
 		&.sticky {
-			position: fixed;
 			width: 100%;
-			border-bottom: 1px solid #ebebeb;
-			z-index: 9999900;
+
+			&.open-messages-box {
+				.messages-top-box {
+					top: -45px;
+				}
+			}
+
+			.container {
+				position: fixed;
+				z-index: 99992299999;
+				top: 51px;
+				background: #fff;
+				border-bottom: 1px solid #ebebeb;
+				transition: all 0.1s;
+
+				&.top {
+					top: 0 !important;
+				}
+
+				&.scrolled {
+					top: 0;
+				}
+			}
 		}
 	}
 
@@ -1290,6 +1309,7 @@
 						}
 
 						.share {
+							z-index: 9;
 							width: 36px;
 							height: 36px;
 							background-size: 75%;
