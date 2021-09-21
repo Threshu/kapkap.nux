@@ -2732,13 +2732,12 @@ header {
         }
 
         .mobile-cart {
-          display: absolute;
+          position: absolute;
           bottom: unset;
-          right: 78px;
-          top: 15px;
+          right: 68px;
+          top: 16px;
           padding: 15px;
-          border: 1px solid;
-          border-radius: 50%;
+          border: 0;
           background-color: #fff;
 
           .close-circle {

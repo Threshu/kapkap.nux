@@ -20,8 +20,7 @@
       </div>
 
       <TopBar />
-
-      <div class="container">
+      <div :class="`container ${headerMessage == '' || showMessage == false ? 'top' : ''}`">
         <div class="row">
           <div class="col-sm-12">
             <div class="main-menu">
@@ -68,6 +67,7 @@ export default class Header extends Vue {
   showOverlay: boolean = false
 
   mounted () {
+    window.addEventListener('scroll', this.handleScroll);
     if (this.isLoaded) {
       this.processMessages()
     } else {
@@ -87,6 +87,17 @@ export default class Header extends Vue {
       }
       this.headerMessage = this.headerMessages[this.messageIndex++]
     }, 5000)
+  }
+
+  handleScroll () {
+     let header = document.querySelector("#sticky > .container");
+     if (header) {
+        if (window.scrollY > 40 && !header.className.includes('scrolled')) {
+          header.classList.add('scrolled'); 
+        } else if (window.scrollY < 40) {
+          header.classList.remove('scrolled');
+        }
+     }
   }
 
   onCloseBox () {
