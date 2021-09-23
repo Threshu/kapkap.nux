@@ -92,9 +92,9 @@ export default class Header extends Vue {
   handleScroll () {
      let header = document.querySelector("#sticky > .container");
      if (header) {
-        if (window.scrollY > 40 && !header.className.includes('scrolled')) {
+        if (window.scrollY > 51 && !header.className.includes('scrolled')) {
           header.classList.add('scrolled'); 
-        } else if (window.scrollY < 40) {
+        } else if (window.scrollY < 51) {
           header.classList.remove('scrolled');
         }
      }

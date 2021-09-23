@@ -1009,18 +1009,19 @@
 			}
 
 			.container {
-				position: fixed;
+				position: static;
 				z-index: 99992299999;
 				top: 51px;
 				background: #fff;
 				border-bottom: 1px solid #ebebeb;
-				transition: all 0.1s;
 
 				&.top {
+					position: fixed;
 					top: 0 !important;
 				}
 
 				&.scrolled {
+					position: fixed;
 					top: 0;
 				}
 			}
@@ -1044,6 +1045,38 @@
 		.productBoxBg {
 			.productBox {
 				margin-top: 0;
+
+				&.productModalBox {
+					display: block;
+					position: fixed;
+					background: #fff;
+					top: 0;
+					z-index: 99999;
+					width: 100%;
+					height: 100%;
+					overflow: hidden;
+
+					.productConfBox {
+						height: 60%;
+
+						.objectsList {
+							display: block;
+						    overflow: scroll;
+						    max-height: calc(50vh - 50px);
+						}
+
+						.summary {
+							position: fixed;
+							bottom: 32px;
+							padding-bottom: 10px;
+						}
+
+						.confButtons {
+							position: fixed;
+							bottom: 0;
+						}
+					}
+				}
 
 				.productConfBox {
 					float: none;
@@ -1241,6 +1274,19 @@
 					float: none;
 					width: auto;
 					padding: 8px 12px 0;
+
+					.createCup {
+						padding: 10px;
+					    width: 130px;
+					    border-radius: 2;
+					    background: #31a745;
+					    color: #fff;
+					    margin: 15px auto 0;
+					    display: flex;
+					    align-items: center;
+					    justify-content: center;
+					    font: normal normal bold 14px/19px Lato;
+					}
 
 					.productView {
 						position: relative;
