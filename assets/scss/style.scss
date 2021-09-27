@@ -6,6 +6,16 @@ img {
   height: 100%;
 }
 
+body {
+  &.noScroll {
+    overflow: hidden;
+
+    .overflow {
+      z-index: 66;
+    }
+  }
+}
+
 .price {
   display: flex;
   width: 30%;
@@ -1702,7 +1712,7 @@ span.breed {
   color: #fff;
   position: absolute;
   width: 100%;
-  top: 0;
+  top: -45px;
 
   .close {
     position: absolute;
