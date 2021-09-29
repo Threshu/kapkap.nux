@@ -4,21 +4,24 @@
     <div class="collection-wrapper productBoxBg">
       <div class="container">
         <div class="row">
-
-          <div class="productBox mobile" ref="productBox">
+          <div ref="productBox" class="productBox mobile">
             <div class="productViewBox">
-
-                <div class="productView">
-                    <div class="productPreview">
-                        <img class="mobile" src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"/>
-                    </div>
+              <div class="productView">
+                <div class="productPreview">
+                  <img
+                    class="mobile"
+                    src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
+                  >
                 </div>
-                <button class="createCup" v-on:click="showConf = true">Stwórz kubek</button>
+              </div>
+              <button class="createCup" @click="showConf = true">
+                Stwórz kubek
+              </button>
             </div>
           </div>
 
-          <div class="productBox productModalBox" ref="productModalBox" v-if="showConf == true">
-            <div class="overflow" v-if="showModal == true || showEditModal == true"></div>
+          <div v-if="showConf == true" ref="productModalBox" class="productBox productModalBox">
+            <div v-if="showModal == true || showEditModal == true" class="overflow" />
             <div class="productViewBox">
               <button class="frontCup active">
                 Przód kubka
@@ -36,7 +39,10 @@
                     :zoom-amount="2"
                   />
 
-                  <img class="mobile" src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png">
+                  <img
+                    class="mobile"
+                    src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
+                  >
                 </div>
 
                 <div class="shareBox">
@@ -44,7 +50,7 @@
                 </div>
 
                 <span class="cupInfo">
-                  Przedstawione zdjęcia mają jedynie charakter poglądowy. </br>
+                  Przedstawione zdjęcia mają jedynie charakter poglądowy. <br />
                   Docelowy kubek może różnić się kolorostycznie.
                 </span>
               </div>
@@ -122,8 +128,10 @@
               </div>
 
               <div v-if="confMenu == 2">
-                  <h3 class="productConfBoxTitle">Wybierz tło</h3>
-                  <div class="bgList mobile">
+                <h3 class="productConfBoxTitle">
+                  Wybierz tło
+                </h3>
+                <div class="bgList mobile">
                   <div class="bgItem">
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
                   </div>
@@ -307,49 +315,94 @@
                         </h4>
 
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                       </div>
 
@@ -381,31 +434,58 @@
                         </h4>
 
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                       </div>
                     </div>
@@ -625,7 +705,10 @@
                     :zoom-amount="2"
                   />
 
-                  <img class="mobile" src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png">
+                  <img
+                    class="mobile"
+                    src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
+                  >
                 </div>
 
                 <div class="shareBox">
@@ -633,7 +716,7 @@
                 </div>
 
                 <span class="cupInfo">
-                  Przedstawione zdjęcia mają jedynie charakter poglądowy. </br>
+                  Przedstawione zdjęcia mają jedynie charakter poglądowy. <br />
                   Docelowy kubek może różnić się kolorostycznie.
                 </span>
               </div>
@@ -754,18 +837,36 @@
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
                   </div>
                 </div>
-                  <div class="paginationBox">
-                    <div class="pagination">
-                      <button class="prevAll"><<</button>
-                      <button class="prev"><</button>
-                      <button class="page">1</button>
-                      <button class="page active">2</button>
-                      <button class="page">3</button>
-                      <button class="page">4</button>
-                      <button class="page">5</button>
-                      <button class="next">></button>
-                      <button class="nextAll">>></button>
-                      </div>
+                <div class="paginationBox">
+                  <div class="pagination">
+                    <button class="prevAll">
+                      &lt;&lt;
+                    </button>
+                    <button class="prev">
+                      &lt;
+                    </button>
+                    <button class="page">
+                      1
+                    </button>
+                    <button class="page active">
+                      2
+                    </button>
+                    <button class="page">
+                      3
+                    </button>
+                    <button class="page">
+                      4
+                    </button>
+                    <button class="page">
+                      5
+                    </button>
+                    <button class="next">
+                      >
+                    </button>
+                    <button class="nextAll">
+                      >>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="summary">
@@ -915,49 +1016,94 @@
                         </h4>
 
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                          >
                         </div>
                       </div>
 
@@ -989,31 +1135,58 @@
                         </h4>
 
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                         <div class="objItem">
-                          <img alt="product body icon" src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp">
+                          <img
+                            alt="product body icon"
+                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
+                          >
                         </div>
                       </div>
                     </div>
@@ -1094,15 +1267,33 @@
 
                 <div class="paginationBox">
                   <div class="pagination">
-                    <button class="prevAll"><<</button>
-                    <button class="prev"><</button>
-                    <button class="page">1</button>
-                    <button class="page active">2</button>
-                    <button class="page">3</button>
-                    <button class="page">4</button>
-                    <button class="page">5</button>
-                    <button class="next">></button>
-                    <button class="nextAll">>></button>
+                    <button class="prevAll">
+                      &lt;&lt;
+                    </button>
+                    <button class="prev">
+                      &lt;
+                    </button>
+                    <button class="page">
+                      1
+                    </button>
+                    <button class="page active">
+                      2
+                    </button>
+                    <button class="page">
+                      3
+                    </button>
+                    <button class="page">
+                      4
+                    </button>
+                    <button class="page">
+                      5
+                    </button>
+                    <button class="next">
+                      >
+                    </button>
+                    <button class="nextAll">
+                      >>
+                    </button>
                   </div>
                 </div>
 
@@ -1278,18 +1469,15 @@
         </template>
       </VueSlickCarousel>
     </div>
-
   </section>
 </template>
 
-
 <script>
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, Watch } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import imageZoom from 'vue-image-zoomer'
 import VueSlickCarousel from 'vue-slick-carousel'
 import Picture from '@/components/Common/Picture'
-import { Watch } from 'nuxt-property-decorator'
 
 @Component({
   components: {
@@ -1300,55 +1488,55 @@ import { Watch } from 'nuxt-property-decorator'
 })
 
 export default class Cup extends Vue {
-      showModal = false
-      confMenu = 1
-      showConf = false
-      showEditModal = false
-      removeBox = false
-      news = false
-      sliderSettings = {
-        arrows: true,
+  showModal = false
+  confMenu = 1
+  showConf = false
+  showEditModal = false
+  removeBox = false
+  news = false
+  sliderSettings = {
+    arrows: true,
+    centerMode: true,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    touchThreshold: 5,
+    speed: 500,
+    focusOnSelect: true,
+    dots: true,
+    responsive: [{
+      breakpoint: 4000,
+      settings: {
+        class: 'center',
         centerMode: true,
         slidesToShow: 4,
-        slidesToScroll: 4,
-        touchThreshold: 5,
-        speed: 500,
-        focusOnSelect: true,
-        dots: true,
-        responsive: [{
-          breakpoint: 4000,
-          settings: {
-            class: 'center',
-            centerMode: true,
-            slidesToShow: 4,
-            slidesToScroll: 4
-          }
-        }, {
-          breakpoint: 1500,
-          settings: {
-            class: 'center',
-            centerMode: true,
-            slidesToShow: 3,
-            slidesToScroll: 3
-          }
-        }, {
-          breakpoint: 1024,
-          settings: {
-            class: 'center',
-            centerMode: true,
-            slidesToShow: 2,
-            slidesToScroll: 2
-          }
-        }, {
-          breakpoint: 600,
-          settings: {
-            class: 'center',
-            centerMode: true,
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }]
+        slidesToScroll: 4
       }
+    }, {
+      breakpoint: 1500,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    }, {
+      breakpoint: 1024,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    }, {
+      breakpoint: 600,
+      settings: {
+        class: 'center',
+        centerMode: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }]
+  }
 
   mounted () {
     const scrollHeight = this.$refs.productBox.offsetTop
@@ -1356,14 +1544,13 @@ export default class Cup extends Vue {
   }
 
   @Watch('showConf')
-  onShowConfChanged(val = string, oldVal = string) {
-    const el = document.body;
-    if (val == true) {
-      el.classList.add('noScroll');
+  onShowConfChanged (val = string, oldVal = string) {
+    const el = document.body
+    if (val) {
+      el.classList.add('noScroll')
     } else {
-      el.classList.remove('noScroll');
+      el.classList.remove('noScroll')
     }
   }
-
 }
 </script>
