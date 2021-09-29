@@ -56,7 +56,7 @@
               </div>
             </div>
 
-            <div id="productConfBox" class="productConfBox">
+            <div class="productConfBox">
               <div class="confMenu">
                 <div :class="`confMenu1 ${confMenu === 1 ? 'active' : ''}`" @click="confMenu = 1" />
                 <div :class="`confMenu2 ${confMenu === 2 ? 'active' : ''}`" @click="confMenu = 2" />
@@ -1265,38 +1265,6 @@
                   </div>
                 </div>
 
-                <div class="paginationBox">
-                  <div class="pagination">
-                    <button class="prevAll">
-                      &lt;&lt;
-                    </button>
-                    <button class="prev">
-                      &lt;
-                    </button>
-                    <button class="page">
-                      1
-                    </button>
-                    <button class="page active">
-                      2
-                    </button>
-                    <button class="page">
-                      3
-                    </button>
-                    <button class="page">
-                      4
-                    </button>
-                    <button class="page">
-                      5
-                    </button>
-                    <button class="next">
-                      >
-                    </button>
-                    <button class="nextAll">
-                      >>
-                    </button>
-                  </div>
-                </div>
-
                 <div class="summary">
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
@@ -1374,6 +1342,38 @@
                   </div>
                   <div class="quoteItem">
                     <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
+                  </div>
+                </div>
+
+                <div class="paginationBox">
+                  <div class="pagination">
+                    <button class="prevAll">
+                      &lt;&lt;
+                    </button>
+                    <button class="prev">
+                      &lt;
+                    </button>
+                    <button class="page">
+                      1
+                    </button>
+                    <button class="page active">
+                      2
+                    </button>
+                    <button class="page">
+                      3
+                    </button>
+                    <button class="page">
+                      4
+                    </button>
+                    <button class="page">
+                      5
+                    </button>
+                    <button class="next">
+                      >
+                    </button>
+                    <button class="nextAll">
+                      >>
+                    </button>
                   </div>
                 </div>
 
