@@ -1554,3 +1554,6 @@ export default class Cup extends Vue {
   }
 }
 </script>
+
+<style lang="sass">
+</style>
