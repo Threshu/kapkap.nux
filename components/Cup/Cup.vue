@@ -131,44 +131,48 @@
                 <h3 class="productConfBoxTitle">
                   Wybierz tło
                 </h3>
-                <div class="bgList mobile">
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+
+                  <div class="bgList mobile">
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem selected">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
+                      <div class="bgItem">
+                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                      </div>
                   </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem selected">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                </div>
+             
+
+
 
                 <div class="summary">
                   <div class="qty-box">
@@ -502,7 +506,7 @@
                       ✕
                     </button>
                     <h3 class="modalTitle">
-                      Jakie obiekty chcesz dodac?
+                      Jakie obiekty chcesz dodać?
                     </h3>
 
                     <div class="modalContent">
@@ -1486,6 +1490,8 @@ import Picture from '@/components/Common/Picture'
     imageZoom
   }
 })
+
+
 
 export default class Cup extends Vue {
   showModal = false
