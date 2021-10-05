@@ -20,8 +20,8 @@
             </div>
           </div>
 
-          <div v-if="showConf == true" ref="productModalBox" class="productBox productModalBox">
-            <div v-if="showModal == true || showEditModal == true" class="overflow" />
+          <div v-if="showConf" ref="productModalBox" class="productBox productModalBox">
+            <div v-if="showModal || showEditModal" class="overflow" />
             <div class="productViewBox">
               <button class="frontCup active">
                 Przód kubka
@@ -50,7 +50,7 @@
                 </div>
 
                 <span class="cupInfo">
-                  Przedstawione zdjęcia mają jedynie charakter poglądowy. <br />
+                  Przedstawione zdjęcia mają jedynie charakter poglądowy. <br>
                   Docelowy kubek może różnić się kolorostycznie.
                 </span>
               </div>
@@ -132,47 +132,44 @@
                   Wybierz tło
                 </h3>
 
-                  <div class="bgList mobile">
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem selected">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
-                      <div class="bgItem">
-                        <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                      </div>
+                <div class="bgList mobile">
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
                   </div>
-             
-
-
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem selected">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                  <div class="bgItem">
+                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                  </div>
+                </div>
 
                 <div class="summary">
                   <div class="qty-box">
@@ -237,7 +234,7 @@
                         <button class="down" />
                       </div>
                     </div>
-                    <div v-if="removeBox == true" class="removeBox">
+                    <div v-if="removeBox" class="removeBox">
                       <button class="cancelRemove" @click="removeBox = false">
                         Anuluj
                       </button>
@@ -302,7 +299,7 @@
                     Dodaj
                   </button>
 
-                  <div v-if="showEditModal == true" class="modal">
+                  <div v-if="showEditModal" class="modal">
                     <button class="closeModal" @click="showEditModal = false">
                       ✕
                     </button>
@@ -501,7 +498,7 @@
                       Zapisz
                     </button>
                   </div>
-                  <div v-if="showModal == true" class="modal">
+                  <div v-if="showModal" class="modal">
                     <button class="closeModal" @click="showModal = false">
                       ✕
                     </button>
@@ -720,7 +717,7 @@
                 </div>
 
                 <span class="cupInfo">
-                  Przedstawione zdjęcia mają jedynie charakter poglądowy. <br />
+                  Przedstawione zdjęcia mają jedynie charakter poglądowy. <br>
                   Docelowy kubek może różnić się kolorostycznie.
                 </span>
               </div>
@@ -938,7 +935,7 @@
                         <button class="down" />
                       </div>
                     </div>
-                    <div v-if="removeBox == true" class="removeBox">
+                    <div v-if="removeBox" class="removeBox">
                       <button class="cancelRemove" @click="removeBox = false">
                         Anuluj
                       </button>
@@ -1003,7 +1000,7 @@
                     Dodaj
                   </button>
 
-                  <div v-if="showEditModal == true" class="modal">
+                  <div v-if="showEditModal" class="modal">
                     <button class="closeModal" @click="showEditModal = false">
                       ✕
                     </button>
@@ -1490,8 +1487,6 @@ import Picture from '@/components/Common/Picture'
     imageZoom
   }
 })
-
-
 
 export default class Cup extends Vue {
   showModal = false
