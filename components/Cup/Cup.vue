@@ -300,7 +300,7 @@
                   </button>
 
                   <div v-if="showEditModal" class="modal">
-                    <button class="closeModal" @click="showEditModal = false">
+                    <button class="closeModal desktop" @click="showEditModal = false">
                       ✕
                     </button>
                     <h3 class="modalTitle">
@@ -499,7 +499,7 @@
                     </button>
                   </div>
                   <div v-if="showModal" class="modal">
-                    <button class="closeModal" @click="showModal = false">
+                    <button class="closeModal desktop" @click="showModal = false">
                       ✕
                     </button>
                     <h3 class="modalTitle">

@@ -1054,6 +1054,14 @@
 						      background-color: #58a557;
 						      border: none;
 						    }
+
+						    .modal {
+						    	.cancel,
+						    	.add {
+						    		height: 42px;
+						    		font-size: 14px;
+						    	}
+						    }
 						}
 
 						.summary {
@@ -1154,10 +1162,11 @@
 								top: 6px;
 							}
 							.modalContent {
-								max-height: calc(100vh - 112px);
+								max-height: calc(100vh - 86px);
 								overflow: auto;
 							}
 							.modalTitle {
+								padding-top: 10px;
 								padding-bottom: 10px;
 								font-size: 20px;
 								text-align: center;
