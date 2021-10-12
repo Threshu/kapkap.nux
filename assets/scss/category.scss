@@ -968,6 +968,7 @@
 }
 
 
+
 @media (max-width: 1350px) {
 	header {
 		&.sticky {
@@ -1022,6 +1023,7 @@
 					position: fixed;
 					background: #fff;
 					top: 0;
+					left: 0;
 					z-index: 99999;
 					width: 100%;
 					height: 100%;
@@ -1375,3 +1377,8 @@
 	} 
 }
 
+@media only screen and (min-width: 600px) and (max-width: 1400px)  {
+	.categoryBox .productBoxBg .productBox .productViewBox .productView .productPreview img {
+		width: 35%;
+	}
+}
