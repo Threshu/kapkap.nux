@@ -1,0 +1,37 @@
+{
+  "order": [
+    {
+      "orderId": 1,
+      "status": "",
+      "products": [
+        {
+          "id": 1,
+          "backImageUrl": "",
+          "frontImageUrl": "",
+          "number": 1,
+          "price": 59.99,
+          "title": "Kubeczek nr 1"
+        },
+        {
+          "id": 2,
+          "backImageUrl": "",
+          "frontImageUrl": "",
+          "number": 1,
+          "price": 59.99,
+          "title": "Kubeczek nr 2"
+        }
+      ],
+      "delivery": {
+        "name": "test",
+        "address": "słoneczna 8",
+        "city": "Warszawa",
+        "zip": "00-222",
+      },
+      "payment": {
+        "method": "xxx"
+      },
+      "totalPrice": 59.99,
+      "clientTime": "",
+    }
+  ]
+}
