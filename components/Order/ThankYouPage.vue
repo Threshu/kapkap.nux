@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumb title="Najczęściej zadawane pytania" />
+    <Breadcrumb title="Dziękujemy za zamówienie" />
 
     <section className="section-b-space light-layout">
         <div className="container">
@@ -8,8 +8,8 @@
                 <div className="col-md-12">
                     <div className="success-text">
                         <i className="fa fa-check-circle" aria-hidden="true"/>
-                        <h2>{translate('thankYou')}</h2>
-                        <p>{translate('paymentReceivedSuccessfully', {orderId: order.orderId})}</p>
+                        <h2>Dziękujemy!</h2>
+                        <p>Otrzymaliśmy Twoją płatność za zamówienie numer: {{order.orderId}}</p>
                     </div>
                 </div>
             </div>
@@ -21,11 +21,11 @@
                 <div className="col-lg-6">
                     <div className="product-order">
                         <h3>{translate('yourOrderDetails')}</h3>
-                        {items.map((item, index) => {
-                            return <div className="row product-order-detail" key={index}>
+                            <div :v-for="(item, index) in order.products" :key="index" 
+                                className="row product-order-detail" key={index}>
                                 <div className="col-3">
-                                    <img key={1} src={item.frontThumbnail} alt="thumbnail"/>
-                                    <img key={2} src={item.backThumbnail} alt="thumbnail"/>
+                                    <img :src="item.frontImageUrl" alt="thumbnail"/>
+                                    <img :src="item.backThumbnail" alt="thumbnail"/>
                                 </div>
                                 <div className="col-3 order_detail">
                                     <div>
@@ -35,22 +35,21 @@
                                 </div>
                                 <div className="col-3 order_detail">
                                     <div>
-                                        <h4>{translate('quantity')}</h4>
-                                        <h5>{item.number}</h5>
+                                        <h4>Ilość</h4>
+                                        <h5>{{item.number}}</h5>
                                     </div>
                                 </div>
                                 <div className="col-3 order_detail">
                                     <div>
-                                        <h4>{translate('price')}</h4>
-                                        <h5>{item.price*item.number} {symbol}</h5>
+                                        <h4>Cena</h4>
+                                        <h5>{{item.price*item.number}} {{symbol}}</h5>
                                     </div>
                                 </div>
                             </div>
-                        })}
                         <div className="total-sec">
                             <ul>
-                                <li>{translate('subtotal')} <span>{orderTotal} {symbol}</span></li>
-                                <li>{translate('shipping')} <span>bezpłatnie</span></li>
+                                <li>Całość <span>{orderTotal} {symbol}</span></li>
+                                <li>Wysyłka <span>bezpłatnie</span></li>
                             </ul>
                         </div>
                         <div className="final-total">
@@ -108,15 +107,14 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
 
-// eslint-disable-next-line import/no-named-default
-import orderJSON from '~/data/faq.json'
+import orderJSON from '~/data/order.json'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 
 @Jsonld
 @Component({
   components: { Breadcrumb }
 })
-export default class Faq extends Vue {
+export default class ThankYou extends Vue {
   order: any = []
 
   mounted () {
