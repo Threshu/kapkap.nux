@@ -223,10 +223,12 @@
 </template>
 
 <script lang="ts">
-import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import SmallLoader from '~/components/Common/SmallLoader.vue'
 import { STATUS_LOADED } from '~/store/defaults/types'
+
+import basketJSON from '~/data/basket.json'
 
 @Component({
   components: { SmallLoader, Breadcrumb }
@@ -237,7 +239,10 @@ export default class Basket extends Vue {
 
   @Action('preview/fetchCartPreviews') fetchCartPreviews!: any
 
+  @Mutation('basket/setBasket') setBasket!: any
+
   mounted () {
+    this.setBasket(basketJSON)
     if (this.isLoaded) {
       this.processCartPreviews()
     } else {
