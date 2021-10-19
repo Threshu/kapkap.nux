@@ -2,12 +2,12 @@
   <div>
     <Breadcrumb title="Dziękujemy za zamówienie" />
 
-    <section className="section-b-space light-layout">
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <div className="success-text">
-                        <i className="fa fa-check-circle" aria-hidden="true"/>
+    <section class="section-b-space light-layout">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="success-text">
+                        <i class="fa fa-check-circle" aria-hidden="true"/>
                         <h2>Dziękujemy!</h2>
                         <p>Otrzymaliśmy Twoją płatność za zamówienie numer: {{order.orderId}}</p>
                     </div>
@@ -15,83 +15,83 @@
             </div>
         </div>
     </section>
-    <section className="section-b-space">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-6">
-                    <div className="product-order">
-                        <h3>{translate('yourOrderDetails')}</h3>
-                            <div :v-for="(item, index) in order.products" :key="index" 
-                                className="row product-order-detail" key={index}>
-                                <div className="col-3">
+    <section class="section-b-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-order">
+                        <h3>szczegóły Twojego zamówienia</h3>
+                            <div v-for="(item, index) in order.products" :key="index" 
+                                class="row product-order-detail" key={index}>
+                                <div class="col-3">
                                     <img :src="item.frontImageUrl" alt="thumbnail"/>
                                     <img :src="item.backThumbnail" alt="thumbnail"/>
                                 </div>
-                                <div className="col-3 order_detail">
+                                <div class="col-3 order_detail">
                                     <div>
-                                        <h4>{translate('productName')}</h4>
-                                        <h5>{item.title}</h5>
+                                        <h4>Produkt</h4>
+                                        <h5>{{item.title}}</h5>
                                     </div>
                                 </div>
-                                <div className="col-3 order_detail">
+                                <div class="col-3 order_detail">
                                     <div>
                                         <h4>Ilość</h4>
                                         <h5>{{item.number}}</h5>
                                     </div>
                                 </div>
-                                <div className="col-3 order_detail">
+                                <div class="col-3 order_detail">
                                     <div>
                                         <h4>Cena</h4>
-                                        <h5>{{item.price*item.number}} {{symbol}}</h5>
+                                        <h5>{{item.price*item.number}} {{order.payment.symbol}}</h5>
                                     </div>
                                 </div>
                             </div>
-                        <div className="total-sec">
+                        <div class="total-sec">
                             <ul>
-                                <li>Całość <span>{orderTotal} {symbol}</span></li>
+                                <li>Całość <span>{{order.payment.orderTotal}} {{order.payment.symbol}}</span></li>
                                 <li>Wysyłka <span>bezpłatnie</span></li>
                             </ul>
                         </div>
-                        <div className="final-total">
-                            <h3>{translate('total')} <span>{orderTotal} {symbol}</span></h3>
+                        <div class="final-total">
+                            <h3>suma <span>{{order.payment.orderTotal}} {{order.payment.symbol}}</span></h3>
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-6">
-                    <div className="row order-success-sec">
-                        <div className="col-sm-6">
-                            <h4>{translate('checkout')}</h4>
-                            <ul className="order-detail">
+                <div class="col-lg-6">
+                    <div class="row order-success-sec">
+                        <div class="col-sm-6">
+                            <h4>Podsumowanie</h4>
+                            <ul class="order-detail">
                                 <li>
                                     <div>
-                                        {translate('orderId')}:&nbsp;<strong>{order.orderId}</strong>
+                                      numer zamówienia:&nbsp;<strong>{{order.orderId}}</strong>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        {translate('orderDate')}:<br /><strong>{CheckDate}</strong>
+                                        data zamówienia:<br /><strong>{{CheckDate}}</strong>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        {order.delivery && (
-                            <div className="col-sm-6">
-                                <h4>{translate('shippingAddress')}</h4>
-                                <ul className="order-detail">
-                                    <li>{order.delivery.name}</li>
-                                    <li>{order.delivery.address}</li>
-                                    <li>{order.delivery.city}, {order.delivery.zip}</li>
-                                </ul>
-                            </div>
-                        )}
-                        <div className="col-sm-12 payment-mode">
-                            <h4>{translate('paymentMethod')}</h4>
-                            <p>{getPaymentDescription(order.payment.method)}</p>
+
+                        <div class="col-sm-6">
+                            <h4>Adres dostawy</h4>
+                            <ul class="order-detail">
+                                <li>{{order.delivery.name}}</li>
+                                <li>{{order.delivery.address}}</li>
+                                <li>{{order.delivery.city}}, {{order.delivery.zip}}</li>
+                            </ul>
                         </div>
-                        <div className="col-md-12">
-                            <div className="delivery-sec">
-                                <h3>{translate('deliveryDate')}</h3>
-                                <h2>{deliveryDate}</h2>
+
+                        <div class="col-sm-12 payment-mode">
+                            <h4>Metoda płatności</h4>
+                            <p>{{getPaymentDescription(order.payment.method)}}</p>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="delivery-sec">
+                                <h3>przewidywana dostawa</h3>
+                                <h2>{{deliveryDate}}</h2>
                             </div>
                         </div>
                     </div>
@@ -115,20 +115,25 @@ import Breadcrumb from '~/components/Common/Breadcrumb.vue'
   components: { Breadcrumb }
 })
 export default class ThankYou extends Vue {
-  order: any = []
+  order: any = orderJSON
+  options: any = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+  current: any = new Date(this.order.clientTime)
+  nextDay: any = new Date(this.current.valueOf() + 2 * 60 * 60 * 24 * 1000)
+  CheckDate: any = this.current.toLocaleDateString("pl-PL", this.options).toString()
+  deliveryDate: any = this.nextDay.toLocaleDateString("pl-PL", this.options).toString()
 
   mounted () {
     this.order = orderJSON
   }
 
-  getPaymentDescription(type) {
+  getPaymentDescription(type: any) {
       switch (type) {
           case 'ONLINE':
-              return translate('paymentOnline');
+              return 'Płatność on-line';
           case 'CASH_ON_DELIVERY':
-              return translate('cashOnDelivery');
+              return 'Płatność za pobraniem';
           case 'TRANSFER':
-              return translate('manualTransfer');
+              return 'Przelew na konto';
           default:
               return 'Nieznana forma płatności';
       }

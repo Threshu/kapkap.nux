@@ -4,16 +4,18 @@
   "products": [
     {
       "id": 1,
-      "backImageUrl": "",
-      "frontImageUrl": "",
+      "backImageUrl": "http://vifus.webd.pl/kubek.png",
+      "frontImageUrl": "http://vifus.webd.pl/kubek.png",
+      "backThumbnail": "http://vifus.webd.pl/kubek.png",
       "number": 1,
       "price": 59.99,
       "title": "Kubeczek nr 1"
     },
     {
       "id": 2,
-      "backImageUrl": "",
-      "frontImageUrl": "",
+      "backImageUrl": "http://vifus.webd.pl/kubek.png",
+      "frontImageUrl": "http://vifus.webd.pl/kubek.png",
+      "backThumbnail": "http://vifus.webd.pl/kubek.png",
       "number": 1,
       "price": 59.99,
       "title": "Kubeczek nr 2"
@@ -26,8 +28,10 @@
     "zip": "00-222"
   },
   "payment": {
-    "method": "xxx"
+    "method": "TRANSFER",
+    "orderTotal": 120,
+    "symbol": "PLN"
   },
   "totalPrice": 59.99,
-  "clientTime": ""
+  "clientTime": "2021-10-19 15:00:00"
 }
