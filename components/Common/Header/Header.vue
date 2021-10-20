@@ -80,13 +80,15 @@ export default class Header extends Vue {
   }
 
   processMessages () {
-    this.headerMessage = this.headerMessages[0]
-    setInterval(() => {
-      if (this.messageIndex >= this.headerMessages.length) {
-        this.messageIndex = 0
-      }
-      this.headerMessage = this.headerMessages[this.messageIndex++]
-    }, 5000)
+    if (this.headerMessages) {
+      this.headerMessage = this.headerMessages[0]
+      setInterval(() => {
+        if (this.messageIndex >= this.headerMessages.length) {
+          this.messageIndex = 0
+        }
+        this.headerMessage = this.headerMessages[this.messageIndex++]
+      }, 5000)
+    }
   }
 
   handleScroll () {

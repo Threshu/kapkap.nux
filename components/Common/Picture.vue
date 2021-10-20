@@ -1,10 +1,12 @@
 <template>
   <picture>
     <source
+      v-if="path"
       :srcset="path.replace(/\.png$/, '.webp')"
       type="image/webp"
     >
     <img
+      v-if="path"
       :src="path"
       :class="className"
       :alt="alt"

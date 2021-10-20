@@ -8,6 +8,7 @@
       />
     </NuxtLink>
     <Picture
+      v-if="petImage"
       :path="petImage"
       alt="personalizowane prezenty KapKap"
       :class-name="`img-fluid logo dog ${petImage ? 'show' : ''}`"
