@@ -1922,3 +1922,20 @@ header {
     }
   }
 }
+
+.address-tabs {
+  display: block;
+  border-bottom: 1px solid #aaa;
+  margin: 0 0 10px;
+  padding: 0;
+
+  .tab-item {
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+
+    &.active {
+      color: #28a745;
+    }
+  }
+}
