@@ -85,7 +85,7 @@
                           <div class="input-group">
                             <!-- !!! -->
                             <input
-                              v-bind="item.number"
+                              :value="item.number"
                               type="number"
                               class="form-control input-number"
                             >
@@ -130,7 +130,7 @@
                         <input
                           type="text"
                           name="quantity"
-                          value="item.number"
+                          :value="item.number"
                           readOnly="true"
                           class="form-control input-number"
                         >
@@ -174,7 +174,7 @@
               <tfoot>
                 <tr>
                   <td>Suma:</td>
-                  <td><h2>{{ total }} zł</h2></td>
+                  <td><h2>{{ cart.total }} zł</h2></td>
                 </tr>
               </tfoot>
             </table>
@@ -262,8 +262,8 @@ export default class Basket extends Vue {
 
   }
 
-  calculateTotal () {
-
+  calculateTotal (item, number) {
+    return item.price * number;
   }
 
   processCartPreviews () {
