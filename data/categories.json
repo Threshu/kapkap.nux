@@ -1,0 +1,186 @@
+{
+  "success": true,
+  "categories": [
+    {
+      "id": "60fa7974dda6f2058755b55d",
+      "path": "/kubki/z-psami",
+      "title": "Kubki z psami"
+    },
+    {
+      "id": "60fa79c6dda6f2058755b55e",
+      "path": "/kubki/dla-par",
+      "title": "Kubki dla par"
+    },
+    {
+      "id": "60fa79dcdda6f2058755b55f",
+      "path": "/kubki/ze-znajomymi",
+      "title": "Kubki ze znajomymi"
+    },
+    {
+      "id": "60fa79e8dda6f2058755b560",
+      "path": "/kubki/z-kotami",
+      "title": "Kubki z kotami"
+    },
+    {
+      "id": "6181945ad63115009f404fc8",
+      "path": "/kubki/na-swieta",
+      "title": "Kubki na święta"
+    }
+  ],
+  "products": [
+    {
+      "id": "5f97e95d6c422d7bfdca2d50",
+      "name": "/ja-i-pies/latem-nad-morzem",
+      "title": "Ja i mój pies nad morzem",
+      "price": 59.99,
+      "avgGrade": 5,
+      "numberOfGrades": 1,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/nad-morzem-2.webp"
+    },
+    {
+      "id": "5fb2db972774333fbca5f77d",
+      "name": "/ja-i-pies/na-swieta",
+      "title": "Ja i mój pies na święta",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/swieta.webp"
+    },
+    {
+      "id": "5fb2db972774333fbca5f77a",
+      "name": "/ja-i-pies/zima",
+      "title": "Ja i mój pies zimą",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/zima.webp"
+    },
+    {
+      "id": "5fb2db972774333fbca5f77c",
+      "name": "/ja-i-pies/w-miescie",
+      "title": "Ja i mój pies w mieście",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/w-miescie.webp"
+    },
+    {
+      "id": "5fb2db972774333fbca5f77b",
+      "name": "/ja-i-pies/nad-jeziorem",
+      "title": "Ja i mój pies nad jeziorem",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/nad-jeziorem-1.webp"
+    },
+    {
+      "id": "5ff3996e7e77b608b116b5a8",
+      "name": "/ja-i-pies/w-lesie",
+      "title": "Ja i mój pies w lesie",
+      "price": 59.99,
+      "avgGrade": 4.818181818181818,
+      "numberOfGrades": 11,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/w-lesie.webp"
+    },
+    {
+      "id": "60bce684e826c363899347db",
+      "name": "/ja-i-pies/altanka-noca",
+      "title": "Altanka nocą",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": [
+        "60fa7974dda6f2058755b55d",
+        "60fa79c6dda6f2058755b55e",
+        "60fa79dcdda6f2058755b55f"
+      ],
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-62359_191434_front.jpg"
+    },
+    {
+      "id": "60bce8f2e826c363899347dd",
+      "name": "/ja-i-pies/altanka-za-dnia",
+      "title": "Altanka za dnia",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-07710_192147_front.jpg"
+    },
+    {
+      "id": "60bce953e826c363899347df",
+      "name": "/ja-i-pies/na-ksiezycu",
+      "title": "Na księżycu",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-71563_190435_front.jpg"
+    },
+    {
+      "id": "60bce9a9e826c363899347e1",
+      "name": "/ja-i-pies/wenecja",
+      "title": "Wenecja",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-58835_192756_front.jpg"
+    },
+    {
+      "id": "60bce9d5e826c363899347e3",
+      "name": "/ja-i-pies/w-parku",
+      "title": "W parku",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-72513_183631_front.jpg"
+    },
+    {
+      "id": "60bce9fde826c363899347e6",
+      "name": "/ja-i-pies/gory-zima",
+      "title": "Góry zimą",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-27243_185806_front.jpg"
+    },
+    {
+      "id": "60bf4f27714eafcd2ab25c7c",
+      "name": "/ja-i-pies/zachod-slonca",
+      "title": "Zachód słońca z wiatrakiem w tle",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-60127_113908_front.jpg"
+    },
+    {
+      "id": "60bf5370c18100622c7de5e3",
+      "name": "/ja-i-pies/pomost-nad-morzem",
+      "title": "Pomost nad morzem",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-00291_113105_front.jpg"
+    },
+    {
+      "id": "61571462551a0c9a0296f21c",
+      "name": "/ja-i-pies/swieta2",
+      "title": "Święta II",
+      "price": 59.99,
+      "avgGrade": 0,
+      "numberOfGrades": 0,
+      "categories": null,
+      "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-60369_160605_front.png"
+    }
+  ]
+}
