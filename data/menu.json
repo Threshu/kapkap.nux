@@ -4,23 +4,23 @@
     "link": "/"
   },
   {
-    "title": "Kubki z psami",
-    "link": "kubki/z-psami"
+    "title": "Kubki",
+    "link": "/kubki"
   },
   {
-    "title": "Kubki z kotami",
-    "link": "kubek/xxxx"
+    "title": "-Produkt-",
+    "link": "/kubek/xxxx"
   },
   {
-    "title": "Kubki dla par",
-    "link": "kubki/dla-par"
+    "link": "personalizacja",
+    "title": "Personalizacja"
   },
   {
-    "title": "Kubki ze znajomymi",
-    "link": "kubki/ze-znajomymi"
+    "link": "/blog/blog-leftsidebar",
+    "title": "Blog"
   },
   {
-    "link": "kontakt",
+    "link": "/kontakt",
     "title": "Kontakt"
   }
 ]

@@ -1,0 +1,28 @@
+<template>
+  <div>
+    <Breadcrumb title="Blog" />
+    <section class="section-b-space blog-page ratio2_3">
+      <div class="container">
+        <div class="row">
+          <!--Blog List start-->
+          <div class="col-12">
+            <BlogList />
+          </div>
+          <!--Blog List start-->
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+import BlogList from './widgets/blog-list'
+import Breadcrumb from '~/components/Common/Breadcrumb'
+
+export default {
+  components: {
+    Breadcrumb,
+    BlogList
+  }
+}
+</script>
