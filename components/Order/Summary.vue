@@ -13,14 +13,14 @@
                   </div>
 
                   <div class="address-tabs">
-                    <a class="tab-item" 
+                    <a class="tab-item"
                       v-on:click="activeTab='billing'">Adres rozliczeniowy</a>
                     <a class="tab-item" v-on:click="activeTab='delivery'">Inny adres dostawy</a>
                   </div>
 
                   <div v-if="activeTab == 'delivery'">
                     <AddressForm
-                      :form="delivery"  
+                      :form="delivery"
                     />
                   </div>
 
@@ -29,7 +29,7 @@
                       :form="billing"
                     />
                   </div>
-                      
+
                   <div class="additionalInfo">
                     <p>Wpisz uwagi dotyczące zamówienia</p>
                     <textarea
@@ -53,7 +53,7 @@
                       </ul>
                       <ul class="sub-total">
                         <li>Suma <span
-                          class="count">{{cartItems.payment.orderTotal}} 
+                          class="count">{{cartItems.payment.orderTotal}}
                           {{cartItems.payment.symbol}}</span></li>
                         <CheckoutBoxes
                           title="Wybierz sposób dostawy"
@@ -87,7 +87,7 @@
 
                       <ul class="total">
                         <li>
-                          Do zapłaty 
+                          Do zapłaty
                           <span class="count">
                             {{cartItems.totalPrice}} {{cartItems.payment.symbol}}
                           </span>
@@ -126,8 +126,8 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
-import CheckoutBoxes from './CheckoutBoxes';
-import AddressForm from "./AddressForm";
+import CheckoutBoxes from './CheckoutBoxes.vue';
+import AddressForm from './AddressForm.vue';
 import orderJSON from '~/data/order.json'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 
@@ -164,7 +164,7 @@ export default class Summary extends Vue {
     companyName: '',
     taxId: ''
   }
-  
+
   initialAdditionals: any = {
     accountAnswer: false,
     paymentOption: 0,
@@ -221,7 +221,7 @@ export default class Summary extends Vue {
 
   calculateTotal(product: any, numb: any) {
     return parseFloat(product.price) * numb.toFixed(2);
-  } 
+  }
 
 }
 </script>

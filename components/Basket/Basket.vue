@@ -262,8 +262,8 @@ export default class Basket extends Vue {
 
   }
 
-  calculateTotal (item, number) {
-    return item.price * number;
+  calculateTotal (item: any, number: number) {
+    return item.price * number
   }
 
   processCartPreviews () {
