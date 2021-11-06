@@ -35,7 +35,7 @@
       "price": 59.99,
       "avgGrade": 5,
       "numberOfGrades": 1,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/nad-morzem-2.webp"
     },
     {
@@ -45,7 +45,7 @@
       "price": 59.99,
       "avgGrade": 0,
       "numberOfGrades": 0,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d", "6181945ad63115009f404fc8"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/swieta.webp"
     },
     {
@@ -55,7 +55,7 @@
       "price": 59.99,
       "avgGrade": 0,
       "numberOfGrades": 0,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/zima.webp"
     },
     {
@@ -65,7 +65,7 @@
       "price": 59.99,
       "avgGrade": 0,
       "numberOfGrades": 0,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/w-miescie.webp"
     },
     {
@@ -75,7 +75,7 @@
       "price": 59.99,
       "avgGrade": 0,
       "numberOfGrades": 0,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/nad-jeziorem-1.webp"
     },
     {
@@ -85,7 +85,7 @@
       "price": 59.99,
       "avgGrade": 4.818181818181818,
       "numberOfGrades": 11,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/w-lesie.webp"
     },
     {
@@ -129,7 +129,7 @@
       "price": 59.99,
       "avgGrade": 0,
       "numberOfGrades": 0,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-58835_192756_front.jpg"
     },
     {
@@ -139,7 +139,7 @@
       "price": 59.99,
       "avgGrade": 0,
       "numberOfGrades": 0,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-72513_183631_front.jpg"
     },
     {
@@ -159,7 +159,7 @@
       "price": 59.99,
       "avgGrade": 0,
       "numberOfGrades": 0,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-60127_113908_front.jpg"
     },
     {
@@ -169,7 +169,7 @@
       "price": 59.99,
       "avgGrade": 0,
       "numberOfGrades": 0,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-00291_113105_front.jpg"
     },
     {
@@ -179,7 +179,7 @@
       "price": 59.99,
       "avgGrade": 0,
       "numberOfGrades": 0,
-      "categories": null,
+      "categories": ["60fa7974dda6f2058755b55d"],
       "imageURL": "https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/front-60369_160605_front.png"
     }
   ]
