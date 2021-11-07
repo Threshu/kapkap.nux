@@ -11,7 +11,10 @@ pl:
 <template>
   <div>
     <section class="home-page section-b-space">
-      <div class="infographic"></div>
+      
+      <NuxtLink to="/kubki">
+        <div class="infographic"></div>
+      </NuxtLink>
 
       <div class="home-slider">
         <h1 class="home-title">
