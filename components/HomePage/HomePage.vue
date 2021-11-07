@@ -11,6 +11,8 @@ pl:
 <template>
   <div>
     <section class="home-page section-b-space">
+      <div class="infographic"></div>
+
       <div class="home-slider">
         <h1 class="home-title">
           Sklep z personalizowanymi<br>gadżetami i prezentami

@@ -1939,3 +1939,22 @@ header {
     }
   }
 }
+
+.infographic {
+  display: block;
+  background-image: url("/images/main-page/M_1250x300.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 600px;
+  width: 100%;
+  margin: 20px auto;
+
+  @media (max-width: 1920px) {
+    background-image: url("/images/main-page/M_700x150.png");
+    height: 300px;
+  }
+  @media (max-width: 768px) {
+    background-image: url("/images/main-page/M_340x300.png");
+    background-size: contain;
+  }
+}
