@@ -6,9 +6,9 @@
         <ul class="recent-blog">
           <li v-for="(blog,index) in bloglist.slice(0, 6)" :key="index">
             <div class="media">
-              <img :src="getImgUrl(blog.images[0])" class="img-fluid" alt>
+              <img :src="blog.imageURL" class="img-fluid" alt>
               <div class="media-body align-self-center">
-                <h6>{{ blog.date }}</h6>
+                <h6>{{ blog.dateCreated }}</h6>
                 <p>{{ blog.title }}</p>
               </div>
             </div>
