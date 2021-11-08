@@ -19,7 +19,17 @@ pl:
   <div>
     <Breadcrumb title="Kontakt" />
     <section class="contact-page section-b-space">
-      <Modal v-if="showModal" :message="mMessage" xtitle="xxxxx444xxxx"/>
+
+      <div v-if="showModal" class="nuxtmodal-overlay" @click="showModal = false">
+        <div class="nuxtmodal" @click.stop>
+          <div class="close" @click="showModal = false">
+            <a class="close-img">&#x2715</a>
+          </div>
+          <h6>{{mTitle}}</h6>
+          <p v-html="mMessage"></p>
+        </div>
+      </div>
+
       <div class="container">
         <div class="row section-b-space">
           <div class="col-lg-7 map">
@@ -148,10 +158,9 @@ pl:
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
-import Modal from '~/components/Common/Modal.vue'
 
 @Component({
-  components: { Breadcrumb, Modal }
+  components: { Breadcrumb }
 })
 export default class Contact extends Vue {
   phone: string = <string>process.env.phone
@@ -162,7 +171,8 @@ export default class Contact extends Vue {
   companyCity: string = <string>process.env.companyCity
   companyMail: string = <string>process.env.companyMail
   showModal: any = false
-  mMessage: any = 'xsssss'
+  mMessage: any = ''
+  mTitle: any = ''
 
   firstName: string = ''
   lastName: string = ''
@@ -180,8 +190,13 @@ export default class Contact extends Vue {
         message: this.message
       })
       this.showModal = true
+      this.mMessage = 'Odpowiemy na tę wiadomość w ciągu paru godzin.<br/> Wysłaliśmy również potwierdzenie ' +
+                'wysłania tej wiadomości na twój adres e-mail.'
+      this.mTitle = 'Dziękujemy za kontakt'
     } catch (err) {
       this.showModal = true
+      this.mMessage = err.message
+      this.mTitle = 'Wystąpił błąd'
     }
 
     return false
