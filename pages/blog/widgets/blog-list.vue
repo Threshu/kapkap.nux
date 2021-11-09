@@ -9,27 +9,27 @@
       <div class="col-xl-6">
         <div class="blog-left">
           <nuxt-link :to="{ path: '/blog/blog-detail'}">
-            <img :src="getImgUrl(blog.images[0])" class="img-fluid" alt>
+            <img :src="blog.imageURL" class="img-fluid" alt>
           </nuxt-link>
         </div>
       </div>
       <div class="col-xl-6">
         <div class="blog-right">
           <div>
-            <h6>{{ blog.date }}</h6>
+            <h6>{{ blog.dateCreated }}</h6>
             <nuxt-link :to="{ path: '/blog/blog-detail'}">
               <h4>{{ blog.title }}</h4>
             </nuxt-link>
             <ul class="post-social">
-              <li>Posted By : {{ blog.auther }}</li>
+              <li>Posted By : {{ blog.author }}</li>
               <li>
-                <i class="fa fa-heart" /> 5 Hits
+                <i class="fa fa-heart" /> {{blog.views}} Hits
               </li>
               <li>
-                <i class="fa fa-comments" /> 10 Comment
+                <i class="fa fa-comments" /> {{blog.comments}} Comment
               </li>
             </ul>
-            <p>{{ blog.description }}</p>
+            <p>{{ blog.shortContent }}</p>
           </div>
         </div>
       </div>
