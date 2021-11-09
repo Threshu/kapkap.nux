@@ -19,6 +19,17 @@ pl:
   <div>
     <Breadcrumb title="Kontakt" />
     <section class="contact-page section-b-space">
+
+      <div v-if="showModal" class="nuxtmodal-overlay" @click="showModal = false">
+        <div class="nuxtmodal" @click.stop>
+          <div class="close" @click="showModal = false">
+            <a class="close-img">&#x2715</a>
+          </div>
+          <h6>{{mTitle}}</h6>
+          <p v-html="mMessage"></p>
+        </div>
+      </div>
+
       <div class="container">
         <div class="row section-b-space">
           <div class="col-lg-7 map">
@@ -80,7 +91,7 @@ pl:
                 <div class="col-md-6">
                   <label for="firstName">{{ $t('firstName') }}</label>
                   <input
-                    v-bind="firstName"
+                    v-model="firstName"
                     type="text"
                     class="form-control"
                     id="firstName"
@@ -90,7 +101,7 @@ pl:
                 <div class="col-md-6">
                   <label for="lastName">{{ $t('lastName') }}</label>
                   <input
-                    v-bind="lastName"
+                    v-model="lastName"
                     type="text"
                     class="form-control"
                     id="lastName"
@@ -100,7 +111,7 @@ pl:
                 <div class="col-md-6">
                   <label for="phoneNumber">{{ $t('number') }}</label>
                   <input
-                    v-bind="phoneNumber"
+                    v-model="phoneNumber"
                     type="text"
                     class="form-control"
                     id="phoneNumber"
@@ -110,7 +121,7 @@ pl:
                 <div class="col-md-6">
                   <label for="email">{{ $t('email') }}</label>
                   <input
-                    v-bind="email"
+                    v-model="email"
                     type="email"
                     class="form-control"
                     id="email"
@@ -120,7 +131,7 @@ pl:
                 <div class="col-md-12">
                   <label for="message">{{ $t('enterMessage') }}</label>
                   <textarea
-                    v-bind="message"
+                    v-model="message"
                     class="form-control"
                     :placeholder="$t('message')"
                     id="message"
@@ -159,6 +170,9 @@ export default class Contact extends Vue {
   companyZip: string = <string>process.env.companyZip
   companyCity: string = <string>process.env.companyCity
   companyMail: string = <string>process.env.companyMail
+  showModal: any = false
+  mMessage: any = ''
+  mTitle: any = ''
 
   firstName: string = ''
   lastName: string = ''
@@ -168,23 +182,21 @@ export default class Contact extends Vue {
 
   async sendMessage () {
     try {
-      await this.$axios.post("/contact/mail", {
+      const test = await this.$axios.post("/contact/mail", {
         firstName: this.firstName,
         lastName: this.lastName,
         phoneNumber: this.phoneNumber,
         email: this.email,
         message: this.message
       })
-      this.$root.$emit('popup', {
-        title: 'Dziękujemy za kontakt',
-        message: 'Odpowiemy na tę wiadomość w ciągu paru godzin. Wysłaliśmy również potwierdzenie ' +
-          'wysłania tej wiadomości na twój adres e-mail.',
-      })
+      this.showModal = true
+      this.mMessage = 'Odpowiemy na tę wiadomość w ciągu paru godzin.<br/> Wysłaliśmy również potwierdzenie ' +
+                'wysłania tej wiadomości na twój adres e-mail.'
+      this.mTitle = 'Dziękujemy za kontakt'
     } catch (err) {
-      this.$root.$emit('popup', {
-        title: 'Przepraszamy',
-        message: 'Nie mogliśmy wysłać wiadomości. Prosimy o kontakt na naszego maila: ' + this.companyMail,
-      })
+      this.showModal = true
+      this.mMessage = err.message
+      this.mTitle = 'Wystąpił błąd'
     }
 
     return false
