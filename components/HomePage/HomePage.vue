@@ -11,6 +11,11 @@ pl:
 <template>
   <div>
     <section class="home-page section-b-space">
+      
+      <NuxtLink to="/kubki">
+        <div class="infographic"></div>
+      </NuxtLink>
+
       <div class="home-slider">
         <h1 class="home-title">
           Sklep z personalizowanymi<br>gadżetami i prezentami
