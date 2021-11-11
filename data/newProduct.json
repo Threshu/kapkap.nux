@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "id": "61571462551a0c9a0296f21c",
+  "title": "Święta II",
+  "price": 59.99,
+  "sampleImageURL": "",
+  "avgGrade": 0,
+  "numberOfGrades": 0,
+  "items":
+  {
+    "cups":
+    [
+      {
+        "title": "todo",
+        "id": "000000000000000000000000"
+      }
+    ],
+    "quotes":
+    [
+      {
+        "quoteId": "000000000000000000000000",
+        "quoteImageUrl": "todo",
+        "quoteTags":
+        [
+          "todo"
+        ]
+      }
+    ],
+    "backgrounds":
+    [
+      {
+        "backgroundId": "000000000000000000000000",
+        "partialBackgroundURL": "todo",
+        "fullBackgroundURL": "todo"
+      }
+    ]
+  }
+}
