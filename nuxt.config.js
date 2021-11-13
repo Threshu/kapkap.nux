@@ -37,7 +37,8 @@ export default {
   plugins: [
     '~/plugins/preview.client.js',
     '~/plugins/jsonld',
-    '~/plugins/axios-accessor'
+    '~/plugins/axios-accessor',
+    {src: '~plugins/zoom', ssr: false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -79,8 +80,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
+  build: { vendor:['vue-image-zoomer'] },
 
   env: {
     phone: process.env.PHONE,

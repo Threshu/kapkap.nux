@@ -239,6 +239,7 @@ export default class Cups extends Vue {
   @Action('categories/getCategories') getCategories!: any
   @Mutation('categories/setCategories') setCategories!: any
   products: any = []
+  alias: any = []
 
   asyncData ({ params }: any) {
     const alias = params.alias
@@ -248,11 +249,11 @@ export default class Cups extends Vue {
   created () {
     this.setCategories(catJSON);
     if (this.alias) {
-      const selectedCat = this.cat.categories.filter((item1) => {
+      const selectedCat = this.cat.categories.filter((item1: any) => {
         return item1.path.includes(this.alias)
       })
 
-      this.products = this.cat.products.filter((item) => {
+      this.products = this.cat.products.filter((item: any) => {
         if (item.categories) {
           return item.categories.includes(selectedCat[0].id)
         }

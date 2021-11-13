@@ -509,47 +509,19 @@
                     <div class="modalContent">
                       <div class="objItem">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
+                        <span class="name">Kobieta</span>
                       </div>
                       <div class="objItem">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
+                        <span class="name">Mężczyzna</span>
                       </div>
                       <div class="objItem">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
+                        <span class="name">Pies</span>
                       </div>
                       <div class="objItem selected">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
+                        <span class="name">Kot</span>
                       </div>
                     </div>
 
@@ -736,18 +708,12 @@
                   Wybierz Kubek
                 </h3>
 
-                <div class="cupsList desktop">
-                  <div class="cupItem ">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png">
-                  </div>
-                  <div class="cupItem selected">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png">
-                  </div>
-                  <div class="cupItem ">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png">
-                  </div>
-                  <div class="cupItem ">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png">
+                <div class="cupsList desktop" v-if="cups">
+                  <div class="cupItem" v-for="(item, index) in cups.cups"
+                  :key="index"
+                  @click="setCup(item.id)"
+                  v-bind:class="{'selected': item.id == cupObject.cupId}">
+                    <img v-if="item" :src="item.imageURL">
                   </div>
                 </div>
 
@@ -800,73 +766,25 @@
                 <h3 class="productConfBoxTitle">
                   Wybierz tło
                 </h3>
-                <div class="bgList desktop">
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem selected">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                <div class="bgList desktop" v-if="cups">
+                  <div class="bgItem" v-for="(item, index) in cups.bgs"
+                  :key="index"
+                  @click="setBg(item.id)"
+                  v-bind:class="{'selected': item.id == cupObject.bgId}">
+                    <img :src="item.imageURL">
                   </div>
                 </div>
                 <div class="paginationBox">
                   <div class="pagination">
-                    <button class="prevAll">
-                      &lt;&lt;
-                    </button>
-                    <button class="prev">
-                      &lt;
-                    </button>
-                    <button class="page">
-                      1
-                    </button>
-                    <button class="page active">
-                      2
-                    </button>
-                    <button class="page">
-                      3
-                    </button>
-                    <button class="page">
-                      4
-                    </button>
-                    <button class="page">
-                      5
-                    </button>
-                    <button class="next">
-                      >
-                    </button>
-                    <button class="nextAll">
-                      >>
-                    </button>
+                    <button class="prevAll">&lt;&lt;</button>
+                    <button class="prev">&lt;</button>
+                    <button class="page">1</button>
+                    <button class="page active">2</button>
+                    <button class="page">3</button>
+                    <button class="page">4</button>
+                    <button class="page">5</button>
+                    <button class="next">></button>
+                    <button class="nextAll">>></button>
                   </div>
                 </div>
 
@@ -1213,47 +1131,19 @@
                     <div class="modalContent">
                       <div class="objItem">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
+                        <span class="name">Kobieta</span>
                       </div>
                       <div class="objItem">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
+                        <span class="name">Mężczyzna</span>
                       </div>
                       <div class="objItem">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
+                        <span class="name">Pies</span>
                       </div>
                       <div class="objItem selected">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
-                      </div>
-                      <div class="objItem">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Postać</span>
+                        <span class="name">Kot</span>
                       </div>
                     </div>
 
@@ -1316,33 +1206,12 @@
                   Dodaj cytat
                 </h3>
 
-                <div class="quotesList desktop">
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem selected">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
+                <div class="quotesList desktop" v-if="cups">
+                  <div class="quoteItem" v-for="(item, index) in cups.quotes" 
+                  :key="index"
+                  @click="setQuote(item.id)"
+                  v-bind:class="{'selected': item.id == cupObject.quoteId}">
+                    <img :src="item.imageURL">
                   </div>
                 </div>
 
@@ -1473,28 +1342,48 @@
   </section>
 </template>
 
-<script>
-import { Component, Vue, Watch } from 'nuxt-property-decorator'
+<script  lang="ts">
+import { Action, Component, Getter, Mutation, Vue, Watch } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
-import imageZoom from 'vue-image-zoomer'
 import VueSlickCarousel from 'vue-slick-carousel'
 import Picture from '@/components/Common/Picture'
+import cupsJSON from '~/data/cupsData.json'
 
 @Component({
   components: {
     VueSlickCarousel,
-    Picture,
-    imageZoom
+    Picture
   }
 })
 
 export default class Cup extends Vue {
+  @Getter('defaults/isLoaded') isLoaded!: boolean
+  @Getter('cup/cups') cups!: any
+
+  @Mutation('cup/setCups') setCups!: any
+
+  cups: any = cupsJSON
   showModal = false
   confMenu = 1
   showConf = false
   showEditModal = false
   removeBox = false
   news = false
+
+  cupObject = {
+    cupId: null,
+    bgId: null,
+    quoteId: null,
+    objects: [
+      {
+        name: null,
+        figureId: null, 
+        hairColor: null,
+        hairType: null
+      }
+    ]
+  }
+
   sliderSettings = {
     arrows: true,
     centerMode: true,
@@ -1539,20 +1428,22 @@ export default class Cup extends Vue {
     }]
   }
 
-  mounted () {
-    const scrollHeight = this.$refs.productBox.offsetTop
-    window.scrollTo(0, scrollHeight - 50)
+  setCup(id) { 
+    this.cupObject.cupId = id
   }
 
-  @Watch('showConf')
-  onShowConfChanged (val = string, oldVal = string) {
-    const el = document.body
-    if (val) {
-      el.classList.add('noScroll')
-    } else {
-      el.classList.remove('noScroll')
-    }
+  setBg(id) { 
+    this.cupObject.bgId = id
   }
+
+  setQuote(id) { 
+    this.cupObject.quoteId = id
+  }
+
+  mounted () {
+    this.setCups(cupsJSON)
+  }
+
 }
 </script>
 
