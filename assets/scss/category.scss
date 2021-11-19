@@ -9,7 +9,12 @@
 	left: 0;
 	opacity: 0.75;
 	z-index: 8888888;
+
+	@media (max-width: 1350px) {
+		z-index: 77777;
+	}
 }
+
 .categoryBox {
 	padding: 0;
 
@@ -364,6 +369,14 @@
 									text-align: left;
 									margin-bottom: 20px;
 
+									.breed {
+										display: block;
+										font-weight: bold;
+										font-family: Lato;
+										font-size: 14px;
+										margin-top: 20px;
+									}
+
 									.objItem {
 										margin-left: 0;
 										height: auto;
@@ -514,6 +527,10 @@
 							.objImage {
 								width: 36px;
 								height: 38px;
+
+								img {
+									width: auto;
+								}
 							}
 
 							.objName {
@@ -1189,6 +1206,7 @@
 							}
 							.modalContent {
 								max-height: calc(100vh - 86px);
+								height: calc(100vh - 86px);
 								overflow: auto;
 							}
 							.modalTitle {

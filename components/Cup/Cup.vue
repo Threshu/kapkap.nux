@@ -69,18 +69,12 @@
                   Wybierz Kubek
                 </h3>
 
-                <div class="cupsList mobile">
-                  <div class="cupItem ">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png">
-                  </div>
-                  <div class="cupItem selected">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png">
-                  </div>
-                  <div class="cupItem ">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png">
-                  </div>
-                  <div class="cupItem ">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/optimized/kubek-bialy.png">
+                <div class="cupsList mobile" v-if="cups">
+                  <div class="cupItem" v-for="(item, index) in cups.cups"
+                  :key="index"
+                  @click="setCup(item.id)"
+                  v-bind:class="{'selected': item.id == cupObject.cupId}">
+                    <img v-if="item" :src="item.imageURL">
                   </div>
                 </div>
 
@@ -121,7 +115,7 @@
                   <button class="back" @click="showConf = false">
                     Wstecz
                   </button>
-                  <button class="next">
+                  <button class="next" @click="confMenu = 2">
                     Dalej
                   </button>
                 </div>
@@ -132,42 +126,12 @@
                   Wybierz tło
                 </h3>
 
-                <div class="bgList mobile">
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem selected">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
-                  </div>
-                  <div class="bgItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/assets/cup_photos/back-14391_191721_front.webp">
+                <div class="bgList mobile" v-if="cups">
+                  <div class="bgItem" v-for="(item, index) in cups.bgs"
+                  :key="index"
+                  @click="setBg(item.id)"
+                  v-bind:class="{'selected': item.id == cupObject.bgId}">
+                    <img :src="item.imageURL">
                   </div>
                 </div>
 
@@ -220,27 +184,27 @@
                 </h3>
                 <div class="objectsList">
 
-                  <div class="objectItem" v-for="(item, index) in cupObject.objects" :key="index">
+                  <div class="objectItem" v-for="(item, index) in cupObject.items" :key="index">
                     <div class="objectRow">
                       <div class="objImage">
-                        <img src="https://kapkap.eu/static/media/one-dog.02c1a9bb.webp">
+                        <img :src="item.bodyImageUrl">
                       </div>
                       <div class="objName">
-                        Fafikx
+                        {{item.name}}
                       </div>
                       <div class="objActions">
-                        <button class="edit" @click="showEditModal = true" />
-                        <button class="remove" @click="removeBox = true" />
+                        <button class="edit" @click="editItem(index)" />
+                        <button class="remove" @click="removeItem(index)" />
                         <button class="top" />
                         <button class="down" />
                       </div>
                     </div>
-                    <div v-if="removeBox" class="removeBox">
-                      <button class="cancelRemove" @click="removeBox = false">
+                    <div v-if="removeItemId == index" class="removeBox">
+                      <button class="cancelRemove" @click="removeItem(null)">
                         Anuluj
                       </button>
-                      <button class="acceptRemove">
-                        Usun
+                      <button class="acceptRemove" @click="removeItem(index, true)">
+                        Usuń
                       </button>
                     </div>
                   </div>
@@ -254,197 +218,71 @@
                       ✕
                     </button>
                     <h3 class="modalTitle">
-                      Kobieta
+                      {{objectData.title}}
                     </h3>
 
                     <div class="modalContent edit">
-                      <input class="objectName" type="text" value="Imie">
+                      <input class="objectName" type="text" placeholder="Imię" v-model="tempObject.name">
 
-                      <div class="objectsBox">
-                        <h4 class="objectTitle">
-                          Sylwetka
-                        </h4>
+                      <div class="objectsBox" v-if="objectData.bodies">
+                        <h4 class="objectTitle">Sylwetka</h4>
 
-                        <div class="objItem">
+                        <div class="objItem" v-for="(item, index) in objectData.bodies" :key="index"
+                          :class="[item.bodyId == tempObject.figureId ? 'selected' : '']"
+                          @click="setFigure(item.bodyId, item.bodyImageUrl)">
                           <img
                             alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/women_body/90/2_spring_style4.webp"
+                            :src="item.bodyImageUrl"
                           >
                         </div>
                       </div>
 
-                      <div class="objectsBox color">
+                      <div class="objectsBox color" v-if="objectData.hairstyle">
                         <h4 class="objectTitle">
                           Kolor włosów
                         </h4>
-
-                        <div class="objItem">
-                          <div class="colorItem" style="background: #BD967A;" />
-                        </div>
-                        <div class="objItem">
-                          <div class="colorItem" style="background: #E8C2A4;" />
-                        </div>
-                        <div class="objItem">
-                          <div class="colorItem" style="background: #DC9213;" />
-                        </div>
-                        <div class="objItem">
-                          <div class="colorItem" style="background: #1C1C1C;" />
-                        </div>
-                        <div class="objItem">
-                          <div class="colorItem" style="background: #5D3800;" />
+                        <div class="objItem" v-for="(item, index) in objectData.hairstyle" :key="index" 
+                          :class="[index == tempObject.hairColor ? 'selected' : '']">
+                          <div class="colorItem" :class="index" @click="setHairColor(index)"/>
                         </div>
                       </div>
 
-                      <div class="objectsBox">
+                      <div class="objectsBox" v-if="objectData.hairstyle && objectData.hairstyle[tempObject.hairColor]">
                         <h4 class="objectTitle">
                           Rodzaj włosów
                         </h4>
 
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
-                          >
+                        <div v-for="(item, index) in objectData.hairstyle[tempObject.hairColor]" :key="index">
+                          <div class="objItem" v-for="(item1, index1) in item" :key="index1"
+                            :class="[item1.hairstyleId == tempObject.hairstyleId ? 'selected' : '']"
+                            @click="setHairStyle(item1.hairstyleId)">
+                            <img
+                              alt="product hairstyle icon"
+                              :src="item1.hairstyleImageUrl"
+                            >
+                          </div>
                         </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
-                          >
-                        </div>
-                        <div class="objItem">
-                          <img
-                            alt="product body icon"
-                            src="https://d3vejpae6rnkkg.cloudfront.net/female_hairstyle/90/black/bun_hair/female_hair_black_11.webp"
-                          >
+                      </div>
+
+                      <div class="objectsBox" v-if="objectData.type=='dog'">
+                        <div v-for="(dogs, breed) in objectData" v-if="breed != 'title'">
+                          <span class="breed">{{breed}}</span>
+                          <div class="objItem" v-for="(item, index) in dogs" :key="index" v-if="item.imageUrl"
+                            :class="[item.variantId == tempObject.variantId ? 'selected' : '']"
+                            @click="setDog(item.variantId, item.imageUrl)">
+                            <img
+                              alt="product body icon"
+                              :src="item.imageUrl"
+                            >
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    <button class="cancel" @click="showEditModal = false">
+                    <button class="cancel" @click="editCancel()">
                       Anuluj
                     </button>
-                    <button class="add">
+                    <button class="add" @click="pushObject(objectData.type, tempObject.edit)">
                       Zapisz
                     </button>
                   </div>
@@ -457,21 +295,17 @@
                     </h3>
 
                     <div class="modalContent">
-                      <div class="objItem">
+                      <div class="objItem" @click="configureObject(women, 'women')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Kobieta</span>
                       </div>
-                      <div class="objItem">
+                      <div class="objItem" @click="configureObject(men, 'men')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Mężczyzna</span>
                       </div>
-                      <div class="objItem">
+                      <div class="objItem" @click="configureObject(dogs, 'dog')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Pies</span>
-                      </div>
-                      <div class="objItem selected">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Kot</span>
                       </div>
                     </div>
 
@@ -518,10 +352,10 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="back">
+                  <button class="back" @click="confMenu = 3">
                     Wstecz
                   </button>
-                  <button class="next">
+                  <button class="next" @click="confMenu = 4">
                     Dalej
                   </button>
                 </div>
@@ -532,33 +366,12 @@
                   Dodaj cytat
                 </h3>
 
-                <div class="quotesList mobile">
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem selected">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
-                  </div>
-                  <div class="quoteItem">
-                    <img src="https://d3vejpae6rnkkg.cloudfront.net/quotes/90/cytaty_06a.png">
+                <div class="quotesList mobile" v-if="cups">
+                  <div class="quoteItem" v-for="(item, index) in cups.quotes" 
+                  :key="index"
+                  @click="setQuote(item.id)"
+                  v-bind:class="{'selected': item.id == cupObject.quoteId}">
+                    <img :src="item.imageURL">
                   </div>
                 </div>
 
@@ -596,13 +409,13 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="next">
+                  <button class="next" @click="buyNow()">
+                    Kup Teraz
+                  </button>
+                  <button class="next fl" @click="addToCart()">
                     Dodaj do koszyka
                   </button>
-                  <button class="next fl">
-                    Dalej
-                  </button>
-                  <button class="reset">
+                  <button class="reset" @click="reset()"">
                     Resetuj i zacznij od nowa
                   </button>
                 </div>
@@ -704,7 +517,7 @@
                   <button class="back" @click="showConf = false">
                     Wstecz
                   </button>
-                  <button class="next">
+                  <button class="next" @click="confMenu = 2">
                     Dalej
                   </button>
                 </div>
@@ -772,10 +585,10 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="back">
+                  <button class="back" @click="confMenu = 2">
                     Wstecz
                   </button>
-                  <button class="next">
+                  <button class="next" @click="confMenu = 3">
                     Dalej
                   </button>
                 </div>
@@ -788,7 +601,7 @@
                   Dodaj obiekty
                 </h3>
                 <div class="objectsList">
-                  <div class="objectItem" v-for="(item, index) in cupObject.objects" :key="index">
+                  <div class="objectItem" v-for="(item, index) in cupObject.items" :key="index">
                     <div class="objectRow">
                       <div class="objImage">
                         <img :src="item.bodyImageUrl">
@@ -796,19 +609,20 @@
                       <div class="objName">
                         {{item.name}}
                       </div>
+
                       <div class="objActions">
-                        <button class="edit" @click="showEditModal = true" />
-                        <button class="remove" @click="removeBox = true" />
+                        <button class="edit" @click="editItem(index)" />
+                        <button class="remove" @click="removeItem(index)" />
                         <button class="top" />
                         <button class="down" />
                       </div>
                     </div>
-                    <div v-if="removeBox" class="removeBox">
-                      <button class="cancelRemove" @click="removeBox = false">
+                    <div v-if="removeItemId == index" class="removeBox">
+                      <button class="cancelRemove" @click="removeItem(null)">
                         Anuluj
                       </button>
-                      <button class="acceptRemove">
-                        Usun
+                      <button class="acceptRemove" @click="removeItem(index, true)">
+                        Usuń
                       </button>
                     </div>
                   </div>
@@ -849,7 +663,7 @@
                         </div>
                       </div>
 
-                      <div class="objectsBox" v-if="objectData.hairstyle[tempObject.hairColor]">
+                      <div class="objectsBox" v-if="objectData.hairstyle && objectData.hairstyle[tempObject.hairColor]">
                         <h4 class="objectTitle">
                           Rodzaj włosów
                         </h4>
@@ -865,12 +679,30 @@
                           </div>
                         </div>
                       </div>
+
+                      <div class="objectsBox" v-if="objectData.type=='dog'">
+
+
+                        <div v-for="(dogs, breed) in objectData" v-if="breed != 'title'">
+
+                          <span class="breed">{{breed}}</span>
+                          <div class="objItem" v-for="(item, index) in dogs" :key="index" v-if="item.imageUrl"
+                            :class="[item.variantId == tempObject.variantId ? 'selected' : '']"
+                            @click="setDog(item.variantId, item.imageUrl)">
+
+                            <img
+                              alt="product body icon"
+                              :src="item.imageUrl"
+                            >
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
-                    <button class="cancel" @click="showEditModal = false">
+                    <button class="cancel" @click="editCancel()">
                       Anuluj
                     </button>
-                    <button class="add" @click="pushObject()">
+                    <button class="add" @click="pushObject(objectData.type, tempObject.edit)">
                       Zapisz
                     </button>
                   </div>
@@ -886,15 +718,15 @@
                     </h3>
 
                     <div class="modalContent">
-                      <div class="objItem" @click="configureObject(women)">
+                      <div class="objItem" @click="configureObject(women, 'women')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Kobieta</span>
                       </div>
-                      <div class="objItem" @click="configureObject(men)">
+                      <div class="objItem" @click="configureObject(men, 'men')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Mężczyzna</span>
                       </div>
-                      <div class="objItem" @click="configureObject(dogs)">
+                      <div class="objItem" @click="configureObject(dogs, 'dog')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Pies</span>
                       </div>
@@ -943,10 +775,10 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="back">
+                  <button class="back" @click="confMenu = 3">
                     Wstecz
                   </button>
-                  <button class="next">
+                  <button class="next" @click="confMenu = 4">
                     Dalej
                   </button>
                 </div>
@@ -1034,13 +866,13 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="next">
+                  <button class="next" @click="buyNow()">
+                    Kup Teraz
+                  </button>
+                  <button class="next fl" @click="addToCart()">
                     Dodaj do koszyka
                   </button>
-                  <button class="next fl">
-                    Dalej
-                  </button>
-                  <button class="reset">
+                  <button class="reset" @click="reset()"">
                     Resetuj i zacznij od nowa
                   </button>
                 </div>
@@ -1125,6 +957,7 @@ export default class Cup extends Vue {
   showConf = false
   showEditModal = false
   removeBox = false
+  removeItemId = null
   news = false
   objectData: any = []
   men: any = menJSON
@@ -1133,17 +966,20 @@ export default class Cup extends Vue {
 
   tempObject = {
     name: null,
+    type: '', 
+    edit: null, 
     figureId: null, 
+    variantId: null,
     bodyImageUrl: null,
     hairColor: 'black',
     hairstyleId: null
   }
 
   cupObject = {
-    cupId: null,
-    bgId: null,
+    cupId: this.cups.cups[0].id,
+    bgId: this.cups.bgs[0].id,
     quoteId: null,
-    objects: []
+    items: []
   }
 
   sliderSettings = {
@@ -1190,46 +1026,123 @@ export default class Cup extends Vue {
     }]
   }
 
-  setCup(id) { 
+  setCup(id: any) { 
     this.cupObject.cupId = id
   }
 
-  setBg(id) { 
+  setBg(id: any) { 
     this.cupObject.bgId = id
   }
 
-  setQuote(id) { 
+  setQuote(id: any) { 
     this.cupObject.quoteId = id
   }
 
-  setHairColor(color) { 
+  setHairColor(color: any) { 
     this.tempObject.hairColor = color
   }
 
-  setFigure(figureId, bodyImageUrl) { 
+  setFigure(figureId: any, bodyImageUrl: any) { 
     this.tempObject.figureId = figureId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
 
-  setHairStyle(hairstyleId) {
+  setDog(variantId: any, bodyImageUrl: any) { 
+    this.tempObject.variantId = variantId
+    this.tempObject.bodyImageUrl = bodyImageUrl
+  }
+
+  setHairStyle(hairstyleId: any) {
     this.tempObject.hairstyleId = hairstyleId
   }
 
-  pushObject() {
-    this.cupObject.objects.push(this.tempObject)
+  pushObject(type: any, edit: any) {
+    this.tempObject.type = type
+    if (edit != null) {
+      this.cupObject.items[edit] = this.tempObject
+    } else {
+      this.cupObject.items.push(this.tempObject)
+    }
     this.showEditModal = false
+    this.resetTempObject();
+  }
+
+  editCancel() {
+    this.showEditModal = false
+    this.resetTempObject()
+    this.objectData = []
+  }
+
+  editItem(itemId: any) {
+    this.tempObject = this.cupObject.items[itemId]
+    this.showModal = false
+    this.showEditModal = true
+    this.tempObject = this.cupObject.items[itemId]
+    this.tempObject.edit = itemId
+
+    switch(this.tempObject.type) {
+      case 'dog':
+        this.objectData = this.dogs
+        this.objectData.type = this.tempObject.type
+        break;
+      case 'woman':
+        this.objectData = this.women
+        this.objectData.type = this.tempObject.type
+        break;
+      case 'men':
+        this.objectData = this.men
+        this.objectData.type = this.tempObject.type
+        break;
+    }
+
+  }
+
+  removeItem(itemId: any, confirmRemove: any = false) {
+    if (confirmRemove) {
+      this.cupObject.items.splice(itemId, 1);
+      this.removeItemId = null
+    } else {
+      this.removeItemId = itemId
+    }
+  }
+
+  resetTempObject() {
     this.tempObject = {
       name: null,
+      type: '',
+      edit: null,
       figureId: null, 
+      variantId: null,
+      bodyImageUrl: null,
       hairColor: 'black',
       hairstyleId: null
     }
   }
 
-  configureObject(data) {
+  configureObject(data: any, type: any) {
     this.objectData = data
     this.showModal = false
+    this.objectData.type = type
     this.showEditModal = true
+  }
+
+  buyNow() {
+    console.log("KUP TERAZ OBIEKT:", this.cupObject)
+  }
+
+  addToCart() {
+    console.log("Koszyk OBIEKT:", this.cupObject)
+  }
+
+  reset() {
+    this.confMenu = 1
+    this.cupObject = {
+      cupId: this.cups.cups[0].id,
+      bgId: this.cups.bgs[0].id,
+      quoteId: null,
+      items: []
+    }
+    this.resetTempObject()
   }
 
   mounted () {
