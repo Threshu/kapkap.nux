@@ -58,10 +58,10 @@
 
             <div class="productConfBox">
               <div class="confMenu">
-                <div :class="`confMenu1 ${confMenu === 1 ? 'active' : ''}`" @click="confMenu = 1" />
-                <div :class="`confMenu2 ${confMenu === 2 ? 'active' : ''}`" @click="confMenu = 2" />
-                <div :class="`confMenu3 ${confMenu === 3 ? 'active' : ''}`" @click="confMenu = 3" />
-                <div :class="`confMenu4 ${confMenu === 4 ? 'active' : ''}`" @click="confMenu = 4" />
+                <div :class="`confMenu1 ${confMenu === 1 ? 'active' : ''}`" @click="openCupItems(1)" />
+                <div :class="`confMenu2 ${confMenu === 2 ? 'active' : ''}`" @click="openCupItems(2)" />
+                <div :class="`confMenu3 ${confMenu === 3 ? 'active' : ''}`" @click="openCupItems(3)" />
+                <div :class="`confMenu4 ${confMenu === 4 ? 'active' : ''}`" @click="openCupItems(4)" />
               </div>
 
               <div v-if="confMenu == 1">
@@ -69,11 +69,12 @@
                   Wybierz Kubek
                 </h3>
 
-                <div class="cupsList mobile" v-if="cups">
+                <div v-if="cups" class="cupsList mobile">
                   <div class="cupItem" v-for="(item, index) in cups.cups"
-                  :key="index"
-                  @click="setCup(item.id)"
-                  v-bind:class="{'selected': item.id == cupObject.cupId}">
+                    :key="index"
+                    @click="setCup(item.id)"
+                    v-bind:class="{'selected': item.id == cupObject.cupId}"
+                  >
                     <img v-if="item" :src="item.imageURL">
                   </div>
                 </div>
@@ -115,7 +116,7 @@
                   <button class="back" @click="showConf = false">
                     Wstecz
                   </button>
-                  <button class="next" @click="confMenu = 2">
+                  <button class="next" @click="openCupItems(2)">
                     Dalej
                   </button>
                 </div>
@@ -169,10 +170,10 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="back">
+                  <button class="back" @click="openCupItems(1)">
                     Wstecz
                   </button>
-                  <button class="next">
+                  <button class="next" @click="openCupItems(3)">
                     Dalej
                   </button>
                 </div>
@@ -195,8 +196,8 @@
                       <div class="objActions">
                         <button class="edit" @click="editItem(index)" />
                         <button class="remove" @click="removeItem(index)" />
-                        <button class="top" />
-                        <button class="down" />
+                        <button class="top" @click="topItem(index)" />
+                        <button class="down"  @click="downItem(index)" />
                       </div>
                     </div>
                     <div v-if="removeItemId == index" class="removeBox">
@@ -264,11 +265,11 @@
                         </div>
                       </div>
 
-                      <div class="objectsBox" v-if="objectData.type=='dog'">
+                      <div class="objectsBox" v-if="objectData.type==='dog'">
                         <div v-for="(dogs, breed) in objectData" v-if="breed != 'title'">
                           <span class="breed">{{breed}}</span>
                           <div class="objItem" v-for="(item, index) in dogs" :key="index" v-if="item.imageUrl"
-                            :class="[item.variantId == tempObject.variantId ? 'selected' : '']"
+                            :class="item.variantId == tempObject.variantId ? 'selected' : ''"
                             @click="setDog(item.variantId, item.imageUrl)">
                             <img
                               alt="product body icon"
@@ -352,10 +353,10 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="back" @click="confMenu = 3">
+                  <button class="back" @click="openCupItems(2)">
                     Wstecz
                   </button>
-                  <button class="next" @click="confMenu = 4">
+                  <button class="next" @click="openCupItems(4)">
                     Dalej
                   </button>
                 </div>
@@ -460,10 +461,10 @@
 
             <div id="productConfBox" class="productConfBox">
               <div class="confMenu">
-                <div :class="`confMenu1 ${confMenu === 1 ? 'active' : ''}`" @click="confMenu = 1" />
-                <div :class="`confMenu2 ${confMenu === 2 ? 'active' : ''}`" @click="confMenu = 2" />
-                <div :class="`confMenu3 ${confMenu === 3 ? 'active' : ''}`" @click="confMenu = 3" />
-                <div :class="`confMenu4 ${confMenu === 4 ? 'active' : ''}`" @click="confMenu = 4" />
+                <div :class="`confMenu1 ${confMenu === 1 ? 'active' : ''}`" @click="openCupItems(1)" />
+                <div :class="`confMenu2 ${confMenu === 2 ? 'active' : ''}`" @click="openCupItems(2)" />
+                <div :class="`confMenu3 ${confMenu === 3 ? 'active' : ''}`" @click="openCupItems(3)" />
+                <div :class="`confMenu4 ${confMenu === 4 ? 'active' : ''}`" @click="openCupItems(4)" />
               </div>
 
               <div v-if="confMenu == 1">
@@ -517,7 +518,7 @@
                   <button class="back" @click="showConf = false">
                     Wstecz
                   </button>
-                  <button class="next" @click="confMenu = 2">
+                  <button class="next" @click="openCupItems(2)">
                     Dalej
                   </button>
                 </div>
@@ -585,10 +586,10 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="back" @click="confMenu = 2">
+                  <button class="back" @click="openCupItems(1)">
                     Wstecz
                   </button>
-                  <button class="next" @click="confMenu = 3">
+                  <button class="next" @click="openCupItems(3)">
                     Dalej
                   </button>
                 </div>
@@ -613,8 +614,8 @@
                       <div class="objActions">
                         <button class="edit" @click="editItem(index)" />
                         <button class="remove" @click="removeItem(index)" />
-                        <button class="top" />
-                        <button class="down" />
+                        <button class="top" @click="topItem(index)" />
+                        <button class="down"  @click="downItem(index)" />
                       </div>
                     </div>
                     <div v-if="removeItemId == index" class="removeBox">
@@ -775,10 +776,10 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="back" @click="confMenu = 3">
+                  <button class="back" @click="openCupItems(2)">
                     Wstecz
                   </button>
-                  <button class="next" @click="confMenu = 4">
+                  <button class="next" @click="openCupItems(4)">
                     Dalej
                   </button>
                 </div>
@@ -947,9 +948,9 @@ import dogsJSON from '~/data/dogs.json'
 
 export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('cup/cups') cups!: any
+  @Getter('cup/cups') cups!: Array
 
-  @Mutation('cup/setCups') setCups!: any
+  @Mutation('cup/setCups') setCups!: Function
 
   cups: any = cupsJSON
   showModal = false
@@ -965,18 +966,18 @@ export default class Cup extends Vue {
   dogs: any = dogsJSON
 
   tempObject = {
-    name: null,
+    name: '',
     type: '', 
     edit: null, 
-    figureId: null, 
+    figureId: '', 
     variantId: null,
-    bodyImageUrl: null,
+    bodyImageUrl: '',
     hairColor: 'black',
-    hairstyleId: null
+    hairstyleId: ''
   }
 
   cupObject = {
-    cupId: this.cups.cups[0].id,
+    cupId: this.cups?.cups[0]?.id,
     bgId: this.cups.bgs[0].id,
     quoteId: null,
     items: []
@@ -1042,7 +1043,7 @@ export default class Cup extends Vue {
     this.tempObject.hairColor = color
   }
 
-  setFigure(figureId: any, bodyImageUrl: any) { 
+  setFigure(figureId: string, bodyImageUrl: string) { 
     this.tempObject.figureId = figureId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
@@ -1097,7 +1098,7 @@ export default class Cup extends Vue {
 
   }
 
-  removeItem(itemId: any, confirmRemove: any = false) {
+  removeItem(itemId: any, confirmRemove: Boolean = false) {
     if (confirmRemove) {
       this.cupObject.items.splice(itemId, 1);
       this.removeItemId = null
@@ -1108,22 +1109,39 @@ export default class Cup extends Vue {
 
   resetTempObject() {
     this.tempObject = {
-      name: null,
+      name: '',
       type: '',
       edit: null,
-      figureId: null, 
+      figureId: '', 
       variantId: null,
-      bodyImageUrl: null,
+      bodyImageUrl: '',
       hairColor: 'black',
-      hairstyleId: null
+      hairstyleId: ''
     }
   }
 
-  configureObject(data: any, type: any) {
+  configureObject(data: Object, type: String) {
     this.objectData = data
     this.showModal = false
     this.objectData.type = type
     this.showEditModal = true
+  }
+
+  moveArrayItemToNewIndex(arr: any, old_index: number, new_index: number) {
+      arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+      return arr; 
+  }
+
+  topItem(index: number) {
+    this.moveArrayItemToNewIndex(this.cupObject.items, index, index-1)
+  }
+
+  downItem(index: number) {
+    this.moveArrayItemToNewIndex(this.cupObject.items, index, index+1)
+  }
+
+  openCupItems(id: number) {
+    this.confMenu = id
   }
 
   buyNow() {
