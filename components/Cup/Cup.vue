@@ -255,7 +255,7 @@
 
                         <div v-for="(item, index) in objectData.hairstyle[tempObject.hairColor]" :key="index">
                           <div class="objItem" v-for="(item1, index1) in item" :key="index1"
-                            :class="[item1.hairstyleId == tempObject.hairstyleId ? 'selected' : '']"
+                            :class="item1.hairstyleId == tempObject.hairstyleId ? 'selected' : ''"
                             @click="setHairStyle(item1.hairstyleId)">
                             <img
                               alt="product hairstyle icon"
@@ -268,7 +268,9 @@
                       <div class="objectsBox" v-if="objectData.type==='dog'">
                         <div v-for="(dogs, breed) in objectData" v-if="breed != 'title'">
                           <span class="breed">{{breed}}</span>
-                          <div class="objItem" v-for="(item, index) in dogs" :key="index" v-if="item.imageUrl"
+                          <div class="objItem" v-for="(item, index) in dogs" 
+                            v-if="item.imageUrl"
+                            :key="index" 
                             :class="item.variantId == tempObject.variantId ? 'selected' : ''"
                             @click="setDog(item.variantId, item.imageUrl)">
                             <img
@@ -671,7 +673,7 @@
 
                         <div v-for="(item, index) in objectData.hairstyle[tempObject.hairColor]" :key="index">
                           <div class="objItem" v-for="(item1, index1) in item" :key="index1"
-                            :class="[item1.hairstyleId == tempObject.hairstyleId ? 'selected' : '']"
+                            :class="item1.hairstyleId == tempObject.hairstyleId ? 'selected' : ''"
                             @click="setHairStyle(item1.hairstyleId)">
                             <img
                               alt="product hairstyle icon"
@@ -948,7 +950,7 @@ import dogsJSON from '~/data/dogs.json'
 
 export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('cup/cups') cups!: Array
+  @Getter('cup/cups') cups!: any
 
   @Mutation('cup/setCups') setCups!: Function
 
@@ -979,7 +981,7 @@ export default class Cup extends Vue {
   cupObject = {
     cupId: this.cups?.cups[0]?.id,
     bgId: this.cups.bgs[0].id,
-    quoteId: null,
+    quoteId: '',
     items: []
   }
 
@@ -1027,19 +1029,19 @@ export default class Cup extends Vue {
     }]
   }
 
-  setCup(id: any) { 
+  setCup(id: string) { 
     this.cupObject.cupId = id
   }
 
-  setBg(id: any) { 
+  setBg(id: string) { 
     this.cupObject.bgId = id
   }
 
-  setQuote(id: any) { 
+  setQuote(id: string) { 
     this.cupObject.quoteId = id
   }
 
-  setHairColor(color: any) { 
+  setHairColor(color: string) { 
     this.tempObject.hairColor = color
   }
 
@@ -1053,7 +1055,7 @@ export default class Cup extends Vue {
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
 
-  setHairStyle(hairstyleId: any) {
+  setHairStyle(hairstyleId: string) {
     this.tempObject.hairstyleId = hairstyleId
   }
 
@@ -1079,7 +1081,10 @@ export default class Cup extends Vue {
     this.showModal = false
     this.showEditModal = true
     this.tempObject = this.cupObject.items[itemId]
-    this.tempObject.edit = itemId
+    if (itemId) {
+      this.tempObject.edit = itemId
+
+    }
 
     switch(this.tempObject.type) {
       case 'dog':
@@ -1157,7 +1162,7 @@ export default class Cup extends Vue {
     this.cupObject = {
       cupId: this.cups.cups[0].id,
       bgId: this.cups.bgs[0].id,
-      quoteId: null,
+      quoteId: '',
       items: []
     }
     this.resetTempObject()
