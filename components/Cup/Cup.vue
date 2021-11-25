@@ -228,9 +228,12 @@
                       <div class="objectsBox" v-if="objectData.bodies">
                         <h4 class="objectTitle">Sylwetka</h4>
 
-                        <div class="objItem" v-for="(item, index) in objectData.bodies" :key="index"
-                          :class="[item.bodyId == tempObject.figureId ? 'selected' : '']"
-                          @click="setFigure(item.bodyId, item.bodyImageUrl)">
+                        <div class="objItem" 
+                          v-for="(item, index) in objectData.bodies" 
+                          :key="index"
+                          :class="item.bodyId == tempObject.figureId ? 'selected' : ''"
+                          @click="setFigure(item.bodyId, item.bodyImageUrl)"
+                        >
                           <img
                             alt="product body icon"
                             :src="item.bodyImageUrl"
@@ -254,9 +257,12 @@
                         </h4>
 
                         <div v-for="(item, index) in objectData.hairstyle[tempObject.hairColor]" :key="index">
-                          <div class="objItem" v-for="(item1, index1) in item" :key="index1"
+                          <div class="objItem" 
+                            v-for="(item1, index1) in item" 
+                            :key="index1"
                             :class="item1.hairstyleId == tempObject.hairstyleId ? 'selected' : ''"
-                            @click="setHairStyle(item1.hairstyleId)">
+                            @click="setHairStyle(item1.hairstyleId)"
+                          >
                             <img
                               alt="product hairstyle icon"
                               :src="item1.hairstyleImageUrl"
@@ -266,17 +272,21 @@
                       </div>
 
                       <div class="objectsBox" v-if="objectData.type==='dog'">
-                        <div v-for="(dogs, breed) in objectData" v-if="breed != 'title'">
+                        <div 
+                          v-for="(dogs, breed) in objectData" 
+                          v-if="breed != 'title'"
+                        >
                           <span class="breed">{{breed}}</span>
-                          <div class="objItem" v-for="(item, index) in dogs" 
+                          <div class="objItem" 
+                            v-for="(item, index) in dogs" 
                             v-if="item.imageUrl"
                             :key="index" 
                             :class="item.variantId == tempObject.variantId ? 'selected' : ''"
                             @click="setDog(item.variantId, item.imageUrl)">
-                            <img
-                              alt="product body icon"
-                              :src="item.imageUrl"
-                            >
+                              <img
+                                alt="product body icon"
+                                :src="item.imageUrl"
+                              >
                           </div>
                         </div>
                       </div>
@@ -298,15 +308,15 @@
                     </h3>
 
                     <div class="modalContent">
-                      <div class="objItem" @click="configureObject(women, 'women')">
+                      <div class="objItem" @click="newCupObject(women, 'women')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Kobieta</span>
                       </div>
-                      <div class="objItem" @click="configureObject(men, 'men')">
+                      <div class="objItem" @click="newCupObject(men, 'men')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Mężczyzna</span>
                       </div>
-                      <div class="objItem" @click="configureObject(dogs, 'dog')">
+                      <div class="objItem" @click="newCupObject(dogs, 'dog')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Pies</span>
                       </div>
@@ -721,15 +731,15 @@
                     </h3>
 
                     <div class="modalContent">
-                      <div class="objItem" @click="configureObject(women, 'women')">
+                      <div class="objItem" @click="newCupObject(women, 'women')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Kobieta</span>
                       </div>
-                      <div class="objItem" @click="configureObject(men, 'men')">
+                      <div class="objItem" @click="newCupObject(men, 'men')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Mężczyzna</span>
                       </div>
-                      <div class="objItem" @click="configureObject(dogs, 'dog')">
+                      <div class="objItem" @click="newCupObject(dogs, 'dog')">
                         <img src="https://kapkap.eu/static/media/female.50388f42.webp">
                         <span class="name">Pies</span>
                       </div>
@@ -950,7 +960,6 @@ import dogsJSON from '~/data/dogs.json'
 
 export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('cup/cups') cups!: any
 
   @Mutation('cup/setCups') setCups!: Function
 
@@ -967,20 +976,20 @@ export default class Cup extends Vue {
   women: any = womenJSON
   dogs: any = dogsJSON
 
-  tempObject = {
+  tempObject: any = {
     name: '',
     type: '', 
-    edit: null, 
+    edit: '', 
     figureId: '', 
-    variantId: null,
+    variantId: '',
     bodyImageUrl: '',
     hairColor: 'black',
     hairstyleId: ''
   }
 
-  cupObject = {
+  cupObject: any = {
     cupId: this.cups?.cups[0]?.id,
-    bgId: this.cups.bgs[0].id,
+    bgId: this.cups?.bgs[0]?.id,
     quoteId: '',
     items: []
   }
@@ -1060,8 +1069,9 @@ export default class Cup extends Vue {
   }
 
   pushObject(type: any, edit: any) {
+    console.log(edit, 'zzz2');
     this.tempObject.type = type
-    if (edit != null) {
+    if (edit != '') {
       this.cupObject.items[edit] = this.tempObject
     } else {
       this.cupObject.items.push(this.tempObject)
@@ -1076,13 +1086,13 @@ export default class Cup extends Vue {
     this.objectData = []
   }
 
-  editItem(itemId: any) {
-    this.tempObject = this.cupObject.items[itemId]
+  editItem(itemIndex: any) {
+    this.tempObject = this.cupObject.items[itemIndex]
     this.showModal = false
     this.showEditModal = true
-    this.tempObject = this.cupObject.items[itemId]
-    if (itemId) {
-      this.tempObject.edit = itemId
+    this.tempObject = this.cupObject.items[itemIndex]
+    if (itemIndex) {
+      this.tempObject.edit = itemIndex
 
     }
 
@@ -1116,16 +1126,16 @@ export default class Cup extends Vue {
     this.tempObject = {
       name: '',
       type: '',
-      edit: null,
+      edit: '',
       figureId: '', 
-      variantId: null,
+      variantId: '',
       bodyImageUrl: '',
       hairColor: 'black',
       hairstyleId: ''
     }
   }
 
-  configureObject(data: Object, type: String) {
+  newCupObject(data: Object, type: String) {
     this.objectData = data
     this.showModal = false
     this.objectData.type = type
