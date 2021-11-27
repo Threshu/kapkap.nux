@@ -83,11 +83,15 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus">
+                      <button class="qty-minus" @click="quantityMinus">
                         -
                       </button>
-                      <input type="number" class="qty-input">
-                      <button class="qty-plus">
+                      <input type="number" 
+                        class="qty-input"  
+                        v-model="cupObject.count"
+                        @keyup="recalculateTotal"
+                      >
+                      <button class="qty-plus"  @click="quantityPlus">
                         +
                       </button>
                     </div>
@@ -98,7 +102,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      59.99 zł
+                      {{cupData.price}} zł
                     </div>
                   </div>
 
@@ -107,7 +111,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
                     <div class="sum-val">
-                      119.98 zł
+                      {{cupObject.total}} zł
                     </div>
                   </div>
                 </div>
@@ -136,15 +140,20 @@
                   </div>
                 </div>
 
+
                 <div class="summary">
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus">
+                      <button class="qty-minus" @click="quantityMinus">
                         -
                       </button>
-                      <input type="number" class="qty-input">
-                      <button class="qty-plus">
+                      <input type="number" 
+                        class="qty-input"  
+                        v-model="cupObject.count"
+                        @keyup="recalculateTotal"
+                      >
+                      <button class="qty-plus"  @click="quantityPlus">
                         +
                       </button>
                     </div>
@@ -155,7 +164,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      59.99 zł
+                      {{cupData.price}} zł
                     </div>
                   </div>
 
@@ -164,7 +173,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
                     <div class="sum-val">
-                      119.98 zł
+                      {{cupObject.total}} zł
                     </div>
                   </div>
                 </div>
@@ -335,11 +344,15 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus">
+                      <button class="qty-minus" @click="quantityMinus">
                         -
                       </button>
-                      <input type="number" class="qty-input">
-                      <button class="qty-plus">
+                      <input type="number" 
+                        class="qty-input"  
+                        v-model="cupObject.count"
+                        @keyup="recalculateTotal"
+                      >
+                      <button class="qty-plus"  @click="quantityPlus">
                         +
                       </button>
                     </div>
@@ -350,7 +363,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      59.99 zł
+                      {{cupData.price}} zł
                     </div>
                   </div>
 
@@ -359,7 +372,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
                     <div class="sum-val">
-                      119.98 zł
+                      {{cupObject.total}} zł
                     </div>
                   </div>
                 </div>
@@ -392,11 +405,15 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus">
+                      <button class="qty-minus" @click="quantityMinus">
                         -
                       </button>
-                      <input type="number" class="qty-input">
-                      <button class="qty-plus">
+                      <input type="number" 
+                        class="qty-input"  
+                        v-model="cupObject.count"
+                        @keyup="recalculateTotal"
+                      >
+                      <button class="qty-plus"  @click="quantityPlus">
                         +
                       </button>
                     </div>
@@ -407,7 +424,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      59.99 zł
+                      {{cupData.price}} zł
                     </div>
                   </div>
 
@@ -416,7 +433,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
                     <div class="sum-val">
-                      119.98 zł
+                      {{cupObject.total}} zł
                     </div>
                   </div>
                 </div>
@@ -497,11 +514,15 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus">
+                      <button class="qty-minus" @click="quantityMinus">
                         -
                       </button>
-                      <input type="number" class="qty-input">
-                      <button class="qty-plus">
+                      <input type="number" 
+                        class="qty-input"  
+                        v-model="cupObject.count"
+                        @keyup="recalculateTotal"
+                      >
+                      <button class="qty-plus"  @click="quantityPlus">
                         +
                       </button>
                     </div>
@@ -512,7 +533,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      59.99 zł
+                      {{cupData.price}} zł
                     </div>
                   </div>
 
@@ -521,7 +542,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
                     <div class="sum-val">
-                      119.98 zł
+                      {{cupObject.total}} zł
                     </div>
                   </div>
                 </div>
@@ -568,11 +589,15 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus">
+                      <button class="qty-minus" @click="quantityMinus">
                         -
                       </button>
-                      <input type="number" class="qty-input">
-                      <button class="qty-plus">
+                      <input type="number" 
+                        class="qty-input"  
+                        v-model="cupObject.count"
+                        @keyup="recalculateTotal"
+                      >
+                      <button class="qty-plus"  @click="quantityPlus">
                         +
                       </button>
                     </div>
@@ -583,7 +608,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      59.99 zł
+                      {{cupData.price}} zł
                     </div>
                   </div>
 
@@ -592,7 +617,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
                     <div class="sum-val">
-                      119.98 zł
+                      {{cupObject.total}} zł
                     </div>
                   </div>
                 </div>
@@ -758,11 +783,15 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus">
+                      <button class="qty-minus" @click="quantityMinus">
                         -
                       </button>
-                      <input type="number" class="qty-input">
-                      <button class="qty-plus">
+                      <input type="number" 
+                        class="qty-input"  
+                        v-model="cupObject.count"
+                        @keyup="recalculateTotal"
+                      >
+                      <button class="qty-plus"  @click="quantityPlus">
                         +
                       </button>
                     </div>
@@ -773,7 +802,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      59.99 zł
+                      {{cupData.price}} zł
                     </div>
                   </div>
 
@@ -782,7 +811,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
                     <div class="sum-val">
-                      119.98 zł
+                      {{cupObject.total}} zł
                     </div>
                   </div>
                 </div>
@@ -849,11 +878,15 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus">
+                      <button class="qty-minus" @click="quantityMinus">
                         -
                       </button>
-                      <input type="number" class="qty-input">
-                      <button class="qty-plus">
+                      <input type="number" 
+                        class="qty-input"  
+                        v-model="cupObject.count"
+                        @keyup="recalculateTotal"
+                      >
+                      <button class="qty-plus"  @click="quantityPlus">
                         +
                       </button>
                     </div>
@@ -864,7 +897,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      59.99 zł
+                      {{cupData.price}} zł
                     </div>
                   </div>
 
@@ -873,7 +906,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Cena sumaryczna:</span>
                     <div class="sum-val">
-                      119.98 zł
+                      {{cupObject.total}} zł
                     </div>
                   </div>
                 </div>
@@ -946,7 +979,7 @@ import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import VueSlickCarousel from 'vue-slick-carousel'
 import Picture from '@/components/Common/Picture'
 
-import cupsJSON from '~/data/cupsData.json'
+import cupsJSON from '~/data/newProduct.json'
 import menJSON from '~/data/men.json'
 import womenJSON from '~/data/women.json'
 import dogsJSON from '~/data/dogs.json'
@@ -963,7 +996,8 @@ export default class Cup extends Vue {
 
   @Mutation('cup/setCups') setCups!: Function
 
-  cups: any = cupsJSON
+  cups: any = cupsJSON.items
+  cupData: any = cupsJSON
   showModal = false
   confMenu = 1
   showConf = false
@@ -991,6 +1025,8 @@ export default class Cup extends Vue {
     cupId: this.cups?.cups[0]?.id,
     bgId: this.cups?.bgs[0]?.id,
     quoteId: '',
+    count: 0,
+    total: 0,
     items: []
   }
 
@@ -1167,6 +1203,20 @@ export default class Cup extends Vue {
     console.log("Koszyk OBIEKT:", this.cupObject)
   }
 
+  recalculateTotal() {
+    this.cupObject.total = this.cupData.price * this.cupObject.count
+  }
+
+  quantityPlus() {
+    this.cupObject.count++
+    this.recalculateTotal()
+  }
+
+  quantityMinus() {
+    this.cupObject.count--
+    this.recalculateTotal()
+  }
+
   reset() {
     this.confMenu = 1
     this.cupObject = {
@@ -1180,6 +1230,7 @@ export default class Cup extends Vue {
 
   mounted () {
     this.setCups(cupsJSON)
+    this.quantityPlus()
   }
 
 }
