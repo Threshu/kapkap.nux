@@ -364,7 +364,10 @@
 
 							&.edit {
 								padding: 25px 50px;
-
+								max-height: calc(100vh - 86px);
+								height: calc(100vh - 400px);
+								overflow: auto;
+								
 								.objectsBox {
 									text-align: left;
 									margin-bottom: 20px;
