@@ -367,7 +367,7 @@
 								max-height: calc(100vh - 86px);
 								height: calc(100vh - 400px);
 								overflow: auto;
-								
+
 								.objectsBox {
 									text-align: left;
 									margin-bottom: 20px;
@@ -442,6 +442,12 @@
 
 							.objectsBox {
 								overflow: hidden;
+
+								&:hover {
+									.objItem {
+										opacity: 0.3;
+									}
+								}
 							}
 
 							.objItem {
@@ -450,13 +456,13 @@
 							    text-align: center;
 							    margin: 5px 20px;
 							    display: inline-block;
-							    opacity: 0.3;
+							    opacity: 1;
 							    transition: all 0.3s;
 							    cursor: pointer;
 							    position: relative;
 
 							    &:hover {
-							    	opacity: 1;
+							    	opacity: 1 !important;
 							    }
 
 							    &.selected {
@@ -1208,8 +1214,8 @@
 								top: 6px;
 							}
 							.modalContent {
-								max-height: calc(100vh - 86px);
-								height: calc(100vh - 86px);
+								max-height: calc(100vh - 86px) !important;
+								height: calc(100vh - 86px) !important;
 								overflow: auto;
 							}
 							.modalTitle {
