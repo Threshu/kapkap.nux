@@ -83,7 +83,7 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus" @click="quantityMinus">
+                      <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
                       <input type="number" 
@@ -91,7 +91,7 @@
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="quantityPlus">
+                      <button class="qty-plus"  @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -145,7 +145,7 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus" @click="quantityMinus">
+                      <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
                       <input type="number" 
@@ -153,7 +153,7 @@
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="quantityPlus">
+                      <button class="qty-plus"  @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -344,7 +344,7 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus" @click="quantityMinus">
+                      <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
                       <input type="number" 
@@ -352,7 +352,7 @@
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="quantityPlus">
+                      <button class="qty-plus"  @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -405,7 +405,7 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus" @click="quantityMinus">
+                      <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
                       <input type="number" 
@@ -413,7 +413,7 @@
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="quantityPlus">
+                      <button class="qty-plus"  @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -514,7 +514,7 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus" @click="quantityMinus">
+                      <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
                       <input type="number" 
@@ -522,7 +522,7 @@
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="quantityPlus">
+                      <button class="qty-plus"  @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -589,7 +589,7 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus" @click="quantityMinus">
+                      <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
                       <input type="number" 
@@ -597,7 +597,7 @@
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="quantityPlus">
+                      <button class="qty-plus"  @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -783,7 +783,7 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus" @click="quantityMinus">
+                      <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
                       <input type="number" 
@@ -791,7 +791,7 @@
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="quantityPlus">
+                      <button class="qty-plus"  @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -878,7 +878,7 @@
                   <div class="qty-box">
                     <span class="qty-label">Sztuk:</span>
                     <div class="qty-flex">
-                      <button class="qty-minus" @click="quantityMinus">
+                      <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
                       <input type="number" 
@@ -886,7 +886,7 @@
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="quantityPlus">
+                      <button class="qty-plus"  @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -1203,16 +1203,21 @@ export default class Cup extends Vue {
     console.log("Koszyk OBIEKT:", this.cupObject)
   }
 
-  recalculateTotal() {
-    this.cupObject.total = this.cupData.price * this.cupObject.count
+  formatPrice(value) {
+      let val = (value/1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
 
-  quantityPlus() {
+  recalculateTotal() {
+    this.cupObject.total = this.formatPrice(this.cupData.price * this.cupObject.count)
+  }
+
+  increaseQuantity() {
     this.cupObject.count++
     this.recalculateTotal()
   }
 
-  quantityMinus() {
+  decreaseQuantity() {
     this.cupObject.count--
     this.recalculateTotal()
   }
@@ -1230,7 +1235,7 @@ export default class Cup extends Vue {
 
   mounted () {
     this.setCups(cupsJSON)
-    this.quantityPlus()
+    this.increaseQuantity()
   }
 
 }
