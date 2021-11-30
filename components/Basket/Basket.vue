@@ -5,7 +5,7 @@
       v-if="!isLoaded"
     />
     <section
-      v-if="isLoaded && cart && cart.products.length"
+      v-if="isLoaded && cartItems.length > 0"
       class="cart-section section-b-space"
     >
       <div class="container">
@@ -34,7 +34,7 @@
               </thead>
               <tbody key="index">
                 <tr
-                  v-for="(item, index) in cart.products"
+                  v-for="(item, index) in cartItems"
                   :key="index"
                 >
                   <!-- PREVIEWS -->
@@ -85,7 +85,7 @@
                           <div class="input-group">
                             <!-- !!! -->
                             <input
-                              :value="item.number"
+                              :value="item.count"
                               type="number"
                               class="form-control input-number"
                             >
@@ -122,7 +122,7 @@
                           <button
                             type="button"
                             class="btn quantity-left-minus"
-                            @click="changeProductQuantity(item.id, item.number - 1)"
+                            @click="changeProductQuantity(item.id, item.count - 1)"
                           >
                             <i class="fa fa-angle-left" />
                           </button>
@@ -130,14 +130,14 @@
                         <input
                           type="text"
                           name="quantity"
-                          :value="item.number"
+                          :value="item.count"
                           readOnly="true"
                           class="form-control input-number"
                         >
                         <span class="input-group-prepend">
                           <button
                             class="btn quantity-right-plus"
-                            @click="changeProductQuantity(item.id, item.number + 1)"
+                            @click="changeProductQuantity(item.id, item.count + 1)"
                           >
                             <i class="fa fa-angle-right" />
                           </button>
@@ -154,7 +154,7 @@
                     </button>
                     <button
                       class="btn quantity-right-plus separated"
-                      @click="removeFromCart(item.id)"
+                      @click="removeFromCart(index)"
                     >
                       <i class="fa fa-times" />
                     </button>
@@ -163,7 +163,7 @@
                     <h2
                       class="td-color"
                     >
-                      {{ calculateTotal(item, item.number) }} zł
+                      {{ calculateItemTotal(item.price, item.count) }} zł
                     </h2>
                   </td>
                 </tr>
@@ -174,7 +174,7 @@
               <tfoot>
                 <tr>
                   <td>Suma:</td>
-                  <td><h2>{{ cart.total }} zł</h2></td>
+                  <td><h2>{{ total }} zł</h2></td>
                 </tr>
               </tfoot>
             </table>
@@ -228,7 +228,6 @@ import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import SmallLoader from '~/components/Common/SmallLoader.vue'
 import { STATUS_LOADED } from '~/store/defaults/types'
 
-import basketJSON from '~/data/basket.json'
 
 @Component({
   components: { SmallLoader, Breadcrumb }
@@ -238,11 +237,48 @@ export default class Basket extends Vue {
   @Getter('basket/basket') cart!: any
 
   @Action('preview/fetchCartPreviews') fetchCartPreviews!: any
+  @Mutation('basket/removeItem') removeItem!: any
+  total: any = 0
+  cartItems: any = []
 
-  @Mutation('basket/setBasket') setBasket!: any
+  suscribe: any = this.$store.subscribe((mutation, state) => {
+    if (mutation.type === 'basket/setBasket') {
+      this.setCartItems(mutation.payload)
+    }
+  })
+
+  setCartItems(items: any) {
+    this.cartItems = items
+    this.calculateTotal()
+  }
+
+  calculateTotal() {
+    this.total = 0;
+    this.cartItems.forEach(item => {
+      this.total = parseFloat(this.total) + parseFloat(item.total)
+    })
+  }
+
+  removeFromCart (index: number) {
+    this.removeItem(index)
+    this.cartItems.splice(index, 1)
+    this.calculateTotal()
+  }
+
+  changeProductQuantity () {
+
+  }
+
+  calculateItemTotal (price: any, number: number) {
+    return price * number
+  }
+
+  processCartPreviews () {
+    this.fetchCartPreviews(this.cart)
+  }
 
   mounted () {
-    this.setBasket(basketJSON)
+    this.setCartItems(JSON.parse(localStorage.cup))
     if (this.isLoaded) {
       this.processCartPreviews()
     } else {
@@ -254,20 +290,5 @@ export default class Basket extends Vue {
     }
   }
 
-  removeFromCart () {
-
-  }
-
-  changeProductQuantity () {
-
-  }
-
-  calculateTotal (item: any, number: number) {
-    return item.price * number
-  }
-
-  processCartPreviews () {
-    this.fetchCartPreviews(this.cart)
-  }
 }
 </script>

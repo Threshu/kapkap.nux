@@ -993,8 +993,8 @@ import dogsJSON from '~/data/dogs.json'
 
 export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
-
-  @Mutation('cup/setCups') setCups!: Function
+  @Mutation('cup/setCups') setCups!: Function  
+  @Mutation('basket/setBasket') setBasket!: any
 
   cups: any = cupsJSON.items
   cupData: any = cupsJSON
@@ -1011,7 +1011,6 @@ export default class Cup extends Vue {
   dogs: any = dogsJSON
 
   tempObject: any = {
-    name: '',
     type: '', 
     edit: '', 
     figureId: '', 
@@ -1022,6 +1021,8 @@ export default class Cup extends Vue {
   }
 
   cupObject: any = {
+    title: this.cupData.title,
+    price: this.cupData.price,
     cupId: this.cups?.cups[0]?.id,
     bgId: this.cups?.bgs[0]?.id,
     quoteId: '',
@@ -1105,7 +1106,6 @@ export default class Cup extends Vue {
   }
 
   pushObject(type: any, edit: any) {
-    console.log(edit, 'zzz2');
     this.tempObject.type = type
     if (edit != '') {
       this.cupObject.items[edit] = this.tempObject
@@ -1200,10 +1200,16 @@ export default class Cup extends Vue {
   }
 
   addToCart() {
-    console.log("Koszyk OBIEKT:", this.cupObject)
+    var tempStorage: any = []
+    if (localStorage.cup) {
+      tempStorage = JSON.parse(localStorage.cup)
+    }
+
+    tempStorage.push(this.cupObject)
+    this.setBasket(tempStorage)
   }
 
-  formatPrice(value) {
+  formatPrice(value: number) {
       let val = (value/1).toFixed(2).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }

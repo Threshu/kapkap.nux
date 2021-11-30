@@ -11,7 +11,7 @@
           v-for="(item, index) in cartItems"
         >
           <CartSmallItem
-            :key="index"
+            :index="index"
             :item="item"
           />
         </template>
@@ -23,7 +23,7 @@
             SUMA:
           </div>
           <div>
-            {total} {symbol}
+            {{total}} zł
           </div>
         </li>
         <li
@@ -45,14 +45,49 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import CartSmallItem from '~/components/Common/Header/CartSmallItem.vue'
 
 @Component({
   components: { CartSmallItem }
 })
 export default class CartWidget extends Vue {
+  @Getter('basket/basket') basket!: any
+  total: any = 0
   itemsNumber: number = 0
   cartItems: any = []
+
+  suscribe: any = this.$store.subscribe((mutation, state) => {
+    if (mutation.type === 'basket/setBasket') {
+      this.setCartItems(mutation.payload)
+    } else if (mutation.type === 'basket/removeItem') {
+      this.removeCartItem(mutation.payload)
+    }
+  })
+
+  removeCartItem(index: number) {
+    this.cartItems.splice(index, 1)
+    this.calculateTotal()
+  }
+
+  calculateTotal() {
+    this.total = 0;
+    this.cartItems.forEach(item => {
+      this.total = parseFloat(this.total) + parseFloat(item.total)
+    })
+    this.itemsNumber = this.cartItems.length
+  }
+
+  setCartItems(items: any) {
+    this.cartItems = items
+    this.calculateTotal()
+  }
+
+  mounted () {
+    if (this.basket) {
+      this.setCartItems(this.basket)
+    }
+  }
+
 }
 </script>
