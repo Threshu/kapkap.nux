@@ -1,10 +1,17 @@
 export default {
-  removeItem (state, itemId) {
-    state.basket.products = state.basket.products.filter(item => item.id !== itemId)
+  removeItem (state, index) {
+    var tempStorage = []
+    if (localStorage.cup) {
+      tempStorage = JSON.parse(localStorage.cup)
+    }
+    tempStorage.splice(index, 1)
+    localStorage.cup = JSON.stringify(tempStorage)
+    state.basket = tempStorage
   },
 
   setBasket (state, basket) {
     state.basket = basket
+    localStorage.cup = JSON.stringify(basket)
   },
 
   setPreviewImage (state, { cartItemId, frontImageUrl, backImageUrl }) {
