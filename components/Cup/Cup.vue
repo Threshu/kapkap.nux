@@ -439,11 +439,25 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="next" @click="buyNow()">
+                  <button class="next"
+                    v-if="!editMode" 
+                    @click="buyNow()">
                     Kup Teraz
                   </button>
-                  <button class="next fl" @click="addToCart()">
+                  <button class="next fl" 
+                    v-if="!editMode"
+                    @click="addToCart()">
                     Dodaj do koszyka
+                  </button>
+                  <button class="next"
+                    v-if="editMode" 
+                    @click="saveCartItem()">
+                    Zapisz
+                  </button>
+                  <button class="next fl" 
+                    v-if="editMode"
+                    @click="backToCart()">
+                    Wróć
                   </button>
                   <button class="reset" @click="reset()"">
                     Resetuj i zacznij od nowa
@@ -912,11 +926,25 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="next" @click="buyNow()">
+                  <button class="next"
+                    v-if="!editMode" 
+                    @click="buyNow()">
                     Kup Teraz
                   </button>
-                  <button class="next fl" @click="addToCart()">
+                  <button class="next fl" 
+                    v-if="!editMode"
+                    @click="addToCart()">
                     Dodaj do koszyka
+                  </button>
+                  <button class="next"
+                    v-if="editMode" 
+                    @click="saveCartItem()">
+                    Zapisz
+                  </button>
+                  <button class="next fl" 
+                    v-if="editMode"
+                    @click="backToCart()">
+                    Wróć
                   </button>
                   <button class="reset" @click="reset()"">
                     Resetuj i zacznij od nowa
@@ -993,8 +1021,10 @@ import dogsJSON from '~/data/dogs.json'
 
 export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
+  @Getter('basket/dupa') edit!: any
   @Mutation('cup/setCups') setCups!: Function  
   @Mutation('basket/setBasket') setBasket!: any
+  @Mutation('basket/editBasket') editBasket!: any
 
   cups: any = cupsJSON.items
   cupData: any = cupsJSON
@@ -1005,6 +1035,7 @@ export default class Cup extends Vue {
   removeBox = false
   removeItemId = null
   news = false
+  editMode = false
   objectData: any = []
   men: any = menJSON
   women: any = womenJSON
@@ -1239,9 +1270,39 @@ export default class Cup extends Vue {
     this.resetTempObject()
   }
 
+  setupEdit() {
+    var editObj = JSON.parse(localStorage.cup)
+    if (editObj[this.$store.state.basket.edit]) {
+      this.editMode = true
+      this.cupObject = editObj[this.$store.state.basket.edit]
+    }
+  }
+
+  saveCartItem() {
+    var tempStorage: any = []
+    if (localStorage.cup) {
+      tempStorage = JSON.parse(localStorage.cup)
+    }
+    tempStorage[this.$store.state.basket.edit] = this.cupObject
+    this.setBasket(tempStorage)
+    this.reset()
+    this.editBasket(null)
+    this.$router.push('/koszyk')
+  } 
+
+  backToCart() {
+    this.editBasket(null)
+    this.reset()
+    this.$router.push('/koszyk')
+  }
+
   mounted () {
+    if (Number.isInteger(this.$store.state.basket.edit)) {
+      this.setupEdit()
+    } else {
+      this.increaseQuantity()
+    }
     this.setCups(cupsJSON)
-    this.increaseQuantity()
   }
 
 }

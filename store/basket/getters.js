@@ -1,3 +1,4 @@
 export default {
-  basket: state => JSON.parse(localStorage.cup)
+  basket: state => state.basket,
+  dupa: state => state.edit
 }

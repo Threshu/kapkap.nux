@@ -13,6 +13,19 @@ export default {
     state.basket = basket
     localStorage.cup = JSON.stringify(basket)
   },
+  setBasketItemCount (state, basket) {
+    var tempStorage = []
+    if (localStorage.cup) {
+      tempStorage = JSON.parse(localStorage.cup)
+      tempStorage[basket.index].count = basket.count
+      localStorage.cup = JSON.stringify(tempStorage)
+      state.basket = tempStorage
+    }
+  },
+
+  editBasket (state, index) {
+    state.edit = index
+  },
 
   setPreviewImage (state, { cartItemId, frontImageUrl, backImageUrl }) {
     state.basket.products.forEach((item) => {
