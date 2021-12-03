@@ -260,7 +260,9 @@ export default class Basket extends Vue {
   calculateTotal() {
     this.total = 0;
     this.cartItems.forEach(item => {
-      this.total = parseFloat(this.total) + parseFloat(item.count*item.price)
+      if (item) {
+        this.total = parseFloat(this.total) + parseFloat(item.count*item.price)
+      }
     })
   }
 
@@ -279,7 +281,7 @@ export default class Basket extends Vue {
   }
 
   processCartPreviews () {
-    this.fetchCartPreviews(this.cart)
+    this.fetchCartPreviews(this.cartItems)
   }
 
   editProduct (index: number) {

@@ -1,4 +1,4 @@
 export default {
   basket: state => state.basket,
-  dupa: state => state.edit
+  editb: state => state.edit
 }

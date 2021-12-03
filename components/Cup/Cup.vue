@@ -1021,7 +1021,7 @@ import dogsJSON from '~/data/dogs.json'
 
 export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('basket/dupa') edit!: any
+  @Getter('basket/editb') edit!: any
   @Mutation('cup/setCups') setCups!: Function  
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
@@ -1052,6 +1052,7 @@ export default class Cup extends Vue {
   }
 
   cupObject: any = {
+    id: this.cupData.id,
     title: this.cupData.title,
     price: this.cupData.price,
     cupId: this.cups?.cups[0]?.id,
@@ -1235,7 +1236,7 @@ export default class Cup extends Vue {
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
     }
-
+    console.log('aaav',this.cupObject)
     tempStorage.push(this.cupObject)
     this.setBasket(tempStorage)
   }
@@ -1262,6 +1263,7 @@ export default class Cup extends Vue {
   reset() {
     this.confMenu = 1
     this.cupObject = {
+      id: this.cupData.id,
       cupId: this.cups.cups[0].id,
       bgId: this.cups.bgs[0].id,
       quoteId: '',

@@ -27,11 +27,12 @@ export default {
     state.edit = index
   },
 
-  setPreviewImage (state, { cartItemId, frontImageUrl, backImageUrl }) {
-    state.basket.products.forEach((item) => {
-      if (item.id === cartItemId) {
+  setPreviewImage (state, { cartItemIndex, frontImageUrl, backImageUrl, previewId }) {
+    state.basket.forEach(function (item, index) {
+      if (index === cartItemIndex) {
         item.frontImageUrl = frontImageUrl
         item.backImageUrl = backImageUrl
+        item.previewId = previewId
       }
     })
   }
