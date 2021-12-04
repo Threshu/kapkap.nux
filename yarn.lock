@@ -10534,7 +10534,7 @@ vue-server-renderer@^2.6.12:
 
 vue-slick-carousel@^1.0.6:
   version "1.0.6"
-  resolved "https://registry.npmjs.org/vue-slick-carousel/-/vue-slick-carousel-1.0.6.tgz"
+  resolved "https://registry.yarnpkg.com/vue-slick-carousel/-/vue-slick-carousel-1.0.6.tgz#8fbfe59a233b0fb7777e4934b60bbdf0a6a24f96"
   integrity sha512-1CN/hpWC8m1U/eO7Kuc71jntJqdg6Z/ieLji21OPfQUhs8ZYnnGhQSu1covpa3IyuovM9T5puPCVgexs3DDF5A==
   dependencies:
     enquire.js "2.1.6"
@@ -10545,11 +10545,6 @@ vue-slick-carousel@^1.0.6:
     lodash.pick "^4.4.0"
     resize-observer-polyfill "1.5.1"
     vue "^2.6.10"
-
-vue-slicksort@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/vue-slicksort/-/vue-slicksort-1.2.0.tgz#2bc1da2facc4350279ebc3866acea6ee5fe681ef"
-  integrity sha512-k1324l+AnYy6MrpySN7PYL165z2EkvZmMe+BS7H/EugzS8IrZYRtoqa3QxSSWB34C7cplV1hj3c+7peKpxpYxg==
 
 vue-slider-component@^3.2.13:
   version "3.2.13"

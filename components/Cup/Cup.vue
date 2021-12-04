@@ -86,8 +86,8 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number" 
-                        class="qty-input"  
+                      <input type="number"
+                        class="qty-input"
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
@@ -148,8 +148,8 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number" 
-                        class="qty-input"  
+                      <input type="number"
+                        class="qty-input"
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
@@ -237,8 +237,8 @@
                       <div class="objectsBox" v-if="objectData.bodies">
                         <h4 class="objectTitle">Sylwetka</h4>
 
-                        <div class="objItem" 
-                          v-for="(item, index) in objectData.bodies" 
+                        <div class="objItem"
+                          v-for="(item, index) in objectData.bodies"
                           :key="index"
                           :class="item.bodyId == tempObject.figureId ? 'selected' : ''"
                           @click="setFigure(item.bodyId, item.bodyImageUrl)"
@@ -254,7 +254,7 @@
                         <h4 class="objectTitle">
                           Kolor włosów
                         </h4>
-                        <div class="objItem" v-for="(item, index) in objectData.hairstyle" :key="index" 
+                        <div class="objItem" v-for="(item, index) in objectData.hairstyle" :key="index"
                           :class="[index == tempObject.hairColor ? 'selected' : '']">
                           <div class="colorItem" :class="index" @click="setHairColor(index)"/>
                         </div>
@@ -266,8 +266,8 @@
                         </h4>
 
                         <div v-for="(item, index) in objectData.hairstyle[tempObject.hairColor]" :key="index">
-                          <div class="objItem" 
-                            v-for="(item1, index1) in item" 
+                          <div class="objItem"
+                            v-for="(item1, index1) in item"
                             :key="index1"
                             :class="item1.hairstyleId == tempObject.hairstyleId ? 'selected' : ''"
                             @click="setHairStyle(item1.hairstyleId)"
@@ -281,15 +281,15 @@
                       </div>
 
                       <div class="objectsBox" v-if="objectData.type==='dog'">
-                        <div 
-                          v-for="(dogs, breed) in objectData" 
+                        <div
+                          v-for="(dogs, breed) in objectData"
                           v-if="breed != 'title'"
                         >
                           <span class="breed">{{breed}}</span>
-                          <div class="objItem" 
-                            v-for="(item, index) in dogs" 
+                          <div class="objItem"
+                            v-for="(item, index) in dogs"
                             v-if="item.imageUrl"
-                            :key="index" 
+                            :key="index"
                             :class="item.variantId == tempObject.variantId ? 'selected' : ''"
                             @click="setDog(item.variantId, item.imageUrl)">
                               <img
@@ -347,8 +347,8 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number" 
-                        class="qty-input"  
+                      <input type="number"
+                        class="qty-input"
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
@@ -393,7 +393,7 @@
                 </h3>
 
                 <div class="quotesList mobile" v-if="cups">
-                  <div class="quoteItem" v-for="(item, index) in cups.quotes" 
+                  <div class="quoteItem" v-for="(item, index) in cups.quotes"
                   :key="index"
                   @click="setQuote(item.id)"
                   v-bind:class="{'selected': item.id == cupObject.quoteId}">
@@ -408,8 +408,8 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number" 
-                        class="qty-input"  
+                      <input type="number"
+                        class="qty-input"
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
@@ -440,21 +440,21 @@
 
                 <div class="confButtons">
                   <button class="next"
-                    v-if="!editMode" 
+                    v-if="!editMode"
                     @click="buyNow()">
                     Kup Teraz
                   </button>
-                  <button class="next fl" 
+                  <button class="next fl"
                     v-if="!editMode"
                     @click="addToCart()">
                     Dodaj do koszyka
                   </button>
                   <button class="next"
-                    v-if="editMode" 
+                    v-if="editMode"
                     @click="saveCartItem()">
                     Zapisz
                   </button>
-                  <button class="next fl" 
+                  <button class="next fl"
                     v-if="editMode"
                     @click="backToCart()">
                     Wróć
@@ -531,8 +531,8 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number" 
-                        class="qty-input"  
+                      <input type="number"
+                        class="qty-input"
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
@@ -606,8 +606,8 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number" 
-                        class="qty-input"  
+                      <input type="number"
+                        class="qty-input"
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
@@ -709,7 +709,7 @@
                         <h4 class="objectTitle">
                           Kolor włosów
                         </h4>
-                        <div class="objItem" v-for="(item, index) in objectData.hairstyle" :key="index" 
+                        <div class="objItem" v-for="(item, index) in objectData.hairstyle" :key="index"
                           :class="[index == tempObject.hairColor ? 'selected' : '']">
                           <div class="colorItem" :class="index" @click="setHairColor(index)"/>
                         </div>
@@ -800,8 +800,8 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number" 
-                        class="qty-input"  
+                      <input type="number"
+                        class="qty-input"
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
@@ -848,7 +848,7 @@
                 </h3>
 
                 <div class="quotesList desktop" v-if="cups">
-                  <div class="quoteItem" v-for="(item, index) in cups.quotes" 
+                  <div class="quoteItem" v-for="(item, index) in cups.quotes"
                   :key="index"
                   @click="setQuote(item.id)"
                   v-bind:class="{'selected': item.id == cupObject.quoteId}">
@@ -895,8 +895,8 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number" 
-                        class="qty-input"  
+                      <input type="number"
+                        class="qty-input"
                         v-model="cupObject.count"
                         @keyup="recalculateTotal"
                       >
@@ -927,21 +927,21 @@
 
                 <div class="confButtons">
                   <button class="next"
-                    v-if="!editMode" 
+                    v-if="!editMode"
                     @click="buyNow()">
                     Kup Teraz
                   </button>
-                  <button class="next fl" 
+                  <button class="next fl"
                     v-if="!editMode"
                     @click="addToCart()">
                     Dodaj do koszyka
                   </button>
                   <button class="next"
-                    v-if="editMode" 
+                    v-if="editMode"
                     @click="saveCartItem()">
                     Zapisz
                   </button>
-                  <button class="next fl" 
+                  <button class="next fl"
                     v-if="editMode"
                     @click="backToCart()">
                     Wróć
@@ -1002,10 +1002,10 @@
 </template>
 
 <script  lang="ts">
-import { Action, Component, Getter, Mutation, Vue, Watch } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Vue} from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import VueSlickCarousel from 'vue-slick-carousel'
-import Picture from '@/components/Common/Picture'
+import Picture from '@/components/Common/Picture.vue'
 
 import cupsJSON from '~/data/newProduct.json'
 import menJSON from '~/data/men.json'
@@ -1022,7 +1022,7 @@ import dogsJSON from '~/data/dogs.json'
 export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('basket/editb') edit!: any
-  @Mutation('cup/setCups') setCups!: Function  
+  @Mutation('cup/setCups') setCups!: Function
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
 
@@ -1042,9 +1042,9 @@ export default class Cup extends Vue {
   dogs: any = dogsJSON
 
   tempObject: any = {
-    type: '', 
-    edit: '', 
-    figureId: '', 
+    type: '',
+    edit: '',
+    figureId: '',
     variantId: '',
     bodyImageUrl: '',
     hairColor: 'black',
@@ -1107,28 +1107,28 @@ export default class Cup extends Vue {
     }]
   }
 
-  setCup(id: string) { 
+  setCup(id: string) {
     this.cupObject.cupId = id
   }
 
-  setBg(id: string) { 
+  setBg(id: string) {
     this.cupObject.bgId = id
   }
 
-  setQuote(id: string) { 
+  setQuote(id: string) {
     this.cupObject.quoteId = id
   }
 
-  setHairColor(color: string) { 
+  setHairColor(color: string) {
     this.tempObject.hairColor = color
   }
 
-  setFigure(figureId: string, bodyImageUrl: string) { 
+  setFigure(figureId: string, bodyImageUrl: string) {
     this.tempObject.figureId = figureId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
 
-  setDog(variantId: any, bodyImageUrl: any) { 
+  setDog(variantId: any, bodyImageUrl: any) {
     this.tempObject.variantId = variantId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
@@ -1195,7 +1195,7 @@ export default class Cup extends Vue {
       name: '',
       type: '',
       edit: '',
-      figureId: '', 
+      figureId: '',
       variantId: '',
       bodyImageUrl: '',
       hairColor: 'black',
@@ -1212,7 +1212,7 @@ export default class Cup extends Vue {
 
   moveArrayItemToNewIndex(arr: any, old_index: number, new_index: number) {
       arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-      return arr; 
+      return arr;
   }
 
   topItem(index: number) {
@@ -1290,7 +1290,7 @@ export default class Cup extends Vue {
     this.reset()
     this.editBasket(null)
     this.$router.push('/koszyk')
-  } 
+  }
 
   backToCart() {
     this.editBasket(null)

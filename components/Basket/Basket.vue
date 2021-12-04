@@ -228,7 +228,6 @@ import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import SmallLoader from '~/components/Common/SmallLoader.vue'
 import { STATUS_LOADED } from '~/store/defaults/types'
 
-
 @Component({
   components: { SmallLoader, Breadcrumb }
 })
@@ -252,16 +251,16 @@ export default class Basket extends Vue {
     }
   })
 
-  setCartItems(items: any) {
+  setCartItems (items: any) {
     this.cartItems = items
     this.calculateTotal()
   }
 
-  calculateTotal() {
-    this.total = 0;
-    this.cartItems.forEach(item => {
+  calculateTotal () {
+    this.total = 0
+    this.cartItems.forEach((item: any) => {
       if (item) {
-        this.total = parseFloat(this.total) + parseFloat(item.count*item.price)
+        this.total = this.total + item.count * item.price
       }
     })
   }
@@ -272,8 +271,8 @@ export default class Basket extends Vue {
     this.calculateTotal()
   }
 
-  changeProductQuantity (index, count) {
-    this.setBasketItemCount({'index': index, 'count': count})
+  changeProductQuantity (index: number, count: number) {
+    this.setBasketItemCount({ index, count })
   }
 
   calculateItemTotal (price: any, number: number) {
@@ -304,6 +303,5 @@ export default class Basket extends Vue {
       })
     }
   }
-
 }
 </script>

@@ -1,8 +1,10 @@
 <template>
   <li class="onhover-div mobile-cart">
-    <div class="cart-qty-cls">{{ itemsNumber }}</div>
+    <div class="cart-qty-cls">
+      {{ itemsNumber }}
+    </div>
     <NuxtLink rel="nofollow" to="/koszyk">
-      <img src="/images/icon/cart.png" class="img-fluid" alt=""/>
+      <img src="/images/icon/cart.png" class="img-fluid" alt="">
     </NuxtLink>
     <div class="show-div">
       <ul class="shopping-cart">
@@ -23,7 +25,7 @@
             SUMA:
           </div>
           <div>
-            {{total}} zł
+            {{ total }} zł
           </div>
         </li>
         <li
@@ -67,22 +69,22 @@ export default class CartWidget extends Vue {
     }
   })
 
-  removeCartItem(index: number) {
+  removeCartItem (index: number) {
     this.cartItems.splice(index, 1)
     this.calculateTotal()
   }
 
-  calculateTotal() {
-    this.total = 0;
-    this.cartItems.forEach(item => {
-      if (item){
-        this.total = parseFloat(this.total) + parseFloat(item.count*item.price)
+  calculateTotal () {
+    this.total = 0
+    this.cartItems.forEach((item: any) => {
+      if (item) {
+        this.total = this.total + item.count * item.price
       }
     })
     this.itemsNumber = this.cartItems.length
   }
 
-  setCartItems(items: any) {
+  setCartItems (items: any) {
     this.cartItems = items
     this.calculateTotal()
   }
@@ -92,6 +94,5 @@ export default class CartWidget extends Vue {
       this.setCartItems(JSON.parse(localStorage.cup))
     }
   }
-
 }
 </script>
