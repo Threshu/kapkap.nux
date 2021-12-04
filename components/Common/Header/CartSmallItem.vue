@@ -1,10 +1,8 @@
 <template>
-  <li>
+  <li v-if="item">
     <div class="media">
       <div class="media-body">
-        <NuxtLink :to="`/edytuj-produkt/${item.id}`">
-          <h5>{{ item.title }}</h5>
-        </NuxtLink>
+        <h5>{{ item.title }}</h5>
         <div class="details">
           <span>{{ item.count }} x {{ item.total }} zł</span>
         </div>

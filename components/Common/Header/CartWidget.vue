@@ -62,6 +62,8 @@ export default class CartWidget extends Vue {
       this.setCartItems(mutation.payload)
     } else if (mutation.type === 'basket/removeItem') {
       this.removeCartItem(mutation.payload)
+    } else if (mutation.type === 'basket/setBasketItemCount') {
+      this.setCartItems(state.basket.basket)
     }
   })
 
@@ -73,7 +75,9 @@ export default class CartWidget extends Vue {
   calculateTotal() {
     this.total = 0;
     this.cartItems.forEach(item => {
-      this.total = parseFloat(this.total) + parseFloat(item.total)
+      if (item){
+        this.total = parseFloat(this.total) + parseFloat(item.count*item.price)
+      }
     })
     this.itemsNumber = this.cartItems.length
   }
@@ -84,8 +88,8 @@ export default class CartWidget extends Vue {
   }
 
   mounted () {
-    if (this.basket) {
-      this.setCartItems(this.basket)
+    if (localStorage.cup) {
+      this.setCartItems(JSON.parse(localStorage.cup))
     }
   }
 

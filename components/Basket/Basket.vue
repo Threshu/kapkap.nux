@@ -122,7 +122,7 @@
                           <button
                             type="button"
                             class="btn quantity-left-minus"
-                            @click="changeProductQuantity(item.id, item.count - 1)"
+                            @click="changeProductQuantity(index, item.count - 1)"
                           >
                             <i class="fa fa-angle-left" />
                           </button>
@@ -137,7 +137,7 @@
                         <span class="input-group-prepend">
                           <button
                             class="btn quantity-right-plus"
-                            @click="changeProductQuantity(item.id, item.count + 1)"
+                            @click="changeProductQuantity(index, item.count + 1)"
                           >
                             <i class="fa fa-angle-right" />
                           </button>
@@ -148,7 +148,7 @@
                   <td>
                     <button
                       class="btn quantity-right-plus separated"
-                      @click="history.push(`/edytuj-produkt/${item.id}`)"
+                      @click="editProduct(index)"
                     >
                       <i class="fa fa-pencil" />
                     </button>
@@ -234,9 +234,10 @@ import { STATUS_LOADED } from '~/store/defaults/types'
 })
 export default class Basket extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('basket/basket') cart!: any
 
   @Action('preview/fetchCartPreviews') fetchCartPreviews!: any
+  @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
+  @Mutation('basket/editBasket') editBasket!: any
   @Mutation('basket/removeItem') removeItem!: any
   total: any = 0
   cartItems: any = []
@@ -244,6 +245,10 @@ export default class Basket extends Vue {
   suscribe: any = this.$store.subscribe((mutation, state) => {
     if (mutation.type === 'basket/setBasket') {
       this.setCartItems(mutation.payload)
+    }
+
+    if (mutation.type === 'basket/setBasketItemCount') {
+      this.setCartItems(state.basket.basket)
     }
   })
 
@@ -255,7 +260,9 @@ export default class Basket extends Vue {
   calculateTotal() {
     this.total = 0;
     this.cartItems.forEach(item => {
-      this.total = parseFloat(this.total) + parseFloat(item.total)
+      if (item) {
+        this.total = parseFloat(this.total) + parseFloat(item.count*item.price)
+      }
     })
   }
 
@@ -265,8 +272,8 @@ export default class Basket extends Vue {
     this.calculateTotal()
   }
 
-  changeProductQuantity () {
-
+  changeProductQuantity (index, count) {
+    this.setBasketItemCount({'index': index, 'count': count})
   }
 
   calculateItemTotal (price: any, number: number) {
@@ -274,11 +281,19 @@ export default class Basket extends Vue {
   }
 
   processCartPreviews () {
-    this.fetchCartPreviews(this.cart)
+    this.fetchCartPreviews(this.cartItems)
+  }
+
+  editProduct (index: number) {
+    this.editBasket(index)
+    this.$router.push('/kubek/xxx')
   }
 
   mounted () {
-    this.setCartItems(JSON.parse(localStorage.cup))
+    if (localStorage.cup) {
+      this.setCartItems(JSON.parse(localStorage.cup))
+    }
+
     if (this.isLoaded) {
       this.processCartPreviews()
     } else {

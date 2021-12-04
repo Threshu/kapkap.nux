@@ -13,12 +13,26 @@ export default {
     state.basket = basket
     localStorage.cup = JSON.stringify(basket)
   },
+  setBasketItemCount (state, basket) {
+    var tempStorage = []
+    if (localStorage.cup) {
+      tempStorage = JSON.parse(localStorage.cup)
+      tempStorage[basket.index].count = basket.count
+      localStorage.cup = JSON.stringify(tempStorage)
+      state.basket = tempStorage
+    }
+  },
 
-  setPreviewImage (state, { cartItemId, frontImageUrl, backImageUrl }) {
-    state.basket.products.forEach((item) => {
-      if (item.id === cartItemId) {
+  editBasket (state, index) {
+    state.edit = index
+  },
+
+  setPreviewImage (state, { cartItemIndex, frontImageUrl, backImageUrl, previewId }) {
+    state.basket.forEach(function (item, index) {
+      if (index === cartItemIndex) {
         item.frontImageUrl = frontImageUrl
         item.backImageUrl = backImageUrl
+        item.previewId = previewId
       }
     })
   }
