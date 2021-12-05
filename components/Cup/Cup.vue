@@ -961,42 +961,7 @@
       <h3 class="styled-page-header">
         Powiązane produkty
       </h3>
-      <VueSlickCarousel
-        v-if="news && news.length"
-        v-bind="sliderSettings"
-      >
-        <template
-          v-for="(image, key) in news"
-        >
-          <div
-            :key="key"
-            class="bestseller-item"
-          >
-            <span
-              v-if="image.news"
-              class="promotion new"
-            >
-              Nowość
-            </span>
-            <NuxtLink
-              :to="image.url"
-            >
-              <Picture
-                :path="`/images/main-page/news/${image.filename}`"
-                :alt="image.alt"
-              />
-            </NuxtLink>
-            <h3>{{ image.title }}</h3>
-
-            <NuxtLink
-              class="ch2-btn"
-              :to="image.url"
-            >
-              Personalizuj
-            </NuxtLink>
-          </div>
-        </template>
-      </VueSlickCarousel>
+     
     </div>
   </section>
 </template>
@@ -1004,7 +969,6 @@
 <script  lang="ts">
 import { Action, Component, Getter, Mutation, Vue, Watch } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
-import VueSlickCarousel from 'vue-slick-carousel'
 import Picture from '@/components/Common/Picture'
 
 import cupsJSON from '~/data/newProduct.json'
@@ -1014,7 +978,6 @@ import dogsJSON from '~/data/dogs.json'
 
 @Component({
   components: {
-    VueSlickCarousel,
     Picture
   }
 })
