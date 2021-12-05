@@ -961,42 +961,7 @@
       <h3 class="styled-page-header">
         Powiązane produkty
       </h3>
-      <VueSlickCarousel
-        v-if="news && news.length"
-        v-bind="sliderSettings"
-      >
-        <template
-          v-for="(image, key) in news"
-        >
-          <div
-            :key="key"
-            class="bestseller-item"
-          >
-            <span
-              v-if="image.news"
-              class="promotion new"
-            >
-              Nowość
-            </span>
-            <NuxtLink
-              :to="image.url"
-            >
-              <Picture
-                :path="`/images/main-page/news/${image.filename}`"
-                :alt="image.alt"
-              />
-            </NuxtLink>
-            <h3>{{ image.title }}</h3>
-
-            <NuxtLink
-              class="ch2-btn"
-              :to="image.url"
-            >
-              Personalizuj
-            </NuxtLink>
-          </div>
-        </template>
-      </VueSlickCarousel>
+     
     </div>
   </section>
 </template>
@@ -1014,7 +979,6 @@ import dogsJSON from '~/data/dogs.json'
 
 @Component({
   components: {
-    VueSlickCarousel,
     Picture
   }
 })
