@@ -969,7 +969,6 @@
 <script  lang="ts">
 import { Component, Getter, Mutation, Vue} from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
-import VueSlickCarousel from 'vue-slick-carousel'
 import Picture from '@/components/Common/Picture.vue'
 
 import cupsJSON from '~/data/newProduct.json'
