@@ -66,7 +66,7 @@
 
               <div v-if="confMenu == 1">
                 <h3 class="productConfBoxTitle">
-                  Wybierz Kubek
+                  Wybierz kubek
                 </h3>
 
                 <div v-if="cups" class="cupsList mobile">
@@ -109,7 +109,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -171,7 +171,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -190,7 +190,7 @@
 
               <div v-if="confMenu == 3">
                 <h3 class="productConfBoxTitle">
-                  Dodaj obiekty
+                  Dodaj postać lub zwierzę
                 </h3>
                 <div class="objectsList">
 
@@ -374,7 +374,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -435,7 +435,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -516,7 +516,7 @@
 
               <div v-if="confMenu == 1">
                 <h3 class="productConfBoxTitle">
-                  Wybierz Kubek
+                  Wybierz kubek
                 </h3>
 
                 <div class="cupsList desktop" v-if="cups">
@@ -558,7 +558,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -633,7 +633,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -654,7 +654,7 @@
                 v-if="confMenu == 3"
               >
                 <h3 class="productConfBoxTitle">
-                  Dodaj obiekty
+                  Dodaj postać lub zwierzę
                 </h3>
                 <div class="objectsList">
                   <div class="objectItem" v-for="(item, index) in cupObject.items" :key="index">
@@ -831,7 +831,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -926,7 +926,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
