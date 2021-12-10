@@ -313,21 +313,25 @@
                       ✕
                     </button>
                     <h3 class="modalTitle">
-                      Jakie obiekty chcesz dodać?
+                      Kogo lub co chcesz dodać?
                     </h3>
 
                     <div class="modalContent">
                       <div class="objItem" @click="newCupObject(women, 'women')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Kobieta</span>
+                        <img src="/images/cup_page/sample_woman.png">
+                        <span class="name">Kobietę</span>
                       </div>
                       <div class="objItem" @click="newCupObject(men, 'men')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Mężczyzna</span>
+                        <img src="/images/cup_page/sample_man.png">
+                        <span class="name">Mężczyznę</span>
                       </div>
                       <div class="objItem" @click="newCupObject(dogs, 'dog')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Pies</span>
+                        <img src="/images/cup_page/sample_dog.png">
+                        <span class="name">Psa</span>
+                      </div>
+                      <div class="objItem" @click="newCupObject(cats, 'cat')">
+                        <img src="/images/cup_page/sample_cat.png">
+                        <span class="name">Kota</span>
                       </div>
                     </div>
 
@@ -766,21 +770,25 @@
                       ✕
                     </button>
                     <h3 class="modalTitle">
-                      Jakie obiekty chcesz dodac?
+                      Kogo lub co chcesz dodać?
                     </h3>
 
                     <div class="modalContent">
                       <div class="objItem" @click="newCupObject(women, 'women')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Kobieta</span>
+                        <img src="/images/cup_page/sample_woman.png">
+                        <span class="name">Kobietę</span>
                       </div>
                       <div class="objItem" @click="newCupObject(men, 'men')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Mężczyzna</span>
+                        <img src="/images/cup_page/sample_man.png">
+                        <span class="name">Mężczyznę</span>
                       </div>
                       <div class="objItem" @click="newCupObject(dogs, 'dog')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Pies</span>
+                        <img src="/images/cup_page/sample_dog.png">
+                        <span class="name">Psa</span>
+                      </div>
+                      <div class="objItem" @click="newCupObject(cats, 'cat')">
+                        <img src="/images/cup_page/sample_cat.png">
+                        <span class="name">Kota</span>
                       </div>
                     </div>
 
@@ -961,7 +969,7 @@
       <h3 class="styled-page-header">
         Powiązane produkty
       </h3>
-     
+
     </div>
   </section>
 </template>
@@ -1003,6 +1011,7 @@ export default class Cup extends Vue {
   men: any = menJSON
   women: any = womenJSON
   dogs: any = dogsJSON
+  cats: any = dogsJSON
 
   tempObject: any = {
     type: '',
