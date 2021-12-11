@@ -66,7 +66,7 @@
 
               <div v-if="confMenu == 1">
                 <h3 class="productConfBoxTitle">
-                  Wybierz Kubek
+                  Wybierz kubek
                 </h3>
 
                 <div v-if="cups" class="cupsList mobile">
@@ -109,7 +109,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -171,7 +171,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -190,7 +190,7 @@
 
               <div v-if="confMenu == 3">
                 <h3 class="productConfBoxTitle">
-                  Dodaj obiekty
+                  Dodaj postać lub zwierzę
                 </h3>
                 <div class="objectsList">
 
@@ -279,7 +279,6 @@
                           </div>
                         </div>
                       </div>
-                        
 
                         <div class="objectsBox" v-if="objectData.type==='dog' || objectData.type==='cat'">
                             <div
@@ -315,25 +314,25 @@
                       ✕
                     </button>
                     <h3 class="modalTitle">
-                      Jakie obiekty chcesz dodać?
+                      Kogo lub co chcesz dodać?
                     </h3>
 
                     <div class="modalContent">
                       <div class="objItem" @click="newCupObject(women, 'women')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Kobieta</span>
+                        <img src="/images/cup_page/sample_woman.png">
+                        <span class="name">Kobietę</span>
                       </div>
                       <div class="objItem" @click="newCupObject(men, 'men')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Mężczyzna</span>
+                        <img src="/images/cup_page/sample_man.png">
+                        <span class="name">Mężczyznę</span>
                       </div>
                       <div class="objItem" @click="newCupObject(dogs, 'dog')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Pies</span>
+                        <img src="/images/cup_page/sample_dog.png">
+                        <span class="name">Psa</span>
                       </div>
                       <div class="objItem" @click="newCupObject(cats, 'cat')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Kot</span>
+                        <img src="/images/cup_page/sample_cat.png">
+                        <span class="name">Kota</span>
                       </div>
                     </div>
 
@@ -376,7 +375,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -437,7 +436,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -518,7 +517,7 @@
 
               <div v-if="confMenu == 1">
                 <h3 class="productConfBoxTitle">
-                  Wybierz Kubek
+                  Wybierz kubek
                 </h3>
 
                 <div class="cupsList desktop" v-if="cups">
@@ -560,7 +559,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -635,7 +634,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -656,7 +655,7 @@
                 v-if="confMenu == 3"
               >
                 <h3 class="productConfBoxTitle">
-                  Dodaj obiekty
+                  Dodaj postać lub zwierzę
                 </h3>
                 <div class="objectsList">
                   <div class="objectItem" v-for="(item, index) in cupObject.items" :key="index">
@@ -772,25 +771,25 @@
                       ✕
                     </button>
                     <h3 class="modalTitle">
-                      Jakie obiekty chcesz dodac?
+                      Kogo lub co chcesz dodać?
                     </h3>
 
                     <div class="modalContent">
                       <div class="objItem" @click="newCupObject(women, 'women')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Kobieta</span>
+                        <img src="/images/cup_page/sample_woman.png">
+                        <span class="name">Kobietę</span>
                       </div>
                       <div class="objItem" @click="newCupObject(men, 'men')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Mężczyzna</span>
+                        <img src="/images/cup_page/sample_man.png">
+                        <span class="name">Mężczyznę</span>
                       </div>
                       <div class="objItem" @click="newCupObject(dogs, 'dog')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Pies</span>
+                        <img src="/images/cup_page/sample_dog.png">
+                        <span class="name">Psa</span>
                       </div>
                       <div class="objItem" @click="newCupObject(cats, 'cat')">
-                        <img src="https://kapkap.eu/static/media/female.50388f42.webp">
-                        <span class="name">Kot</span>
+                        <img src="/images/cup_page/sample_cat.png">
+                        <span class="name">Kota</span>
                       </div>
                     </div>
 
@@ -833,7 +832,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -928,7 +927,7 @@
                   <span class="sum-sep">=</span>
 
                   <div class="sum-box">
-                    <span class="sum-label">Cena sumaryczna:</span>
+                    <span class="sum-label">Suma:</span>
                     <div class="sum-val">
                       {{cupObject.total}} zł
                     </div>
@@ -971,7 +970,7 @@
       <h3 class="styled-page-header">
         Powiązane produkty
       </h3>
-     
+
     </div>
   </section>
 </template>
@@ -996,7 +995,7 @@ export default class Cup extends Vue {
   @Getter('cup/cats') cats!: any
   @Getter('cup/mens') men!: any
   @Getter('cup/womens') women!: any
-
+  @Getter('basket/editb') edit!: any
   @Mutation('cup/setCups') setCups!: Function
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
@@ -1298,7 +1297,6 @@ export default class Cup extends Vue {
       })
     }
   }
-
 
 }
 </script>
