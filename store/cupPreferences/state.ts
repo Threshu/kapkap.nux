@@ -1,19 +1,23 @@
 export type Cups = Record<any, any>
+export type Quotes = Record<any, any>
 
 export type Pet = {
   id: string,
   imageUrl: string,
   name: Record<string, string>[],
-  variantId: string
+  variantId: string,
+  tags?: string[]
 }
 
 export type Dogs = {
   success: boolean,
+  title: string,
   pets: Pet[]
 }
 
 export type Cats = {
   success: boolean,
+  title: string,
   pets: Pet[]
 }
 
@@ -34,12 +38,14 @@ export type Hairstyles = Record<HairstyleStyle, Hairstyle[]>[]
 
 export type Men = {
   success: boolean,
+  title: string,
   hairstyles: Record<HairstyleColors, Hairstyles>[],
   bodies: Body[]
 }
 
 export type Women = {
   success: boolean,
+  title: string,
   hairstyles: Record<HairstyleColors, Hairstyles>[],
   bodies: Body[]
 }

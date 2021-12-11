@@ -1140,21 +1140,20 @@ export default class Cup extends Vue {
 
     }
 
-    switch(this.tempObject.type) {
+    switch (this.tempObject.type) {
       case 'dog':
         this.objectData = this.dogs
         this.objectData.type = this.tempObject.type
-        break;
+        break
       case 'woman':
         this.objectData = this.women
         this.objectData.type = this.tempObject.type
-        break;
+        break
       case 'men':
         this.objectData = this.men
         this.objectData.type = this.tempObject.type
         break
     }
-
   }
 
   removeItem(itemId: any, confirmRemove: Boolean = false) {
