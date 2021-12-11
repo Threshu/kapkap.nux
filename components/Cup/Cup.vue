@@ -250,7 +250,7 @@
                         </div>
                       </div>
 
-                      <div class="objectsBox color" v-if="objectData.hairstyle">
+                      <div class="objectsBox color" v-if="objectData.hairstyles">
                         <h4 class="objectTitle">
                           Kolor włosów
                         </h4>
@@ -260,12 +260,12 @@
                         </div>
                       </div>
 
-                      <div class="objectsBox" v-if="objectData.hairstyle && objectData.hairstyle[tempObject.hairColor]">
+                      <div class="objectsBox" v-if="objectData.hairstyles && objectData.hairstyles[tempObject.hairColor]">
                         <h4 class="objectTitle">
                           Rodzaj włosów
                         </h4>
 
-                        <div v-for="(item, index) in objectData.hairstyle[tempObject.hairColor]" :key="index">
+                        <div v-for="(item, index) in objectData.hairstyles[tempObject.hairColor]" :key="index">
                           <div class="objItem"
                             v-for="(item1, index1) in item"
                             :key="index1"
@@ -280,24 +280,25 @@
                         </div>
                       </div>
 
-                      <div class="objectsBox" v-if="objectData.type==='dog'">
-                        <div
-                          v-for="(dogs, breed) in objectData"
-                          v-if="breed != 'title'"
-                        >
-                          <span class="breed">{{breed}}</span>
-                          <div class="objItem"
-                            v-for="(item, index) in dogs"
-                            v-if="item.imageUrl"
-                            :key="index"
-                            :class="item.variantId == tempObject.variantId ? 'selected' : ''"
-                            @click="setDog(item.variantId, item.imageUrl)">
-                              <img
-                                alt="product body icon"
-                                :src="item.imageUrl"
-                              >
-                          </div>
-                        </div>
+                        <div class="objectsBox" v-if="objectData.type==='dog' || objectData.type==='cat'">
+                            <div
+                              v-for="(dogs, breed) in objectData"
+                            >
+                              <span class="breed">{{breed}}</span>
+                              <div class="objItem"
+                                v-for="(item, index) in dogs"
+                                v-if="item.imageUrl"
+                                :key="index"
+                                :class="item.variantId == tempObject.variantId ? 'selected' : ''"
+                                @click="setDog(item.variantId, item.imageUrl)">
+                                  <img
+                                    alt="product body icon"
+                                    :src="item.imageUrl"
+                                  >
+                              </div>
+                            </div>
+                        </div>  
+
                       </div>
                     </div>
 
@@ -709,22 +710,22 @@
                         </div>
                       </div>
 
-                      <div class="objectsBox color" v-if="objectData.hairstyle">
+                      <div class="objectsBox color" v-if="objectData.hairstyles">
                         <h4 class="objectTitle">
                           Kolor włosów
                         </h4>
-                        <div class="objItem" v-for="(item, index) in objectData.hairstyle" :key="index"
+                        <div class="objItem" v-for="(item, index) in objectData.hairstyles" :key="index"
                           :class="[index == tempObject.hairColor ? 'selected' : '']">
                           <div class="colorItem" :class="index" @click="setHairColor(index)"/>
                         </div>
                       </div>
 
-                      <div class="objectsBox" v-if="objectData.hairstyle && objectData.hairstyle[tempObject.hairColor]">
+                      <div class="objectsBox" v-if="objectData.hairstyles && objectData.hairstyles[tempObject.hairColor]">
                         <h4 class="objectTitle">
                           Rodzaj włosów
                         </h4>
 
-                        <div v-for="(item, index) in objectData.hairstyle[tempObject.hairColor]" :key="index">
+                        <div v-for="(item, index) in objectData.hairstyles[tempObject.hairColor]" :key="index">
                           <div class="objItem" v-for="(item1, index1) in item" :key="index1"
                             :class="item1.hairstyleId == tempObject.hairstyleId ? 'selected' : ''"
                             @click="setHairStyle(item1.hairstyleId)">
@@ -735,21 +736,21 @@
                           </div>
                         </div>
                       </div>
-
-                      <div class="objectsBox" v-if="objectData.type=='dog'">
-
-
-                        <div v-for="(dogs, breed) in objectData" v-if="breed != 'title'">
-
+                      <div class="objectsBox" v-if="objectData.type==='dog' || objectData.type==='cat'">
+                        <div
+                          v-for="(dogs, breed) in objectData"
+                        >
                           <span class="breed">{{breed}}</span>
-                          <div class="objItem" v-for="(item, index) in dogs" :key="index" v-if="item.imageUrl"
-                            :class="[item.variantId == tempObject.variantId ? 'selected' : '']"
+                          <div class="objItem"
+                            v-for="(item, index) in dogs"
+                            v-if="item.imageUrl"
+                            :key="index"
+                            :class="item.variantId == tempObject.variantId ? 'selected' : ''"
                             @click="setDog(item.variantId, item.imageUrl)">
-
-                            <img
-                              alt="product body icon"
-                              :src="item.imageUrl"
-                            >
+                              <img
+                                alt="product body icon"
+                                :src="item.imageUrl"
+                              >
                           </div>
                         </div>
                       </div>
@@ -975,14 +976,12 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Mutation, Vue} from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Action, Vue} from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import Picture from '@/components/Common/Picture.vue'
 
 import cupsJSON from '~/data/newProduct.json'
-import menJSON from '~/data/men.json'
-import womenJSON from '~/data/women.json'
-import dogsJSON from '~/data/dogs.json'
+import { STATUS_LOADED } from '~/store/defaults/types'
 
 @Component({
   components: {
@@ -992,10 +991,19 @@ import dogsJSON from '~/data/dogs.json'
 
 export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
+  @Getter('cup/dogs') dogs!: any
+  @Getter('cup/cats') cats!: any
+  @Getter('cup/mens') men!: any
+  @Getter('cup/womens') women!: any
   @Getter('basket/editb') edit!: any
   @Mutation('cup/setCups') setCups!: Function
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
+
+  @Action('cup/getDogs') getDogs!: any
+  @Action('cup/getCats') getCats!: any
+  @Action('cup/getMens') getMens!: any
+  @Action('cup/getWomens') getWomens!: any
 
   cups: any = cupsJSON.items
   cupData: any = cupsJSON
@@ -1008,10 +1016,6 @@ export default class Cup extends Vue {
   news = false
   editMode = false
   objectData: any = []
-  men: any = menJSON
-  women: any = womenJSON
-  dogs: any = dogsJSON
-  cats: any = dogsJSON
 
   tempObject: any = {
     type: '',
@@ -1208,7 +1212,6 @@ export default class Cup extends Vue {
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
     }
-    console.log('aaav',this.cupObject)
     tempStorage.push(this.cupObject)
     this.setBasket(tempStorage)
   }
@@ -1277,6 +1280,22 @@ export default class Cup extends Vue {
       this.increaseQuantity()
     }
     this.setCups(cupsJSON)
+
+    if (this.isLoaded) {
+      this.getDogs()
+      this.getCats()
+      this.getMens()
+      this.getWomens()
+    } else {
+      this.$store.watch(state => state.defaults.status, (newValue: string) => {
+        if (newValue === STATUS_LOADED) {
+          this.getDogs()
+          this.getCats()
+          this.getMens()
+          this.getWomens()
+        }
+      })
+    }
   }
 
 }
