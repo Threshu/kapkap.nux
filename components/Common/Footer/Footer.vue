@@ -258,12 +258,12 @@ export default class Footer extends Vue {
   email: string = ''
 
   menuOptions: menuItem[] = [
-    { link: 'ja-i-pies/latem-nad-morzem', title: 'Nad morzem' },
-    { link: 'ja-i-pies/nad-jeziorem', title: 'Nad jeziorem' },
-    { link: 'ja-i-pies/zima', title: 'Zimą' },
-    { link: 'ja-i-pies/w-lesie', title: 'W lesie' },
-    { link: 'ja-i-pies/w-miescie', title: 'W mieście' },
-    { link: 'ja-i-pies/na-swieta', title: 'Na święta' }
+    { link: '/ja-i-pies/latem-nad-morzem', title: 'Nad morzem' },
+    { link: '/ja-i-pies/nad-jeziorem', title: 'Nad jeziorem' },
+    { link: '/ja-i-pies/zima', title: 'Zimą' },
+    { link: '/ja-i-pies/w-lesie', title: 'W lesie' },
+    { link: '/ja-i-pies/w-miescie', title: 'W mieście' },
+    { link: '/ja-i-pies/na-swieta', title: 'Na święta' }
   ]
 
   get isHomePage () {
