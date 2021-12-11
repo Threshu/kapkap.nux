@@ -8,11 +8,10 @@ export default {
   setCats (state, cats) {
     state.cats = cats
   },
-  setMens (state, mens) {
-    state.mens = mens
+  setMen (state, men) {
+    state.men = men
   },
-  setWomens (state, womens) {
-    state.womens = womens
+  setWomen (state, women) {
+    state.women = women
   }
-
 }

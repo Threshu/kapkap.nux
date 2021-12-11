@@ -297,7 +297,7 @@
                                   >
                               </div>
                             </div>
-                        </div>  
+                        </div>
 
                       </div>
                     </div>
@@ -976,7 +976,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Mutation, Action, Vue} from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Action, Vue } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import Picture from '@/components/Common/Picture.vue'
 
@@ -991,19 +991,19 @@ import { STATUS_LOADED } from '~/store/defaults/types'
 
 export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('cup/dogs') dogs!: any
-  @Getter('cup/cats') cats!: any
-  @Getter('cup/mens') men!: any
-  @Getter('cup/womens') women!: any
+  @Getter('cupPreferences/dogs') dogs!: any
+  @Getter('cupPreferences/cats') cats!: any
+  @Getter('cupPreferences/men') men!: any
+  @Getter('cupPreferences/women') women!: any
   @Getter('basket/editb') edit!: any
-  @Mutation('cup/setCups') setCups!: Function
+  @Mutation('cupPreferences/setCups') setCups!: any
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
 
-  @Action('cup/getDogs') getDogs!: any
-  @Action('cup/getCats') getCats!: any
-  @Action('cup/getMens') getMens!: any
-  @Action('cup/getWomens') getWomens!: any
+  @Action('cupPreferences/getDogs') getDogs!: any
+  @Action('cupPreferences/getCats') getCats!: any
+  @Action('cupPreferences/getMen') getMen!: any
+  @Action('cupPreferences/getWomen') getWomen!: any
 
   cups: any = cupsJSON.items
   cupData: any = cupsJSON
@@ -1152,7 +1152,7 @@ export default class Cup extends Vue {
       case 'men':
         this.objectData = this.men
         this.objectData.type = this.tempObject.type
-        break;
+        break
     }
 
   }
@@ -1187,8 +1187,8 @@ export default class Cup extends Vue {
   }
 
   moveArrayItemToNewIndex(arr: any, old_index: number, new_index: number) {
-      arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-      return arr;
+      arr.splice(new_index, 0, arr.splice(old_index, 1)[0])
+      return arr
   }
 
   topItem(index: number) {
@@ -1284,15 +1284,15 @@ export default class Cup extends Vue {
     if (this.isLoaded) {
       this.getDogs()
       this.getCats()
-      this.getMens()
-      this.getWomens()
+      this.getMen()
+      this.getWomen()
     } else {
       this.$store.watch(state => state.defaults.status, (newValue: string) => {
         if (newValue === STATUS_LOADED) {
           this.getDogs()
           this.getCats()
-          this.getMens()
-          this.getWomens()
+          this.getMen()
+          this.getWomen()
         }
       })
     }
