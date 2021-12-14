@@ -21,7 +21,7 @@
           </div>
 
           <div
-            v-if="showConf || !isMobile"
+            v-if="(showConf || !isMobile) && isLoaded"
             :ref="{'productModalBox': showConf}"
             :class="{'productModalBox': isMobile}"
             class="productBox"
@@ -963,7 +963,7 @@ export default class Cup extends Vue {
   }
 
   checkIfMobile () {
-    if (screen.width <= 1350) {
+    if (window.innerWidth <= 1350) {
       this.isMobile = true
     } else {
       this.isMobile = false
