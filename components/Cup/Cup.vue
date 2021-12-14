@@ -256,7 +256,7 @@
                         </h4>
                         <div class="objItem" v-for="(item, index) in objectData.hairstyle" :key="index"
                           :class="[index == tempObject.hairColor ? 'selected' : '']">
-                          <div class="colorItem" :class="index" @click="setHairColor(index)"/>
+                          <div class="colorItem" :class="index" @click="setHairColor(index)"></div>
                         </div>
                       </div>
 
@@ -280,25 +280,23 @@
                         </div>
                       </div>
 
-                        <div class="objectsBox" v-if="objectData.type==='dog' || objectData.type==='cat'">
-                            <div
-                              v-for="(dogs, breed) in objectData"
-                            >
-                              <span class="breed">{{breed}}</span>
-                              <div class="objItem"
-                                v-for="(item, index) in dogs"
-                                v-if="item.imageUrl"
-                                :key="index"
-                                :class="item.variantId == tempObject.variantId ? 'selected' : ''"
-                                @click="setDog(item.variantId, item.imageUrl)">
-                                  <img
-                                    alt="product body icon"
-                                    :src="item.imageUrl"
-                                  >
-                              </div>
+                      <div class="objectsBox" v-if="objectData.type==='dogs' || objectData.type==='cats'">
+                          <div
+                            v-for="(dogs, breed) in objectData"
+                          >
+                            <span class="breed">{{breed}}</span>
+                            <div class="objItem"
+                              v-for="(item, index) in dogs"
+                              v-if="item.imageUrl"
+                              :key="index"
+                              :class="item.variantId == tempObject.variantId ? 'selected' : ''"
+                              @click="setDog(item.variantId, item.imageUrl)">
+                                <img
+                                  alt="product body icon"
+                                  :src="item.imageUrl"
+                                >
                             </div>
-                        </div>
-
+                          </div>
                       </div>
                     </div>
 
@@ -326,11 +324,11 @@
                         <img src="/images/cup_page/sample_man.png">
                         <span class="name">Mężczyznę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(dogs, 'dog')">
+                      <div class="objItem" @click="newCupObject(dogs, 'dogs')">
                         <img src="/images/cup_page/sample_dog.png">
                         <span class="name">Psa</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(cats, 'cat')">
+                      <div class="objItem" @click="newCupObject(cats, 'cats')">
                         <img src="/images/cup_page/sample_cat.png">
                         <span class="name">Kota</span>
                       </div>
@@ -464,7 +462,7 @@
                     @click="backToCart()">
                     Wróć
                   </button>
-                  <button class="reset" @click="reset()"">
+                  <button class="reset" @click="reset()">
                     Resetuj i zacznij od nowa
                   </button>
                 </div>
@@ -736,7 +734,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="objectsBox" v-if="objectData.type==='dog' || objectData.type==='cat'">
+                      <div class="objectsBox" v-if="objectData.type==='dogs' || objectData.type==='cats'">
                         <div
                           v-for="(dogs, breed) in objectData"
                         >
@@ -783,11 +781,11 @@
                         <img src="/images/cup_page/sample_man.png">
                         <span class="name">Mężczyznę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(dogs, 'dog')">
+                      <div class="objItem" @click="newCupObject(dogs, 'dogs')">
                         <img src="/images/cup_page/sample_dog.png">
                         <span class="name">Psa</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(cats, 'cat')">
+                      <div class="objItem" @click="newCupObject(cats, 'cats')">
                         <img src="/images/cup_page/sample_cat.png">
                         <span class="name">Kota</span>
                       </div>
@@ -955,7 +953,7 @@
                     @click="backToCart()">
                     Wróć
                   </button>
-                  <button class="reset" @click="reset()"">
+                  <button class="reset" @click="reset()">
                     Resetuj i zacznij od nowa
                   </button>
                 </div>
@@ -1140,12 +1138,16 @@ export default class Cup extends Vue {
 
     }
 
-    switch (this.tempObject.type) {
-      case 'dog':
+    switch(this.tempObject.type) {
+      case 'cats':
+        this.objectData = this.cats
+        this.objectData.type = this.tempObject.type
+        break
+      case 'dogs':
         this.objectData = this.dogs
         this.objectData.type = this.tempObject.type
         break
-      case 'woman':
+      case 'women':
         this.objectData = this.women
         this.objectData.type = this.tempObject.type
         break
@@ -1207,7 +1209,7 @@ export default class Cup extends Vue {
   }
 
   addToCart() {
-    var tempStorage: any = []
+    let tempStorage: any = []
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
     }
@@ -1247,7 +1249,7 @@ export default class Cup extends Vue {
   }
 
   setupEdit() {
-    var editObj = JSON.parse(localStorage.cup)
+    let editObj = JSON.parse(localStorage.cup)
     if (editObj[this.$store.state.basket.edit]) {
       this.editMode = true
       this.cupObject = editObj[this.$store.state.basket.edit]
@@ -1255,7 +1257,7 @@ export default class Cup extends Vue {
   }
 
   saveCartItem() {
-    var tempStorage: any = []
+    let tempStorage: any = []
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
     }
@@ -1272,29 +1274,98 @@ export default class Cup extends Vue {
     this.$router.push('/koszyk')
   }
 
-  mounted () {
+  randomIntFromInterval(min: number, max: number) { 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+  pickRandomProperty(obj: Object) {
+      let result;
+      let count = 0;
+      for (let prop in obj) {
+          if (Math.random() < 1/++count) {
+             result = prop;
+          }
+      }
+
+      return result;
+  }
+
+  setStartObjects() {
+    let count = this.randomIntFromInterval(2, 4)
+    let i = 0, randBody, randHair, randProp, typeRand
+    while (i < count) {
+      typeRand = this.randomIntFromInterval(1, 4)
+      switch (typeRand) {
+        case 1:
+          if (this.men) {
+            randBody = this.randomIntFromInterval(0, this.men.bodies.length-1)
+            randHair = this.randomIntFromInterval(0, this.men.hairstyles['black']['all'].length-1)
+            this.cupObject.items.push({
+              type: 'men',
+              figureId: this.men.bodies[randBody].bodyId,
+              bodyImageUrl: this.men.bodies[randBody].bodyImageUrl,
+              hairColor: 'black',
+              hairstyleId: this.men.hairstyles['black']['all'][randHair].hairstyleId
+            })
+          }
+        break
+        case 2:
+          if (this.women) {
+            randBody = this.randomIntFromInterval(0, this.women.bodies.length-1)
+            randHair = this.randomIntFromInterval(0, this.women.hairstyles.black.bun.length-1)
+            this.cupObject.items.push({
+              type: 'women',
+              figureId: this.women.bodies[randBody].bodyId,
+              bodyImageUrl: this.women.bodies[randBody].bodyImageUrl,
+              hairColor: 'black',
+              hairstyleId: this.women.hairstyles.black.bun[randHair].hairstyleId
+            })
+          }
+        break
+        case 3:
+          randProp = this.pickRandomProperty(this.dogs)
+          if (randProp) {
+            this.cupObject.items.push({
+              type: 'dogs',
+              figureId: this.dogs[randProp][0].id,
+              variantId: this.dogs[randProp][0].variantId,
+              bodyImageUrl: this.dogs[randProp][0].imageUrl,
+            })
+          }
+        break
+        case 4:
+          randProp = this.pickRandomProperty(this.cats)
+          if (randProp) {
+            this.cupObject.items.push({
+              type: 'cats',
+              figureId: this.cats[randProp][0].id,
+              variantId: this.cats[randProp][0].variantId,
+              bodyImageUrl: this.cats[randProp][0].imageUrl,
+            })
+          }
+        break
+      }
+
+      i++
+    }
+  }
+
+  created () {
     if (Number.isInteger(this.$store.state.basket.edit)) {
       this.setupEdit()
     } else {
       this.increaseQuantity()
     }
-    this.setCups(cupsJSON)
 
-    if (this.isLoaded) {
-      this.getDogs()
-      this.getCats()
-      this.getMen()
-      this.getWomen()
-    } else {
-      this.$store.watch(state => state.defaults.status, (newValue: string) => {
-        if (newValue === STATUS_LOADED) {
-          this.getDogs()
-          this.getCats()
-          this.getMen()
-          this.getWomen()
-        }
-      })
-    }
+    this.setCups(cupsJSON)
+    this.getDogs()
+    this.getCats()
+    this.getMen()
+    this.getWomen()
+    this.$store.dispatch("cupPreferences/getDogs").then(dogs => {
+      this.setStartObjects()
+    });
+
   }
 
 }
