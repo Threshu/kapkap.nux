@@ -1142,19 +1142,19 @@ export default class Cup extends Vue {
       case 'cats':
         this.objectData = this.cats
         this.objectData.type = this.tempObject.type
-        break;
+        break
       case 'dogs':
         this.objectData = this.dogs
         this.objectData.type = this.tempObject.type
-        break;
+        break
       case 'women':
         this.objectData = this.women
         this.objectData.type = this.tempObject.type
-        break;
+        break
       case 'men':
         this.objectData = this.men
         this.objectData.type = this.tempObject.type
-        break;
+        break
     }
   }
 
@@ -1209,7 +1209,7 @@ export default class Cup extends Vue {
   }
 
   addToCart() {
-    var tempStorage: any = []
+    let tempStorage: any = []
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
     }
@@ -1249,7 +1249,7 @@ export default class Cup extends Vue {
   }
 
   setupEdit() {
-    var editObj = JSON.parse(localStorage.cup)
+    let editObj = JSON.parse(localStorage.cup)
     if (editObj[this.$store.state.basket.edit]) {
       this.editMode = true
       this.cupObject = editObj[this.$store.state.basket.edit]
@@ -1257,7 +1257,7 @@ export default class Cup extends Vue {
   }
 
   saveCartItem() {
-    var tempStorage: any = []
+    let tempStorage: any = []
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
     }
@@ -1279,24 +1279,27 @@ export default class Cup extends Vue {
   }
 
   pickRandomProperty(obj: Object) {
-      var result;
-      var count = 0;
-      for (var prop in obj)
-          if (Math.random() < 1/++count)
+      let result;
+      let count = 0;
+      for (let prop in obj) {
+          if (Math.random() < 1/++count) {
              result = prop;
+          }
+      }
+
       return result;
   }
 
   setStartObjects() {
-    var count = this.randomIntFromInterval(2, 4)
-    var i = 0
+    let count = this.randomIntFromInterval(2, 4)
+    let i = 0, randBody, randHair, randProp, typeRand
     while (i < count) {
-      var typeRand = this.randomIntFromInterval(1, 4)
+      typeRand = this.randomIntFromInterval(1, 4)
       switch (typeRand) {
         case 1:
           if (this.men) {
-            var randBody = this.randomIntFromInterval(0, this.men.bodies.length-1)
-            var randHair = this.randomIntFromInterval(0, this.men.hairstyles['black']['all'].length-1)
+            randBody = this.randomIntFromInterval(0, this.men.bodies.length-1)
+            randHair = this.randomIntFromInterval(0, this.men.hairstyles['black']['all'].length-1)
             this.cupObject.items.push({
               type: 'men',
               figureId: this.men.bodies[randBody].bodyId,
@@ -1305,11 +1308,11 @@ export default class Cup extends Vue {
               hairstyleId: this.men.hairstyles['black']['all'][randHair].hairstyleId
             })
           }
-        break;
+        break
         case 2:
           if (this.women) {
-            var randBody = this.randomIntFromInterval(0, this.women.bodies.length-1)
-            var randHair = this.randomIntFromInterval(0, this.women.hairstyles.black.bun.length-1)
+            randBody = this.randomIntFromInterval(0, this.women.bodies.length-1)
+            randHair = this.randomIntFromInterval(0, this.women.hairstyles.black.bun.length-1)
             this.cupObject.items.push({
               type: 'women',
               figureId: this.women.bodies[randBody].bodyId,
@@ -1318,9 +1321,9 @@ export default class Cup extends Vue {
               hairstyleId: this.women.hairstyles.black.bun[randHair].hairstyleId
             })
           }
-        break;
+        break
         case 3:
-          var randProp = this.pickRandomProperty(this.dogs)
+          randProp = this.pickRandomProperty(this.dogs)
           if (randProp) {
             this.cupObject.items.push({
               type: 'dogs',
@@ -1329,9 +1332,9 @@ export default class Cup extends Vue {
               bodyImageUrl: this.dogs[randProp][0].imageUrl,
             })
           }
-        break;
+        break
         case 4:
-          var randProp = this.pickRandomProperty(this.cats)
+          randProp = this.pickRandomProperty(this.cats)
           if (randProp) {
             this.cupObject.items.push({
               type: 'cats',
@@ -1340,10 +1343,10 @@ export default class Cup extends Vue {
               bodyImageUrl: this.cats[randProp][0].imageUrl,
             })
           }
-        break;
+        break
       }
 
-      i++;
+      i++
     }
   }
 
