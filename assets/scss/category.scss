@@ -361,57 +361,53 @@
 							text-align: center;
 							padding: 40px 50px;
 							background: #fff;
+							padding: 25px 50px;
+							height: calc(75vh - 133px);
+							overflow: auto;
 
-							&.edit {
-								padding: 25px 50px;
-								max-height: calc(100vh - 86px);
-								height: calc(100vh - 400px);
-								overflow: auto;
+							.objectsBox {
+								text-align: left;
+								margin-bottom: 20px;
 
-								.objectsBox {
-									text-align: left;
-									margin-bottom: 20px;
+								.breed {
+									display: block;
+									font-weight: bold;
+									font-family: Lato;
+									font-size: 14px;
+									margin-top: 20px;
+								}
 
-									.breed {
-										display: block;
-										font-weight: bold;
-										font-family: Lato;
-										font-size: 14px;
-										margin-top: 20px;
+								.objItem {
+									margin-left: 0;
+									height: auto;
+
+									&.selected {
+										opacity: 1;
 									}
 
-									.objItem {
-										margin-left: 0;
-										height: auto;
+									.colorItem {
+										width: 52px;
+										max-height: 52px;
+										border-radius: 50%;
 
-										&.selected {
-											opacity: 1;
+										&.black {
+											background: #000;
 										}
 
-										.colorItem {
-											width: 52px;
-											max-height: 52px;
-											border-radius: 50%;
+										&.blond {
+											background: rgb(220, 146, 19);
+										}
 
-											&.black {
-												background: #000;
-											}
+										&.brown {
+											background: rgb(189, 150, 122);
+										}
 
-											&.blond {
-												background: rgb(220, 146, 19);
-											}
+										&.dark_brown {
+											background: rgb(93, 56, 0);
+										}
 
-											&.brown {
-												background: rgb(189, 150, 122);
-											}
-
-											&.dark_brown {
-												background: rgb(93, 56, 0);
-											}
-
-											&.other {
-												background-color: green;
-											}
+										&.other {
+											background-color: green;
 										}
 									}
 								}
@@ -1213,13 +1209,20 @@
 							.closeModal {
 								right: 6px;
 								top: 6px;
+								z-index: 2;
 							}
 							.modalContent {
-								max-height: calc(100vh - 86px) !important;
-								height: calc(100vh - 86px) !important;
+								height: calc(100vh - 45px);
 								overflow: auto;
+								display: flex;
+								flex-wrap: wrap;
+								justify-content: center;
+								align-items: center;
 							}
 							.modalTitle {
+								position: absolute;
+								width: 100%;
+								z-index: 1;
 								padding-top: 10px;
 								padding-bottom: 10px;
 								font-size: 20px;
