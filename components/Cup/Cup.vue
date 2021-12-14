@@ -316,11 +316,11 @@
                     </h3>
 
                     <div class="modalContent">
-                      <div class="objItem" @click="newCupObject(womens, 'womens')">
+                      <div class="objItem" @click="newCupObject(women, 'women')">
                         <img src="/images/cup_page/sample_woman.png">
                         <span class="name">Kobietę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(mens, 'mens')">
+                      <div class="objItem" @click="newCupObject(men, 'men')">
                         <img src="/images/cup_page/sample_man.png">
                         <span class="name">Mężczyznę</span>
                       </div>
@@ -773,11 +773,11 @@
                     </h3>
 
                     <div class="modalContent">
-                      <div class="objItem" @click="newCupObject(womens, 'womens')">
+                      <div class="objItem" @click="newCupObject(women, 'women')">
                         <img src="/images/cup_page/sample_woman.png">
                         <span class="name">Kobietę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(mens, 'mens')">
+                      <div class="objItem" @click="newCupObject(men, 'men')">
                         <img src="/images/cup_page/sample_man.png">
                         <span class="name">Mężczyznę</span>
                       </div>
@@ -991,8 +991,8 @@ export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('cupPreferences/dogs') dogs!: any
   @Getter('cupPreferences/cats') cats!: any
-  @Getter('cupPreferences/mens') mens!: any
-  @Getter('cupPreferences/womens') womens!: any
+  @Getter('cupPreferences/men') men!: any
+  @Getter('cupPreferences/women') women!: any
   @Getter('basket/editb') edit!: any
   @Mutation('cupPreferences/setCups') setCups!: any
   @Mutation('basket/setBasket') setBasket!: any
@@ -1000,8 +1000,8 @@ export default class Cup extends Vue {
 
   @Action('cupPreferences/getDogs') getDogs!: any
   @Action('cupPreferences/getCats') getCats!: any
-  @Action('cupPreferences/getMens') getMens!: any
-  @Action('cupPreferences/getWomens') getWomens!: any
+  @Action('cupPreferences/getMen') getMen!: any
+  @Action('cupPreferences/getWomen') getWomen!: any
 
   cups: any = cupsJSON.items
   cupData: any = cupsJSON
@@ -1147,12 +1147,12 @@ export default class Cup extends Vue {
         this.objectData = this.dogs
         this.objectData.type = this.tempObject.type
         break;
-      case 'womens':
-        this.objectData = this.womens
+      case 'women':
+        this.objectData = this.women
         this.objectData.type = this.tempObject.type
         break;
-      case 'mens':
-        this.objectData = this.mens
+      case 'men':
+        this.objectData = this.men
         this.objectData.type = this.tempObject.type
         break;
     }
@@ -1294,28 +1294,28 @@ export default class Cup extends Vue {
       var typeRand = this.randomIntFromInterval(1, 4)
       switch (typeRand) {
         case 1:
-          if (this.mens) {
-            var randBody = this.randomIntFromInterval(0, this.mens.bodies.length-1)
-            var randHair = this.randomIntFromInterval(0, this.mens.hairstyles['black']['all'].length-1)
+          if (this.men) {
+            var randBody = this.randomIntFromInterval(0, this.men.bodies.length-1)
+            var randHair = this.randomIntFromInterval(0, this.men.hairstyles['black']['all'].length-1)
             this.cupObject.items.push({
-              type: 'mens',
-              figureId: this.mens.bodies[randBody].bodyId,
-              bodyImageUrl: this.mens.bodies[randBody].bodyImageUrl,
+              type: 'men',
+              figureId: this.men.bodies[randBody].bodyId,
+              bodyImageUrl: this.men.bodies[randBody].bodyImageUrl,
               hairColor: 'black',
-              hairstyleId: this.mens.hairstyles['black']['all'][randHair].hairstyleId
+              hairstyleId: this.men.hairstyles['black']['all'][randHair].hairstyleId
             })
           }
         break;
         case 2:
-          if (this.womens) {
-            var randBody = this.randomIntFromInterval(0, this.womens.bodies.length-1)
-            var randHair = this.randomIntFromInterval(0, this.womens.hairstyles.black.bun.length-1)
+          if (this.women) {
+            var randBody = this.randomIntFromInterval(0, this.women.bodies.length-1)
+            var randHair = this.randomIntFromInterval(0, this.women.hairstyles.black.bun.length-1)
             this.cupObject.items.push({
-              type: 'womens',
-              figureId: this.womens.bodies[randBody].bodyId,
-              bodyImageUrl: this.womens.bodies[randBody].bodyImageUrl,
+              type: 'women',
+              figureId: this.women.bodies[randBody].bodyId,
+              bodyImageUrl: this.women.bodies[randBody].bodyImageUrl,
               hairColor: 'black',
-              hairstyleId: this.womens.hairstyles.black.bun[randHair].hairstyleId
+              hairstyleId: this.women.hairstyles.black.bun[randHair].hairstyleId
             })
           }
         break;
@@ -1357,8 +1357,8 @@ export default class Cup extends Vue {
     this.setCups(cupsJSON)
     this.getDogs()
     this.getCats()
-    this.getMens()
-    this.getWomens()
+    this.getMen()
+    this.getWomen()
     this.$store.dispatch("cupPreferences/getDogs").then(dogs => {
       this.setStartObjects()
     });
