@@ -150,7 +150,7 @@
                     <img :src="item.imageURL">
                   </div>
                 </div>
-                <div class="paginationBox">
+                <div class="paginationBox" v-if="!isMobile">
                   <div class="pagination">
                     <button class="prevAll">
                       &lt;&lt;
@@ -467,7 +467,7 @@
                   </div>
                 </div>
 
-                <div class="paginationBox">
+                <div class="paginationBox" v-if="!isMobile">
                   <div class="pagination">
                     <button class="prevAll">
                       &lt;&lt;
