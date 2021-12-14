@@ -20,485 +20,12 @@
             </div>
           </div>
 
-          <div v-if="showConf" ref="productModalBox" class="productBox productModalBox">
-            <div v-if="showModal || showEditModal" class="overflow" />
-            <div class="productViewBox">
-              <button class="frontCup active">
-                Przód kubka
-              </button>
-              <button class="backCup">
-                Tył kubka
-              </button>
-
-              <div class="productView">
-                <div class="productPreview">
-                  <image-zoom
-                    class="desktop"
-                    regular="https://vifus.webd.pl/kubek.png"
-                    zoom="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
-                    :zoom-amount="2"
-                  />
-
-                  <img
-                    class="mobile"
-                    src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
-                  >
-                </div>
-
-                <div class="shareBox">
-                  <button class="share" />
-                </div>
-
-                <span class="cupInfo">
-                  Przedstawione zdjęcia mają jedynie charakter poglądowy. <br>
-                  Docelowy kubek może różnić się kolorostycznie.
-                </span>
-              </div>
-            </div>
-
-            <div class="productConfBox">
-              <div class="confMenu">
-                <div :class="`confMenu1 ${confMenu === 1 ? 'active' : ''}`" @click="openCupItems(1)" />
-                <div :class="`confMenu2 ${confMenu === 2 ? 'active' : ''}`" @click="openCupItems(2)" />
-                <div :class="`confMenu3 ${confMenu === 3 ? 'active' : ''}`" @click="openCupItems(3)" />
-                <div :class="`confMenu4 ${confMenu === 4 ? 'active' : ''}`" @click="openCupItems(4)" />
-              </div>
-
-              <div v-if="confMenu == 1">
-                <h3 class="productConfBoxTitle">
-                  Wybierz kubek
-                </h3>
-
-                <div v-if="cups" class="cupsList mobile">
-                  <div
-                    v-for="(item, index) in cups.cups"
-                    :key="index"
-                    class="cupItem"
-                    :class="{'selected': item.id == cupObject.cupId}"
-                    @click="setCup(item.id)"
-                  >
-                    <img v-if="item" :src="item.imageURL">
-                  </div>
-                </div>
-
-                <div class="summary">
-                  <div class="qty-box">
-                    <span class="qty-label">Sztuk:</span>
-                    <div class="qty-flex">
-                      <button class="qty-minus" @click="decreaseQuantity">
-                        -
-                      </button>
-                      <input
-                        v-model="cupObject.count"
-                        type="number"
-                        class="qty-input"
-                        @keyup="recalculateTotal"
-                      >
-                      <button class="qty-plus" @click="increaseQuantity">
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  <span class="price-sep">x</span>
-
-                  <div class="price-box">
-                    <span class="price-label">Cena za sztukę:</span>
-                    <div class="price-val">
-                      {{ cupData.price }} zł
-                    </div>
-                  </div>
-
-                  <span class="sum-sep">=</span>
-
-                  <div class="sum-box">
-                    <span class="sum-label">Suma:</span>
-                    <div class="sum-val">
-                      {{ cupObject.total }} zł
-                    </div>
-                  </div>
-                </div>
-
-                <div class="confButtons">
-                  <button class="back" @click="showConf = false">
-                    Wstecz
-                  </button>
-                  <button class="next" @click="openCupItems(2)">
-                    Dalej
-                  </button>
-                </div>
-              </div>
-
-              <div v-if="confMenu == 2">
-                <h3 class="productConfBoxTitle">
-                  Wybierz tło
-                </h3>
-
-                <div v-if="cups" class="bgList mobile">
-                  <div
-                    v-for="(item, index) in cups.bgs"
-                    :key="index"
-                    class="bgItem"
-                    :class="{'selected': item.id == cupObject.bgId}"
-                    @click="setBg(item.id)"
-                  >
-                    <img :src="item.imageURL">
-                  </div>
-                </div>
-
-                <div class="summary">
-                  <div class="qty-box">
-                    <span class="qty-label">Sztuk:</span>
-                    <div class="qty-flex">
-                      <button class="qty-minus" @click="decreaseQuantity">
-                        -
-                      </button>
-                      <input
-                        v-model="cupObject.count"
-                        type="number"
-                        class="qty-input"
-                        @keyup="recalculateTotal"
-                      >
-                      <button class="qty-plus" @click="increaseQuantity">
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  <span class="price-sep">x</span>
-
-                  <div class="price-box">
-                    <span class="price-label">Cena za sztukę:</span>
-                    <div class="price-val">
-                      {{ cupData.price }} zł
-                    </div>
-                  </div>
-
-                  <span class="sum-sep">=</span>
-
-                  <div class="sum-box">
-                    <span class="sum-label">Suma:</span>
-                    <div class="sum-val">
-                      {{ cupObject.total }} zł
-                    </div>
-                  </div>
-                </div>
-
-                <div class="confButtons">
-                  <button class="back" @click="openCupItems(1)">
-                    Wstecz
-                  </button>
-                  <button class="next" @click="openCupItems(3)">
-                    Dalej
-                  </button>
-                </div>
-              </div>
-
-              <div v-if="confMenu == 3">
-                <h3 class="productConfBoxTitle">
-                  Dodaj postać lub zwierzę
-                </h3>
-                <div class="objectsList">
-                  <div v-for="(item, index) in cupObject.items" :key="index" class="objectItem">
-                    <div class="objectRow">
-                      <div class="objImage">
-                        <img :src="item.bodyImageUrl">
-                      </div>
-                      <div class="objName">
-                        {{ item.name }}
-                      </div>
-                      <div class="objActions">
-                        <button class="edit" @click="editItem(index)" />
-                        <button class="remove" @click="removeItem(index)" />
-                        <button class="top" @click="topItem(index)" />
-                        <button class="down" @click="downItem(index)" />
-                      </div>
-                    </div>
-                    <div v-if="removeItemId == index" class="removeBox">
-                      <button class="cancelRemove" @click="removeItem(null)">
-                        Anuluj
-                      </button>
-                      <button class="acceptRemove" @click="removeItem(index, true)">
-                        Usuń
-                      </button>
-                    </div>
-                  </div>
-
-                  <button class="addNew" @click="showModal = true">
-                    Dodaj
-                  </button>
-
-                  <div v-if="showEditModal" class="modal">
-                    <button class="closeModal desktop" @click="showEditModal = false">
-                      ✕
-                    </button>
-                    <h3 class="modalTitle">
-                      {{ objectData.title }}
-                    </h3>
-
-                    <div class="modalContent edit">
-                      <input v-model="tempObject.name" class="objectName" type="text" placeholder="Imię">
-
-                      <div v-if="objectData.bodies" class="objectsBox">
-                        <h4 class="objectTitle">
-                          Sylwetka
-                        </h4>
-
-                        <div
-                          v-for="(item, index) in objectData.bodies"
-                          :key="index"
-                          class="objItem"
-                          :class="item.bodyId == tempObject.figureId ? 'selected' : ''"
-                          @click="setFigure(item.bodyId, item.bodyImageUrl)"
-                        >
-                          <img
-                            alt="product body icon"
-                            :src="item.bodyImageUrl"
-                          >
-                        </div>
-                      </div>
-
-                      <div v-if="objectData.hairstyles" class="objectsBox color">
-                        <h4 class="objectTitle">
-                          Kolor włosów
-                        </h4>
-                        <div
-                          v-for="(item, index) in objectData.hairstyle"
-                          :key="index"
-                          class="objItem"
-                          :class="[index == tempObject.hairColor ? 'selected' : '']"
-                        >
-                          <div class="colorItem" :class="index" @click="setHairColor(index)" />
-                        </div>
-                      </div>
-
-                      <div v-if="objectData.hairstyles && objectData.hairstyles[tempObject.hairColor]" class="objectsBox">
-                        <h4 class="objectTitle">
-                          Rodzaj włosów
-                        </h4>
-
-                        <div v-for="(item, index) in objectData.hairstyles[tempObject.hairColor]" :key="index">
-                          <div
-                            v-for="(item1, index1) in item"
-                            :key="index1"
-                            class="objItem"
-                            :class="item1.hairstyleId == tempObject.hairstyleId ? 'selected' : ''"
-                            @click="setHairStyle(item1.hairstyleId)"
-                          >
-                            <img
-                              alt="product hairstyle icon"
-                              :src="item1.hairstyleImageUrl"
-                            >
-                          </div>
-                        </div>
-                      </div>
-
-                      <div v-if="objectData.type==='dogs' || objectData.type==='cats'" class="objectsBox">
-                        <div
-                          v-for="(dogs, breed) in objectData"
-                        >
-                          <span class="breed">{{ breed }}</span>
-                          <div
-                            v-for="(item, index) in dogs"
-                            v-if="item.imageUrl"
-                            :key="index"
-                            class="objItem"
-                            :class="item.variantId == tempObject.variantId ? 'selected' : ''"
-                            @click="setDog(item.variantId, item.imageUrl)"
-                          >
-                            <img
-                              alt="product body icon"
-                              :src="item.imageUrl"
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button class="cancel" @click="editCancel()">
-                      Anuluj
-                    </button>
-                    <button class="add" @click="pushObject(objectData.type, tempObject.edit)">
-                      Zapisz
-                    </button>
-                  </div>
-                  <div v-if="showModal" class="modal">
-                    <button class="closeModal desktop" @click="showModal = false">
-                      ✕
-                    </button>
-                    <h3 class="modalTitle">
-                      Kogo lub co chcesz dodać?
-                    </h3>
-
-                    <div class="modalContent">
-                      <div class="objItem" @click="newCupObject(women, 'women')">
-                        <img src="/images/cup_page/sample_woman.png">
-                        <span class="name">Kobietę</span>
-                      </div>
-                      <div class="objItem" @click="newCupObject(men, 'men')">
-                        <img src="/images/cup_page/sample_man.png">
-                        <span class="name">Mężczyznę</span>
-                      </div>
-                      <div class="objItem" @click="newCupObject(dogs, 'dogs')">
-                        <img src="/images/cup_page/sample_dog.png">
-                        <span class="name">Psa</span>
-                      </div>
-                      <div class="objItem" @click="newCupObject(cats, 'cats')">
-                        <img src="/images/cup_page/sample_cat.png">
-                        <span class="name">Kota</span>
-                      </div>
-                    </div>
-
-                    <button class="cancel" @click="showModal = false">
-                      Anuluj
-                    </button>
-                    <button class="add">
-                      Dodaj
-                    </button>
-                  </div>
-                </div>
-
-                <div class="summary">
-                  <div class="qty-box">
-                    <span class="qty-label">Sztuk:</span>
-                    <div class="qty-flex">
-                      <button class="qty-minus" @click="decreaseQuantity">
-                        -
-                      </button>
-                      <input
-                        v-model="cupObject.count"
-                        type="number"
-                        class="qty-input"
-                        @keyup="recalculateTotal"
-                      >
-                      <button class="qty-plus" @click="increaseQuantity">
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  <span class="price-sep">x</span>
-
-                  <div class="price-box">
-                    <span class="price-label">Cena za sztukę:</span>
-                    <div class="price-val">
-                      {{ cupData.price }} zł
-                    </div>
-                  </div>
-
-                  <span class="sum-sep">=</span>
-
-                  <div class="sum-box">
-                    <span class="sum-label">Suma:</span>
-                    <div class="sum-val">
-                      {{ cupObject.total }} zł
-                    </div>
-                  </div>
-                </div>
-
-                <div class="confButtons">
-                  <button class="back" @click="openCupItems(2)">
-                    Wstecz
-                  </button>
-                  <button class="next" @click="openCupItems(4)">
-                    Dalej
-                  </button>
-                </div>
-              </div>
-
-              <div v-if="confMenu == 4">
-                <h3 class="productConfBoxTitle">
-                  Dodaj cytat
-                </h3>
-
-                <div v-if="cups" class="quotesList mobile">
-                  <div
-                    v-for="(item, index) in cups.quotes"
-                    :key="index"
-                    class="quoteItem"
-                    :class="{'selected': item.id == cupObject.quoteId}"
-                    @click="setQuote(item.id)"
-                  >
-                    <img :src="item.imageURL">
-                  </div>
-                </div>
-
-                <div class="summary">
-                  <div class="qty-box">
-                    <span class="qty-label">Sztuk:</span>
-                    <div class="qty-flex">
-                      <button class="qty-minus" @click="decreaseQuantity">
-                        -
-                      </button>
-                      <input
-                        v-model="cupObject.count"
-                        type="number"
-                        class="qty-input"
-                        @keyup="recalculateTotal"
-                      >
-                      <button class="qty-plus" @click="increaseQuantity">
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  <span class="price-sep">x</span>
-
-                  <div class="price-box">
-                    <span class="price-label">Cena za sztukę:</span>
-                    <div class="price-val">
-                      {{ cupData.price }} zł
-                    </div>
-                  </div>
-
-                  <span class="sum-sep">=</span>
-
-                  <div class="sum-box">
-                    <span class="sum-label">Suma:</span>
-                    <div class="sum-val">
-                      {{ cupObject.total }} zł
-                    </div>
-                  </div>
-                </div>
-
-                <div class="confButtons">
-                  <button
-                    v-if="!editMode"
-                    class="next"
-                    @click="buyNow()"
-                  >
-                    Kup Teraz
-                  </button>
-                  <button
-                    v-if="!editMode"
-                    class="next fl"
-                    @click="addToCart()"
-                  >
-                    Dodaj do koszyka
-                  </button>
-                  <button
-                    v-if="editMode"
-                    class="next"
-                    @click="saveCartItem()"
-                  >
-                    Zapisz
-                  </button>
-                  <button
-                    v-if="editMode"
-                    class="next fl"
-                    @click="backToCart()"
-                  >
-                    Wróć
-                  </button>
-                  <button class="reset" @click="reset()">
-                    Resetuj i zacznij od nowa
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="productBox desktop">
+          <div
+            v-if="showConf || !isMobile"
+            :ref="{'productModalBox': showConf}"
+            :class="{'productModalBox': isMobile}"
+            class="productBox"
+          >
             <div class="productViewBox">
               <button class="frontCup active">
                 Przód kubka
@@ -546,7 +73,7 @@
                   Wybierz kubek
                 </h3>
 
-                <div v-if="cups" class="cupsList desktop">
+                <div v-if="cups" class="cupsList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
                   <div
                     v-for="(item, index) in cups.cups"
                     :key="index"
@@ -612,7 +139,7 @@
                 <h3 class="productConfBoxTitle">
                   Wybierz tło
                 </h3>
-                <div v-if="cups" class="bgList desktop">
+                <div v-if="cups" class="bgList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
                   <div
                     v-for="(item, index) in cups.bgs"
                     :key="index"
@@ -807,17 +334,18 @@
                       <div v-if="objectData.type==='dogs' || objectData.type==='cats'" class="objectsBox">
                         <div
                           v-for="(dogs, breed) in objectData"
+                          :key="breed"
                         >
                           <span class="breed">{{ breed }}</span>
                           <div
                             v-for="(item, index) in dogs"
-                            v-if="item.imageUrl"
                             :key="index"
                             class="objItem"
                             :class="item.variantId == tempObject.variantId ? 'selected' : ''"
                             @click="setDog(item.variantId, item.imageUrl)"
                           >
                             <img
+                              v-if="item.imageUrl"
                               alt="product body icon"
                               :src="item.imageUrl"
                             >
@@ -927,7 +455,7 @@
                   Dodaj cytat
                 </h3>
 
-                <div v-if="cups" class="quotesList desktop">
+                <div v-if="cups" class="quotesList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
                   <div
                     v-for="(item, index) in cups.quotes"
                     :key="index"
@@ -1096,6 +624,7 @@ export default class Cup extends Vue {
   removeBox = false
   removeItemId = null
   news = false
+  isMobile = false
   editMode = false
   objectData: any = []
 
@@ -1288,7 +817,6 @@ export default class Cup extends Vue {
   }
 
   buyNow () {
-    console.log('KUP TERAZ OBIEKT:', this.cupObject)
   }
 
   addToCart () {
@@ -1434,7 +962,17 @@ export default class Cup extends Vue {
     }
   }
 
-  created () {
+  checkIfMobile () {
+    if (screen.width <= 1350) {
+      this.isMobile = true
+    } else {
+      this.isMobile = false
+    }
+  }
+
+  mounted () {
+    this.checkIfMobile()
+    window.addEventListener('resize', this.checkIfMobile)
     if (Number.isInteger(this.$store.state.basket.edit)) {
       this.setupEdit()
     } else {
