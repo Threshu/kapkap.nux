@@ -256,7 +256,7 @@
                         </h4>
                         <div class="objItem" v-for="(item, index) in objectData.hairstyle" :key="index"
                           :class="[index == tempObject.hairColor ? 'selected' : '']">
-                          <div class="colorItem" :class="index" @click="setHairColor(index)"/>
+                          <div class="colorItem" :class="index" @click="setHairColor(index)"></div>
                         </div>
                       </div>
 
@@ -280,25 +280,23 @@
                         </div>
                       </div>
 
-                        <div class="objectsBox" v-if="objectData.type==='dog' || objectData.type==='cat'">
-                            <div
-                              v-for="(dogs, breed) in objectData"
-                            >
-                              <span class="breed">{{breed}}</span>
-                              <div class="objItem"
-                                v-for="(item, index) in dogs"
-                                v-if="item.imageUrl"
-                                :key="index"
-                                :class="item.variantId == tempObject.variantId ? 'selected' : ''"
-                                @click="setDog(item.variantId, item.imageUrl)">
-                                  <img
-                                    alt="product body icon"
-                                    :src="item.imageUrl"
-                                  >
-                              </div>
+                      <div class="objectsBox" v-if="objectData.type==='dogs' || objectData.type==='cats'">
+                          <div
+                            v-for="(dogs, breed) in objectData"
+                          >
+                            <span class="breed">{{breed}}</span>
+                            <div class="objItem"
+                              v-for="(item, index) in dogs"
+                              v-if="item.imageUrl"
+                              :key="index"
+                              :class="item.variantId == tempObject.variantId ? 'selected' : ''"
+                              @click="setDog(item.variantId, item.imageUrl)">
+                                <img
+                                  alt="product body icon"
+                                  :src="item.imageUrl"
+                                >
                             </div>
-                        </div>
-
+                          </div>
                       </div>
                     </div>
 
@@ -318,19 +316,19 @@
                     </h3>
 
                     <div class="modalContent">
-                      <div class="objItem" @click="newCupObject(women, 'women')">
+                      <div class="objItem" @click="newCupObject(womens, 'womens')">
                         <img src="/images/cup_page/sample_woman.png">
                         <span class="name">Kobietę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(men, 'men')">
+                      <div class="objItem" @click="newCupObject(mens, 'mens')">
                         <img src="/images/cup_page/sample_man.png">
                         <span class="name">Mężczyznę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(dogs, 'dog')">
+                      <div class="objItem" @click="newCupObject(dogs, 'dogs')">
                         <img src="/images/cup_page/sample_dog.png">
                         <span class="name">Psa</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(cats, 'cat')">
+                      <div class="objItem" @click="newCupObject(cats, 'cats')">
                         <img src="/images/cup_page/sample_cat.png">
                         <span class="name">Kota</span>
                       </div>
@@ -464,7 +462,7 @@
                     @click="backToCart()">
                     Wróć
                   </button>
-                  <button class="reset" @click="reset()"">
+                  <button class="reset" @click="reset()">
                     Resetuj i zacznij od nowa
                   </button>
                 </div>
@@ -736,7 +734,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="objectsBox" v-if="objectData.type==='dog' || objectData.type==='cat'">
+                      <div class="objectsBox" v-if="objectData.type==='dogs' || objectData.type==='cats'">
                         <div
                           v-for="(dogs, breed) in objectData"
                         >
@@ -775,19 +773,19 @@
                     </h3>
 
                     <div class="modalContent">
-                      <div class="objItem" @click="newCupObject(women, 'women')">
+                      <div class="objItem" @click="newCupObject(womens, 'womens')">
                         <img src="/images/cup_page/sample_woman.png">
                         <span class="name">Kobietę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(men, 'men')">
+                      <div class="objItem" @click="newCupObject(mens, 'mens')">
                         <img src="/images/cup_page/sample_man.png">
                         <span class="name">Mężczyznę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(dogs, 'dog')">
+                      <div class="objItem" @click="newCupObject(dogs, 'dogs')">
                         <img src="/images/cup_page/sample_dog.png">
                         <span class="name">Psa</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(cats, 'cat')">
+                      <div class="objItem" @click="newCupObject(cats, 'cats')">
                         <img src="/images/cup_page/sample_cat.png">
                         <span class="name">Kota</span>
                       </div>
@@ -955,7 +953,7 @@
                     @click="backToCart()">
                     Wróć
                   </button>
-                  <button class="reset" @click="reset()"">
+                  <button class="reset" @click="reset()">
                     Resetuj i zacznij od nowa
                   </button>
                 </div>
@@ -993,8 +991,8 @@ export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('cupPreferences/dogs') dogs!: any
   @Getter('cupPreferences/cats') cats!: any
-  @Getter('cupPreferences/men') men!: any
-  @Getter('cupPreferences/women') women!: any
+  @Getter('cupPreferences/mens') mens!: any
+  @Getter('cupPreferences/womens') womens!: any
   @Getter('basket/editb') edit!: any
   @Mutation('cupPreferences/setCups') setCups!: any
   @Mutation('basket/setBasket') setBasket!: any
@@ -1002,8 +1000,8 @@ export default class Cup extends Vue {
 
   @Action('cupPreferences/getDogs') getDogs!: any
   @Action('cupPreferences/getCats') getCats!: any
-  @Action('cupPreferences/getMen') getMen!: any
-  @Action('cupPreferences/getWomen') getWomen!: any
+  @Action('cupPreferences/getMens') getMens!: any
+  @Action('cupPreferences/getWomens') getWomens!: any
 
   cups: any = cupsJSON.items
   cupData: any = cupsJSON
@@ -1140,19 +1138,23 @@ export default class Cup extends Vue {
 
     }
 
-    switch (this.tempObject.type) {
-      case 'dog':
+    switch(this.tempObject.type) {
+      case 'cats':
+        this.objectData = this.cats
+        this.objectData.type = this.tempObject.type
+        break;
+      case 'dogs':
         this.objectData = this.dogs
         this.objectData.type = this.tempObject.type
-        break
-      case 'woman':
-        this.objectData = this.women
+        break;
+      case 'womens':
+        this.objectData = this.womens
         this.objectData.type = this.tempObject.type
-        break
-      case 'men':
-        this.objectData = this.men
+        break;
+      case 'mens':
+        this.objectData = this.mens
         this.objectData.type = this.tempObject.type
-        break
+        break;
     }
   }
 
@@ -1272,29 +1274,95 @@ export default class Cup extends Vue {
     this.$router.push('/koszyk')
   }
 
-  mounted () {
+  randomIntFromInterval(min: number, max: number) { 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+  pickRandomProperty(obj: Object) {
+      var result;
+      var count = 0;
+      for (var prop in obj)
+          if (Math.random() < 1/++count)
+             result = prop;
+      return result;
+  }
+
+  setStartObjects() {
+    var count = this.randomIntFromInterval(2, 4)
+    var i = 0
+    while (i < count) {
+      var typeRand = this.randomIntFromInterval(1, 4)
+      switch (typeRand) {
+        case 1:
+          if (this.mens) {
+            var randBody = this.randomIntFromInterval(0, this.mens.bodies.length-1)
+            var randHair = this.randomIntFromInterval(0, this.mens.hairstyles['black']['all'].length-1)
+            this.cupObject.items.push({
+              type: 'mens',
+              figureId: this.mens.bodies[randBody].bodyId,
+              bodyImageUrl: this.mens.bodies[randBody].bodyImageUrl,
+              hairColor: 'black',
+              hairstyleId: this.mens.hairstyles['black']['all'][randHair].hairstyleId
+            })
+          }
+        break;
+        case 2:
+          if (this.womens) {
+            var randBody = this.randomIntFromInterval(0, this.womens.bodies.length-1)
+            var randHair = this.randomIntFromInterval(0, this.womens.hairstyles.black.bun.length-1)
+            this.cupObject.items.push({
+              type: 'womens',
+              figureId: this.womens.bodies[randBody].bodyId,
+              bodyImageUrl: this.womens.bodies[randBody].bodyImageUrl,
+              hairColor: 'black',
+              hairstyleId: this.womens.hairstyles.black.bun[randHair].hairstyleId
+            })
+          }
+        break;
+        case 3:
+          var randProp = this.pickRandomProperty(this.dogs)
+          if (randProp) {
+            this.cupObject.items.push({
+              type: 'dogs',
+              figureId: this.dogs[randProp][0].id,
+              variantId: this.dogs[randProp][0].variantId,
+              bodyImageUrl: this.dogs[randProp][0].imageUrl,
+            })
+          }
+        break;
+        case 4:
+          var randProp = this.pickRandomProperty(this.cats)
+          if (randProp) {
+            this.cupObject.items.push({
+              type: 'cats',
+              figureId: this.cats[randProp][0].id,
+              variantId: this.cats[randProp][0].variantId,
+              bodyImageUrl: this.cats[randProp][0].imageUrl,
+            })
+          }
+        break;
+      }
+
+      i++;
+    }
+  }
+
+  created () {
     if (Number.isInteger(this.$store.state.basket.edit)) {
       this.setupEdit()
     } else {
       this.increaseQuantity()
     }
-    this.setCups(cupsJSON)
 
-    if (this.isLoaded) {
-      this.getDogs()
-      this.getCats()
-      this.getMen()
-      this.getWomen()
-    } else {
-      this.$store.watch(state => state.defaults.status, (newValue: string) => {
-        if (newValue === STATUS_LOADED) {
-          this.getDogs()
-          this.getCats()
-          this.getMen()
-          this.getWomen()
-        }
-      })
-    }
+    this.setCups(cupsJSON)
+    this.getDogs()
+    this.getCats()
+    this.getMens()
+    this.getWomens()
+    this.$store.dispatch("cupPreferences/getDogs").then(dogs => {
+      this.setStartObjects()
+    });
+
   }
 
 }

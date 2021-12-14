@@ -27,20 +27,20 @@ export const getCats = async ({ commit }) => {
   } catch {}
 }
 
-export const getMen = async ({ commit }) => {
+export const getMens = async ({ commit }) => {
   try {
     const res = await $axios.get('/gender/male')
     if (res?.data) {
-      commit('setMen', res.data)
+      commit('setMens', res.data)
     }
   } catch {}
 }
 
-export const getWomen = async ({ commit }) => {
+export const getWomens = async ({ commit }) => {
   try {
     const res = await $axios.get('/gender/female')
     if (res?.data) {
-      commit('setWomen', res.data)
+      commit('setWomens', res.data)
     }
   } catch {}
 }
