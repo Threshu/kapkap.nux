@@ -70,10 +70,12 @@
                 </h3>
 
                 <div v-if="cups" class="cupsList mobile">
-                  <div class="cupItem" v-for="(item, index) in cups.cups"
+                  <div
+                    v-for="(item, index) in cups.cups"
                     :key="index"
+                    class="cupItem"
+                    :class="{'selected': item.id == cupObject.cupId}"
                     @click="setCup(item.id)"
-                    v-bind:class="{'selected': item.id == cupObject.cupId}"
                   >
                     <img v-if="item" :src="item.imageURL">
                   </div>
@@ -86,12 +88,13 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number"
-                        class="qty-input"
+                      <input
                         v-model="cupObject.count"
+                        type="number"
+                        class="qty-input"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="increaseQuantity">
+                      <button class="qty-plus" @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -102,7 +105,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      {{cupData.price}} zł
+                      {{ cupData.price }} zł
                     </div>
                   </div>
 
@@ -111,7 +114,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Suma:</span>
                     <div class="sum-val">
-                      {{cupObject.total}} zł
+                      {{ cupObject.total }} zł
                     </div>
                   </div>
                 </div>
@@ -131,15 +134,17 @@
                   Wybierz tło
                 </h3>
 
-                <div class="bgList mobile" v-if="cups">
-                  <div class="bgItem" v-for="(item, index) in cups.bgs"
-                  :key="index"
-                  @click="setBg(item.id)"
-                  v-bind:class="{'selected': item.id == cupObject.bgId}">
+                <div v-if="cups" class="bgList mobile">
+                  <div
+                    v-for="(item, index) in cups.bgs"
+                    :key="index"
+                    class="bgItem"
+                    :class="{'selected': item.id == cupObject.bgId}"
+                    @click="setBg(item.id)"
+                  >
                     <img :src="item.imageURL">
                   </div>
                 </div>
-
 
                 <div class="summary">
                   <div class="qty-box">
@@ -148,12 +153,13 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number"
-                        class="qty-input"
+                      <input
                         v-model="cupObject.count"
+                        type="number"
+                        class="qty-input"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="increaseQuantity">
+                      <button class="qty-plus" @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -164,7 +170,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      {{cupData.price}} zł
+                      {{ cupData.price }} zł
                     </div>
                   </div>
 
@@ -173,7 +179,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Suma:</span>
                     <div class="sum-val">
-                      {{cupObject.total}} zł
+                      {{ cupObject.total }} zł
                     </div>
                   </div>
                 </div>
@@ -193,20 +199,19 @@
                   Dodaj postać lub zwierzę
                 </h3>
                 <div class="objectsList">
-
-                  <div class="objectItem" v-for="(item, index) in cupObject.items" :key="index">
+                  <div v-for="(item, index) in cupObject.items" :key="index" class="objectItem">
                     <div class="objectRow">
                       <div class="objImage">
                         <img :src="item.bodyImageUrl">
                       </div>
                       <div class="objName">
-                        {{item.name}}
+                        {{ item.name }}
                       </div>
                       <div class="objActions">
                         <button class="edit" @click="editItem(index)" />
                         <button class="remove" @click="removeItem(index)" />
                         <button class="top" @click="topItem(index)" />
-                        <button class="down"  @click="downItem(index)" />
+                        <button class="down" @click="downItem(index)" />
                       </div>
                     </div>
                     <div v-if="removeItemId == index" class="removeBox">
@@ -228,18 +233,21 @@
                       ✕
                     </button>
                     <h3 class="modalTitle">
-                      {{objectData.title}}
+                      {{ objectData.title }}
                     </h3>
 
                     <div class="modalContent edit">
-                      <input class="objectName" type="text" placeholder="Imię" v-model="tempObject.name">
+                      <input v-model="tempObject.name" class="objectName" type="text" placeholder="Imię">
 
-                      <div class="objectsBox" v-if="objectData.bodies">
-                        <h4 class="objectTitle">Sylwetka</h4>
+                      <div v-if="objectData.bodies" class="objectsBox">
+                        <h4 class="objectTitle">
+                          Sylwetka
+                        </h4>
 
-                        <div class="objItem"
+                        <div
                           v-for="(item, index) in objectData.bodies"
                           :key="index"
+                          class="objItem"
                           :class="item.bodyId == tempObject.figureId ? 'selected' : ''"
                           @click="setFigure(item.bodyId, item.bodyImageUrl)"
                         >
@@ -250,25 +258,30 @@
                         </div>
                       </div>
 
-                      <div class="objectsBox color" v-if="objectData.hairstyles">
+                      <div v-if="objectData.hairstyles" class="objectsBox color">
                         <h4 class="objectTitle">
                           Kolor włosów
                         </h4>
-                        <div class="objItem" v-for="(item, index) in objectData.hairstyle" :key="index"
-                          :class="[index == tempObject.hairColor ? 'selected' : '']">
-                          <div class="colorItem" :class="index" @click="setHairColor(index)"></div>
+                        <div
+                          v-for="(item, index) in objectData.hairstyle"
+                          :key="index"
+                          class="objItem"
+                          :class="[index == tempObject.hairColor ? 'selected' : '']"
+                        >
+                          <div class="colorItem" :class="index" @click="setHairColor(index)" />
                         </div>
                       </div>
 
-                      <div class="objectsBox" v-if="objectData.hairstyles && objectData.hairstyles[tempObject.hairColor]">
+                      <div v-if="objectData.hairstyles && objectData.hairstyles[tempObject.hairColor]" class="objectsBox">
                         <h4 class="objectTitle">
                           Rodzaj włosów
                         </h4>
 
                         <div v-for="(item, index) in objectData.hairstyles[tempObject.hairColor]" :key="index">
-                          <div class="objItem"
+                          <div
                             v-for="(item1, index1) in item"
                             :key="index1"
+                            class="objItem"
                             :class="item1.hairstyleId == tempObject.hairstyleId ? 'selected' : ''"
                             @click="setHairStyle(item1.hairstyleId)"
                           >
@@ -280,23 +293,25 @@
                         </div>
                       </div>
 
-                      <div class="objectsBox" v-if="objectData.type==='dogs' || objectData.type==='cats'">
+                      <div v-if="objectData.type==='dogs' || objectData.type==='cats'" class="objectsBox">
+                        <div
+                          v-for="(dogs, breed) in objectData"
+                        >
+                          <span class="breed">{{ breed }}</span>
                           <div
-                            v-for="(dogs, breed) in objectData"
+                            v-for="(item, index) in dogs"
+                            v-if="item.imageUrl"
+                            :key="index"
+                            class="objItem"
+                            :class="item.variantId == tempObject.variantId ? 'selected' : ''"
+                            @click="setDog(item.variantId, item.imageUrl)"
                           >
-                            <span class="breed">{{breed}}</span>
-                            <div class="objItem"
-                              v-for="(item, index) in dogs"
-                              v-if="item.imageUrl"
-                              :key="index"
-                              :class="item.variantId == tempObject.variantId ? 'selected' : ''"
-                              @click="setDog(item.variantId, item.imageUrl)">
-                                <img
-                                  alt="product body icon"
-                                  :src="item.imageUrl"
-                                >
-                            </div>
+                            <img
+                              alt="product body icon"
+                              :src="item.imageUrl"
+                            >
                           </div>
+                        </div>
                       </div>
                     </div>
 
@@ -350,12 +365,13 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number"
-                        class="qty-input"
+                      <input
                         v-model="cupObject.count"
+                        type="number"
+                        class="qty-input"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="increaseQuantity">
+                      <button class="qty-plus" @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -366,7 +382,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      {{cupData.price}} zł
+                      {{ cupData.price }} zł
                     </div>
                   </div>
 
@@ -375,7 +391,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Suma:</span>
                     <div class="sum-val">
-                      {{cupObject.total}} zł
+                      {{ cupObject.total }} zł
                     </div>
                   </div>
                 </div>
@@ -395,11 +411,14 @@
                   Dodaj cytat
                 </h3>
 
-                <div class="quotesList mobile" v-if="cups">
-                  <div class="quoteItem" v-for="(item, index) in cups.quotes"
-                  :key="index"
-                  @click="setQuote(item.id)"
-                  v-bind:class="{'selected': item.id == cupObject.quoteId}">
+                <div v-if="cups" class="quotesList mobile">
+                  <div
+                    v-for="(item, index) in cups.quotes"
+                    :key="index"
+                    class="quoteItem"
+                    :class="{'selected': item.id == cupObject.quoteId}"
+                    @click="setQuote(item.id)"
+                  >
                     <img :src="item.imageURL">
                   </div>
                 </div>
@@ -411,12 +430,13 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number"
-                        class="qty-input"
+                      <input
                         v-model="cupObject.count"
+                        type="number"
+                        class="qty-input"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="increaseQuantity">
+                      <button class="qty-plus" @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -427,7 +447,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      {{cupData.price}} zł
+                      {{ cupData.price }} zł
                     </div>
                   </div>
 
@@ -436,30 +456,38 @@
                   <div class="sum-box">
                     <span class="sum-label">Suma:</span>
                     <div class="sum-val">
-                      {{cupObject.total}} zł
+                      {{ cupObject.total }} zł
                     </div>
                   </div>
                 </div>
 
                 <div class="confButtons">
-                  <button class="next"
+                  <button
                     v-if="!editMode"
-                    @click="buyNow()">
+                    class="next"
+                    @click="buyNow()"
+                  >
                     Kup Teraz
                   </button>
-                  <button class="next fl"
+                  <button
                     v-if="!editMode"
-                    @click="addToCart()">
+                    class="next fl"
+                    @click="addToCart()"
+                  >
                     Dodaj do koszyka
                   </button>
-                  <button class="next"
+                  <button
                     v-if="editMode"
-                    @click="saveCartItem()">
+                    class="next"
+                    @click="saveCartItem()"
+                  >
                     Zapisz
                   </button>
-                  <button class="next fl"
+                  <button
                     v-if="editMode"
-                    @click="backToCart()">
+                    class="next fl"
+                    @click="backToCart()"
+                  >
                     Wróć
                   </button>
                   <button class="reset" @click="reset()">
@@ -518,11 +546,14 @@
                   Wybierz kubek
                 </h3>
 
-                <div class="cupsList desktop" v-if="cups">
-                  <div class="cupItem" v-for="(item, index) in cups.cups"
-                  :key="index"
-                  @click="setCup(item.id)"
-                  v-bind:class="{'selected': item.id == cupObject.cupId}">
+                <div v-if="cups" class="cupsList desktop">
+                  <div
+                    v-for="(item, index) in cups.cups"
+                    :key="index"
+                    class="cupItem"
+                    :class="{'selected': item.id == cupObject.cupId}"
+                    @click="setCup(item.id)"
+                  >
                     <img v-if="item" :src="item.imageURL">
                   </div>
                 </div>
@@ -534,12 +565,13 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number"
-                        class="qty-input"
+                      <input
                         v-model="cupObject.count"
+                        type="number"
+                        class="qty-input"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="increaseQuantity">
+                      <button class="qty-plus" @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -550,7 +582,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      {{cupData.price}} zł
+                      {{ cupData.price }} zł
                     </div>
                   </div>
 
@@ -559,7 +591,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Suma:</span>
                     <div class="sum-val">
-                      {{cupObject.total}} zł
+                      {{ cupObject.total }} zł
                     </div>
                   </div>
                 </div>
@@ -580,25 +612,46 @@
                 <h3 class="productConfBoxTitle">
                   Wybierz tło
                 </h3>
-                <div class="bgList desktop" v-if="cups">
-                  <div class="bgItem" v-for="(item, index) in cups.bgs"
-                  :key="index"
-                  @click="setBg(item.id)"
-                  v-bind:class="{'selected': item.id == cupObject.bgId}">
+                <div v-if="cups" class="bgList desktop">
+                  <div
+                    v-for="(item, index) in cups.bgs"
+                    :key="index"
+                    class="bgItem"
+                    :class="{'selected': item.id == cupObject.bgId}"
+                    @click="setBg(item.id)"
+                  >
                     <img :src="item.imageURL">
                   </div>
                 </div>
                 <div class="paginationBox">
                   <div class="pagination">
-                    <button class="prevAll">&lt;&lt;</button>
-                    <button class="prev">&lt;</button>
-                    <button class="page">1</button>
-                    <button class="page active">2</button>
-                    <button class="page">3</button>
-                    <button class="page">4</button>
-                    <button class="page">5</button>
-                    <button class="next">></button>
-                    <button class="nextAll">>></button>
+                    <button class="prevAll">
+                      &lt;&lt;
+                    </button>
+                    <button class="prev">
+                      &lt;
+                    </button>
+                    <button class="page">
+                      1
+                    </button>
+                    <button class="page active">
+                      2
+                    </button>
+                    <button class="page">
+                      3
+                    </button>
+                    <button class="page">
+                      4
+                    </button>
+                    <button class="page">
+                      5
+                    </button>
+                    <button class="next">
+                      >
+                    </button>
+                    <button class="nextAll">
+                      >>
+                    </button>
                   </div>
                 </div>
 
@@ -609,12 +662,13 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number"
-                        class="qty-input"
+                      <input
                         v-model="cupObject.count"
+                        type="number"
+                        class="qty-input"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="increaseQuantity">
+                      <button class="qty-plus" @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -625,7 +679,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      {{cupData.price}} zł
+                      {{ cupData.price }} zł
                     </div>
                   </div>
 
@@ -634,7 +688,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Suma:</span>
                     <div class="sum-val">
-                      {{cupObject.total}} zł
+                      {{ cupObject.total }} zł
                     </div>
                   </div>
                 </div>
@@ -656,20 +710,20 @@
                   Dodaj postać lub zwierzę
                 </h3>
                 <div class="objectsList">
-                  <div class="objectItem" v-for="(item, index) in cupObject.items" :key="index">
+                  <div v-for="(item, index) in cupObject.items" :key="index" class="objectItem">
                     <div class="objectRow">
                       <div class="objImage">
                         <img :src="item.bodyImageUrl">
                       </div>
                       <div class="objName">
-                        {{item.name}}
+                        {{ item.name }}
                       </div>
 
                       <div class="objActions">
                         <button class="edit" @click="editItem(index)" />
                         <button class="remove" @click="removeItem(index)" />
                         <button class="top" @click="topItem(index)" />
-                        <button class="down"  @click="downItem(index)" />
+                        <button class="down" @click="downItem(index)" />
                       </div>
                     </div>
                     <div v-if="removeItemId == index" class="removeBox">
@@ -690,17 +744,25 @@
                     <button class="closeModal" @click="showEditModal = false">
                       ✕
                     </button>
-                    <h3 class="modalTitle">{{objectData.title}}</h3>
+                    <h3 class="modalTitle">
+                      {{ objectData.title }}
+                    </h3>
 
                     <div class="modalContent edit">
-                      <input class="objectName" type="text" placeholder="Imię" v-model="tempObject.name">
+                      <input v-model="tempObject.name" class="objectName" type="text" placeholder="Imię">
 
-                      <div class="objectsBox" v-if="objectData.bodies">
-                        <h4 class="objectTitle">Sylwetka</h4>
+                      <div v-if="objectData.bodies" class="objectsBox">
+                        <h4 class="objectTitle">
+                          Sylwetka
+                        </h4>
 
-                        <div class="objItem" v-for="(item, index) in objectData.bodies" :key="index"
+                        <div
+                          v-for="(item, index) in objectData.bodies"
+                          :key="index"
+                          class="objItem"
                           :class="[item.bodyId == tempObject.figureId ? 'selected' : '']"
-                          @click="setFigure(item.bodyId, item.bodyImageUrl)">
+                          @click="setFigure(item.bodyId, item.bodyImageUrl)"
+                        >
                           <img
                             alt="product body icon"
                             :src="item.bodyImageUrl"
@@ -708,25 +770,33 @@
                         </div>
                       </div>
 
-                      <div class="objectsBox color" v-if="objectData.hairstyles">
+                      <div v-if="objectData.hairstyles" class="objectsBox color">
                         <h4 class="objectTitle">
                           Kolor włosów
                         </h4>
-                        <div class="objItem" v-for="(item, index) in objectData.hairstyles" :key="index"
-                          :class="[index == tempObject.hairColor ? 'selected' : '']">
-                          <div class="colorItem" :class="index" @click="setHairColor(index)"/>
+                        <div
+                          v-for="(item, index) in objectData.hairstyles"
+                          :key="index"
+                          class="objItem"
+                          :class="[index == tempObject.hairColor ? 'selected' : '']"
+                        >
+                          <div class="colorItem" :class="index" @click="setHairColor(index)" />
                         </div>
                       </div>
 
-                      <div class="objectsBox" v-if="objectData.hairstyles && objectData.hairstyles[tempObject.hairColor]">
+                      <div v-if="objectData.hairstyles && objectData.hairstyles[tempObject.hairColor]" class="objectsBox">
                         <h4 class="objectTitle">
                           Rodzaj włosów
                         </h4>
 
                         <div v-for="(item, index) in objectData.hairstyles[tempObject.hairColor]" :key="index">
-                          <div class="objItem" v-for="(item1, index1) in item" :key="index1"
+                          <div
+                            v-for="(item1, index1) in item"
+                            :key="index1"
+                            class="objItem"
                             :class="item1.hairstyleId == tempObject.hairstyleId ? 'selected' : ''"
-                            @click="setHairStyle(item1.hairstyleId)">
+                            @click="setHairStyle(item1.hairstyleId)"
+                          >
                             <img
                               alt="product hairstyle icon"
                               :src="item1.hairstyleImageUrl"
@@ -734,21 +804,23 @@
                           </div>
                         </div>
                       </div>
-                      <div class="objectsBox" v-if="objectData.type==='dogs' || objectData.type==='cats'">
+                      <div v-if="objectData.type==='dogs' || objectData.type==='cats'" class="objectsBox">
                         <div
                           v-for="(dogs, breed) in objectData"
                         >
-                          <span class="breed">{{breed}}</span>
-                          <div class="objItem"
+                          <span class="breed">{{ breed }}</span>
+                          <div
                             v-for="(item, index) in dogs"
                             v-if="item.imageUrl"
                             :key="index"
+                            class="objItem"
                             :class="item.variantId == tempObject.variantId ? 'selected' : ''"
-                            @click="setDog(item.variantId, item.imageUrl)">
-                              <img
-                                alt="product body icon"
-                                :src="item.imageUrl"
-                              >
+                            @click="setDog(item.variantId, item.imageUrl)"
+                          >
+                            <img
+                              alt="product body icon"
+                              :src="item.imageUrl"
+                            >
                           </div>
                         </div>
                       </div>
@@ -807,12 +879,13 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number"
-                        class="qty-input"
+                      <input
                         v-model="cupObject.count"
+                        type="number"
+                        class="qty-input"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="increaseQuantity">
+                      <button class="qty-plus" @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -823,7 +896,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      {{cupData.price}} zł
+                      {{ cupData.price }} zł
                     </div>
                   </div>
 
@@ -832,7 +905,7 @@
                   <div class="sum-box">
                     <span class="sum-label">Suma:</span>
                     <div class="sum-val">
-                      {{cupObject.total}} zł
+                      {{ cupObject.total }} zł
                     </div>
                   </div>
                 </div>
@@ -854,11 +927,14 @@
                   Dodaj cytat
                 </h3>
 
-                <div class="quotesList desktop" v-if="cups">
-                  <div class="quoteItem" v-for="(item, index) in cups.quotes"
-                  :key="index"
-                  @click="setQuote(item.id)"
-                  v-bind:class="{'selected': item.id == cupObject.quoteId}">
+                <div v-if="cups" class="quotesList desktop">
+                  <div
+                    v-for="(item, index) in cups.quotes"
+                    :key="index"
+                    class="quoteItem"
+                    :class="{'selected': item.id == cupObject.quoteId}"
+                    @click="setQuote(item.id)"
+                  >
                     <img :src="item.imageURL">
                   </div>
                 </div>
@@ -902,12 +978,13 @@
                       <button class="qty-minus" @click="decreaseQuantity">
                         -
                       </button>
-                      <input type="number"
-                        class="qty-input"
+                      <input
                         v-model="cupObject.count"
+                        type="number"
+                        class="qty-input"
                         @keyup="recalculateTotal"
                       >
-                      <button class="qty-plus"  @click="increaseQuantity">
+                      <button class="qty-plus" @click="increaseQuantity">
                         +
                       </button>
                     </div>
@@ -918,7 +995,7 @@
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
                     <div class="price-val">
-                      {{cupData.price}} zł
+                      {{ cupData.price }} zł
                     </div>
                   </div>
 
@@ -927,30 +1004,38 @@
                   <div class="sum-box">
                     <span class="sum-label">Suma:</span>
                     <div class="sum-val">
-                      {{cupObject.total}} zł
+                      {{ cupObject.total }} zł
                     </div>
                   </div>
                 </div>
 
                 <div class="confButtons">
-                  <button class="next"
+                  <button
                     v-if="!editMode"
-                    @click="buyNow()">
+                    class="next"
+                    @click="buyNow()"
+                  >
                     Kup Teraz
                   </button>
-                  <button class="next fl"
+                  <button
                     v-if="!editMode"
-                    @click="addToCart()">
+                    class="next fl"
+                    @click="addToCart()"
+                  >
                     Dodaj do koszyka
                   </button>
-                  <button class="next"
+                  <button
                     v-if="editMode"
-                    @click="saveCartItem()">
+                    class="next"
+                    @click="saveCartItem()"
+                  >
                     Zapisz
                   </button>
-                  <button class="next fl"
+                  <button
                     v-if="editMode"
-                    @click="backToCart()">
+                    class="next fl"
+                    @click="backToCart()"
+                  >
                     Wróć
                   </button>
                   <button class="reset" @click="reset()">
@@ -968,7 +1053,6 @@
       <h3 class="styled-page-header">
         Powiązane produkty
       </h3>
-
     </div>
   </section>
 </template>
@@ -979,7 +1063,7 @@ import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import Picture from '@/components/Common/Picture.vue'
 
 import cupsJSON from '~/data/newProduct.json'
-import { STATUS_LOADED } from '~/store/defaults/types'
+// import { STATUS_LOADED } from '~/store/defaults/types'
 
 @Component({
   components: {
@@ -1081,64 +1165,63 @@ export default class Cup extends Vue {
     }]
   }
 
-  setCup(id: string) {
+  setCup (id: string) {
     this.cupObject.cupId = id
   }
 
-  setBg(id: string) {
+  setBg (id: string) {
     this.cupObject.bgId = id
   }
 
-  setQuote(id: string) {
+  setQuote (id: string) {
     this.cupObject.quoteId = id
   }
 
-  setHairColor(color: string) {
+  setHairColor (color: string) {
     this.tempObject.hairColor = color
   }
 
-  setFigure(figureId: string, bodyImageUrl: string) {
+  setFigure (figureId: string, bodyImageUrl: string) {
     this.tempObject.figureId = figureId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
 
-  setDog(variantId: any, bodyImageUrl: any) {
+  setDog (variantId: any, bodyImageUrl: any) {
     this.tempObject.variantId = variantId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
 
-  setHairStyle(hairstyleId: string) {
+  setHairStyle (hairstyleId: string) {
     this.tempObject.hairstyleId = hairstyleId
   }
 
-  pushObject(type: any, edit: any) {
+  pushObject (type: any, edit: any) {
     this.tempObject.type = type
-    if (edit != '') {
+    if (edit) {
       this.cupObject.items[edit] = this.tempObject
     } else {
       this.cupObject.items.push(this.tempObject)
     }
     this.showEditModal = false
-    this.resetTempObject();
+    this.resetTempObject()
   }
 
-  editCancel() {
+  editCancel () {
     this.showEditModal = false
     this.resetTempObject()
     this.objectData = []
   }
 
-  editItem(itemIndex: any) {
+  editItem (itemIndex: any) {
     this.tempObject = this.cupObject.items[itemIndex]
     this.showModal = false
     this.showEditModal = true
     this.tempObject = this.cupObject.items[itemIndex]
     if (itemIndex) {
       this.tempObject.edit = itemIndex
-
     }
 
-    switch(this.tempObject.type) {
+    switch (this.tempObject.type) {
       case 'cats':
         this.objectData = this.cats
         this.objectData.type = this.tempObject.type
@@ -1158,16 +1241,16 @@ export default class Cup extends Vue {
     }
   }
 
-  removeItem(itemId: any, confirmRemove: Boolean = false) {
+  removeItem (itemId: any, confirmRemove: Boolean = false) {
     if (confirmRemove) {
-      this.cupObject.items.splice(itemId, 1);
+      this.cupObject.items.splice(itemId, 1)
       this.removeItemId = null
     } else {
       this.removeItemId = itemId
     }
   }
 
-  resetTempObject() {
+  resetTempObject () {
     this.tempObject = {
       name: '',
       type: '',
@@ -1180,35 +1263,35 @@ export default class Cup extends Vue {
     }
   }
 
-  newCupObject(data: Object, type: String) {
+  newCupObject (data: Object, type: String) {
     this.objectData = data
     this.showModal = false
     this.objectData.type = type
     this.showEditModal = true
   }
 
-  moveArrayItemToNewIndex(arr: any, old_index: number, new_index: number) {
-      arr.splice(new_index, 0, arr.splice(old_index, 1)[0])
-      return arr
+  moveArrayItemToNewIndex (arr: any, oldIndex: number, newIndex: number) {
+    arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0])
+    return arr
   }
 
-  topItem(index: number) {
-    this.moveArrayItemToNewIndex(this.cupObject.items, index, index-1)
+  topItem (index: number) {
+    this.moveArrayItemToNewIndex(this.cupObject.items, index, index - 1)
   }
 
-  downItem(index: number) {
-    this.moveArrayItemToNewIndex(this.cupObject.items, index, index+1)
+  downItem (index: number) {
+    this.moveArrayItemToNewIndex(this.cupObject.items, index, index + 1)
   }
 
-  openCupItems(id: number) {
+  openCupItems (id: number) {
     this.confMenu = id
   }
 
-  buyNow() {
-    console.log("KUP TERAZ OBIEKT:", this.cupObject)
+  buyNow () {
+    console.log('KUP TERAZ OBIEKT:', this.cupObject)
   }
 
-  addToCart() {
+  addToCart () {
     let tempStorage: any = []
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
@@ -1217,26 +1300,26 @@ export default class Cup extends Vue {
     this.setBasket(tempStorage)
   }
 
-  formatPrice(value: number) {
-      let val = (value/1).toFixed(2).replace('.', ',')
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  formatPrice (value: number) {
+    const val = (value / 1).toFixed(2).replace('.', ',')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
 
-  recalculateTotal() {
+  recalculateTotal () {
     this.cupObject.total = this.formatPrice(this.cupData.price * this.cupObject.count)
   }
 
-  increaseQuantity() {
+  increaseQuantity () {
     this.cupObject.count++
     this.recalculateTotal()
   }
 
-  decreaseQuantity() {
+  decreaseQuantity () {
     this.cupObject.count--
     this.recalculateTotal()
   }
 
-  reset() {
+  reset () {
     this.confMenu = 1
     this.cupObject = {
       id: this.cupData.id,
@@ -1248,15 +1331,15 @@ export default class Cup extends Vue {
     this.resetTempObject()
   }
 
-  setupEdit() {
-    let editObj = JSON.parse(localStorage.cup)
+  setupEdit () {
+    const editObj = JSON.parse(localStorage.cup)
     if (editObj[this.$store.state.basket.edit]) {
       this.editMode = true
       this.cupObject = editObj[this.$store.state.basket.edit]
     }
   }
 
-  saveCartItem() {
+  saveCartItem () {
     let tempStorage: any = []
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
@@ -1268,51 +1351,52 @@ export default class Cup extends Vue {
     this.$router.push('/koszyk')
   }
 
-  backToCart() {
+  backToCart () {
     this.editBasket(null)
     this.reset()
     this.$router.push('/koszyk')
   }
 
-  randomIntFromInterval(min: number, max: number) { 
+  randomIntFromInterval (min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  pickRandomProperty(obj: Object) {
-      let result;
-      let count = 0;
-      for (let prop in obj) {
-          if (Math.random() < 1/++count) {
-             result = prop;
-          }
+  pickRandomProperty (obj: Object) {
+    let result
+    let count = 0
+    for (const prop in obj) {
+      if (Math.random() < 1 / ++count) {
+        result = prop
       }
+    }
 
-      return result;
+    return result
   }
 
-  setStartObjects() {
-    let count = this.randomIntFromInterval(2, 4)
-    let i = 0, randBody, randHair, randProp, typeRand
+  setStartObjects () {
+    const count = this.randomIntFromInterval(2, 4)
+    let i = 0; let randBody; let randHair; let randProp; let typeRand
+
     while (i < count) {
       typeRand = this.randomIntFromInterval(1, 4)
       switch (typeRand) {
         case 1:
           if (this.men) {
-            randBody = this.randomIntFromInterval(0, this.men.bodies.length-1)
-            randHair = this.randomIntFromInterval(0, this.men.hairstyles['black']['all'].length-1)
+            randBody = this.randomIntFromInterval(0, this.men.bodies.length - 1)
+            randHair = this.randomIntFromInterval(0, this.men.hairstyles.black.all.length - 1)
             this.cupObject.items.push({
               type: 'men',
               figureId: this.men.bodies[randBody].bodyId,
               bodyImageUrl: this.men.bodies[randBody].bodyImageUrl,
               hairColor: 'black',
-              hairstyleId: this.men.hairstyles['black']['all'][randHair].hairstyleId
+              hairstyleId: this.men.hairstyles.black.all[randHair].hairstyleId
             })
           }
-        break
+          break
         case 2:
           if (this.women) {
-            randBody = this.randomIntFromInterval(0, this.women.bodies.length-1)
-            randHair = this.randomIntFromInterval(0, this.women.hairstyles.black.bun.length-1)
+            randBody = this.randomIntFromInterval(0, this.women.bodies.length - 1)
+            randHair = this.randomIntFromInterval(0, this.women.hairstyles.black.bun.length - 1)
             this.cupObject.items.push({
               type: 'women',
               figureId: this.women.bodies[randBody].bodyId,
@@ -1321,7 +1405,7 @@ export default class Cup extends Vue {
               hairstyleId: this.women.hairstyles.black.bun[randHair].hairstyleId
             })
           }
-        break
+          break
         case 3:
           randProp = this.pickRandomProperty(this.dogs)
           if (randProp) {
@@ -1329,10 +1413,10 @@ export default class Cup extends Vue {
               type: 'dogs',
               figureId: this.dogs[randProp][0].id,
               variantId: this.dogs[randProp][0].variantId,
-              bodyImageUrl: this.dogs[randProp][0].imageUrl,
+              bodyImageUrl: this.dogs[randProp][0].imageUrl
             })
           }
-        break
+          break
         case 4:
           randProp = this.pickRandomProperty(this.cats)
           if (randProp) {
@@ -1340,10 +1424,10 @@ export default class Cup extends Vue {
               type: 'cats',
               figureId: this.cats[randProp][0].id,
               variantId: this.cats[randProp][0].variantId,
-              bodyImageUrl: this.cats[randProp][0].imageUrl,
+              bodyImageUrl: this.cats[randProp][0].imageUrl
             })
           }
-        break
+          break
       }
 
       i++
@@ -1362,12 +1446,10 @@ export default class Cup extends Vue {
     this.getCats()
     this.getMen()
     this.getWomen()
-    this.$store.dispatch("cupPreferences/getDogs").then(dogs => {
+    this.$store.dispatch('cupPreferences/getDogs').then(() => {
       this.setStartObjects()
-    });
-
+    })
   }
-
 }
 </script>
 
