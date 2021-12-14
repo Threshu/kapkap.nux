@@ -364,8 +364,7 @@
 
 							&.edit {
 								padding: 25px 50px;
-								max-height: calc(100vh - 86px);
-								height: calc(100vh - 400px);
+								height: calc(100vh - 45px);
 								overflow: auto;
 
 								.objectsBox {
@@ -1213,13 +1212,20 @@
 							.closeModal {
 								right: 6px;
 								top: 6px;
+								z-index: 2;
 							}
 							.modalContent {
-								max-height: calc(100vh - 86px) !important;
-								height: calc(100vh - 86px) !important;
+								height: calc(100vh - 45px);
 								overflow: auto;
+								display: flex;
+								flex-wrap: wrap;
+								justify-content: center;
+								align-items: center;
 							}
 							.modalTitle {
+								position: absolute;
+								width: 100%;
+								z-index: 1;
 								padding-top: 10px;
 								padding-bottom: 10px;
 								font-size: 20px;
