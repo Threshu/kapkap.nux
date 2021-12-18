@@ -11,51 +11,50 @@ pl:
 <template>
   <div>
     <section class="home-page section-b-space">
-      
-      <NuxtLink to="/kubki">
-        <div class="infographic"></div>
-      </NuxtLink>
-
       <div class="home-slider">
         <h1 class="home-title">
           Sklep z personalizowanymi<br>gadżetami i prezentami
         </h1>
-        <VueSlickCarousel
-          v-if="topSlider && topSlider.length"
-          v-bind="topSliderSettings"
-        >
-          <template
-            v-for="(image, key) in topSlider"
-          >
-            <div
-              :key="key"
-              class="home-slider-item"
-            >
-              <div
-                v-if="image.news"
-                class="new"
-              >
-                Nowość
-              </div>
-              <NuxtLink :to="image.url">
-                <Picture
-                  :path="`/images/main-page/top-slider/${image.filename}`"
-                  :alt="image.alt"
-                />
-              </NuxtLink>
-            </div>
-          </template>
-          <!--          <template #prevArrow="">-->
-          <!--            <div-->
-          <!--              class="carousel-left"-->
-          <!--            />-->
-          <!--          </template>-->
-          <!--          <template #nextArrow="">-->
-          <!--            <div-->
-          <!--              class="carousel-right"-->
-          <!--            />-->
-          <!--          </template>-->
-        </VueSlickCarousel>
+        <NuxtLink to="/kubki">
+          <div class="infographic" />
+        </NuxtLink>
+
+<!--      <VueSlickCarousel-->
+<!--          v-if="topSlider && topSlider.length"-->
+<!--          v-bind="topSliderSettings"-->
+<!--        >-->
+<!--          <template-->
+<!--            v-for="(image, key) in topSlider"-->
+<!--          >-->
+<!--            <div-->
+<!--              :key="key"-->
+<!--              class="home-slider-item"-->
+<!--            >-->
+<!--              <div-->
+<!--                v-if="image.news"-->
+<!--                class="new"-->
+<!--              >-->
+<!--                Nowość-->
+<!--              </div>-->
+<!--              <NuxtLink :to="image.url">-->
+<!--                <Picture-->
+<!--                  :path="`/images/main-page/top-slider/${image.filename}`"-->
+<!--                  :alt="image.alt"-->
+<!--                />-->
+<!--              </NuxtLink>-->
+<!--            </div>-->
+<!--          </template>-->
+<!--          &lt;!&ndash;          <template #prevArrow="">&ndash;&gt;-->
+<!--          &lt;!&ndash;            <div&ndash;&gt;-->
+<!--          &lt;!&ndash;              class="carousel-left"&ndash;&gt;-->
+<!--          &lt;!&ndash;            />&ndash;&gt;-->
+<!--          &lt;!&ndash;          </template>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <template #nextArrow="">&ndash;&gt;-->
+<!--          &lt;!&ndash;            <div&ndash;&gt;-->
+<!--          &lt;!&ndash;              class="carousel-right"&ndash;&gt;-->
+<!--          &lt;!&ndash;            />&ndash;&gt;-->
+<!--          &lt;!&ndash;          </template>&ndash;&gt;-->
+<!--        </VueSlickCarousel>-->
       </div>
 
       <div class="article-photo-box no-padding">
@@ -213,7 +212,6 @@ pl:
           <div class="row">
             <div class="col-sm-12">
               <div class="accordion theme-accordion">
-
                 <b-card v-for="(item, index) in faqs" :key="index" no-body class="mb-1">
                   <b-card-header header-tag="header" class="p-1" role="tab">
                     <b-button v-b-toggle="'accordion-' + index" block href="#" variant="light">
@@ -228,7 +226,6 @@ pl:
                     </b-card-body>
                   </b-collapse>
                 </b-card>
-
               </div>
             </div>
           </div>

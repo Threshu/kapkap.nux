@@ -1169,7 +1169,6 @@ label {
     padding: 0;
 
     .service-block + .service-block {
-      border-left: none;
       border-top: 1px solid #ddd;
       margin: 0 30px;
     }
@@ -1183,6 +1182,7 @@ label {
 
   @media (max-width: 767px) {
     .service-block + .service-block {
+      border-left: none!important;
       margin: 0;
     }
 
@@ -1778,7 +1778,7 @@ header {
   display: block;
   margin-bottom: 0;
   background: #f3f3f3;
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 
   .home-title {
     text-align: center;
@@ -1787,10 +1787,10 @@ header {
     color: #656565;
     opacity: 1;
     text-transform: unset;
-    padding: 91px 0 50px;
+    padding: 40px 0 20px;
 
-    @media (max-width: 800px) {
-      font-size: 24px;
+    @media (max-width: 768px) {
+      font-size: 30px;
       line-height: 40px;
       padding: 40px 0 0;
     }
@@ -1942,13 +1942,14 @@ header {
   background-image: url("/images/main-page/M_1250x300.png");
   background-position: center;
   background-repeat: no-repeat;
-  height: 600px;
   width: 100%;
-  margin: 20px auto;
+  height: 300px;
+  background-size: contain;
+  margin: 40px 0;
 
   @media (max-width: 1920px) {
     background-image: url("/images/main-page/M_700x150.png");
-    height: 300px;
+    background-size: auto;
   }
   @media (max-width: 768px) {
     background-image: url("/images/main-page/M_340x300.png");
