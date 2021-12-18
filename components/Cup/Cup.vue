@@ -40,7 +40,9 @@
                     class="desktop"
                     regular="https://vifus.webd.pl/kubek.png"
                     zoom="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
-                    :zoom-amount="2"
+                    zoom-amount="2"
+                    alt="Podgląd wygenerowanego obrazu kubka"
+                    hover-message="Najedź myszką, aby powiększyć obraz"
                   />
 
                   <img
@@ -577,7 +579,7 @@
       </div>
     </div>
 
-    <div class="similar">
+    <div class="similar" v-if="false">
       <h3 class="styled-page-header">
         Powiązane produkty
       </h3>

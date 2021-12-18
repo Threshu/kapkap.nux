@@ -18,7 +18,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preconnect', href: process.env.SITE_URL },
+      { rel: 'preconnect', href: process.env.SITE_URL }
     ]
   },
 
@@ -94,7 +94,12 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: { vendor: ['vue-image-zoomer'] },
+  build: {
+    vendor: [
+      // https://www.npmjs.com/package/vue-image-zoomer
+      'vue-image-zoomer'
+    ]
+  },
 
   env: {
     phone: process.env.PHONE,
