@@ -10,6 +10,7 @@
       :src="path"
       :class="className"
       :alt="alt"
+      loading="lazy"
     >
   </picture>
 </template>

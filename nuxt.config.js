@@ -18,10 +18,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&display=swap' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap' }
+      { rel: 'preconnect', href: process.env.SITE_URL },
     ]
   },
 
@@ -43,7 +40,7 @@ export default {
     '~/plugins/preview.client.js',
     '~/plugins/jsonld',
     '~/plugins/axios-accessor',
-    {src: '~plugins/zoom', ssr: false}
+    { src: '~plugins/zoom', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -56,10 +53,22 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build'
+    '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/stylelint
     // '@nuxtjs/stylelint-module'
+    '@nuxtjs/google-fonts'
   ],
+
+  googleFonts: {
+    families: {
+      Lato: [300, 400, 700],
+      Poppins: [200, 300, 400, 500, 700]
+    },
+    display: 'swap',
+    prefetch: true,
+    preconnect: true,
+    preload: true
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -85,7 +94,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: { vendor:['vue-image-zoomer'] },
+  build: { vendor: ['vue-image-zoomer'] },
 
   env: {
     phone: process.env.PHONE,
@@ -94,6 +103,6 @@ export default {
     companyStreet: process.env.COMPANY_STREET,
     companyZip: process.env.COMPANY_ZIP,
     companyCity: process.env.COMPANY_CITY,
-    companyMail: process.env.COMPANY_MAIL,
+    companyMail: process.env.COMPANY_MAIL
   }
 }
