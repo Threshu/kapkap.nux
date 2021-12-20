@@ -136,7 +136,7 @@
 		.productBox {
 			display: block;
 			width: 100%;
-			margin: 50px 0;
+			margin: 50px auto;
 
 			.productConfBox {
 				float: left;
@@ -860,6 +860,9 @@
 					width: 100%;
 
 					.back {
+						display: flex;
+						align-items: center;
+						justify-content: center;
 						background: #989898;
 						height: 67px;
 						width: calc(50% - 0.5px);
@@ -924,6 +927,7 @@
 					img {
 						//max-width: 580px;
 						width: auto;
+						max-width: 100%;
 						height: auto;
 						cursor: pointer;
 					}
@@ -1321,6 +1325,9 @@
 							width: 50%;
 							font-size: 14px;
 							line-height: 0;
+							display: flex;
+							align-items: center;
+							justify-content: center;
 
 							&.fl{
 								width: calc(50% - 1px);
@@ -1432,8 +1439,20 @@
 	}
 }
 
-@media only screen and (min-width: 600px) and (max-width: 1400px)  {
+@media only screen and (min-width: 600px) and (max-width: 1350px)  {
 	.categoryBox .productBoxBg .productBox .productViewBox .productView .productPreview img {
 		width: 35%;
+	}
+}
+
+@media only screen and (min-width: 1430px) and (max-width: 1550px)  {
+	.categoryBox .productBoxBg .productBox {
+		width: calc(100% - 150px);
+	}
+}
+
+@media only screen and (min-width: 1550px) {
+	.categoryBox .productBoxBg .productBox .productViewBox .productPreview {
+		margin-bottom: 60px;
 	}
 }

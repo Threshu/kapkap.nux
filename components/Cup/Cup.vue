@@ -4,25 +4,9 @@
     <div class="collection-wrapper productBoxBg">
       <div class="container">
         <div class="row">
-          <div ref="productBox" class="productBox mobile">
-            <div class="productViewBox">
-              <div class="productView">
-                <div class="productPreview">
-                  <img
-                    class="mobile"
-                    src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
-                  >
-                </div>
-              </div>
-              <button class="createCup" @click="showConf = true">
-                Stwórz kubek
-              </button>
-            </div>
-          </div>
-
           <div
             v-if="(showConf || !isMobile) && isLoaded"
-            :ref="{'productModalBox': showConf}"
+            :ref="{'productModalBox': isMobile}"
             :class="{'productModalBox': isMobile}"
             class="productBox"
           >
@@ -51,7 +35,7 @@
                   >
                 </div>
 
-                <div class="shareBox">
+                <div v-if="false" class="shareBox">
                   <button class="share" />
                 </div>
 
@@ -126,9 +110,12 @@
                 </div>
 
                 <div class="confButtons">
-                  <button class="back" @click="showConf = false">
+                  <NuxtLink
+                    to="/kubki"
+                    class="back"
+                  >
                     Wstecz
-                  </button>
+                  </NuxtLink>
                   <button class="next" @click="openCupItems(2)">
                     Dalej
                   </button>
@@ -579,7 +566,7 @@
       </div>
     </div>
 
-    <div class="similar" v-if="false">
+    <div v-if="false" class="similar">
       <h3 class="styled-page-header">
         Powiązane produkty
       </h3>
@@ -621,7 +608,7 @@ export default class Cup extends Vue {
   cupData: any = cupsJSON
   showModal = false
   confMenu = 1
-  showConf = false
+  showConf = true
   showEditModal = false
   removeBox = false
   removeItemId = null
