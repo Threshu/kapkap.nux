@@ -221,7 +221,7 @@ pl:
                   <b-collapse :id="'accordion-' + index" visible accordion="my-accordion" role="tabpanel">
                     <b-card-body>
                       <b-card-text>
-                        <p>{{ item.answer }}</p>
+                        <p v-html="item.answer"></p>
                       </b-card-text>
                     </b-card-body>
                   </b-collapse>
