@@ -1939,7 +1939,7 @@ header {
 
 .infographic {
   display: block;
-  background-image: url("/images/main-page/M_1250x300.png");
+  background-image: url("/images/main-page/M_700x150.png");
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
@@ -1948,7 +1948,6 @@ header {
   margin: 40px 0;
 
   @media (max-width: 1920px) {
-    background-image: url("/images/main-page/M_700x150.png");
     background-size: auto;
   }
   @media (max-width: 768px) {
