@@ -13,5 +13,8 @@ export default {
   },
   setWomen (state, women) {
     state.women = women
+  },
+  setProduct (state, product) {
+    state.product = product
   }
 }

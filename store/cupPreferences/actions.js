@@ -44,3 +44,13 @@ export const getWomen = async ({ commit }) => {
     }
   } catch {}
 }
+
+export const getCupDetails = async ({ commit }, payload) => {
+  try {
+    const res = await $axios.get('/product/' + payload.id)
+    if (res?.data) {
+      console.log('resxxx', res.data);
+      commit('setProduct', res.data)
+    }
+  } catch {}
+}

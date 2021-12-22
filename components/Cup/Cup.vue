@@ -130,7 +130,7 @@
                 </h3>
                 <div v-if="cups" class="bgList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
                   <div
-                    v-for="(item, index) in cups.bgs"
+                    v-for="(item, index) in cups.backgrounds"
                     :key="index"
                     class="bgItem"
                     :class="{'selected': item.id == cupObject.bgId}"
@@ -594,8 +594,8 @@ export default class Cup extends Vue {
   @Getter('cupPreferences/cats') cats!: any
   @Getter('cupPreferences/men') men!: any
   @Getter('cupPreferences/women') women!: any
+  @Getter('cupPreferences/product') cupData!: any
   @Getter('basket/editb') edit!: any
-  @Mutation('cupPreferences/setCups') setCups!: any
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
 
@@ -603,9 +603,8 @@ export default class Cup extends Vue {
   @Action('cupPreferences/getCats') getCats!: any
   @Action('cupPreferences/getMen') getMen!: any
   @Action('cupPreferences/getWomen') getWomen!: any
-
-  cups: any = cupsJSON.items
-  cupData: any = cupsJSON
+  @Action('cupPreferences/getCupDetails') getCupDetails!: any
+  cups: any = []
   showModal = false
   confMenu = 1
   showConf = true
@@ -627,17 +626,7 @@ export default class Cup extends Vue {
     hairstyleId: ''
   }
 
-  cupObject: any = {
-    id: this.cupData.id,
-    title: this.cupData.title,
-    price: this.cupData.price,
-    cupId: this.cups?.cups[0]?.id,
-    bgId: this.cups?.bgs[0]?.id,
-    quoteId: '',
-    count: 0,
-    total: 0,
-    items: []
-  }
+  cupObject: any = {}
 
   sliderSettings = {
     arrows: true,
@@ -841,7 +830,7 @@ export default class Cup extends Vue {
     this.cupObject = {
       id: this.cupData.id,
       cupId: this.cups.cups[0].id,
-      bgId: this.cups.bgs[0].id,
+      bgId: this.cups.backgrounds[0].id,
       quoteId: '',
       items: []
     }
@@ -960,22 +949,37 @@ export default class Cup extends Vue {
   }
 
   mounted () {
-    this.checkIfMobile()
-    window.addEventListener('resize', this.checkIfMobile)
-    if (Number.isInteger(this.$store.state.basket.edit)) {
-      this.setupEdit()
-    } else {
-      this.increaseQuantity()
-    }
-
-    this.setCups(cupsJSON)
-    this.getDogs()
-    this.getCats()
-    this.getMen()
-    this.getWomen()
-    this.$store.dispatch('cupPreferences/getDogs').then(() => {
+    this.$store.dispatch('cupPreferences/getCupDetails', {id: this.$route.params.alias}).then(() => {
       this.setStartObjects()
+      this.checkIfMobile()
+      window.addEventListener('resize', this.checkIfMobile)
+      if (Number.isInteger(this.$store.state.basket.edit)) {
+        this.setupEdit()
+      } else {
+        this.increaseQuantity()
+      }
+
+      this.getDogs()
+      this.getCats()
+      this.getMen()
+      this.getWomen()
+
+      this.cups = this.cupData.items
+      this.cupObject = {
+        id: this.cupData?.id,
+        title: this.cupData?.title,
+        price: this.cupData?.price,
+        cupId: this.cups?.cups[0]?.id,
+        bgId: this.cups?.backgrounds[0]?.id,
+        quoteId: '',
+        count: 0,
+        total: 0,
+        items: []
+      }
+
     })
+
+    
   }
 }
 </script>
