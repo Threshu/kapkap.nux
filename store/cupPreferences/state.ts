@@ -1,5 +1,6 @@
 export type Cups = Record<any, any>
 export type Quotes = Record<any, any>
+export type Backgrounds = Record<any, any>
 
 export type Pet = {
   id: string,
@@ -31,6 +32,7 @@ export type Hairstyle = {
   hairstyleImageUrl: string
 }
 
+
 export type HairstyleColors = 'black' | 'blond' | 'brown' | 'dark_brown' | 'red' | 'other'
 export type HairstyleStyle = 'all' | 'bun' | 'mid_back' | 'neck' | 'shoulder' | 'tie' | 'upper_back'
 
@@ -50,12 +52,22 @@ export type Women = {
   bodies: Body[]
 }
 
+export type Product = {
+  success: boolean,
+  title: string,
+  items: [Cups[], Quotes[], Backgrounds[]],
+  price: string,
+  sampleImageURL: string,
+  numberOfGrades: string,
+}
+
 export type State = {
   cups: Cups,
   dogs: Dogs,
   cats: Cats,
   men: Men,
   women: Women,
+  product: Product,
 }
 
 export default () => (<State>{})

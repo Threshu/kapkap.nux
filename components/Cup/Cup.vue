@@ -10,6 +10,7 @@
             :class="{'productModalBox': isMobile}"
             class="productBox"
           >
+            <h2 v-if="cupData">{{cupData.title}}</h2>
             <div class="productViewBox">
               <button class="frontCup active">
                 Przód kubka
@@ -24,7 +25,6 @@
                     class="desktop"
                     regular="https://vifus.webd.pl/kubek.png"
                     zoom="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
-                    zoom-amount="2"
                     alt="Podgląd wygenerowanego obrazu kubka"
                     hover-message="Najedź myszką, aby powiększyć obraz"
                   />
@@ -67,7 +67,7 @@
                     :class="{'selected': item.id == cupObject.cupId}"
                     @click="setCup(item.id)"
                   >
-                    <img v-if="item" :src="item.imageURL">
+                    <img v-if="item" :src="item.imageURL" :alt="item.name">
                   </div>
                 </div>
 
@@ -94,7 +94,7 @@
 
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
-                    <div class="price-val">
+                    <div class="price-val" v-if="cupData">
                       {{ cupData.price }} zł
                     </div>
                   </div>
@@ -140,35 +140,7 @@
                   </div>
                 </div>
                 <div v-if="!isMobile" class="paginationBox">
-                  <div class="pagination">
-                    <button class="prevAll">
-                      &lt;&lt;
-                    </button>
-                    <button class="prev">
-                      &lt;
-                    </button>
-                    <button class="page">
-                      1
-                    </button>
-                    <button class="page active">
-                      2
-                    </button>
-                    <button class="page">
-                      3
-                    </button>
-                    <button class="page">
-                      4
-                    </button>
-                    <button class="page">
-                      5
-                    </button>
-                    <button class="next">
-                      >
-                    </button>
-                    <button class="nextAll">
-                      >>
-                    </button>
-                  </div>
+                 
                 </div>
 
                 <div class="summary">
@@ -575,12 +547,9 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Mutation, Action, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Action, Watch, Vue } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import Picture from '@/components/Common/Picture.vue'
-
-import cupsJSON from '~/data/newProduct.json'
-// import { STATUS_LOADED } from '~/store/defaults/types'
 
 @Component({
   components: {
@@ -594,8 +563,8 @@ export default class Cup extends Vue {
   @Getter('cupPreferences/cats') cats!: any
   @Getter('cupPreferences/men') men!: any
   @Getter('cupPreferences/women') women!: any
-  @Getter('cupPreferences/product') cupData!: any
   @Getter('basket/editb') edit!: any
+  @Mutation('cupPreferences/setProduct') setProduct!: any
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
 
@@ -604,7 +573,9 @@ export default class Cup extends Vue {
   @Action('cupPreferences/getMen') getMen!: any
   @Action('cupPreferences/getWomen') getWomen!: any
   @Action('cupPreferences/getCupDetails') getCupDetails!: any
+
   cups: any = []
+  cupData: any = {}
   showModal = false
   confMenu = 1
   showConf = true
@@ -950,20 +921,11 @@ export default class Cup extends Vue {
 
   mounted () {
     this.$store.dispatch('cupPreferences/getCupDetails', {id: this.$route.params.alias}).then(() => {
-      this.setStartObjects()
-      this.checkIfMobile()
-      window.addEventListener('resize', this.checkIfMobile)
-      if (Number.isInteger(this.$store.state.basket.edit)) {
-        this.setupEdit()
-      } else {
-        this.increaseQuantity()
-      }
-
+      this.cupData = this.$store.state.cupPreferences.product
       this.getDogs()
       this.getCats()
       this.getMen()
       this.getWomen()
-
       this.cups = this.cupData.items
       this.cupObject = {
         id: this.cupData?.id,
@@ -976,11 +938,22 @@ export default class Cup extends Vue {
         total: 0,
         items: []
       }
+      this.checkIfMobile()
+      window.addEventListener('resize', this.checkIfMobile)
+      if (Number.isInteger(this.$store.state.basket.edit)) {
+        this.setupEdit()
+      } else {
+        this.increaseQuantity()
+      }
+      this.setStartObjects()
+
+
+
 
     })
-
-    
   }
+
+
 }
 </script>
 
