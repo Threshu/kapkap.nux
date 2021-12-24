@@ -62,14 +62,28 @@
                 </h3>
 
                 <div v-if="cups.cups" class="cupsList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
-                  <div
-                    v-for="(item, index) in cups.cups.slice(page*cupsIPP-cupsIPP, page*cupsIPP)"
-                    :key="index"
-                    class="cupItem"
-                    :class="{'selected': item.id == cupObject.cupId}"
-                    @click="setCup(item.id)"
-                  >
-                    <img v-if="item" :src="item.imageURL" :alt="item.name">
+                  <div v-if="!isMobile">
+                    <div
+                      v-for="(item, index) in cups.cups.slice(page*cupsIPP-cupsIPP, page*cupsIPP)"
+                      :key="index"
+                      class="cupItem"
+                      :class="{'selected': item.id == cupObject.cupId}"
+                      @click="setCup(item.id)"
+                    >
+                      <img v-if="item" :src="item.imageURL" :alt="item.name">
+                    </div>
+                  </div>
+
+                  <div v-if="isMobile">
+                    <div
+                      v-for="(item, index) in cups.cups"
+                      :key="index"
+                      class="cupItem"
+                      :class="{'selected': item.id == cupObject.cupId}"
+                      @click="setCup(item.id)"
+                    >
+                      <img v-if="item" :src="item.imageURL" :alt="item.name">
+                    </div>
                   </div>
                 </div>
 
@@ -171,15 +185,30 @@
                 <h3 class="productConfBoxTitle">
                   Wybierz tło
                 </h3>
+
                 <div v-if="cups" class="bgList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
-                  <div
-                    v-for="(item, index) in cups.backgrounds.slice(page*bgsIPP-bgsIPP, page*bgsIPP)"
-                    :key="index"
-                    class="bgItem"
-                    :class="{'selected': item.id == cupObject.bgId}"
-                    @click="setBg(item.id)"
-                  >
-                    <img :src="item.imageURL">
+                  <div v-if="!isMobile">
+                    <div
+                      v-for="(item, index) in cups.backgrounds.slice(page*bgsIPP-bgsIPP, page*bgsIPP)"
+                      :key="index"
+                      class="bgItem"
+                      :class="{'selected': item.id == cupObject.bgId}"
+                      @click="setBg(item.id)"
+                    >
+                      <img :src="item.imageURL">
+                    </div>
+                  </div>
+
+                  <div v-if="isMobile">
+                    <div
+                      v-for="(item, index) in cups.backgrounds"
+                      :key="index"
+                      class="bgItem"
+                      :class="{'selected': item.id == cupObject.bgId}"
+                      @click="setBg(item.id)"
+                    >
+                      <img :src="item.imageURL">
+                    </div>
                   </div>
                 </div>
 
@@ -497,15 +526,27 @@
                 </h3>
 
                 <div v-if="cups" class="quotesList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
-                  <div
-                    v-for="(item, index) in cups.quotes.slice(page*quotesIPP-quotesIPP, page*quotesIPP)"
-                    :key="index"
-                    class="quoteItem"
-                    :class="{'selected': item.quoteId == cupObject.quoteId}"
-                    @click="setQuote(item.quoteId)"
-                  >
-                    {{ item.quoteId }}
-                    <img :src="item.imageURL">
+                  <div v-if="!isMobile">
+                    <div
+                      v-for="(item, index) in cups.quotes.slice(page*quotesIPP-quotesIPP, page*quotesIPP)"
+                      :key="index"
+                      class="quoteItem"
+                      :class="{'selected': item.quoteId == cupObject.quoteId}"
+                      @click="setQuote(item.quoteId)"
+                    >
+                      <img :src="item.imageURL">
+                    </div>
+                  </div>
+                  <div v-if="isMobile">
+                    <div
+                      v-for="(item, index) in cups.quotes"
+                      :key="index"
+                      class="quoteItem"
+                      :class="{'selected': item.quoteId == cupObject.quoteId}"
+                      @click="setQuote(item.quoteId)"
+                    >
+                      <img :src="item.imageURL">
+                    </div>
                   </div>
                 </div>
 
@@ -678,7 +719,7 @@ export default class Cup extends Vue {
   page: number = 1
   quotesIPP: number = 9 // items per page - quotes
   bgsIPP: number = 9 // items per page - bgs
-  cupsIPP: number = 2 // items per page - cups
+  cupsIPP: number = 4 // items per page - cups
   objectData: any = []
 
   tempObject: any = {
