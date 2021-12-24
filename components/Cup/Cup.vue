@@ -10,7 +10,9 @@
             :class="{'productModalBox': isMobile}"
             class="productBox"
           >
-            <h2 v-if="cupData">{{cupData.title}}</h2>
+            <h2 v-if="cupData">
+              {{ cupData.title }}
+            </h2>
             <div class="productViewBox">
               <button class="frontCup active">
                 Przód kubka
@@ -59,15 +61,56 @@
                   Wybierz kubek
                 </h3>
 
-                <div v-if="cups" class="cupsList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
+                <div v-if="cups.cups" class="cupsList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
                   <div
-                    v-for="(item, index) in cups.cups"
+                    v-for="(item, index) in cups.cups.slice(page*cupsIPP-cupsIPP, page*cupsIPP)"
                     :key="index"
                     class="cupItem"
                     :class="{'selected': item.id == cupObject.cupId}"
                     @click="setCup(item.id)"
                   >
                     <img v-if="item" :src="item.imageURL" :alt="item.name">
+                  </div>
+                </div>
+
+                <div v-if="!isMobile && cups.cups" class="paginationBox">
+                  <div class="pagination">
+                    <button
+                      class="prevAll"
+                      @click="goToPage(1, 'cups')"
+                    >
+                      &lt;&lt;
+                    </button>
+                    <button
+                      class="prev"
+                      @click="goToPage(page - 1, 'cups')"
+                    >
+                      &lt;
+                    </button>
+
+                    <button
+                      v-for="btnPage in Math.ceil(cups.cups.length/cupsIPP)"
+                      :key="btnPage"
+                      class="page"
+                      :class="{'active': btnPage === page}"
+                      @click="goToPage(btnPage, 'cups')"
+                    >
+                      {{ btnPage }}
+                    </button>
+
+                    <button
+                      class="next"
+                      @click="goToPage(page + 1, 'cups')"
+                    >
+                      >
+                    </button>
+                    <button
+                      v-if="cups && cups.cups && cups.cups.length"
+                      class="nextAll"
+                      @click="goToPage(Math.ceil(cups.cups.length/cupsIPP), 'cups')"
+                    >
+                      >>
+                    </button>
                   </div>
                 </div>
 
@@ -94,7 +137,7 @@
 
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
-                    <div class="price-val" v-if="cupData">
+                    <div v-if="cupData" class="price-val">
                       {{ cupData.price }} zł
                     </div>
                   </div>
@@ -130,7 +173,7 @@
                 </h3>
                 <div v-if="cups" class="bgList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
                   <div
-                    v-for="(item, index) in cups.backgrounds"
+                    v-for="(item, index) in cups.backgrounds.slice(page*bgsIPP-bgsIPP, page*bgsIPP)"
                     :key="index"
                     class="bgItem"
                     :class="{'selected': item.id == cupObject.bgId}"
@@ -139,8 +182,45 @@
                     <img :src="item.imageURL">
                   </div>
                 </div>
+
                 <div v-if="!isMobile" class="paginationBox">
-                 
+                  <div class="pagination">
+                    <button
+                      class="prevAll"
+                      @click="goToPage(1, 'bgs')"
+                    >
+                      &lt;&lt;
+                    </button>
+                    <button
+                      class="prev"
+                      @click="goToPage(page - 1, 'bgs')"
+                    >
+                      &lt;
+                    </button>
+
+                    <button
+                      v-for="btnPage in Math.ceil(cups.backgrounds.length/bgsIPP)"
+                      :key="btnPage"
+                      class="page"
+                      :class="{'active': btnPage === page}"
+                      @click="goToPage(btnPage, 'bgs')"
+                    >
+                      {{ btnPage }}
+                    </button>
+
+                    <button
+                      class="next"
+                      @click="goToPage(page + 1, 'bgs')"
+                    >
+                      >
+                    </button>
+                    <button
+                      class="nextAll"
+                      @click="goToPage(Math.ceil(cups.backgrounds.length/bgsIPP), 'bgs')"
+                    >
+                      >>
+                    </button>
+                  </div>
                 </div>
 
                 <div class="summary">
@@ -418,43 +498,53 @@
 
                 <div v-if="cups" class="quotesList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
                   <div
-                    v-for="(item, index) in cups.quotes"
+                    v-for="(item, index) in cups.quotes.slice(page*quotesIPP-quotesIPP, page*quotesIPP)"
                     :key="index"
                     class="quoteItem"
-                    :class="{'selected': item.id == cupObject.quoteId}"
-                    @click="setQuote(item.id)"
+                    :class="{'selected': item.quoteId == cupObject.quoteId}"
+                    @click="setQuote(item.quoteId)"
                   >
+                    {{ item.quoteId }}
                     <img :src="item.imageURL">
                   </div>
                 </div>
 
                 <div v-if="!isMobile" class="paginationBox">
                   <div class="pagination">
-                    <button class="prevAll">
+                    <button
+                      class="prevAll"
+                      @click="goToPage(1, 'quotes')"
+                    >
                       &lt;&lt;
                     </button>
-                    <button class="prev">
+
+                    <button
+                      class="prev"
+                      @click="goToPage(page - 1, 'quotes')"
+                    >
                       &lt;
                     </button>
-                    <button class="page">
-                      1
+
+                    <button
+                      v-for="btnPage in Math.ceil(cups.quotes.length/quotesIPP)"
+                      :key="btnPage"
+                      class="page"
+                      :class="{'active': btnPage === page}"
+                      @click="goToPage(btnPage, 'quotes')"
+                    >
+                      {{ btnPage }}
                     </button>
-                    <button class="page active">
-                      2
-                    </button>
-                    <button class="page">
-                      3
-                    </button>
-                    <button class="page">
-                      4
-                    </button>
-                    <button class="page">
-                      5
-                    </button>
-                    <button class="next">
+
+                    <button
+                      class="next"
+                      @click="goToPage(page + 1, 'quotes')"
+                    >
                       >
                     </button>
-                    <button class="nextAll">
+                    <button
+                      class="nextAll"
+                      @click="goToPage(Math.ceil(cups.quotes.length/quotesIPP), 'quotes')"
+                    >
                       >>
                     </button>
                   </div>
@@ -547,7 +637,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Mutation, Action, Watch, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Action, Vue } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import Picture from '@/components/Common/Picture.vue'
 
@@ -585,6 +675,10 @@ export default class Cup extends Vue {
   news = false
   isMobile = false
   editMode = false
+  page: number = 1
+  quotesIPP: number = 9 // items per page - quotes
+  bgsIPP: number = 9 // items per page - bgs
+  cupsIPP: number = 2 // items per page - cups
   objectData: any = []
 
   tempObject: any = {
@@ -763,6 +857,7 @@ export default class Cup extends Vue {
 
   openCupItems (id: number) {
     this.confMenu = id
+    this.page = 1
   }
 
   buyNow () {
@@ -919,8 +1014,23 @@ export default class Cup extends Vue {
     }
   }
 
+  goToPage (page: number, type: string) {
+    let maxPage
+    if (type === 'quotes') {
+      maxPage = Math.ceil(this.cups.quotes.length / this.quotesIPP)
+    } else if (type === 'cups') {
+      maxPage = Math.ceil(this.cups.cups.length / this.cupsIPP)
+    } else {
+      maxPage = Math.ceil(this.cups.backgrounds.length / this.bgsIPP)
+    }
+
+    if (page > 0 && page <= maxPage) {
+      this.page = page
+    }
+  }
+
   mounted () {
-    this.$store.dispatch('cupPreferences/getCupDetails', {id: this.$route.params.alias}).then(() => {
+    this.$store.dispatch('cupPreferences/getCupDetails', { id: this.$route.params.alias }).then(() => {
       this.cupData = this.$store.state.cupPreferences.product
       this.getDogs()
       this.getCats()
@@ -945,15 +1055,10 @@ export default class Cup extends Vue {
       } else {
         this.increaseQuantity()
       }
+
       this.setStartObjects()
-
-
-
-
     })
   }
-
-
 }
 </script>
 
