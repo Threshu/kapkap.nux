@@ -10,6 +10,9 @@
             :class="{'productModalBox': isMobile}"
             class="productBox"
           >
+            <h2 v-if="cupData">
+              {{ cupData.title }}
+            </h2>
             <div class="productViewBox">
               <button class="frontCup active">
                 Przód kubka
@@ -24,7 +27,6 @@
                     class="desktop"
                     regular="https://vifus.webd.pl/kubek.png"
                     zoom="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
-                    zoom-amount="2"
                     alt="Podgląd wygenerowanego obrazu kubka"
                     hover-message="Najedź myszką, aby powiększyć obraz"
                   />
@@ -59,15 +61,70 @@
                   Wybierz kubek
                 </h3>
 
-                <div v-if="cups" class="cupsList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
-                  <div
-                    v-for="(item, index) in cups.cups"
-                    :key="index"
-                    class="cupItem"
-                    :class="{'selected': item.id == cupObject.cupId}"
-                    @click="setCup(item.id)"
-                  >
-                    <img v-if="item" :src="item.imageURL">
+                <div v-if="cups.cups" class="cupsList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
+                  <div v-if="!isMobile">
+                    <div
+                      v-for="(item, index) in cups.cups.slice(page*cupsIPP-cupsIPP, page*cupsIPP)"
+                      :key="index"
+                      class="cupItem"
+                      :class="{'selected': item.id == cupObject.cupId}"
+                      @click="setCup(item.id)"
+                    >
+                      <img v-if="item" :src="item.imageURL" :alt="item.name">
+                    </div>
+                  </div>
+
+                  <div v-if="isMobile">
+                    <div
+                      v-for="(item, index) in cups.cups"
+                      :key="index"
+                      class="cupItem"
+                      :class="{'selected': item.id == cupObject.cupId}"
+                      @click="setCup(item.id)"
+                    >
+                      <img v-if="item" :src="item.imageURL" :alt="item.name">
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="!isMobile && cups.cups" class="paginationBox">
+                  <div class="pagination">
+                    <button
+                      class="prevAll"
+                      @click="goToPage(1, 'cups')"
+                    >
+                      &lt;&lt;
+                    </button>
+                    <button
+                      class="prev"
+                      @click="goToPage(page - 1, 'cups')"
+                    >
+                      &lt;
+                    </button>
+
+                    <button
+                      v-for="btnPage in Math.ceil(cups.cups.length/cupsIPP)"
+                      :key="btnPage"
+                      class="page"
+                      :class="{'active': btnPage === page}"
+                      @click="goToPage(btnPage, 'cups')"
+                    >
+                      {{ btnPage }}
+                    </button>
+
+                    <button
+                      class="next"
+                      @click="goToPage(page + 1, 'cups')"
+                    >
+                      >
+                    </button>
+                    <button
+                      v-if="cups && cups.cups && cups.cups.length"
+                      class="nextAll"
+                      @click="goToPage(Math.ceil(cups.cups.length/cupsIPP), 'cups')"
+                    >
+                      >>
+                    </button>
                   </div>
                 </div>
 
@@ -94,7 +151,7 @@
 
                   <div class="price-box">
                     <span class="price-label">Cena za sztukę:</span>
-                    <div class="price-val">
+                    <div v-if="cupData" class="price-val">
                       {{ cupData.price }} zł
                     </div>
                   </div>
@@ -128,44 +185,68 @@
                 <h3 class="productConfBoxTitle">
                   Wybierz tło
                 </h3>
+
                 <div v-if="cups" class="bgList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
-                  <div
-                    v-for="(item, index) in cups.bgs"
-                    :key="index"
-                    class="bgItem"
-                    :class="{'selected': item.id == cupObject.bgId}"
-                    @click="setBg(item.id)"
-                  >
-                    <img :src="item.imageURL">
+                  <div v-if="!isMobile">
+                    <div
+                      v-for="(item, index) in cups.backgrounds.slice(page*bgsIPP-bgsIPP, page*bgsIPP)"
+                      :key="index"
+                      class="bgItem"
+                      :class="{'selected': item.id == cupObject.bgId}"
+                      @click="setBg(item.id)"
+                    >
+                      <img :src="item.imageURL">
+                    </div>
+                  </div>
+
+                  <div v-if="isMobile">
+                    <div
+                      v-for="(item, index) in cups.backgrounds"
+                      :key="index"
+                      class="bgItem"
+                      :class="{'selected': item.id == cupObject.bgId}"
+                      @click="setBg(item.id)"
+                    >
+                      <img :src="item.imageURL">
+                    </div>
                   </div>
                 </div>
+
                 <div v-if="!isMobile" class="paginationBox">
                   <div class="pagination">
-                    <button class="prevAll">
+                    <button
+                      class="prevAll"
+                      @click="goToPage(1, 'bgs')"
+                    >
                       &lt;&lt;
                     </button>
-                    <button class="prev">
+                    <button
+                      class="prev"
+                      @click="goToPage(page - 1, 'bgs')"
+                    >
                       &lt;
                     </button>
-                    <button class="page">
-                      1
+
+                    <button
+                      v-for="btnPage in Math.ceil(cups.backgrounds.length/bgsIPP)"
+                      :key="btnPage"
+                      class="page"
+                      :class="{'active': btnPage === page}"
+                      @click="goToPage(btnPage, 'bgs')"
+                    >
+                      {{ btnPage }}
                     </button>
-                    <button class="page active">
-                      2
-                    </button>
-                    <button class="page">
-                      3
-                    </button>
-                    <button class="page">
-                      4
-                    </button>
-                    <button class="page">
-                      5
-                    </button>
-                    <button class="next">
+
+                    <button
+                      class="next"
+                      @click="goToPage(page + 1, 'bgs')"
+                    >
                       >
                     </button>
-                    <button class="nextAll">
+                    <button
+                      class="nextAll"
+                      @click="goToPage(Math.ceil(cups.backgrounds.length/bgsIPP), 'bgs')"
+                    >
                       >>
                     </button>
                   </div>
@@ -445,44 +526,66 @@
                 </h3>
 
                 <div v-if="cups" class="quotesList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
-                  <div
-                    v-for="(item, index) in cups.quotes"
-                    :key="index"
-                    class="quoteItem"
-                    :class="{'selected': item.id == cupObject.quoteId}"
-                    @click="setQuote(item.id)"
-                  >
-                    <img :src="item.imageURL">
+                  <div v-if="!isMobile">
+                    <div
+                      v-for="(item, index) in cups.quotes.slice(page*quotesIPP-quotesIPP, page*quotesIPP)"
+                      :key="index"
+                      class="quoteItem"
+                      :class="{'selected': item.quoteId == cupObject.quoteId}"
+                      @click="setQuote(item.quoteId)"
+                    >
+                      <img :src="item.imageURL">
+                    </div>
+                  </div>
+                  <div v-if="isMobile">
+                    <div
+                      v-for="(item, index) in cups.quotes"
+                      :key="index"
+                      class="quoteItem"
+                      :class="{'selected': item.quoteId == cupObject.quoteId}"
+                      @click="setQuote(item.quoteId)"
+                    >
+                      <img :src="item.imageURL">
+                    </div>
                   </div>
                 </div>
 
                 <div v-if="!isMobile" class="paginationBox">
                   <div class="pagination">
-                    <button class="prevAll">
+                    <button
+                      class="prevAll"
+                      @click="goToPage(1, 'quotes')"
+                    >
                       &lt;&lt;
                     </button>
-                    <button class="prev">
+
+                    <button
+                      class="prev"
+                      @click="goToPage(page - 1, 'quotes')"
+                    >
                       &lt;
                     </button>
-                    <button class="page">
-                      1
+
+                    <button
+                      v-for="btnPage in Math.ceil(cups.quotes.length/quotesIPP)"
+                      :key="btnPage"
+                      class="page"
+                      :class="{'active': btnPage === page}"
+                      @click="goToPage(btnPage, 'quotes')"
+                    >
+                      {{ btnPage }}
                     </button>
-                    <button class="page active">
-                      2
-                    </button>
-                    <button class="page">
-                      3
-                    </button>
-                    <button class="page">
-                      4
-                    </button>
-                    <button class="page">
-                      5
-                    </button>
-                    <button class="next">
+
+                    <button
+                      class="next"
+                      @click="goToPage(page + 1, 'quotes')"
+                    >
                       >
                     </button>
-                    <button class="nextAll">
+                    <button
+                      class="nextAll"
+                      @click="goToPage(Math.ceil(cups.quotes.length/quotesIPP), 'quotes')"
+                    >
                       >>
                     </button>
                   </div>
@@ -579,9 +682,6 @@ import { Component, Getter, Mutation, Action, Vue } from 'nuxt-property-decorato
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import Picture from '@/components/Common/Picture.vue'
 
-import cupsJSON from '~/data/newProduct.json'
-// import { STATUS_LOADED } from '~/store/defaults/types'
-
 @Component({
   components: {
     Picture
@@ -595,7 +695,7 @@ export default class Cup extends Vue {
   @Getter('cupPreferences/men') men!: any
   @Getter('cupPreferences/women') women!: any
   @Getter('basket/editb') edit!: any
-  @Mutation('cupPreferences/setCups') setCups!: any
+  @Mutation('cupPreferences/setProduct') setProduct!: any
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
 
@@ -603,9 +703,10 @@ export default class Cup extends Vue {
   @Action('cupPreferences/getCats') getCats!: any
   @Action('cupPreferences/getMen') getMen!: any
   @Action('cupPreferences/getWomen') getWomen!: any
+  @Action('cupPreferences/getCupDetails') getCupDetails!: any
 
-  cups: any = cupsJSON.items
-  cupData: any = cupsJSON
+  cups: any = []
+  cupData: any = {}
   showModal = false
   confMenu = 1
   showConf = true
@@ -615,6 +716,10 @@ export default class Cup extends Vue {
   news = false
   isMobile = false
   editMode = false
+  page: number = 1
+  quotesIPP: number = 9 // items per page - quotes
+  bgsIPP: number = 9 // items per page - bgs
+  cupsIPP: number = 4 // items per page - cups
   objectData: any = []
 
   tempObject: any = {
@@ -627,17 +732,7 @@ export default class Cup extends Vue {
     hairstyleId: ''
   }
 
-  cupObject: any = {
-    id: this.cupData.id,
-    title: this.cupData.title,
-    price: this.cupData.price,
-    cupId: this.cups?.cups[0]?.id,
-    bgId: this.cups?.bgs[0]?.id,
-    quoteId: '',
-    count: 0,
-    total: 0,
-    items: []
-  }
+  cupObject: any = {}
 
   sliderSettings = {
     arrows: true,
@@ -803,6 +898,7 @@ export default class Cup extends Vue {
 
   openCupItems (id: number) {
     this.confMenu = id
+    this.page = 1
   }
 
   buyNow () {
@@ -841,7 +937,7 @@ export default class Cup extends Vue {
     this.cupObject = {
       id: this.cupData.id,
       cupId: this.cups.cups[0].id,
-      bgId: this.cups.bgs[0].id,
+      bgId: this.cups.backgrounds[0].id,
       quoteId: '',
       items: []
     }
@@ -959,21 +1055,48 @@ export default class Cup extends Vue {
     }
   }
 
-  mounted () {
-    this.checkIfMobile()
-    window.addEventListener('resize', this.checkIfMobile)
-    if (Number.isInteger(this.$store.state.basket.edit)) {
-      this.setupEdit()
+  goToPage (page: number, type: string) {
+    let maxPage
+    if (type === 'quotes') {
+      maxPage = Math.ceil(this.cups.quotes.length / this.quotesIPP)
+    } else if (type === 'cups') {
+      maxPage = Math.ceil(this.cups.cups.length / this.cupsIPP)
     } else {
-      this.increaseQuantity()
+      maxPage = Math.ceil(this.cups.backgrounds.length / this.bgsIPP)
     }
 
-    this.setCups(cupsJSON)
-    this.getDogs()
-    this.getCats()
-    this.getMen()
-    this.getWomen()
-    this.$store.dispatch('cupPreferences/getDogs').then(() => {
+    if (page > 0 && page <= maxPage) {
+      this.page = page
+    }
+  }
+
+  mounted () {
+    this.$store.dispatch('cupPreferences/getCupDetails', { id: this.$route.params.alias }).then(() => {
+      this.cupData = this.$store.state.cupPreferences.product
+      this.getDogs()
+      this.getCats()
+      this.getMen()
+      this.getWomen()
+      this.cups = this.cupData.items
+      this.cupObject = {
+        id: this.cupData?.id,
+        title: this.cupData?.title,
+        price: this.cupData?.price,
+        cupId: this.cups?.cups[0]?.id,
+        bgId: this.cups?.backgrounds[0]?.id,
+        quoteId: '',
+        count: 0,
+        total: 0,
+        items: []
+      }
+      this.checkIfMobile()
+      window.addEventListener('resize', this.checkIfMobile)
+      if (Number.isInteger(this.$store.state.basket.edit)) {
+        this.setupEdit()
+      } else {
+        this.increaseQuantity()
+      }
+
       this.setStartObjects()
     })
   }

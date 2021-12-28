@@ -200,9 +200,11 @@
                                                     <i class="fa fa-star"></i> 
                                                     <i class="fa fa-star"></i>
                                                   </div>
-                                                  <a :href="item.name">
+
+                                                  <NuxtLink :to="`kubek/` + item.id" class="nuxt-link-exact-active nuxt-link-active">
                                                      <h6>{{ item.title }}</h6>
-                                                  </a>
+                                                   </NuxtLink>
+
                                                   <h4>{{ item.price }}</h4>
                                                </div>
                                             </div>
