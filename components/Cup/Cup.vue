@@ -195,7 +195,7 @@
                       :class="{'selected': item.id == cupObject.bgId}"
                       @click="setBg(item.id)"
                     >
-                      <img :src="item.imageURL">
+                      <img :src="item.backgroundURL">
                     </div>
                   </div>
 
@@ -207,7 +207,7 @@
                       :class="{'selected': item.id == cupObject.bgId}"
                       @click="setBg(item.id)"
                     >
-                      <img :src="item.imageURL">
+                      <img :src="item.backgroundURL">
                     </div>
                   </div>
                 </div>
@@ -534,7 +534,7 @@
                       :class="{'selected': item.quoteId == cupObject.quoteId}"
                       @click="setQuote(item.quoteId)"
                     >
-                      <img :src="item.imageURL">
+                      <img :src="item.quoteImageUrl">
                     </div>
                   </div>
                   <div v-if="isMobile">
@@ -545,7 +545,7 @@
                       :class="{'selected': item.quoteId == cupObject.quoteId}"
                       @click="setQuote(item.quoteId)"
                     >
-                      <img :src="item.imageURL">
+                      <img :src="item.quoteImageUrl">
                     </div>
                   </div>
                 </div>
@@ -1048,11 +1048,7 @@ export default class Cup extends Vue {
   }
 
   checkIfMobile () {
-    if (window.innerWidth <= 1350) {
-      this.isMobile = true
-    } else {
-      this.isMobile = false
-    }
+    this.isMobile = window.innerWidth <= 1350
   }
 
   goToPage (page: number, type: string) {
