@@ -1108,6 +1108,9 @@ export default class Cup extends Vue {
       })
     }
 
+
+    console.log(this.cupObject.items)
+
     this.cupObject.items.map(function(value: any, key: any) {
       items.push({
         type: value.type,
@@ -1136,15 +1139,8 @@ export default class Cup extends Vue {
     await this.getCats()
     await this.getMen()
     await this.getWomen()
-  }
 
-  setPreview(imgUrl: string) {
-    this.activePreview = imgUrl
-  }
-
-  mounted () {
-    this.getStartData()
-    this.$store.dispatch('cupPreferences/getCupDetails', { id: this.$route.params.alias }).then(() => {
+    await this.$store.dispatch('cupPreferences/getCupDetails', { id: this.$route.params.alias }).then(() => {
       this.cupData = this.$store.state.cupPreferences.product
       this.cups = this.cupData.items
       this.cupObject = {
@@ -1169,6 +1165,14 @@ export default class Cup extends Vue {
 
       this.setStartObjects()
     })
+  }
+
+  setPreview(imgUrl: string) {
+    this.activePreview = imgUrl
+  }
+
+  mounted () {
+    this.getStartData()
   }
 }
 </script>
