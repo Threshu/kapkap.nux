@@ -1009,6 +1009,7 @@ export default class Cup extends Vue {
 
     while (i < count) {
       typeRand = this.randomIntFromInterval(1, 4)
+      typeRand = 1
       switch (typeRand) {
         case 1:
           if (this.men) {
