@@ -18,14 +18,16 @@
                 v-if="preview && preview.data"
                 class="frontCup"
                 :class="{'active': preview.data.frontImageUrl == activePreview}"
-                @click="setPreview(preview.data.frontImageUrl)">
+                @click="setPreview(preview.data.frontImageUrl)"
+              >
                 Przód kubka
               </button>
-              <button 
+              <button
                 v-if="preview && preview.data"
-                @click="setPreview(preview.data.backImageUrl)"
                 :class="{'active': preview.data.backImageUrl == activePreview}"
-                class="backCup">
+                class="backCup"
+                @click="setPreview(preview.data.backImageUrl)"
+              >
                 Tył kubka
               </button>
 
@@ -824,7 +826,7 @@ export default class Cup extends Vue {
 
   pushObject (type: any, edit: any) {
     this.tempObject.type = type
-    if (edit) {
+    if (typeof edit === 'number') {
       this.cupObject.items[edit] = this.tempObject
     } else {
       this.cupObject.items.push(this.tempObject)
@@ -840,12 +842,12 @@ export default class Cup extends Vue {
     this.objectData = []
   }
 
-  editItem (itemIndex: any) {
+  editItem (itemIndex: number) {
     this.tempObject = this.cupObject.items[itemIndex]
     this.showModal = false
     this.showEditModal = true
     this.tempObject = this.cupObject.items[itemIndex]
-    if (itemIndex) {
+    if (typeof itemIndex === 'number') {
       this.tempObject.edit = itemIndex
     }
 
@@ -873,10 +875,10 @@ export default class Cup extends Vue {
     if (confirmRemove) {
       this.cupObject.items.splice(itemId, 1)
       this.removeItemId = null
+      this.productPreview()
     } else {
       this.removeItemId = itemId
     }
-    this.productPreview()
   }
 
   resetTempObject () {
@@ -893,7 +895,6 @@ export default class Cup extends Vue {
   }
 
   newCupObject (data: Object, type: String) {
-    console.log('aaaa', data)
     this.objectData = data
     this.showModal = false
     this.objectData.type = type
@@ -907,10 +908,12 @@ export default class Cup extends Vue {
 
   topItem (index: number) {
     this.moveArrayItemToNewIndex(this.cupObject.items, index, index - 1)
+    this.productPreview()
   }
 
   downItem (index: number) {
     this.moveArrayItemToNewIndex(this.cupObject.items, index, index + 1)
+    this.productPreview()
   }
 
   openCupItems (id: number) {
@@ -1009,7 +1012,6 @@ export default class Cup extends Vue {
 
     while (i < count) {
       typeRand = this.randomIntFromInterval(1, 4)
-      typeRand = 1
       switch (typeRand) {
         case 1:
           if (this.men) {
@@ -1091,8 +1093,8 @@ export default class Cup extends Vue {
   }
 
   async productPreview () {
-    let items = []
-    items.push({
+    const itemsTemp = []
+    itemsTemp.push({
       type: 'background',
       data: {
         id: this.cupObject.bgId
@@ -1100,34 +1102,31 @@ export default class Cup extends Vue {
     })
 
     if (this.cupObject.quoteId) {
-      items.push({
+      itemsTemp.push({
         type: 'quote',
         data: {
           id: this.cupObject.quoteId
         }
       })
     }
-
-
-    console.log(this.cupObject.items)
-
-    this.cupObject.items.map(function(value: any, key: any) {
-      items.push({
+    this.cupObject.items.forEach((value: any) => {
+      itemsTemp.push({
         type: value.type,
         data: {
           id: value.id,
           variantId: value.variantId,
           bodyId: value.bodyId,
           hairstyleId: value.hairstyleId,
+          name: value.name
         }
       })
-    });
+    })
 
     this.preview = await this.$store.dispatch('preview/getProductPreview', {
       product: {
         id: this.cupObject.id,
         cupId: this.cupObject.cupId,
-        items: items
+        items: itemsTemp
       }
     })
 
@@ -1154,7 +1153,7 @@ export default class Cup extends Vue {
         total: 0,
         items: []
       }
-      
+
       this.checkIfMobile()
       window.addEventListener('resize', this.checkIfMobile)
       if (Number.isInteger(this.$store.state.basket.edit)) {
@@ -1167,7 +1166,7 @@ export default class Cup extends Vue {
     })
   }
 
-  setPreview(imgUrl: string) {
+  setPreview (imgUrl: string) {
     this.activePreview = imgUrl
   }
 
