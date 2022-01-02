@@ -14,26 +14,34 @@
               {{ cupData.title }}
             </h2>
             <div class="productViewBox">
-              <button class="frontCup active">
+              <button
+                v-if="preview && preview.data"
+                class="frontCup"
+                :class="{'active': preview.data.frontImageUrl == activePreview}"
+                @click="setPreview(preview.data.frontImageUrl)">
                 Przód kubka
               </button>
-              <button class="backCup">
+              <button 
+                v-if="preview && preview.data"
+                @click="setPreview(preview.data.backImageUrl)"
+                :class="{'active': preview.data.backImageUrl == activePreview}"
+                class="backCup">
                 Tył kubka
               </button>
 
               <div class="productView">
-                <div class="productPreview">
+                <div v-if="preview && preview.data" class="productPreview">
                   <image-zoom
                     class="desktop"
-                    regular="https://vifus.webd.pl/kubek.png"
-                    zoom="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
+                    :regular="activePreview"
+                    :zoom="activePreview"
                     alt="Podgląd wygenerowanego obrazu kubka"
                     hover-message="Najedź myszką, aby powiększyć obraz"
                   />
 
                   <img
                     class="mobile"
-                    src="https://kapkap.eu/assets/images/main-page/top-slider/05838_220153_front_clipped_rev_1.png"
+                    :src="activePreview"
                   >
                 </div>
 
@@ -192,8 +200,8 @@
                       v-for="(item, index) in cups.backgrounds.slice(page*bgsIPP-bgsIPP, page*bgsIPP)"
                       :key="index"
                       class="bgItem"
-                      :class="{'selected': item.id == cupObject.bgId}"
-                      @click="setBg(item.id)"
+                      :class="{'selected': item.backgroundId == cupObject.bgId}"
+                      @click="setBg(item.backgroundId)"
                     >
                       <img :src="item.backgroundURL">
                     </div>
@@ -204,8 +212,8 @@
                       v-for="(item, index) in cups.backgrounds"
                       :key="index"
                       class="bgItem"
-                      :class="{'selected': item.id == cupObject.bgId}"
-                      @click="setBg(item.id)"
+                      :class="{'selected': item.backgroundId == cupObject.bgId}"
+                      @click="setBg(item.backgroundId)"
                     >
                       <img :src="item.backgroundURL">
                     </div>
@@ -357,7 +365,7 @@
                           v-for="(item, index) in objectData.bodies"
                           :key="index"
                           class="objItem"
-                          :class="[item.bodyId == tempObject.figureId ? 'selected' : '']"
+                          :class="[item.bodyId == tempObject.bodyId ? 'selected' : '']"
                           @click="setFigure(item.bodyId, item.bodyImageUrl)"
                         >
                           <img
@@ -401,7 +409,7 @@
                           </div>
                         </div>
                       </div>
-                      <div v-if="objectData.type==='dogs' || objectData.type==='cats'" class="objectsBox">
+                      <div v-if="objectData.type==='dog' || objectData.type==='cat'" class="objectsBox">
                         <div
                           v-for="(dogs, breed) in objectData"
                           :key="breed"
@@ -412,7 +420,7 @@
                             :key="index"
                             class="objItem"
                             :class="item.variantId == tempObject.variantId ? 'selected' : ''"
-                            @click="setDog(item.variantId, item.imageUrl)"
+                            @click="setPet(item.variantId, item.id, item.imageUrl)"
                           >
                             <img
                               v-if="item.imageUrl"
@@ -443,19 +451,19 @@
                     </h3>
 
                     <div class="modalContent">
-                      <div class="objItem" @click="newCupObject(women, 'women')">
+                      <div class="objItem" @click="newCupObject(women, 'woman')">
                         <img src="/images/cup_page/sample_woman.png">
                         <span class="name">Kobietę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(men, 'men')">
+                      <div class="objItem" @click="newCupObject(men, 'man')">
                         <img src="/images/cup_page/sample_man.png">
                         <span class="name">Mężczyznę</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(dogs, 'dogs')">
+                      <div class="objItem" @click="newCupObject(dogs, 'dog')">
                         <img src="/images/cup_page/sample_dog.png">
                         <span class="name">Psa</span>
                       </div>
-                      <div class="objItem" @click="newCupObject(cats, 'cats')">
+                      <div class="objItem" @click="newCupObject(cats, 'cat')">
                         <img src="/images/cup_page/sample_cat.png">
                         <span class="name">Kota</span>
                       </div>
@@ -707,6 +715,8 @@ export default class Cup extends Vue {
 
   cups: any = []
   cupData: any = {}
+  preview: any = {}
+  activePreview: any = ''
   showModal = false
   confMenu = 1
   showConf = true
@@ -725,7 +735,7 @@ export default class Cup extends Vue {
   tempObject: any = {
     type: '',
     edit: '',
-    figureId: '',
+    bodyId: '',
     variantId: '',
     bodyImageUrl: '',
     hairColor: 'black',
@@ -780,26 +790,30 @@ export default class Cup extends Vue {
 
   setCup (id: string) {
     this.cupObject.cupId = id
+    this.productPreview()
   }
 
   setBg (id: string) {
     this.cupObject.bgId = id
+    this.productPreview()
   }
 
   setQuote (id: string) {
     this.cupObject.quoteId = id
+    this.productPreview()
   }
 
   setHairColor (color: string) {
     this.tempObject.hairColor = color
   }
 
-  setFigure (figureId: string, bodyImageUrl: string) {
-    this.tempObject.figureId = figureId
+  setFigure (bodyId: string, bodyImageUrl: string) {
+    this.tempObject.bodyId = bodyId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
 
-  setDog (variantId: any, bodyImageUrl: any) {
+  setPet (variantId: any, id: any, bodyImageUrl: any) {
+    this.tempObject.id = id
     this.tempObject.variantId = variantId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
@@ -815,8 +829,9 @@ export default class Cup extends Vue {
     } else {
       this.cupObject.items.push(this.tempObject)
     }
-    this.showEditModal = false
+    this.productPreview()
     this.resetTempObject()
+    this.showEditModal = false
   }
 
   editCancel () {
@@ -835,19 +850,19 @@ export default class Cup extends Vue {
     }
 
     switch (this.tempObject.type) {
-      case 'cats':
+      case 'cat':
         this.objectData = this.cats
         this.objectData.type = this.tempObject.type
         break
-      case 'dogs':
+      case 'dog':
         this.objectData = this.dogs
         this.objectData.type = this.tempObject.type
         break
-      case 'women':
+      case 'woman':
         this.objectData = this.women
         this.objectData.type = this.tempObject.type
         break
-      case 'men':
+      case 'man':
         this.objectData = this.men
         this.objectData.type = this.tempObject.type
         break
@@ -861,6 +876,7 @@ export default class Cup extends Vue {
     } else {
       this.removeItemId = itemId
     }
+    this.productPreview()
   }
 
   resetTempObject () {
@@ -868,7 +884,7 @@ export default class Cup extends Vue {
       name: '',
       type: '',
       edit: '',
-      figureId: '',
+      bodyId: '',
       variantId: '',
       bodyImageUrl: '',
       hairColor: 'black',
@@ -877,6 +893,7 @@ export default class Cup extends Vue {
   }
 
   newCupObject (data: Object, type: String) {
+    console.log('aaaa', data)
     this.objectData = data
     this.showModal = false
     this.objectData.type = type
@@ -937,7 +954,7 @@ export default class Cup extends Vue {
     this.cupObject = {
       id: this.cupData.id,
       cupId: this.cups.cups[0].id,
-      bgId: this.cups.backgrounds[0].id,
+      bgId: this.cups.backgrounds[0].backgroundId,
       quoteId: '',
       items: []
     }
@@ -986,7 +1003,7 @@ export default class Cup extends Vue {
     return result
   }
 
-  setStartObjects () {
+  async setStartObjects () {
     const count = this.randomIntFromInterval(2, 4)
     let i = 0; let randBody; let randHair; let randProp; let typeRand
 
@@ -998,8 +1015,8 @@ export default class Cup extends Vue {
             randBody = this.randomIntFromInterval(0, this.men.bodies.length - 1)
             randHair = this.randomIntFromInterval(0, this.men.hairstyles.black.all.length - 1)
             this.cupObject.items.push({
-              type: 'men',
-              figureId: this.men.bodies[randBody].bodyId,
+              type: 'man',
+              bodyId: this.men.bodies[randBody].bodyId,
               bodyImageUrl: this.men.bodies[randBody].bodyImageUrl,
               hairColor: 'black',
               hairstyleId: this.men.hairstyles.black.all[randHair].hairstyleId
@@ -1011,8 +1028,8 @@ export default class Cup extends Vue {
             randBody = this.randomIntFromInterval(0, this.women.bodies.length - 1)
             randHair = this.randomIntFromInterval(0, this.women.hairstyles.black.bun.length - 1)
             this.cupObject.items.push({
-              type: 'women',
-              figureId: this.women.bodies[randBody].bodyId,
+              type: 'woman',
+              bodyId: this.women.bodies[randBody].bodyId,
               bodyImageUrl: this.women.bodies[randBody].bodyImageUrl,
               hairColor: 'black',
               hairstyleId: this.women.hairstyles.black.bun[randHair].hairstyleId
@@ -1020,31 +1037,37 @@ export default class Cup extends Vue {
           }
           break
         case 3:
-          randProp = this.pickRandomProperty(this.dogs)
-          if (randProp) {
-            this.cupObject.items.push({
-              type: 'dogs',
-              figureId: this.dogs[randProp][0].id,
-              variantId: this.dogs[randProp][0].variantId,
-              bodyImageUrl: this.dogs[randProp][0].imageUrl
-            })
-          }
+          await this.$store.dispatch('cupPreferences/getDogs').then(() => {
+            randProp = this.pickRandomProperty(this.dogs)
+            if (randProp) {
+              this.cupObject.items.push({
+                type: 'dog',
+                id: this.dogs[randProp][0].id,
+                variantId: this.dogs[randProp][0].variantId,
+                bodyImageUrl: this.dogs[randProp][0].imageUrl
+              })
+            }
+          })
           break
         case 4:
-          randProp = this.pickRandomProperty(this.cats)
-          if (randProp) {
-            this.cupObject.items.push({
-              type: 'cats',
-              figureId: this.cats[randProp][0].id,
-              variantId: this.cats[randProp][0].variantId,
-              bodyImageUrl: this.cats[randProp][0].imageUrl
-            })
-          }
+          await this.$store.dispatch('cupPreferences/getCats').then(() => {
+            randProp = this.pickRandomProperty(this.cats)
+            if (randProp) {
+              this.cupObject.items.push({
+                type: 'cat',
+                id: this.cats[randProp][0].id,
+                variantId: this.cats[randProp][0].variantId,
+                bodyImageUrl: this.cats[randProp][0].imageUrl
+              })
+            }
+          })
           break
       }
 
       i++
     }
+
+    this.productPreview()
   }
 
   checkIfMobile () {
@@ -1066,25 +1089,75 @@ export default class Cup extends Vue {
     }
   }
 
+  async productPreview () {
+    let items = []
+    items.push({
+      type: 'background',
+      data: {
+        id: this.cupObject.bgId
+      }
+    })
+
+    if (this.cupObject.quoteId) {
+      items.push({
+        type: 'quote',
+        data: {
+          id: this.cupObject.quoteId
+        }
+      })
+    }
+
+    this.cupObject.items.map(function(value: any, key: any) {
+      items.push({
+        type: value.type,
+        data: {
+          id: value.id,
+          variantId: value.variantId,
+          bodyId: value.bodyId,
+          hairstyleId: value.hairstyleId,
+        }
+      })
+    });
+
+    this.preview = await this.$store.dispatch('preview/getProductPreview', {
+      product: {
+        id: this.cupObject.id,
+        cupId: this.cupObject.cupId,
+        items: items
+      }
+    })
+
+    this.setPreview(this.preview.data.frontImageUrl)
+  }
+
+  async getStartData () {
+    await this.getDogs()
+    await this.getCats()
+    await this.getMen()
+    await this.getWomen()
+  }
+
+  setPreview(imgUrl: string) {
+    this.activePreview = imgUrl
+  }
+
   mounted () {
+    this.getStartData()
     this.$store.dispatch('cupPreferences/getCupDetails', { id: this.$route.params.alias }).then(() => {
       this.cupData = this.$store.state.cupPreferences.product
-      this.getDogs()
-      this.getCats()
-      this.getMen()
-      this.getWomen()
       this.cups = this.cupData.items
       this.cupObject = {
         id: this.cupData?.id,
         title: this.cupData?.title,
         price: this.cupData?.price,
+        bgId: this.cups?.backgrounds[0]?.backgroundId,
         cupId: this.cups?.cups[0]?.id,
-        bgId: this.cups?.backgrounds[0]?.id,
         quoteId: '',
         count: 0,
         total: 0,
         items: []
       }
+      
       this.checkIfMobile()
       window.addEventListener('resize', this.checkIfMobile)
       if (Number.isInteger(this.$store.state.basket.edit)) {

@@ -1,6 +1,7 @@
 import { $axios } from '~/utils/api'
 
-export const getProductPreview = async (apiData, previewId) => {
+export const getProductPreview = async ({ commit }, apiData, previewId) => {
+  console.log('apiData', apiData)
   return await $axios.post('/preview', apiData)
 }
 
