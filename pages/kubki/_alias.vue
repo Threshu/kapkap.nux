@@ -23,7 +23,7 @@
                                    <div class="collection-collapse-block-content">
                                       <div class="collection-brand-filter">
                                          <ul class="category-list">
-                                            <li v-for="(item, index) in cat.categories" :key="index">
+                                            <li v-if="cat && cat.categories" v-for="(item, index) in cat.categories" :key="index">
                                                 <NuxtLink :to="item.path" class="nuxt-link-exact-active nuxt-link-active">
                                                   {{item.title}}
                                                 </NuxtLink>
@@ -228,7 +228,6 @@ import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorato
 import { useBrowserLocation } from '@vueuse/core'
 import { Jsonld } from 'nuxt-jsonld'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
-import catJSON from '~/data/categories.json'
 
 @Jsonld
 @Component({
@@ -238,8 +237,7 @@ import catJSON from '~/data/categories.json'
 export default class Cups extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('categories/categories') cat!: any
-  @Action('categories/getCategories') getCategories!: any
-  @Mutation('categories/setCategories') setCategories!: any
+  @Action('categories/getCategories') getCats!: any
   products: any = []
   alias: any = []
 
@@ -248,21 +246,26 @@ export default class Cups extends Vue {
     return { alias }
   }
 
-  created () {
-    this.setCategories(catJSON);
-    if (this.alias) {
-      const selectedCat = this.cat.categories.filter((item1: any) => {
-        return item1.path.includes(this.alias)
-      })
+  async getCategories() {
+    await this.$store.dispatch('categories/getCategories').then(() => {
+      if (this.alias) {
+        const selectedCat = this.cat.categories.filter((item1: any) => {
+          return item1.path.includes(this.alias)
+        })
 
-      this.products = this.cat.products.filter((item: any) => {
-        if (item.categories) {
-          return item.categories.includes(selectedCat[0].id)
-        }
-      })
-    } else {
-      this.products = this.cat.products
-    }
+        this.products = this.cat.products.filter((item: any) => {
+          if (item.categories) {
+            return item.categories.includes(selectedCat[0].id)
+          }
+        })
+      } else {
+        this.products = this.cat.products
+      }
+    })
+  }
+
+  mounted () {
+    this.getCategories()
   }
 
   head () {
