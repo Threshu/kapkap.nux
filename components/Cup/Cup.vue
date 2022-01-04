@@ -933,8 +933,9 @@ export default class Cup extends Vue {
     // this.setBasket(tempStorage)
     
     let basketObj = this.prepareProductObject()
-    basketObj.token = ''
+    basketObj.previewId = this.preview.data.previewId
     basketObj.number = this.cupObject.count
+    basketObj.token = ''
 
     var basket = await this.$store.dispatch('basket/setBasket', basketObj)
     console.log('bask', basket)
