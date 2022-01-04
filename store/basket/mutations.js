@@ -8,10 +8,8 @@ export default {
     localStorage.cup = JSON.stringify(tempStorage)
     state.basket = tempStorage
   },
-
   setBasket (state, basket) {
     state.basket = basket
-    localStorage.cup = JSON.stringify(basket)
   },
   setBasketItemCount (state, basket) {
     var tempStorage = []
@@ -37,3 +35,4 @@ export default {
     })
   }
 }
+

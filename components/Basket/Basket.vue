@@ -238,6 +238,8 @@ export default class Basket extends Vue {
   @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
   @Mutation('basket/editBasket') editBasket!: any
   @Mutation('basket/removeItem') removeItem!: any
+  @Getter('basket/basket') basket!: any
+
   total: any = 0
   cartItems: any = []
 
@@ -288,11 +290,16 @@ export default class Basket extends Vue {
     this.$router.push('/kubek/xxx')
   }
 
-  mounted () {
-    if (localStorage.cup) {
-      this.setCartItems(JSON.parse(localStorage.cup))
+  async getBasket () {
+    if (localStorage.basketToken) {
+      await this.$store.dispatch('basket/getBasket', { token: localStorage.basketToken }).then(() => {
+        console.log('aaa', this.basket)
+      })
     }
+  }
 
+  mounted () {
+    this.getBasket()
     if (this.isLoaded) {
       this.processCartPreviews()
     } else {
