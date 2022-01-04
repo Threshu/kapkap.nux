@@ -1006,7 +1006,7 @@ export default class Cup extends Vue {
     return result
   }
 
-  async setStartObjects () {
+  setStartObjects () {
     const count = this.randomIntFromInterval(2, 4)
     let i = 0; let randBody; let randHair; let randProp; let typeRand
 
@@ -1040,30 +1040,26 @@ export default class Cup extends Vue {
           }
           break
         case 3:
-          await this.$store.dispatch('cupPreferences/getDogs').then(() => {
-            randProp = this.pickRandomProperty(this.dogs)
-            if (randProp) {
-              this.cupObject.items.push({
-                type: 'dog',
-                id: this.dogs[randProp][0].id,
-                variantId: this.dogs[randProp][0].variantId,
-                bodyImageUrl: this.dogs[randProp][0].imageUrl
-              })
-            }
-          })
+          randProp = this.pickRandomProperty(this.dogs)
+          if (randProp) {
+            this.cupObject.items.push({
+              type: 'dog',
+              id: this.dogs[randProp][0].id,
+              variantId: this.dogs[randProp][0].variantId,
+              bodyImageUrl: this.dogs[randProp][0].imageUrl
+            })
+          }
           break
         case 4:
-          await this.$store.dispatch('cupPreferences/getCats').then(() => {
-            randProp = this.pickRandomProperty(this.cats)
-            if (randProp) {
-              this.cupObject.items.push({
-                type: 'cat',
-                id: this.cats[randProp][0].id,
-                variantId: this.cats[randProp][0].variantId,
-                bodyImageUrl: this.cats[randProp][0].imageUrl
-              })
-            }
-          })
+          randProp = this.pickRandomProperty(this.cats)
+          if (randProp) {
+            this.cupObject.items.push({
+              type: 'cat',
+              id: this.cats[randProp][0].id,
+              variantId: this.cats[randProp][0].variantId,
+              bodyImageUrl: this.cats[randProp][0].imageUrl
+            })
+          }
           break
       }
 
@@ -1134,11 +1130,7 @@ export default class Cup extends Vue {
   }
 
   async getStartData () {
-    await this.getDogs()
-    await this.getCats()
-    await this.getMen()
-    await this.getWomen()
-
+    await Promise.allSettled([this.getDogs(), this.getCats(), this.getMen(), this.getWomen()])
     await this.$store.dispatch('cupPreferences/getCupDetails', { id: this.$route.params.alias }).then(() => {
       this.cupData = this.$store.state.cupPreferences.product
       this.cups = this.cupData.items
