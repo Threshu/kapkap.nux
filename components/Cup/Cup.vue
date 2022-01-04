@@ -924,13 +924,20 @@ export default class Cup extends Vue {
   buyNow () {
   }
 
-  addToCart () {
-    let tempStorage: any = []
-    if (localStorage.cup) {
-      tempStorage = JSON.parse(localStorage.cup)
-    }
-    tempStorage.push(this.cupObject)
-    this.setBasket(tempStorage)
+  async addToCart () {
+    // let tempStorage: any = []
+    // if (localStorage.cup) {
+    //   tempStorage = JSON.parse(localStorage.cup)
+    // }
+    // tempStorage.push(this.cupObject)
+    // this.setBasket(tempStorage)
+    
+    let basketObj = this.prepareProductObject()
+    basketObj.token = ''
+    basketObj.number = this.cupObject.count
+
+    var basket = await this.$store.dispatch('basket/setBasket', basketObj)
+    console.log('bask', basket)
   }
 
   formatPrice (value: number) {
@@ -1088,7 +1095,7 @@ export default class Cup extends Vue {
     }
   }
 
-  async productPreview () {
+  prepareProductObject () {
     const itemsTemp = []
     itemsTemp.push({
       type: 'background',
@@ -1118,14 +1125,18 @@ export default class Cup extends Vue {
       })
     })
 
-    this.preview = await this.$store.dispatch('preview/getProductPreview', {
+    return {
       product: {
         id: this.cupObject.id,
         cupId: this.cupObject.cupId,
         items: itemsTemp
       }
-    })
+    }
 
+  }
+
+  async productPreview () {
+    this.preview = await this.$store.dispatch('preview/getProductPreview',this.prepareProductObject())
     this.setPreview(this.preview.data.frontImageUrl)
   }
 
