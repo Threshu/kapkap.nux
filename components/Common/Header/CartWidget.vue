@@ -10,22 +10,23 @@
       <ul class="shopping-cart">
         <span class="cart-title">KOSZYK</span>
         <template
-          v-for="(item, index) in cartItems"
+          v-for="(item, index) in cartItems.products"
         >
           <CartSmallItem
+            :key="index"
             :index="index"
             :item="item"
           />
         </template>
         <li
-          v-if="itemsNumber > 0"
+          v-if="cartItems.products && cartItems.products.length > 0"
           class="total"
         >
           <div>
             SUMA:
           </div>
           <div>
-            {{ total }} zł
+            {{ cartItems.totalPrice }} zł
           </div>
         </li>
         <li
@@ -47,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Vue } from 'nuxt-property-decorator'
 import CartSmallItem from '~/components/Common/Header/CartSmallItem.vue'
 
 @Component({
@@ -71,22 +72,11 @@ export default class CartWidget extends Vue {
 
   removeCartItem (index: number) {
     this.cartItems.splice(index, 1)
-    this.calculateTotal()
-  }
-
-  calculateTotal () {
-    this.total = 0
-    this.cartItems.forEach((item: any) => {
-      if (item) {
-        this.total = this.total + item.count * item.price
-      }
-    })
-    this.itemsNumber = this.cartItems.length
   }
 
   setCartItems (items: any) {
-    this.cartItems = items
-    this.calculateTotal()
+    this.cartItems = items.basket
+    this.itemsNumber = this.cartItems.products.length
   }
 
   mounted () {

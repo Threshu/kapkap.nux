@@ -4,7 +4,7 @@
       <div class="media-body">
         <h5>{{ item.title }}</h5>
         <div class="details">
-          <span>{{ item.count }} x {{ item.total }} zł</span>
+          <span>{{ item.number }} x {{ item.price }} zł</span>
         </div>
       </div>
     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mutation, Emit, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Mutation, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class CartSmallItem extends Vue {

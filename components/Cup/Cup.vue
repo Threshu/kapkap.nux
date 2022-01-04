@@ -925,20 +925,14 @@ export default class Cup extends Vue {
   }
 
   async addToCart () {
-    // let tempStorage: any = []
-    // if (localStorage.cup) {
-    //   tempStorage = JSON.parse(localStorage.cup)
-    // }
-    // tempStorage.push(this.cupObject)
-    // this.setBasket(tempStorage)
-    let basketObj = {
-      'product': this.prepareProductObject(),
-      'previewId': this.preview.data.previewId,
-      'number': this.cupObject.count,
-      'token': localStorage.basketToken
+    const basketObj = {
+      product: this.prepareProductObject(),
+      previewId: this.preview.data.previewId,
+      number: this.cupObject.count,
+      token: localStorage.basketToken
     }
 
-    var basket = await this.$store.dispatch('basket/setBasket', basketObj)
+    const basket = await this.$store.dispatch('basket/setBasket', basketObj)
     if (basket) {
       localStorage.basketToken = basket.data.token
     }
@@ -1134,11 +1128,12 @@ export default class Cup extends Vue {
       cupId: this.cupObject.cupId,
       items: itemsTemp
     }
-
   }
 
   async productPreview () {
-    this.preview = await this.$store.dispatch('preview/getProductPreview', {'product': this.prepareProductObject()})
+    this.preview = await this.$store.dispatch('preview/getProductPreview', {
+      product: this.prepareProductObject()
+    })
     this.setPreview(this.preview.data.frontImageUrl)
   }
 
