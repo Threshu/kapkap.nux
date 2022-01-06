@@ -32,7 +32,6 @@ export type Hairstyle = {
   hairstyleImageUrl: string
 }
 
-
 export type HairstyleColors = 'black' | 'blond' | 'brown' | 'dark_brown' | 'red' | 'other'
 export type HairstyleStyle = 'all' | 'bun' | 'mid_back' | 'neck' | 'shoulder' | 'tie' | 'upper_back'
 

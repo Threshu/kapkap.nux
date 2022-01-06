@@ -44,6 +44,9 @@ export default class Cup extends Vue {
   @Getter('cupPreferences/men') men!: any
   @Getter('cupPreferences/women') women!: any
   @Getter('basket/editb') edit!: any
+  @Getter('preview/previewId') previewId!: string
+  @Getter('cup/productObject') productObject!: Function
+
   @Mutation('cupPreferences/setProduct') setProduct!: any
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
@@ -127,19 +130,48 @@ export default class Cup extends Vue {
     }]
   }
 
+  async mounted () {
+    await Promise.allSettled([this.getDogs(), this.getCats(), this.getMen(), this.getWomen()])
+    // await this.$store.dispatch('cupPreferences/getCupDetails', { id: this.$route.params.alias }).then(() => {
+    //   this.cupData = this.$store.state.cupPreferences.product
+    //   this.cups = this.cupData.items
+    //   this.cupObject = {
+    //     id: this.cupData?.id,
+    //     title: this.cupData?.title,
+    //     price: this.cupData?.price,
+    //     bgId: this.cups?.backgrounds[0]?.backgroundId,
+    //     cupId: this.cups?.cups[0]?.id,
+    //     quoteId: '',
+    //     count: 0,
+    //     total: 0,
+    //     items: []
+    //   }
+    //
+    //   this.checkIfMobile()
+    //   window.addEventListener('resize', this.checkIfMobile)
+    //   if (Number.isInteger(this.$store.state.basket.edit)) {
+    //     this.setupEdit()
+    //   } else {
+    //     this.increaseQuantity()
+    //   }
+    //
+    //   this.setStartObjects()
+    // })
+  }
+
   setCup (id: string) {
     this.cupObject.cupId = id
-    this.productPreview()
+    // this.productPreview()
   }
 
   setBg (id: string) {
     this.cupObject.bgId = id
-    this.productPreview()
+    // this.productPreview()
   }
 
   setQuote (id: string) {
     this.cupObject.quoteId = id
-    this.productPreview()
+    // this.productPreview()
   }
 
   setHairColor (color: string) {
@@ -168,7 +200,7 @@ export default class Cup extends Vue {
     } else {
       this.cupObject.items.push(this.tempObject)
     }
-    this.productPreview()
+    // this.productPreview()
     this.resetTempObject()
     this.showEditModal = false
   }
@@ -212,7 +244,7 @@ export default class Cup extends Vue {
     if (confirmRemove) {
       this.cupObject.items.splice(itemId, 1)
       this.removeItemId = null
-      this.productPreview()
+      // this.productPreview()
     } else {
       this.removeItemId = itemId
     }
@@ -245,12 +277,12 @@ export default class Cup extends Vue {
 
   topItem (index: number) {
     this.moveArrayItemToNewIndex(this.cupObject.items, index, index - 1)
-    this.productPreview()
+    // this.productPreview()
   }
 
   downItem (index: number) {
     this.moveArrayItemToNewIndex(this.cupObject.items, index, index + 1)
-    this.productPreview()
+    // this.productPreview()
   }
 
   openCupItems (id: number) {
@@ -263,8 +295,8 @@ export default class Cup extends Vue {
 
   async addToCart () {
     const basketObj = {
-      product: this.prepareProductObject(),
-      previewId: this.preview.data.previewId,
+      product: this.productObject(),
+      previewId: this.previewId,
       number: this.cupObject.count,
       token: localStorage.basketToken
     }
@@ -408,7 +440,7 @@ export default class Cup extends Vue {
       i++
     }
 
-    this.productPreview()
+    // this.productPreview()
   }
 
   checkIfMobile () {
@@ -428,76 +460,6 @@ export default class Cup extends Vue {
     if (page > 0 && page <= maxPage) {
       this.page = page
     }
-  }
-
-  prepareProductObject () {
-    const itemsTemp = []
-    itemsTemp.push({
-      type: 'background',
-      data: {
-        id: this.cupObject.bgId
-      }
-    })
-
-    if (this.cupObject.quoteId) {
-      itemsTemp.push({
-        type: 'quote',
-        data: {
-          id: this.cupObject.quoteId
-        }
-      })
-    }
-    this.cupObject.items.forEach((value: any) => {
-      itemsTemp.push({
-        type: value.type,
-        data: {
-          id: value.id,
-          variantId: value.variantId,
-          bodyId: value.bodyId,
-          hairstyleId: value.hairstyleId,
-          name: value.name
-        }
-      })
-    })
-
-    return {
-      id: this.cupObject.id,
-      cupId: this.cupObject.cupId,
-      items: itemsTemp
-    }
-  }
-
-  async getStartData () {
-    await Promise.allSettled([this.getDogs(), this.getCats(), this.getMen(), this.getWomen()])
-    await this.$store.dispatch('cupPreferences/getCupDetails', { id: this.$route.params.alias }).then(() => {
-      this.cupData = this.$store.state.cupPreferences.product
-      this.cups = this.cupData.items
-      this.cupObject = {
-        id: this.cupData?.id,
-        title: this.cupData?.title,
-        price: this.cupData?.price,
-        bgId: this.cups?.backgrounds[0]?.backgroundId,
-        cupId: this.cups?.cups[0]?.id,
-        quoteId: '',
-        count: 0,
-        total: 0,
-        items: []
-      }
-
-      this.checkIfMobile()
-      window.addEventListener('resize', this.checkIfMobile)
-      if (Number.isInteger(this.$store.state.basket.edit)) {
-        this.setupEdit()
-      } else {
-        this.increaseQuantity()
-      }
-
-      this.setStartObjects()
-    })
-  }
-
-  mounted () {
-    this.getStartData()
   }
 }
 </script>

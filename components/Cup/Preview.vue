@@ -1,24 +1,24 @@
 <template>
   <div class="productViewBox">
     <button
-      v-if="preview && preview.data"
+      v-if="frontImage"
       class="frontCup"
-      :class="{'active': preview.data.frontImageUrl == activePreview}"
-      @click="setPreview(preview.data.frontImageUrl)"
+      :class="{'active': frontImage == activePreview}"
+      @click="setPreview(frontImage)"
     >
       Przód kubka
     </button>
     <button
-      v-if="preview && preview.data"
-      :class="{'active': preview.data.backImageUrl == activePreview}"
+      v-if="backImage"
+      :class="{'active': backImage == activePreview}"
       class="backCup"
-      @click="setPreview(preview.data.backImageUrl)"
+      @click="setPreview(backImage)"
     >
       Tył kubka
     </button>
 
     <div class="productView">
-      <div v-if="preview && preview.data" class="productPreview">
+      <div v-if="frontImage || backImage" class="productPreview">
         <image-zoom
           class="desktop"
           :regular="activePreview"
@@ -46,25 +46,21 @@
 </template>
 
 <script  lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
 
 @Component({
   components: {
   }
 })
 export default class Preview extends Vue {
-  preview: any = {}
-  activePreview: any = ''
+  @Getter('preview/frontImage') frontImage!: string
+  @Getter('preview/backImage') backImage!: string
+  @Getter('preview/activePreview') activePreview!: string
 
-  async productPreview () {
-    this.preview = await this.$store.dispatch('preview/getProductPreview', {
-      product: this.prepareProductObject()
-    })
-    this.setPreview(this.preview.data.frontImageUrl)
-  }
+  @Action('preview/getProductPreview') getProductPreview!: Function
 
-  setPreview (imgUrl: string) {
-    this.activePreview = imgUrl
+  mounted () {
+    this.getProductPreview()
   }
 }
 </script>

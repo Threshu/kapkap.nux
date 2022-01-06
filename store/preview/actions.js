@@ -1,7 +1,18 @@
 import { $axios } from '~/utils/api'
 
 export const getProductPreview = async ({ commit }, apiData, previewId) => {
-  return await $axios.post('/preview', apiData)
+  const result = await $axios.post('/preview', apiData)
+  if (result?.data) {
+    commit('preview/setPreviewId', result.data.previewId)
+    commit('preview/setPreviewImages', result.data.frontImageUrl, result.data, backImageUrl)
+  }
+}
+
+export const productPreview = async ({ commit }) => {
+  result = await this.$store.dispatch('preview/getProductPreview', {
+    product: this.productObject()
+  })
+  this.setPreview(this.frontImage)
 }
 
 export const fetchCartPreviews = ({ commit }, cart) => {
