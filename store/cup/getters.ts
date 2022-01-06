@@ -1,4 +1,4 @@
-import { Cup, CupImageItem } from './state'
+import { State, CupImageItem } from './state'
 
 export type ProductObject = {
   id: string,
@@ -7,7 +7,7 @@ export type ProductObject = {
 }
 
 export default {
-  productObject: (state: Cup): ProductObject => {
+  productObject: (state: State): ProductObject => {
     const items: CupImageItem[] = []
     items.push({
       type: 'background',
@@ -29,9 +29,16 @@ export default {
     })
 
     return {
-      id: state.id,
+      id: state.productId,
       cupId: state.cupId,
       items
     }
-  }
+  },
+
+  cups: (state: State) => state.cups,
+  dogs: (state: State) => state.dogs,
+  cats: (state: State) => state.cats,
+  men: (state: State) => state.men,
+  women: (state: State) => state.women,
+  product: (state: State) => state.product
 }

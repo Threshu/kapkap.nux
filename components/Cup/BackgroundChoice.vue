@@ -1,7 +1,5 @@
 <template>
-  <div
-    v-if="confMenu == 2"
-  >
+  <div>
     <h3 class="productConfBoxTitle">
       Wybierz tło
     </h3>
@@ -13,7 +11,7 @@
           :key="index"
           class="bgItem"
           :class="{'selected': item.backgroundId == cupObject.bgId}"
-          @click="setBg(item.backgroundId)"
+          @click="setBackground(item.backgroundId)"
         >
           <img :src="item.backgroundURL">
         </div>
@@ -25,7 +23,7 @@
           :key="index"
           class="bgItem"
           :class="{'selected': item.backgroundId == cupObject.bgId}"
-          @click="setBg(item.backgroundId)"
+          @click="setBackground(item.backgroundId)"
         >
           <img :src="item.backgroundURL">
         </div>
@@ -72,63 +70,35 @@
       </div>
     </div>
 
-    <div class="summary">
-      <div class="qty-box">
-        <span class="qty-label">Sztuk:</span>
-        <div class="qty-flex">
-          <button class="qty-minus" @click="decreaseQuantity">
-            -
-          </button>
-          <input
-            v-model="cupObject.count"
-            type="number"
-            class="qty-input"
-            @keyup="recalculateTotal"
-          >
-          <button class="qty-plus" @click="increaseQuantity">
-            +
-          </button>
-        </div>
-      </div>
-
-      <span class="price-sep">x</span>
-
-      <div class="price-box">
-        <span class="price-label">Cena za sztukę:</span>
-        <div class="price-val">
-          {{ cupData.price }} zł
-        </div>
-      </div>
-
-      <span class="sum-sep">=</span>
-
-      <div class="sum-box">
-        <span class="sum-label">Suma:</span>
-        <div class="sum-val">
-          {{ cupObject.total }} zł
-        </div>
-      </div>
-    </div>
-
-    <div class="confButtons">
-      <button class="back" @click="openCupItems(1)">
-        Wstecz
-      </button>
-      <button class="next" @click="openCupItems(3)">
-        Dalej
-      </button>
-    </div>
+    <Summary />
   </div>
 </template>
 
 <script  lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Mutation, Vue } from 'nuxt-property-decorator'
+import Summary from '~/components/Cup/Summary.vue'
 
 @Component({
   components: {
+    Summary
   }
 })
 export default class BackgroundChoice extends Vue {
+  @Mutation('cup/setBackground') setBackground!: Function
 
+  goToPage (page: number, type: string) {
+    let maxPage
+    if (type === 'quotes') {
+      maxPage = Math.ceil(this.cups.quotes.length / this.quotesIPP)
+    } else if (type === 'cups') {
+      maxPage = Math.ceil(this.cups.cups.length / this.cupsIPP)
+    } else {
+      maxPage = Math.ceil(this.cups.backgrounds.length / this.bgsIPP)
+    }
+
+    if (page > 0 && page <= maxPage) {
+      this.page = page
+    }
+  }
 }
 </script>

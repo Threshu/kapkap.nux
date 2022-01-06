@@ -1,5 +1,5 @@
 <template>
-  <div v-if="confMenu == 1">
+  <div>
     <h3 class="productConfBoxTitle">
       Wybierz kubek
     </h3>
@@ -124,13 +124,30 @@
 </template>
 
 <script  lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Mutation, Vue } from 'nuxt-property-decorator'
+import Summary from '~/components/Cup/Summary.vue'
 
 @Component({
   components: {
+    Summary
   }
 })
 export default class CupChoice extends Vue {
+  @Mutation('cup/setCup') setCup!: Function
 
+  goToPage (page: number, type: string) {
+    let maxPage
+    if (type === 'quotes') {
+      maxPage = Math.ceil(this.cups.quotes.length / this.quotesIPP)
+    } else if (type === 'cups') {
+      maxPage = Math.ceil(this.cups.cups.length / this.cupsIPP)
+    } else {
+      maxPage = Math.ceil(this.cups.backgrounds.length / this.bgsIPP)
+    }
+
+    if (page > 0 && page <= maxPage) {
+      this.page = page
+    }
+  }
 }
 </script>

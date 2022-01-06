@@ -38,29 +38,36 @@ import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
   }
 })
 export default class Cup extends Vue {
+  // old
   @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('cupPreferences/dogs') dogs!: any
-  @Getter('cupPreferences/cats') cats!: any
-  @Getter('cupPreferences/men') men!: any
-  @Getter('cupPreferences/women') women!: any
+  @Getter('cup/dogs') dogs!: any
+  @Getter('cup/cats') cats!: any
+  @Getter('cup/men') men!: any
+  @Getter('cup/women') women!: any
   @Getter('basket/editb') edit!: any
+
+  // new
   @Getter('preview/previewId') previewId!: string
   @Getter('cup/productObject') productObject!: Function
 
-  @Mutation('cupPreferences/setProduct') setProduct!: any
+  // new
+  @Mutation('cup/setProduct') setProduct!: any
   @Mutation('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
 
-  @Action('cupPreferences/getDogs') getDogs!: any
-  @Action('cupPreferences/getCats') getCats!: any
-  @Action('cupPreferences/getMen') getMen!: any
-  @Action('cupPreferences/getWomen') getWomen!: any
-  @Action('cupPreferences/getCupDetails') getCupDetails!: any
+  // old
+  @Action('cup/getDogs') getDogs!: any
+  @Action('cup/getCats') getCats!: any
+  @Action('cup/getMen') getMen!: any
+  @Action('cup/getWomen') getWomen!: any
+  @Action('cup/getCupDetails') getCupDetails!: any
+
+  // new
+  @Action('cup/getProduct') getProduct!: Function
 
   cups: any = []
   cupData: any = {}
   showModal = false
-  confMenu = 1
   showConf = true
   showEditModal = false
   removeBox = false
@@ -131,66 +138,24 @@ export default class Cup extends Vue {
   }
 
   async mounted () {
-    await Promise.allSettled([this.getDogs(), this.getCats(), this.getMen(), this.getWomen()])
-    // await this.$store.dispatch('cupPreferences/getCupDetails', { id: this.$route.params.alias }).then(() => {
-    //   this.cupData = this.$store.state.cupPreferences.product
-    //   this.cups = this.cupData.items
-    //   this.cupObject = {
-    //     id: this.cupData?.id,
-    //     title: this.cupData?.title,
-    //     price: this.cupData?.price,
-    //     bgId: this.cups?.backgrounds[0]?.backgroundId,
-    //     cupId: this.cups?.cups[0]?.id,
-    //     quoteId: '',
-    //     count: 0,
-    //     total: 0,
-    //     items: []
-    //   }
-    //
-    //   this.checkIfMobile()
-    //   window.addEventListener('resize', this.checkIfMobile)
-    //   if (Number.isInteger(this.$store.state.basket.edit)) {
-    //     this.setupEdit()
-    //   } else {
-    //     this.increaseQuantity()
-    //   }
-    //
-    //   this.setStartObjects()
-    // })
-  }
+    await Promise.allSettled([
+      this.getDogs(),
+      this.getCats(),
+      this.getMen(),
+      this.getWomen(),
+      this.getProduct({ id: this.$route.params.alias })
+    ])
 
-  setCup (id: string) {
-    this.cupObject.cupId = id
-    // this.productPreview()
-  }
+    this.checkIfMobile()
+    window.addEventListener('resize', this.checkIfMobile)
 
-  setBg (id: string) {
-    this.cupObject.bgId = id
-    // this.productPreview()
-  }
+    if (Number.isInteger(this.$store.state.basket.edit)) {
+      this.setupEdit()
+    } else {
+      this.increaseQuantity()
+    }
 
-  setQuote (id: string) {
-    this.cupObject.quoteId = id
-    // this.productPreview()
-  }
-
-  setHairColor (color: string) {
-    this.tempObject.hairColor = color
-  }
-
-  setFigure (bodyId: string, bodyImageUrl: string) {
-    this.tempObject.bodyId = bodyId
-    this.tempObject.bodyImageUrl = bodyImageUrl
-  }
-
-  setPet (variantId: any, id: any, bodyImageUrl: any) {
-    this.tempObject.id = id
-    this.tempObject.variantId = variantId
-    this.tempObject.bodyImageUrl = bodyImageUrl
-  }
-
-  setHairStyle (hairstyleId: string) {
-    this.tempObject.hairstyleId = hairstyleId
+    this.setStartObjects()
   }
 
   pushObject (type: any, edit: any) {
@@ -240,16 +205,6 @@ export default class Cup extends Vue {
     }
   }
 
-  removeItem (itemId: any, confirmRemove: Boolean = false) {
-    if (confirmRemove) {
-      this.cupObject.items.splice(itemId, 1)
-      this.removeItemId = null
-      // this.productPreview()
-    } else {
-      this.removeItemId = itemId
-    }
-  }
-
   resetTempObject () {
     this.tempObject = {
       name: '',
@@ -270,62 +225,6 @@ export default class Cup extends Vue {
     this.showEditModal = true
   }
 
-  moveArrayItemToNewIndex (arr: any, oldIndex: number, newIndex: number) {
-    arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0])
-    return arr
-  }
-
-  topItem (index: number) {
-    this.moveArrayItemToNewIndex(this.cupObject.items, index, index - 1)
-    // this.productPreview()
-  }
-
-  downItem (index: number) {
-    this.moveArrayItemToNewIndex(this.cupObject.items, index, index + 1)
-    // this.productPreview()
-  }
-
-  openCupItems (id: number) {
-    this.confMenu = id
-    this.page = 1
-  }
-
-  buyNow () {
-  }
-
-  async addToCart () {
-    const basketObj = {
-      product: this.productObject(),
-      previewId: this.previewId,
-      number: this.cupObject.count,
-      token: localStorage.basketToken
-    }
-
-    const basket = await this.$store.dispatch('basket/setBasket', basketObj)
-    if (basket) {
-      localStorage.basketToken = basket.data.token
-    }
-  }
-
-  formatPrice (value: number) {
-    const val = (value / 1).toFixed(2).replace('.', ',')
-    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-  }
-
-  recalculateTotal () {
-    this.cupObject.total = this.formatPrice(this.cupData.price * this.cupObject.count)
-  }
-
-  increaseQuantity () {
-    this.cupObject.count++
-    this.recalculateTotal()
-  }
-
-  decreaseQuantity () {
-    this.cupObject.count--
-    this.recalculateTotal()
-  }
-
   reset () {
     this.confMenu = 1
     this.cupObject = {
@@ -344,24 +243,6 @@ export default class Cup extends Vue {
       this.editMode = true
       this.cupObject = editObj[this.$store.state.basket.edit]
     }
-  }
-
-  saveCartItem () {
-    let tempStorage: any = []
-    if (localStorage.cup) {
-      tempStorage = JSON.parse(localStorage.cup)
-    }
-    tempStorage[this.$store.state.basket.edit] = this.cupObject
-    this.setBasket(tempStorage)
-    this.reset()
-    this.editBasket(null)
-    this.$router.push('/koszyk')
-  }
-
-  backToCart () {
-    this.editBasket(null)
-    this.reset()
-    this.$router.push('/koszyk')
   }
 
   randomIntFromInterval (min: number, max: number) {
@@ -446,23 +327,5 @@ export default class Cup extends Vue {
   checkIfMobile () {
     this.isMobile = window.innerWidth <= 1350
   }
-
-  goToPage (page: number, type: string) {
-    let maxPage
-    if (type === 'quotes') {
-      maxPage = Math.ceil(this.cups.quotes.length / this.quotesIPP)
-    } else if (type === 'cups') {
-      maxPage = Math.ceil(this.cups.cups.length / this.cupsIPP)
-    } else {
-      maxPage = Math.ceil(this.cups.backgrounds.length / this.bgsIPP)
-    }
-
-    if (page > 0 && page <= maxPage) {
-      this.page = page
-    }
-  }
 }
 </script>
-
-<style lang="sass">
-</style>

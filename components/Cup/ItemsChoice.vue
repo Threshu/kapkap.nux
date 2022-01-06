@@ -1,7 +1,5 @@
 <template>
-  <div
-    v-if="confMenu == 3"
-  >
+  <div>
     <h3 class="productConfBoxTitle">
       Dodaj postać lub zwierzę
     </h3>
@@ -169,60 +167,17 @@
       </div>
     </div>
 
-    <div class="summary">
-      <div class="qty-box">
-        <span class="qty-label">Sztuk:</span>
-        <div class="qty-flex">
-          <button class="qty-minus" @click="decreaseQuantity">
-            -
-          </button>
-          <input
-            v-model="cupObject.count"
-            type="number"
-            class="qty-input"
-            @keyup="recalculateTotal"
-          >
-          <button class="qty-plus" @click="increaseQuantity">
-            +
-          </button>
-        </div>
-      </div>
-
-      <span class="price-sep">x</span>
-
-      <div class="price-box">
-        <span class="price-label">Cena za sztukę:</span>
-        <div class="price-val">
-          {{ cupData.price }} zł
-        </div>
-      </div>
-
-      <span class="sum-sep">=</span>
-
-      <div class="sum-box">
-        <span class="sum-label">Suma:</span>
-        <div class="sum-val">
-          {{ cupObject.total }} zł
-        </div>
-      </div>
-    </div>
-
-    <div class="confButtons">
-      <button class="back" @click="openCupItems(2)">
-        Wstecz
-      </button>
-      <button class="next" @click="openCupItems(4)">
-        Dalej
-      </button>
-    </div>
+    <Summary />
   </div>
 </template>
 
 <script  lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import Summary from '~/components/Cup/Summary.vue'
 
 @Component({
   components: {
+    Summary
   }
 })
 export default class ItemsChoice extends Vue {

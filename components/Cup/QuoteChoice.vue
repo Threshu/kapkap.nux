@@ -1,7 +1,5 @@
 <template>
-  <div
-    v-if="confMenu == 4"
-  >
+  <div>
     <h3 class="productConfBoxTitle">
       Dodaj cytat
     </h3>
@@ -72,76 +70,35 @@
       </div>
     </div>
 
-    <div class="summary">
-      <div class="qty-box">
-        <span class="qty-label">Sztuk:</span>
-        <div class="qty-flex">
-          <button class="qty-minus" @click="decreaseQuantity">
-            -
-          </button>
-          <input
-            v-model="cupObject.count"
-            type="number"
-            class="qty-input"
-            @keyup="recalculateTotal"
-          >
-          <button class="qty-plus" @click="increaseQuantity">
-            +
-          </button>
-        </div>
-      </div>
-
-      <span class="price-sep">x</span>
-
-      <div class="price-box">
-        <span class="price-label">Cena za sztukę:</span>
-        <div class="price-val">
-          {{ cupData.price }} zł
-        </div>
-      </div>
-
-      <span class="sum-sep">=</span>
-
-      <div class="sum-box">
-        <span class="sum-label">Suma:</span>
-        <div class="sum-val">
-          {{ cupObject.total }} zł
-        </div>
-      </div>
-    </div>
-
-    <div class="confButtons">
-      <button
-        v-if="!editMode"
-        class="next"
-        @click="buyNow()"
-      >
-        Kup Teraz
-      </button>
-      <button
-        v-if="!editMode"
-        class="next fl"
-        @click="addToCart()"
-      >
-        Dodaj do koszyka
-      </button>
-      <button
-        v-if="editMode"
-        class="next"
-        @click="saveCartItem()"
-      >
-        Zapisz
-      </button>
-      <button
-        v-if="editMode"
-        class="next fl"
-        @click="backToCart()"
-      >
-        Wróć
-      </button>
-      <button class="reset" @click="reset()">
-        Resetuj i zacznij od nowa
-      </button>
-    </div>
+    <Summary />
   </div>
 </template>
+
+<script  lang="ts">
+import { Component, Mutation, Vue } from 'nuxt-property-decorator'
+import Summary from '~/components/Cup/Summary.vue'
+
+@Component({
+  components: {
+    Summary
+  }
+})
+export default class QuoteChoice extends Vue {
+  @Mutation('cup/setQuote') setQuote!: Function
+
+  goToPage (page: number, type: string) {
+    let maxPage
+    if (type === 'quotes') {
+      maxPage = Math.ceil(this.cups.quotes.length / this.quotesIPP)
+    } else if (type === 'cups') {
+      maxPage = Math.ceil(this.cups.cups.length / this.cupsIPP)
+    } else {
+      maxPage = Math.ceil(this.cups.backgrounds.length / this.bgsIPP)
+    }
+
+    if (page > 0 && page <= maxPage) {
+      this.page = page
+    }
+  }
+}
+</script>
