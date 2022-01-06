@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import Cup from '@/components/Cup/Cup.vue'
 import { useBrowserLocation } from '@vueuse/core'
+import Cup from '@/components/Cup/Cup.vue'
 
 export default {
   components: { Cup },
