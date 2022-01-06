@@ -1,4 +1,4 @@
-import { Cats, Cups, Dogs, Men, Product, State, Women } from '~/store/cup/state'
+import { Cats, CupImageItem, Cups, Dogs, Men, Product, State, Women } from '~/store/cup/state'
 
 export default {
   setCups (state: State, cups: Cups) {
@@ -35,18 +35,22 @@ export default {
     state.items = []
   },
 
-  setCup ({ state: any, dispatch: any }, cupId: string) {
+  setCup (state: State, cupId: string) {
     state.cupId = cupId
-    dispatch('preview/getProductPreview')
+    // dispatch('preview/getProductPreview')
   },
 
-  setBackground ({ state: any, dispatch: any }, backgroundId: string) {
+  setBackground (state: State, backgroundId: string) {
     state.backgroundId = backgroundId
-    dispatch('preview/getProductPreview')
+    // dispatch('preview/getProductPreview')
   },
 
-  setQuote ({ state: any, dispatch: any }, quoteId: string) {
+  setQuote (state: State, quoteId: string) {
     state.quoteId = quoteId
-    dispatch('preview/getProductPreview')
+    // dispatch('preview/getProductPreview')
+  },
+
+  addItem (state: State, item: CupImageItem) {
+    state.items.push(item)
   }
 }

@@ -3,14 +3,14 @@
     <button
       v-if="frontImage"
       class="frontCup"
-      :class="{'active': frontImage == activePreview}"
+      :class="{'active': frontImage === activePreview}"
       @click="setPreview(frontImage)"
     >
       Przód kubka
     </button>
     <button
       v-if="backImage"
-      :class="{'active': backImage == activePreview}"
+      :class="{'active': backImage === activePreview}"
       class="backCup"
       @click="setPreview(backImage)"
     >
@@ -57,11 +57,5 @@ export default class Preview extends Vue {
   @Getter('preview/frontImage') frontImage!: string
   @Getter('preview/backImage') backImage!: string
   @Getter('preview/activePreview') activePreview!: string
-
-  @Action('preview/getProductPreview') getProductPreview!: Function
-
-  mounted () {
-    this.getProductPreview()
-  }
 }
 </script>

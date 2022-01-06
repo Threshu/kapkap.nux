@@ -8,7 +8,7 @@ export type Backgrounds = Record<any, any>
 export type Pet = {
   id: string,
   imageUrl: string,
-  name: Record<string, string>[],
+  name: Record<string, string>,
   variantId: string,
   tags?: string[]
 }
@@ -16,13 +16,13 @@ export type Pet = {
 export type Dogs = {
   success: boolean,
   title: string,
-  pets: Pet[]
+  pets: Record<string, Pet[]>
 }
 
 export type Cats = {
   success: boolean,
   title: string,
-  pets: Pet[]
+  pets: Record<string, Pet[]>
 }
 
 export type Body = {
@@ -38,19 +38,19 @@ export type Hairstyle = {
 export type HairstyleColors = 'black' | 'blond' | 'brown' | 'dark_brown' | 'red' | 'other'
 export type HairstyleStyle = 'all' | 'bun' | 'mid_back' | 'neck' | 'shoulder' | 'tie' | 'upper_back'
 
-export type Hairstyles = Record<HairstyleStyle, Hairstyle[]>[]
+export type Hairstyles = Record<HairstyleStyle, Hairstyle[]>
 
 export type Men = {
   success: boolean,
   title: string,
-  hairstyles: Record<HairstyleColors, Hairstyles>[],
+  hairstyles: Record<HairstyleColors, Hairstyles>,
   bodies: Body[]
 }
 
 export type Women = {
   success: boolean,
   title: string,
-  hairstyles: Record<HairstyleColors, Hairstyles>[],
+  hairstyles: Record<HairstyleColors, Hairstyles>,
   bodies: Body[]
 }
 

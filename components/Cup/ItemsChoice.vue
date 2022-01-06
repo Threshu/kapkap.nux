@@ -181,6 +181,19 @@ import Summary from '~/components/Cup/Summary.vue'
   }
 })
 export default class ItemsChoice extends Vue {
+  removeBox = false
+  removeItemId = null
+  objectData: any = []
+
+  tempObject: any = {
+    type: '',
+    edit: '',
+    bodyId: '',
+    variantId: '',
+    bodyImageUrl: '',
+    hairColor: 'black',
+    hairstyleId: ''
+  }
 
   newCupObject (data: Object, type: String) {
     this.objectData = data
