@@ -1,74 +1,76 @@
 <template>
-  <div class="summary">
-    <div class="qty-box">
-      <span class="qty-label">Sztuk:</span>
-      <div class="qty-flex">
-        <button class="qty-minus" @click="decreaseQuantity">
-          -
-        </button>
-        <input
-          v-model="cupObject.count"
-          type="number"
-          class="qty-input"
-          @keyup="recalculateTotal"
-        >
-        <button class="qty-plus" @click="increaseQuantity">
-          +
-        </button>
+  <div>
+    <div class="summary">
+      <div class="qty-box">
+        <span class="qty-label">Sztuk:</span>
+        <div class="qty-flex">
+          <button class="qty-minus" @click="decreaseQuantity">
+            -
+          </button>
+          <input
+            v-model="cupObject.count"
+            type="number"
+            class="qty-input"
+            @keyup="recalculateTotal"
+          >
+          <button class="qty-plus" @click="increaseQuantity">
+            +
+          </button>
+        </div>
+      </div>
+
+      <span class="price-sep">x</span>
+
+      <div class="price-box">
+        <span class="price-label">Cena za sztukę:</span>
+        <div class="price-val">
+          {{ cupData.price }} zł
+        </div>
+      </div>
+
+      <span class="sum-sep">=</span>
+
+      <div class="sum-box">
+        <span class="sum-label">Suma:</span>
+        <div class="sum-val">
+          {{ cupObject.total }} zł
+        </div>
       </div>
     </div>
 
-    <span class="price-sep">x</span>
-
-    <div class="price-box">
-      <span class="price-label">Cena za sztukę:</span>
-      <div class="price-val">
-        {{ cupData.price }} zł
-      </div>
+    <div class="confButtons">
+      <button
+        v-if="!editMode"
+        class="next"
+        @click="buyNow()"
+      >
+        Kup Teraz
+      </button>
+      <button
+        v-if="!editMode"
+        class="next fl"
+        @click="addToCart()"
+      >
+        Dodaj do koszyka
+      </button>
+      <button
+        v-if="editMode"
+        class="next"
+        @click="saveCartItem()"
+      >
+        Zapisz
+      </button>
+      <button
+        v-if="editMode"
+        class="next fl"
+        @click="backToCart()"
+      >
+        Wróć
+      </button>
+      <button class="reset" @click="reset()">
+        Resetuj i zacznij od nowa
+      </button>
     </div>
-
-    <span class="sum-sep">=</span>
-
-    <div class="sum-box">
-      <span class="sum-label">Suma:</span>
-      <div class="sum-val">
-        {{ cupObject.total }} zł
-      </div>
-    </div>
-  </div>
-
-  <div class="confButtons">
-    <button
-      v-if="!editMode"
-      class="next"
-      @click="buyNow()"
-    >
-      Kup Teraz
-    </button>
-    <button
-      v-if="!editMode"
-      class="next fl"
-      @click="addToCart()"
-    >
-      Dodaj do koszyka
-    </button>
-    <button
-      v-if="editMode"
-      class="next"
-      @click="saveCartItem()"
-    >
-      Zapisz
-    </button>
-    <button
-      v-if="editMode"
-      class="next fl"
-      @click="backToCart()"
-    >
-      Wróć
-    </button>
-    <button class="reset" @click="reset()">
-      Resetuj i zacznij od nowa
-    </button>
   </div>
 </template>
 

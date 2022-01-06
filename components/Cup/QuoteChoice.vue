@@ -89,15 +89,8 @@ export default class QuoteChoice extends Vue {
   quotesIPP: number = 9 // items per page - quotes
   page: number = 1
 
-  goToPage (page: number, type: string) {
-    let maxPage
-    if (type === 'quotes') {
-      maxPage = Math.ceil(this.cups.quotes.length / this.quotesIPP)
-    } else if (type === 'cups') {
-      maxPage = Math.ceil(this.cups.cups.length / this.cupsIPP)
-    } else {
-      maxPage = Math.ceil(this.cups.backgrounds.length / this.bgsIPP)
-    }
+  goToPage (page: number) {
+    const maxPage = Math.ceil(this.cups.quotes.length / this.quotesIPP)
 
     if (page > 0 && page <= maxPage) {
       this.page = page
