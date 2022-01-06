@@ -86,6 +86,9 @@ import Summary from '~/components/Cup/Summary.vue'
 export default class QuoteChoice extends Vue {
   @Mutation('cup/setQuote') setQuote!: Function
 
+  quotesIPP: number = 9 // items per page - quotes
+  page: number = 1
+
   goToPage (page: number, type: string) {
     let maxPage
     if (type === 'quotes') {

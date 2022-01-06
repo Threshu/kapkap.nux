@@ -47,6 +47,7 @@
 
 <script  lang="ts">
 import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
+import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 
 @Component({
   components: {

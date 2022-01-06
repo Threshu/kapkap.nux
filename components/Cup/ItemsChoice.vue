@@ -182,5 +182,96 @@ import Summary from '~/components/Cup/Summary.vue'
 })
 export default class ItemsChoice extends Vue {
 
+  newCupObject (data: Object, type: String) {
+    this.objectData = data
+    this.showModal = false
+    this.objectData.type = type
+    this.showEditModal = true
+  }
+
+  pushObject (type: any, edit: any) {
+    this.tempObject.type = type
+    if (typeof edit === 'number') {
+      this.cupObject.items[edit] = this.tempObject
+    } else {
+      this.cupObject.items.push(this.tempObject)
+    }
+    // this.productPreview()
+    this.resetTempObject()
+    this.showEditModal = false
+  }
+
+  editCancel () {
+    this.showEditModal = false
+    this.resetTempObject()
+    this.objectData = []
+  }
+
+  editItem (itemIndex: number) {
+    this.tempObject = this.cupObject.items[itemIndex]
+    this.showModal = false
+    this.showEditModal = true
+    this.tempObject = this.cupObject.items[itemIndex]
+    if (typeof itemIndex === 'number') {
+      this.tempObject.edit = itemIndex
+    }
+
+    switch (this.tempObject.type) {
+      case 'cat':
+        this.objectData = this.cats
+        this.objectData.type = this.tempObject.type
+        break
+      case 'dog':
+        this.objectData = this.dogs
+        this.objectData.type = this.tempObject.type
+        break
+      case 'woman':
+        this.objectData = this.women
+        this.objectData.type = this.tempObject.type
+        break
+      case 'man':
+        this.objectData = this.men
+        this.objectData.type = this.tempObject.type
+        break
+    }
+  }
+
+  topItem (index: number) {
+    this.moveArrayItemToNewIndex(this.cupObject.items, index, index - 1)
+    // this.productPreview()
+  }
+
+  downItem (index: number) {
+    this.moveArrayItemToNewIndex(this.cupObject.items, index, index + 1)
+    // this.productPreview()
+  }
+
+  removeItem (itemId: any, confirmRemove: Boolean = false) {
+    if (confirmRemove) {
+      this.cupObject.items.splice(itemId, 1)
+      this.removeItemId = null
+      // this.productPreview()
+    } else {
+      this.removeItemId = itemId
+    }
+  }
+
+  moveArrayItemToNewIndex (arr: any, oldIndex: number, newIndex: number) {
+    arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0])
+    return arr
+  }
+
+  resetTempObject () {
+    this.tempObject = {
+      name: '',
+      type: '',
+      edit: '',
+      bodyId: '',
+      variantId: '',
+      bodyImageUrl: '',
+      hairColor: 'black',
+      hairstyleId: ''
+    }
+  }
 }
 </script>

@@ -86,6 +86,9 @@ import Summary from '~/components/Cup/Summary.vue'
 export default class BackgroundChoice extends Vue {
   @Mutation('cup/setBackground') setBackground!: Function
 
+  bgsIPP: number = 9 // items per page - bgs
+  page: number = 1
+
   goToPage (page: number, type: string) {
     let maxPage
     if (type === 'quotes') {

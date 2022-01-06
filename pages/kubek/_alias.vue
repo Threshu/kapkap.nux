@@ -1,6 +1,6 @@
 <template>
   <Cup
-    :alias="alias"
+    :product-id="id"
   />
 </template>
 
@@ -12,8 +12,8 @@ export default {
   components: { Cup },
 
   asyncData ({ params }: any) {
-    const alias = params.alias
-    return { alias }
+    const id = params.alias
+    return { id }
   },
 
   head () {

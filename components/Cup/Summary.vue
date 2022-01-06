@@ -133,5 +133,17 @@ export default class Summary extends Vue {
     this.reset()
     this.$router.push('/koszyk')
   }
+
+  reset () {
+    this.confMenu = 1
+    this.cupObject = {
+      id: this.cupData.id,
+      cupId: this.cups.cups[0].id,
+      bgId: this.cups.backgrounds[0].backgroundId,
+      quoteId: '',
+      items: []
+    }
+    this.resetTempObject()
+  }
 }
 </script>

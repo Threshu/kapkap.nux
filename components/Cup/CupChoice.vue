@@ -135,6 +135,9 @@ import Summary from '~/components/Cup/Summary.vue'
 export default class CupChoice extends Vue {
   @Mutation('cup/setCup') setCup!: Function
 
+  cupsIPP: number = 4 // items per page - cups
+  page: number = 1
+
   goToPage (page: number, type: string) {
     let maxPage
     if (type === 'quotes') {
