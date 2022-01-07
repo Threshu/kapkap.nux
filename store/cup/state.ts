@@ -117,10 +117,12 @@ export type WorkingItem = {
   hairstyleId?: string,
   id?: string,
   variantId?: string,
-  name?: string
+  name?: string,
 }
 
 export type WorkingObject = {
+  backgroundId: string
+  quoteId: string,
   cupId: string,
   items: WorkingItem[]
 }
@@ -139,12 +141,6 @@ export type EditorState = {
   editMode: boolean,
 
   workingObject: WorkingObject,
-
-  productId: string,
-  backgroundId: string,
-  quoteId: string,
-  cupId: string,
-  items: CupImageItem[]
 }
 
 export default () => (<EditorState>{})

@@ -12,15 +12,15 @@ export default {
     items.push({
       type: 'background',
       data: {
-        id: state.backgroundId
+        id: state.workingObject.backgroundId
       }
     })
 
-    if (state.quoteId) {
+    if (state.workingObject.quoteId) {
       items.push({
         type: 'quote',
         data: {
-          id: state.quoteId
+          id: state.workingObject.quoteId
         }
       })
     }
@@ -38,8 +38,8 @@ export default {
     })
 
     return {
-      id: state.productId,
-      cupId: state.cupId,
+      id: state.product.id,
+      cupId: state.workingObject.cupId,
       items
     }
   },

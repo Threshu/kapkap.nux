@@ -1,4 +1,5 @@
-import { Cats, Dogs, Men, Product, EditorState, Women, Pet, WorkingItem } from '~/store/cup/state'
+import { rand } from '@vueuse/core'
+import { Cats, Dogs, Men, Product, EditorState, Women, Pet } from '~/store/cup/state'
 
 const randomIntFromInterval = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -24,29 +25,28 @@ export default {
   setProduct (state: EditorState, product: Product) {
     state.product = product
 
-    state.productId = product.id
-    state.title = product.title
-    state.price = product.price
-    state.backgroundId = product.items.backgrounds?.[0]?.backgroundId
-    state.cupId = product.items.cups?.[0]?.id
-    state.quoteId = ''
     state.count = 0
     state.total = 0
-    state.items = []
+    state.title = product.title
+    state.price = product.price
+    state.workingObject.backgroundId = product.items.backgrounds?.[0]?.backgroundId
+    state.workingObject.cupId = product.items.cups?.[0]?.id
+    state.workingObject.quoteId = ''
+    state.workingObject.items = []
   },
 
   setCup (state: EditorState, cupId: string) {
-    state.cupId = cupId
+    state.workingObject.cupId = cupId
     // dispatch('preview/getProductPreview')
   },
 
   setBackground (state: EditorState, backgroundId: string) {
-    state.backgroundId = backgroundId
+    state.workingObject.backgroundId = backgroundId
     // dispatch('preview/getProductPreview')
   },
 
   setQuote (state: EditorState, quoteId: string) {
-    state.quoteId = quoteId
+    state.workingObject.quoteId = quoteId
     // dispatch('preview/getProductPreview')
   },
 
@@ -71,6 +71,8 @@ export default {
   resetWorkingObject (state: EditorState) {
     state.workingObject = {
       cupId: '',
+      backgroundId: '',
+      quoteId: '',
       items: []
     }
   },
@@ -84,6 +86,9 @@ export default {
     let randVariant: number
     let pet: Pet[]
     let petsArray: any[]
+
+    const randCup: number = randomIntFromInterval(0, state.product.items.cups.length - 1)
+    state.workingObject.cupId = state.product.items.cups[randCup].id
 
     for (let i = 0; i < count; i++) {
       typeRand = randomIntFromInterval(1, 4)
