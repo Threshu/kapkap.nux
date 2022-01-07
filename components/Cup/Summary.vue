@@ -85,12 +85,15 @@ import { ProductObject } from '~/store/cup/getters'
 export default class Summary extends Vue {
   @Getter('cup/count') count!: number
   @Getter('cup/price') price!: number
+  @Getter('cup/total') total!: number
   @Getter('cup/productObject') productObject!: ProductObject
   @Getter('preview/previewId') previewId!: string
+  @Getter('cup/editMode') editMode!: boolean
 
   @Mutation('cup/setTotal') setTotal!: Function
   @Mutation('cup/increaseQuantity') increaseQuantity!: Function
   @Mutation('cup/decreaseQuantity') decreaseQuantity!: Function
+  @Mutation('cup/recalculateTotal') recalculateTotal!: Function
 
   formatPrice (value: number) {
     const val = value.toFixed(2).replace('.', ',')
@@ -119,29 +122,29 @@ export default class Summary extends Vue {
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
     }
-    tempStorage[this.$store.state.basket.edit] = this.cupObject
-    this.setBasket(tempStorage)
+    // tempStorage[this.$store.state.basket.edit] = this.cupObject
+    // this.setBasket(tempStorage)
     this.reset()
-    this.editBasket(null)
+    // this.editBasket(null)
     this.$router.push('/koszyk')
   }
 
   backToCart () {
-    this.editBasket(null)
+    // this.editBasket(null)
     this.reset()
     this.$router.push('/koszyk')
   }
 
   reset () {
-    this.confMenu = 1
-    this.cupObject = {
-      id: this.cupData.id,
-      cupId: this.cups.cups[0].id,
-      bgId: this.cups.backgrounds[0].backgroundId,
-      quoteId: '',
-      items: []
-    }
-    this.resetTempObject()
+    // this.confMenu = 1
+    // this.cupObject = {
+    //   id: this.cupData.id,
+    //   cupId: this.cups.cups[0].id,
+    //   bgId: this.cups.backgrounds[0].backgroundId,
+    //   quoteId: '',
+    //   items: []
+    // }
+    // this.resetTempObject()
   }
 }
 </script>

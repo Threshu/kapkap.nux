@@ -86,7 +86,7 @@ export default class Cup extends Vue {
     const editObj = JSON.parse(localStorage.cup)
     if (editObj[this.$store.state.basket.edit]) {
       this.editMode = true
-      this.cupObject = editObj[this.$store.state.basket.edit]
+      // this.cupObject = editObj[this.$store.state.basket.edit]
     }
   }
 

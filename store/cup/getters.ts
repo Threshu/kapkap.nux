@@ -44,4 +44,7 @@ export default {
   women: (state: EditorState) => state.women,
   product: (state: EditorState) => state.product,
   count: (state: EditorState) => state.count,
+  total: (state: EditorState) => state.total,
+  price: (state: EditorState) => state.price,
+  title: (state: EditorState) => state.title
 }

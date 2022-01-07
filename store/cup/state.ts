@@ -78,7 +78,7 @@ export type Product = {
     cups: Cup[],
     quotes: Quote[]
   },
-  price: string,
+  price: number,
   sampleImageURL: string,
   numberOfGrades: string,
 }
@@ -109,13 +109,24 @@ export type CupImageItem = {
   data: CupImageData
 }
 
+export type WorkingItem = {
+  type: string,
+  bodyId?: string,
+  bodyImageUrl?: string,
+  hairColor?: string,
+  hairstyleId?: string,
+  id?: string,
+  variantId?: string
+}
+
 export type WorkingObject = {
   hairColor: string,
   bodyId: string,
   bodyImageUrl: string,
   petId: string,
   variantId: string,
-  hairstyleId: string
+  hairstyleId: string,
+  items: WorkingItem[]
 }
 
 export type EditorState = {

@@ -1,5 +1,7 @@
 import { $axios } from '~/utils/api'
+import { Pet } from '~/store/cup/state'
 
+// @ts-ignore
 export const getCups = async ({ commit }) => {
   try {
     const res = await $axios.get('/cups')
@@ -9,6 +11,7 @@ export const getCups = async ({ commit }) => {
   } catch {}
 }
 
+// @ts-ignore
 export const getDogs = async ({ commit }) => {
   try {
     const res = await $axios.get('/dogs')
@@ -18,6 +21,7 @@ export const getDogs = async ({ commit }) => {
   } catch {}
 }
 
+// @ts-ignore
 export const getCats = async ({ commit }) => {
   try {
     const res = await $axios.get('/cats')
@@ -27,6 +31,7 @@ export const getCats = async ({ commit }) => {
   } catch {}
 }
 
+// @ts-ignore
 export const getMen = async ({ commit }) => {
   try {
     const res = await $axios.get('/gender/male')
@@ -36,6 +41,7 @@ export const getMen = async ({ commit }) => {
   } catch {}
 }
 
+// @ts-ignore
 export const getWomen = async ({ commit }) => {
   try {
     const res = await $axios.get('/gender/female')
@@ -45,7 +51,8 @@ export const getWomen = async ({ commit }) => {
   } catch {}
 }
 
-export const getProduct = async ({ commit }, payload) => {
+// @ts-ignore
+export const getProduct = async ({ commit }, payload: Product) => {
   try {
     const res = await $axios.get('/product/' + payload.id)
     if (res?.data) {
