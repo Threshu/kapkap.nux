@@ -33,14 +33,14 @@
       <div class="pagination">
         <button
           class="prevAll"
-          @click="goToPage(1, 'quotes')"
+          @click="goToPage(1)"
         >
           &lt;&lt;
         </button>
 
         <button
           class="prev"
-          @click="goToPage(page - 1, 'quotes')"
+          @click="goToPage(page - 1)"
         >
           &lt;
         </button>
@@ -50,20 +50,20 @@
           :key="btnPage"
           class="page"
           :class="{'active': btnPage === page}"
-          @click="goToPage(btnPage, 'quotes')"
+          @click="goToPage(btnPage)"
         >
           {{ btnPage }}
         </button>
 
         <button
           class="next"
-          @click="goToPage(page + 1, 'quotes')"
+          @click="goToPage(page + 1)"
         >
           >
         </button>
         <button
           class="nextAll"
-          @click="goToPage(Math.ceil(quotes.length / itemsPerPage), 'quotes')"
+          @click="goToPage(Math.ceil(quotes.length / itemsPerPage))"
         >
           >>
         </button>

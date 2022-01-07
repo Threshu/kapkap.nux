@@ -34,13 +34,13 @@
       <div class="pagination">
         <button
           class="prevAll"
-          @click="goToPage(1, 'cups')"
+          @click="goToPage(1)"
         >
           &lt;&lt;
         </button>
         <button
           class="prev"
-          @click="goToPage(page - 1, 'cups')"
+          @click="goToPage(page - 1)"
         >
           &lt;
         </button>
@@ -50,21 +50,21 @@
           :key="btnPage"
           class="page"
           :class="{'active': btnPage === page}"
-          @click="goToPage(btnPage, 'cups')"
+          @click="goToPage(btnPage)"
         >
           {{ btnPage }}
         </button>
 
         <button
           class="next"
-          @click="goToPage(page + 1, 'cups')"
+          @click="goToPage(page + 1)"
         >
           >
         </button>
         <button
           v-if="cups"
           class="nextAll"
-          @click="goToPage(Math.ceil(cups.length/itemsPerPage), 'cups')"
+          @click="goToPage(Math.ceil(cups.length / itemsPerPage))"
         >
           >>
         </button>

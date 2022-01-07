@@ -4,10 +4,10 @@
       Wybierz tło
     </h3>
 
-    <div v-if="cups" class="bgList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
+    <div v-if="backgrounds" class="bgList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
       <div v-if="!isMobile">
         <div
-          v-for="(item, index) in cups.backgrounds.slice(page*bgsIPP-bgsIPP, page*bgsIPP)"
+          v-for="(item, index) in backgrounds.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)"
           :key="index"
           class="bgItem"
           :class="{'selected': item.backgroundId == cupObject.bgId}"
@@ -19,7 +19,7 @@
 
       <div v-if="isMobile">
         <div
-          v-for="(item, index) in cups.backgrounds"
+          v-for="(item, index) in backgrounds"
           :key="index"
           class="bgItem"
           :class="{'selected': item.backgroundId == cupObject.bgId}"
@@ -34,36 +34,36 @@
       <div class="pagination">
         <button
           class="prevAll"
-          @click="goToPage(1, 'bgs')"
+          @click="goToPage(1)"
         >
           &lt;&lt;
         </button>
         <button
           class="prev"
-          @click="goToPage(page - 1, 'bgs')"
+          @click="goToPage(page - 1)"
         >
           &lt;
         </button>
 
         <button
-          v-for="btnPage in Math.ceil(cups.backgrounds.length/bgsIPP)"
+          v-for="btnPage in Math.ceil(backgrounds.length / itemsPerPage)"
           :key="btnPage"
           class="page"
           :class="{'active': btnPage === page}"
-          @click="goToPage(btnPage, 'bgs')"
+          @click="goToPage(btnPage)"
         >
           {{ btnPage }}
         </button>
 
         <button
           class="next"
-          @click="goToPage(page + 1, 'bgs')"
+          @click="goToPage(page + 1)"
         >
           >
         </button>
         <button
           class="nextAll"
-          @click="goToPage(Math.ceil(cups.backgrounds.length/bgsIPP), 'bgs')"
+          @click="goToPage(Math.ceil(backgrounds.length / itemsPerPage))"
         >
           >>
         </button>
@@ -75,8 +75,9 @@
 </template>
 
 <script  lang="ts">
-import { Component, Mutation, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import Summary from '~/components/Cup/Summary.vue'
+import { Background } from '~/store/cup/state'
 
 @Component({
   components: {
@@ -84,13 +85,16 @@ import Summary from '~/components/Cup/Summary.vue'
   }
 })
 export default class BackgroundChoice extends Vue {
+  @Getter('cup/backgrounds') backgrounds!: Background[]
+  @Getter('app/isMobile') isMobile!: boolean
+
   @Mutation('cup/setBackground') setBackground!: Function
 
-  bgsIPP: number = 9 // items per page - bgs
+  itemsPerPage: number = 9
   page: number = 1
 
   goToPage (page: number) {
-    const maxPage = Math.ceil(this.cups.backgrounds.length / this.bgsIPP)
+    const maxPage = Math.ceil(this.backgrounds.length / this.itemsPerPage)
 
     if (page > 0 && page <= maxPage) {
       this.page = page
