@@ -7,10 +7,10 @@
     <div v-if="cups" class="quotesList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
       <div v-if="!isMobile">
         <div
-          v-for="(item, index) in cups.quotes.slice(page*quotesIPP-quotesIPP, page*quotesIPP)"
+          v-for="(item, index) in cups.quotes.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)"
           :key="index"
           class="quoteItem"
-          :class="{'selected': item.quoteId == cupObject.quoteId}"
+          :class="{'selected': item.quoteId === cupObject.quoteId}"
           @click="setQuote(item.quoteId)"
         >
           <img :src="item.quoteImageUrl">
@@ -18,10 +18,10 @@
       </div>
       <div v-if="isMobile">
         <div
-          v-for="(item, index) in cups.quotes"
+          v-for="(item, index) in quotes"
           :key="index"
           class="quoteItem"
-          :class="{'selected': item.quoteId == cupObject.quoteId}"
+          :class="{'selected': item.quoteId === cupObject.quoteId}"
           @click="setQuote(item.quoteId)"
         >
           <img :src="item.quoteImageUrl">
@@ -46,7 +46,7 @@
         </button>
 
         <button
-          v-for="btnPage in Math.ceil(cups.quotes.length/quotesIPP)"
+          v-for="btnPage in Math.ceil(quotes.length / itemsPerPage)"
           :key="btnPage"
           class="page"
           :class="{'active': btnPage === page}"
@@ -63,7 +63,7 @@
         </button>
         <button
           class="nextAll"
-          @click="goToPage(Math.ceil(cups.quotes.length/quotesIPP), 'quotes')"
+          @click="goToPage(Math.ceil(quotes.length / itemsPerPage), 'quotes')"
         >
           >>
         </button>
@@ -75,8 +75,9 @@
 </template>
 
 <script  lang="ts">
-import { Component, Mutation, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import Summary from '~/components/Cup/Summary.vue'
+import { Quote } from '~/store/cup/state'
 
 @Component({
   components: {
@@ -84,13 +85,16 @@ import Summary from '~/components/Cup/Summary.vue'
   }
 })
 export default class QuoteChoice extends Vue {
+  @Getter('app/isMobile') isMobile!: boolean
+  @Getter('cup/quotes') quotes!: Quote[]
+
   @Mutation('cup/setQuote') setQuote!: Function
 
-  quotesIPP: number = 9 // items per page - quotes
+  itemsPerPage: number = 9
   page: number = 1
 
   goToPage (page: number) {
-    const maxPage = Math.ceil(this.cups.quotes.length / this.quotesIPP)
+    const maxPage = Math.ceil(this.quotes.length / this.itemsPerPage)
 
     if (page > 0 && page <= maxPage) {
       this.page = page

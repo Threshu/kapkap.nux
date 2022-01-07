@@ -35,7 +35,9 @@ export default {
     }
   },
 
-  cups: (state: State) => state.cups,
+  cups: (state: State) => state.product.items.cups,
+  backgrounds: (state: State) => state.product.items.backgrounds,
+  quotes: (state: State) => state.product.items.quotes,
   dogs: (state: State) => state.dogs,
   cats: (state: State) => state.cats,
   men: (state: State) => state.men,

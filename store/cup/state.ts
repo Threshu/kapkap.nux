@@ -1,9 +1,22 @@
 /**
  * Records fetched via ajax
  */
-export type Cups = Record<any, any>
-export type Quotes = Record<any, any>
-export type Backgrounds = Record<any, any>
+export type Cup = {
+  id: string,
+  imageURL: string,
+  name: string
+}
+
+export type Quote = {
+  quoteId: string,
+  quoteImageUrl: string,
+  quoteTags: string[]
+}
+
+export type Background = {
+  backgroundId: string,
+  backgroundURL: string
+}
 
 export type Pet = {
   id: string,
@@ -58,7 +71,11 @@ export type Product = {
   id: string,
   success: boolean,
   title: string,
-  items: [Cups, Quotes, Backgrounds],
+  items: {
+    backgrounds: Background[],
+    cups: Cup[],
+    quotes: Quote[]
+  },
   price: string,
   sampleImageURL: string,
   numberOfGrades: string,
@@ -100,7 +117,6 @@ export type WorkingObject = {
 }
 
 export type State = {
-  cups: Cups,
   dogs: Dogs,
   cats: Cats,
   men: Men,

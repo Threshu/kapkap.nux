@@ -4,13 +4,13 @@
       Wybierz kubek
     </h3>
 
-    <div v-if="cups.cups" class="cupsList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
+    <div v-if="cups" class="cupsList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
       <div v-if="!isMobile">
         <div
-          v-for="(item, index) in cups.cups.slice(page*cupsIPP-cupsIPP, page*cupsIPP)"
+          v-for="(item, index) in cups.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)"
           :key="index"
           class="cupItem"
-          :class="{'selected': item.id == cupObject.cupId}"
+          :class="{'selected': item.id === cupObject.cupId}"
           @click="setCup(item.id)"
         >
           <img v-if="item" :src="item.imageURL" :alt="item.name">
@@ -19,10 +19,10 @@
 
       <div v-if="isMobile">
         <div
-          v-for="(item, index) in cups.cups"
+          v-for="(item, index) in cups"
           :key="index"
           class="cupItem"
-          :class="{'selected': item.id == cupObject.cupId}"
+          :class="{'selected': item.id === cupObject.cupId}"
           @click="setCup(item.id)"
         >
           <img v-if="item" :src="item.imageURL" :alt="item.name">
@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div v-if="!isMobile && cups.cups" class="paginationBox">
+    <div v-if="!isMobile && cups" class="paginationBox">
       <div class="pagination">
         <button
           class="prevAll"
@@ -46,7 +46,7 @@
         </button>
 
         <button
-          v-for="btnPage in Math.ceil(cups.cups.length/cupsIPP)"
+          v-for="btnPage in Math.ceil(cups.length/itemsPerPage)"
           :key="btnPage"
           class="page"
           :class="{'active': btnPage === page}"
@@ -62,70 +62,23 @@
           >
         </button>
         <button
-          v-if="cups && cups.cups && cups.cups.length"
+          v-if="cups"
           class="nextAll"
-          @click="goToPage(Math.ceil(cups.cups.length/cupsIPP), 'cups')"
+          @click="goToPage(Math.ceil(cups.length/itemsPerPage), 'cups')"
         >
           >>
         </button>
       </div>
     </div>
 
-    <div class="summary">
-      <div class="qty-box">
-        <span class="qty-label">Sztuk:</span>
-        <div class="qty-flex">
-          <button class="qty-minus" @click="decreaseQuantity">
-            -
-          </button>
-          <input
-            v-model="cupObject.count"
-            type="number"
-            class="qty-input"
-            @keyup="recalculateTotal"
-          >
-          <button class="qty-plus" @click="increaseQuantity">
-            +
-          </button>
-        </div>
-      </div>
-
-      <span class="price-sep">x</span>
-
-      <div class="price-box">
-        <span class="price-label">Cena za sztukę:</span>
-        <div v-if="cupData" class="price-val">
-          {{ cupData.price }} zł
-        </div>
-      </div>
-
-      <span class="sum-sep">=</span>
-
-      <div class="sum-box">
-        <span class="sum-label">Suma:</span>
-        <div class="sum-val">
-          {{ cupObject.total }} zł
-        </div>
-      </div>
-    </div>
-
-    <div class="confButtons">
-      <NuxtLink
-        to="/kubki"
-        class="back"
-      >
-        Wstecz
-      </NuxtLink>
-      <button class="next" @click="openCupItems(2)">
-        Dalej
-      </button>
-    </div>
+    <Summary />
   </div>
 </template>
 
 <script  lang="ts">
-import { Component, Mutation, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Vue } from 'nuxt-property-decorator'
 import Summary from '~/components/Cup/Summary.vue'
+import { Cup } from '~/store/cup/state'
 
 @Component({
   components: {
@@ -133,13 +86,14 @@ import Summary from '~/components/Cup/Summary.vue'
   }
 })
 export default class CupChoice extends Vue {
-  @Mutation('cup/setCup') setCup!: Function
+  @Getter('cup/cups') cups!: Cup[]
+  @Getter('app/isMobile') isMobile!: boolean
 
-  cupsIPP: number = 4 // items per page - cups
+  itemsPerPage: number = 4
   page: number = 1
 
   goToPage (page: number) {
-    const maxPage = Math.ceil(this.cups.cups.length / this.cupsIPP)
+    const maxPage = Math.ceil(this.cups.length / this.itemsPerPage)
 
     if (page > 0 && page <= maxPage) {
       this.page = page

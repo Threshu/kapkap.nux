@@ -40,8 +40,10 @@ export default class Cup extends Vue {
   @Prop(String) readonly productId!: string
 
   @Getter('defaults/isLoaded') isLoaded!: boolean
+  @Getter('app/isMobile') isMobile!: boolean
 
   @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
+  @Mutation('app/setIsMobile') setIsMobile!: Function
 
   @Action('cup/getDogs') getDogs!: any
   @Action('cup/getCats') getCats!: any
@@ -52,7 +54,6 @@ export default class Cup extends Vue {
 
   showModal = false
   showEditModal = false
-  isMobile = false
 
   // old
   showConf = true
@@ -89,7 +90,7 @@ export default class Cup extends Vue {
   }
 
   checkIfMobile () {
-    this.isMobile = window.innerWidth <= 1350
+    this.setIsMobile(window.innerWidth <= 1350)
   }
 }
 </script>
