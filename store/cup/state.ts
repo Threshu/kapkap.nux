@@ -81,6 +81,7 @@ export type Product = {
   price: number,
   sampleImageURL: string,
   numberOfGrades: string,
+  backgroundId: string
 }
 
 /**

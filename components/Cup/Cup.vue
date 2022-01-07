@@ -49,11 +49,11 @@ export default class Cup extends Vue {
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
   @Mutation('app/setIsMobile') setIsMobile!: Function
 
-  @Action('cup/getDogs') getDogs!: any
-  @Action('cup/getCats') getCats!: any
-  @Action('cup/getMen') getMen!: any
-  @Action('cup/getWomen') getWomen!: any
-  @Action('cup/getProduct') getProduct!: Function
+  @Action('cup/loadDogs') loadDogs!: any
+  @Action('cup/loadCats') loadCats!: any
+  @Action('cup/loadMen') loadMen!: any
+  @Action('cup/loadWomen') loadWomen!: any
+  @Action('cup/loadProduct') loadProduct!: Function
   @Action('preview/getProductPreview') getProductPreview!: Function
 
   showModal = false
@@ -64,11 +64,11 @@ export default class Cup extends Vue {
 
   async mounted () {
     await Promise.allSettled([
-      this.getDogs(),
-      this.getCats(),
-      this.getMen(),
-      this.getWomen(),
-      this.getProduct({ id: this.productId })
+      this.loadDogs(),
+      this.loadCats(),
+      this.loadMen(),
+      this.loadWomen(),
+      this.loadProduct({ id: this.productId })
     ])
 
     this.checkIfMobile()

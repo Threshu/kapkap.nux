@@ -1,4 +1,3 @@
-import { rand } from '@vueuse/core'
 import { Cats, Dogs, Men, Product, EditorState, Women, Pet } from '~/store/cup/state'
 
 const randomIntFromInterval = (min: number, max: number) => {
@@ -29,10 +28,6 @@ export default {
     state.total = 0
     state.title = product.title
     state.price = product.price
-    state.workingObject.backgroundId = product.items.backgrounds?.[0]?.backgroundId
-    state.workingObject.cupId = product.items.cups?.[0]?.id
-    state.workingObject.quoteId = ''
-    state.workingObject.items = []
   },
 
   setCup (state: EditorState, cupId: string) {
@@ -89,6 +84,7 @@ export default {
 
     const randCup: number = randomIntFromInterval(0, state.product.items.cups.length - 1)
     state.workingObject.cupId = state.product.items.cups[randCup].id
+    state.workingObject.backgroundId = state.product.backgroundId
 
     for (let i = 0; i < count; i++) {
       typeRand = randomIntFromInterval(1, 4)

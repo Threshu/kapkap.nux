@@ -1,7 +1,7 @@
 import { $axios } from '~/utils/api'
 
 export const getProductPreview = async ({ commit, rootGetters, getters }) => {
-  const apiData = rootGetters['cup/productObject']
+  const apiData = { ...rootGetters['cup/productObject'], previewId: getters.previewId }
   const result = await $axios.post('/preview', apiData)
   if (result?.data) {
     commit('preview/setPreviewId', result.data.previewId)

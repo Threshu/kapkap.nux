@@ -34,7 +34,7 @@
                                 </div>
                              </div>
                           </div>
- 
+
                           <div class="theme-card">
                              <h5 class="title-border">new products</h5>
                              <div class="offer-slider slide-1">
@@ -43,7 +43,7 @@
                                       <div class="swiper-slide swiper-slide-active" style="width: 320px;">
                                          <div>
                                             <div class="media">
-                                               <a href="/multikart/product/sidebar/1" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a> 
+                                               <a href="/multikart/product/sidebar/1" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a>
                                                <div class="media-body align-self-center">
                                                   <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                                   <a href="/multikart/product/sidebar/1" class="">
@@ -56,7 +56,7 @@
                                                </div>
                                             </div>
                                             <div class="media">
-                                               <a href="/multikart/product/sidebar/4" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a> 
+                                               <a href="/multikart/product/sidebar/4" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a>
                                                <div class="media-body align-self-center">
                                                   <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                                   <a href="/multikart/product/sidebar/4" class="">
@@ -66,7 +66,7 @@
                                                </div>
                                             </div>
                                             <div class="media">
-                                               <a href="/multikart/product/sidebar/8" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a> 
+                                               <a href="/multikart/product/sidebar/8" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a>
                                                <div class="media-body align-self-center">
                                                   <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                                   <a href="/multikart/product/sidebar/8" class="">
@@ -83,7 +83,7 @@
                                       <div class="swiper-slide swiper-slide-next" style="width: 320px;">
                                          <div>
                                             <div class="media">
-                                               <a href="/multikart/product/sidebar/11" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a> 
+                                               <a href="/multikart/product/sidebar/11" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a>
                                                <div class="media-body align-self-center">
                                                   <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                                   <a href="/multikart/product/sidebar/11" class="">
@@ -93,7 +93,7 @@
                                                </div>
                                             </div>
                                             <div class="media">
-                                               <a href="/multikart/product/sidebar/13" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a> 
+                                               <a href="/multikart/product/sidebar/13" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a>
                                                <div class="media-body align-self-center">
                                                   <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                                   <a href="/multikart/product/sidebar/13" class="">
@@ -103,7 +103,7 @@
                                                </div>
                                             </div>
                                             <div class="media">
-                                               <a href="/multikart/product/sidebar/17" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a> 
+                                               <a href="/multikart/product/sidebar/17" class=""><img src="/images/multicart/1.jpg" alt="" class="img-fluid"></a>
                                                <div class="media-body align-self-center">
                                                   <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                                   <a href="/multikart/product/sidebar/17" class="">
@@ -130,7 +130,7 @@
                        <div class="row">
                           <div class="col-sm-12">
                              <div class="top-banner-wrapper">
-                                <a href="#"><img src="/images/multicart/mega-menu/2.jpg" class="img-fluid"></a> 
+                                <a href="#"><img src="/images/multicart/mega-menu/2.jpg" class="img-fluid"></a>
                                 <div class="top-banner-content small-section">
                                    <h4>fashion</h4>
                                    <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
@@ -185,7 +185,7 @@
                                             <div>
                                                <div class="img-wrapper">
                                                   <div class="lable-block">
-                                                    <span class="lable3">new</span> 
+                                                    <span class="lable3">new</span>
                                                     <span class="lable4">on sale</span>
                                                   </div>
                                                   <div class="front">
@@ -194,10 +194,10 @@
                                                </div>
                                                <div class="product-detail">
                                                   <div class="rating">
-                                                    <i class="fa fa-star"></i> 
-                                                    <i class="fa fa-star"></i> 
-                                                    <i class="fa fa-star"></i> 
-                                                    <i class="fa fa-star"></i> 
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                   </div>
 
@@ -237,7 +237,7 @@ import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 export default class Cups extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('categories/categories') cat!: any
-  @Action('categories/getCategories') getCats!: any
+  @Action('categories/getCategories') loadCats!: any
   products: any = []
   alias: any = []
 
