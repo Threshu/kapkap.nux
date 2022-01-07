@@ -4,7 +4,7 @@
       Dodaj postać lub zwierzę
     </h3>
     <div class="objectsList">
-      <div v-for="(item, index) in cupObject.items" :key="index" class="objectItem">
+      <div v-for="(item, index) in items" :key="index" class="objectItem">
         <div class="objectRow">
           <div class="objImage">
             <img :src="item.bodyImageUrl">

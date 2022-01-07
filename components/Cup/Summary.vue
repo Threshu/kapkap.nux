@@ -8,7 +8,7 @@
             -
           </button>
           <input
-            v-model="cupObject.count"
+            v-model="count"
             type="number"
             class="qty-input"
             @keyup="recalculateTotal"
@@ -24,7 +24,7 @@
       <div class="price-box">
         <span class="price-label">Cena za sztukę:</span>
         <div class="price-val">
-          {{ cupData.price }} zł
+          {{ formatPrice(price) }} zł
         </div>
       </div>
 
@@ -33,7 +33,7 @@
       <div class="sum-box">
         <span class="sum-label">Suma:</span>
         <div class="sum-val">
-          {{ cupObject.total }} zł
+          {{ formatPrice(total) }} zł
         </div>
       </div>
     </div>
@@ -75,21 +75,36 @@
 </template>
 
 <script  lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { ProductObject } from '~/store/cup/getters'
 
 @Component({
   components: {
   }
 })
 export default class Summary extends Vue {
+  @Getter('cup/count') count!: number
+  @Getter('cup/price') price!: number
+  @Getter('cup/productObject') productObject!: ProductObject
+  @Getter('preview/previewId') previewId!: string
+
+  @Mutation('cup/setTotal') setTotal!: Function
+  @Mutation('cup/increaseQuantity') increaseQuantity!: Function
+  @Mutation('cup/decreaseQuantity') decreaseQuantity!: Function
+
+  formatPrice (value: number) {
+    const val = value.toFixed(2).replace('.', ',')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  }
+
   buyNow () {
   }
 
   async addToCart () {
     const basketObj = {
-      product: this.productObject(),
+      product: this.productObject,
       previewId: this.previewId,
-      number: this.cupObject.count,
+      number: this.count,
       token: localStorage.basketToken
     }
 
@@ -97,25 +112,6 @@ export default class Summary extends Vue {
     if (basket) {
       localStorage.basketToken = basket.data.token
     }
-  }
-
-  formatPrice (value: number) {
-    const val = (value / 1).toFixed(2).replace('.', ',')
-    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-  }
-
-  recalculateTotal () {
-    this.cupObject.total = this.formatPrice(this.cupData.price * this.cupObject.count)
-  }
-
-  increaseQuantity () {
-    this.cupObject.count++
-    this.recalculateTotal()
-  }
-
-  decreaseQuantity () {
-    this.cupObject.count--
-    this.recalculateTotal()
   }
 
   saveCartItem () {

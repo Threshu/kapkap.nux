@@ -1,5 +1,5 @@
-import { Cats, CupImageItem, Cups, Dogs, Men, Pet, Product, EditorState, Women } from '~/store/cup/state'
 import { Getter, Mutation } from 'nuxt-property-decorator'
+import { Cats, CupImageItem, Cups, Dogs, Men, Pet, Product, EditorState, Women, Cup } from '~/store/cup/state'
 
 const randomIntFromInterval = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -13,10 +13,6 @@ const randomIntFromInterval = (min: number, max: number) => {
 // @Mutation('cup/addItem') addItem!: Function
 
 export default {
-  setCups (state: EditorState, cups: Cups) {
-    state.cups = cups
-  },
-
   setDogs (state: EditorState, dogs: Dogs) {
     state.dogs = dogs
   },
@@ -62,8 +58,26 @@ export default {
     // dispatch('preview/getProductPreview')
   },
 
+  setTotal (state: EditorState, total: number) {
+    state.total = total
+  },
+
   addItem (state: EditorState, item: CupImageItem) {
     state.items.push(item)
+  },
+
+  recalculateTotal (state: EditorState) {
+    state.total = state.price * state.count
+  },
+
+  increaseQuantity (state: EditorState) {
+    state.count++
+    this.recalculateTotal(state)
+  },
+
+  decreaseQuantity (state: EditorState) {
+    state.count--
+    this.recalculateTotal(state)
   },
 
   prepareRandomProduct (state: EditorState) {

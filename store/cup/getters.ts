@@ -42,5 +42,6 @@ export default {
   cats: (state: EditorState) => state.cats,
   men: (state: EditorState) => state.men,
   women: (state: EditorState) => state.women,
-  product: (state: EditorState) => state.product
+  product: (state: EditorState) => state.product,
+  count: (state: EditorState) => state.count,
 }

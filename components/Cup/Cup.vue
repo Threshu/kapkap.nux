@@ -11,8 +11,8 @@
             :class="{'productModalBox': isMobile}"
             class="productBox"
           >
-            <h2 v-if="cupData">
-              {{ cupData.title }}
+            <h2 v-if="title">
+              {{ title }}
             </h2>
             <Preview />
             <EditArea />
@@ -41,6 +41,8 @@ export default class Cup extends Vue {
 
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('app/isMobile') isMobile!: boolean
+  @Getter('cup/editMode') editMode!: boolean
+  @Getter('cup/title') title!: string
 
   @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
   @Mutation('app/setIsMobile') setIsMobile!: Function
@@ -57,7 +59,6 @@ export default class Cup extends Vue {
 
   // old
   showConf = true
-  editMode = false
 
   async mounted () {
     await Promise.allSettled([

@@ -10,12 +10,14 @@ export type Cup = {
 export type Quote = {
   quoteId: string,
   quoteImageUrl: string,
-  quoteTags: string[]
+  quoteTags: string[],
+  quoteTitle: string
 }
 
 export type Background = {
   backgroundId: string,
-  backgroundURL: string
+  backgroundURL: string,
+  backgroundTitle: string
 }
 
 export type Pet = {
@@ -123,10 +125,11 @@ export type EditorState = {
   women: Women,
   product: Product,
 
-  total: number
-  count: number
-  price: string
-  title: string
+  total: number,
+  count: number,
+  price: number,
+  title: string,
+  editMode: boolean,
 
   workingObject: WorkingObject,
 

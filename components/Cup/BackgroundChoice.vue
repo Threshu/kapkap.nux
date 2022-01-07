@@ -10,10 +10,10 @@
           v-for="(item, index) in backgrounds.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)"
           :key="index"
           class="bgItem"
-          :class="{'selected': item.backgroundId == cupObject.bgId}"
+          :class="{'selected': item.backgroundId === backgroundId}"
           @click="setBackground(item.backgroundId)"
         >
-          <img :src="item.backgroundURL">
+          <img :src="item.backgroundURL" :alt="`Tło: ${item.backgroundTitle}`" />
         </div>
       </div>
 
@@ -22,10 +22,10 @@
           v-for="(item, index) in backgrounds"
           :key="index"
           class="bgItem"
-          :class="{'selected': item.backgroundId == cupObject.bgId}"
+          :class="{'selected': item.backgroundId === backgroundId}"
           @click="setBackground(item.backgroundId)"
         >
-          <img :src="item.backgroundURL">
+          <img :src="item.backgroundURL" :alt="`Tło: ${item.backgroundTitle}`" />
         </div>
       </div>
     </div>
@@ -74,7 +74,8 @@
   </div>
 </template>
 
-<script  lang="ts">
+<script lang="ts">
+
 import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import Summary from '~/components/Cup/Summary.vue'
 import { Background } from '~/store/cup/state'
@@ -86,6 +87,7 @@ import { Background } from '~/store/cup/state'
 })
 export default class BackgroundChoice extends Vue {
   @Getter('cup/backgrounds') backgrounds!: Background[]
+  @Getter('cup/backgroundId') backgroundId!: string
   @Getter('app/isMobile') isMobile!: boolean
 
   @Mutation('cup/setBackground') setBackground!: Function

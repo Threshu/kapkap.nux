@@ -13,7 +13,7 @@
           :class="{'selected': item.id === cupId}"
           @click="setCup(item.id)"
         >
-          <img v-if="item" :src="item.imageURL" :alt="item.name">
+          <img v-if="item" :src="item.imageURL" :alt="`Kubek: ${item.name}`" />
         </div>
       </div>
 
@@ -25,7 +25,7 @@
           :class="{'selected': item.id === cupId}"
           @click="setCup(item.id)"
         >
-          <img v-if="item" :src="item.imageURL" :alt="item.name">
+          <img v-if="item" :src="item.imageURL" :alt="`Kubek: ${item.name}`" />
         </div>
       </div>
     </div>

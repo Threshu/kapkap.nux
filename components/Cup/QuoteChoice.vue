@@ -7,13 +7,13 @@
     <div v-if="cups" class="quotesList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
       <div v-if="!isMobile">
         <div
-          v-for="(item, index) in cups.quotes.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)"
+          v-for="(item, index) in quotes.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)"
           :key="index"
           class="quoteItem"
-          :class="{'selected': item.quoteId === cupObject.quoteId}"
+          :class="{'selected': item.quoteId === quoteId}"
           @click="setQuote(item.quoteId)"
         >
-          <img :src="item.quoteImageUrl">
+          <img :src="item.quoteImageUrl" :alt="`Cytat: ${item.quoteTitle}`" />
         </div>
       </div>
       <div v-if="isMobile">
@@ -21,10 +21,10 @@
           v-for="(item, index) in quotes"
           :key="index"
           class="quoteItem"
-          :class="{'selected': item.quoteId === cupObject.quoteId}"
+          :class="{'selected': item.quoteId === quoteId}"
           @click="setQuote(item.quoteId)"
         >
-          <img :src="item.quoteImageUrl">
+          <img :src="item.quoteImageUrl" :alt="`Cytat: ${item.quoteTitle}`" />
         </div>
       </div>
     </div>
@@ -87,6 +87,7 @@ import { Quote } from '~/store/cup/state'
 export default class QuoteChoice extends Vue {
   @Getter('app/isMobile') isMobile!: boolean
   @Getter('cup/quotes') quotes!: Quote[]
+  @Getter('cup/quoteId') quoteId!: string
 
   @Mutation('cup/setQuote') setQuote!: Function
 
