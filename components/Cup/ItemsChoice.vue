@@ -274,6 +274,25 @@ export default class ItemsChoice extends Vue {
     return arr
   }
 
+  setHairColor (color: string) {
+    this.tempObject.hairColor = color
+  }
+
+  setFigure (bodyId: string, bodyImageUrl: string) {
+    this.tempObject.bodyId = bodyId
+    this.tempObject.bodyImageUrl = bodyImageUrl
+  }
+
+  setPet (variantId: any, id: any, bodyImageUrl: any) {
+    this.tempObject.id = id
+    this.tempObject.variantId = variantId
+    this.tempObject.bodyImageUrl = bodyImageUrl
+  }
+
+  setHairStyle (hairstyleId: string) {
+    this.tempObject.hairstyleId = hairstyleId
+  }
+
   resetTempObject () {
     this.tempObject = {
       name: '',

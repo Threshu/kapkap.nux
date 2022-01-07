@@ -90,6 +90,15 @@ export type CupImageItem = {
   data: CupImageData
 }
 
+export type WorkingObject = {
+  hairColor: string,
+  bodyId: string,
+  bodyImageUrl: string,
+  petId: string,
+  variantId: string,
+  hairstyleId: string
+}
+
 export type State = {
   cups: Cups,
   dogs: Dogs,
@@ -102,6 +111,8 @@ export type State = {
   count: number
   price: string
   title: string
+
+  workingObject: WorkingObject,
 
   productId: string,
   backgroundId: string,

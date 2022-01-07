@@ -26,7 +26,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Action, Vue, Prop } from 'nuxt-property-decorator'
+import { Component, Getter, Action, Vue, Prop, Mutation } from 'nuxt-property-decorator'
 import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
@@ -41,11 +41,14 @@ export default class Cup extends Vue {
 
   @Getter('defaults/isLoaded') isLoaded!: boolean
 
+  @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
+
   @Action('cup/getDogs') getDogs!: any
   @Action('cup/getCats') getCats!: any
   @Action('cup/getMen') getMen!: any
   @Action('cup/getWomen') getWomen!: any
   @Action('cup/getProduct') getProduct!: Function
+  @Action('preview/getProductPreview') getProductPreview!: Function
 
   showModal = false
   showEditModal = false
@@ -70,8 +73,11 @@ export default class Cup extends Vue {
     if (Number.isInteger(this.$store.state.basket.edit)) {
       this.setupEdit()
     } else {
+      this.prepareRandomProduct()
       // this.increaseQuantity()
     }
+
+    this.getProductPreview()
   }
 
   setupEdit () {
