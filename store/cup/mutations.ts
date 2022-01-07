@@ -1,72 +1,72 @@
-import { Cats, CupImageItem, Cups, Dogs, Men, Pet, Product, State, Women } from '~/store/cup/state'
+import { Cats, CupImageItem, Cups, Dogs, Men, Pet, Product, EditorState, Women } from '~/store/cup/state'
 import { Getter, Mutation } from 'nuxt-property-decorator'
 
 const randomIntFromInterval = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-@Getter('cup/men') men!: Men
-@Getter('cup/women') women!: Women
-@Getter('cup/cats') cats!: Cats
-@Getter('cup/dogs') dogs!: Dogs
-
-@Mutation('cup/addItem') addItem!: Function
+// @Getter('cup/men') men!: Men
+// @Getter('cup/women') women!: Women
+// @Getter('cup/cats') cats!: Cats
+// @Getter('cup/dogs') dogs!: Dogs
+//
+// @Mutation('cup/addItem') addItem!: Function
 
 export default {
-  setCups (state: State, cups: Cups) {
+  setCups (state: EditorState, cups: Cups) {
     state.cups = cups
   },
 
-  setDogs (state: State, dogs: Dogs) {
+  setDogs (state: EditorState, dogs: Dogs) {
     state.dogs = dogs
   },
 
-  setCats (state: State, cats: Cats) {
+  setCats (state: EditorState, cats: Cats) {
     state.cats = cats
   },
 
-  setMen (state: State, men: Men) {
+  setMen (state: EditorState, men: Men) {
     state.men = men
   },
 
-  setWomen (state: State, women: Women) {
+  setWomen (state: EditorState, women: Women) {
     state.women = women
   },
 
-  setProduct (state: State, product: Product) {
+  setProduct (state: EditorState, product: Product) {
     state.product = product
 
     state.productId = product.id
     state.title = product.title
     state.price = product.price
-    state.backgroundId = product.items?.[0]?.backgroundId
-    state.cupId = state.cups?.[0]?.id
+    state.backgroundId = product.items.backgrounds?.[0]?.backgroundId
+    state.cupId = product.items.cups?.[0]?.id
     state.quoteId = ''
     state.count = 0
     state.total = 0
     state.items = []
   },
 
-  setCup (state: State, cupId: string) {
+  setCup (state: EditorState, cupId: string) {
     state.cupId = cupId
     // dispatch('preview/getProductPreview')
   },
 
-  setBackground (state: State, backgroundId: string) {
+  setBackground (state: EditorState, backgroundId: string) {
     state.backgroundId = backgroundId
     // dispatch('preview/getProductPreview')
   },
 
-  setQuote (state: State, quoteId: string) {
+  setQuote (state: EditorState, quoteId: string) {
     state.quoteId = quoteId
     // dispatch('preview/getProductPreview')
   },
 
-  addItem (state: State, item: CupImageItem) {
+  addItem (state: EditorState, item: CupImageItem) {
     state.items.push(item)
   },
 
-  prepareRandomProduct (state: State) {
+  prepareRandomProduct (state: EditorState) {
     const count = randomIntFromInterval(2, 4)
     let i = 0; let randBody; let randHair; let typeRand
     let randPet

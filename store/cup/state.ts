@@ -116,7 +116,7 @@ export type WorkingObject = {
   hairstyleId: string
 }
 
-export type State = {
+export type EditorState = {
   dogs: Dogs,
   cats: Cats,
   men: Men,
@@ -137,4 +137,4 @@ export type State = {
   items: CupImageItem[]
 }
 
-export default () => (<State>{})
+export default () => (<EditorState>{})

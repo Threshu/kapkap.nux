@@ -1,4 +1,4 @@
-import { State, CupImageItem } from './state'
+import { EditorState, CupImageItem } from './state'
 
 export type ProductObject = {
   id: string,
@@ -7,7 +7,7 @@ export type ProductObject = {
 }
 
 export default {
-  productObject: (state: State): ProductObject => {
+  productObject: (state: EditorState): ProductObject => {
     const items: CupImageItem[] = []
     items.push({
       type: 'background',
@@ -35,12 +35,12 @@ export default {
     }
   },
 
-  cups: (state: State) => state.product.items.cups,
-  backgrounds: (state: State) => state.product.items.backgrounds,
-  quotes: (state: State) => state.product.items.quotes,
-  dogs: (state: State) => state.dogs,
-  cats: (state: State) => state.cats,
-  men: (state: State) => state.men,
-  women: (state: State) => state.women,
-  product: (state: State) => state.product
+  cups: (state: EditorState) => state.product.items.cups,
+  backgrounds: (state: EditorState) => state.product.items.backgrounds,
+  quotes: (state: EditorState) => state.product.items.quotes,
+  dogs: (state: EditorState) => state.dogs,
+  cats: (state: EditorState) => state.cats,
+  men: (state: EditorState) => state.men,
+  women: (state: EditorState) => state.women,
+  product: (state: EditorState) => state.product
 }

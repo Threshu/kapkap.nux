@@ -10,7 +10,7 @@
           v-for="(item, index) in cups.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)"
           :key="index"
           class="cupItem"
-          :class="{'selected': item.id === cupObject.cupId}"
+          :class="{'selected': item.id === cupId}"
           @click="setCup(item.id)"
         >
           <img v-if="item" :src="item.imageURL" :alt="item.name">
@@ -22,7 +22,7 @@
           v-for="(item, index) in cups"
           :key="index"
           class="cupItem"
-          :class="{'selected': item.id === cupObject.cupId}"
+          :class="{'selected': item.id === cupId}"
           @click="setCup(item.id)"
         >
           <img v-if="item" :src="item.imageURL" :alt="item.name">
@@ -46,7 +46,7 @@
         </button>
 
         <button
-          v-for="btnPage in Math.ceil(cups.length/itemsPerPage)"
+          v-for="btnPage in Math.ceil(cups.length / itemsPerPage)"
           :key="btnPage"
           class="page"
           :class="{'active': btnPage === page}"
@@ -76,7 +76,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import Summary from '~/components/Cup/Summary.vue'
 import { Cup } from '~/store/cup/state'
 
@@ -87,7 +87,10 @@ import { Cup } from '~/store/cup/state'
 })
 export default class CupChoice extends Vue {
   @Getter('cup/cups') cups!: Cup[]
+  @Getter('cup/cupId') CupId!: string
   @Getter('app/isMobile') isMobile!: boolean
+
+  @Mutation('cup/setCup') setCup!: Function
 
   itemsPerPage: number = 4
   page: number = 1
