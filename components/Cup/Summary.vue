@@ -96,6 +96,9 @@ export default class Summary extends Vue {
   @Mutation('cup/recalculateTotal') recalculateTotal!: Function
 
   formatPrice (value: number) {
+    if (!value) {
+      value = 0
+    }
     const val = value.toFixed(2).replace('.', ',')
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
@@ -118,9 +121,9 @@ export default class Summary extends Vue {
   }
 
   saveCartItem () {
-    let tempStorage: any = []
+    // let tempStorage: any = []
     if (localStorage.cup) {
-      tempStorage = JSON.parse(localStorage.cup)
+      // tempStorage = JSON.parse(localStorage.cup)
     }
     // tempStorage[this.$store.state.basket.edit] = this.cupObject
     // this.setBasket(tempStorage)

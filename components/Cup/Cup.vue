@@ -30,6 +30,7 @@ import { Component, Getter, Action, Vue, Prop, Mutation } from 'nuxt-property-de
 import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
+import { Cats, Product } from '~/store/cup/state'
 
 @Component({
   components: {
@@ -45,6 +46,7 @@ export default class Cup extends Vue {
   @Getter('cup/title') title!: string
 
   @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
+  @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
   @Mutation('app/setIsMobile') setIsMobile!: Function
 
   @Action('cup/getDogs') getDogs!: any
@@ -66,7 +68,7 @@ export default class Cup extends Vue {
       this.getCats(),
       this.getMen(),
       this.getWomen(),
-      this.getProduct({ id: this.$route.params.alias })
+      this.getProduct({ id: this.productId })
     ])
 
     this.checkIfMobile()
@@ -75,6 +77,7 @@ export default class Cup extends Vue {
     if (Number.isInteger(this.$store.state.basket.edit)) {
       this.setupEdit()
     } else {
+      this.resetWorkingObject()
       this.prepareRandomProduct()
       // this.increaseQuantity()
     }

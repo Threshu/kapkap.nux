@@ -116,16 +116,12 @@ export type WorkingItem = {
   hairColor?: string,
   hairstyleId?: string,
   id?: string,
-  variantId?: string
+  variantId?: string,
+  name?: string
 }
 
 export type WorkingObject = {
-  hairColor: string,
-  bodyId: string,
-  bodyImageUrl: string,
-  petId: string,
-  variantId: string,
-  hairstyleId: string,
+  cupId: string,
   items: WorkingItem[]
 }
 

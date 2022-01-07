@@ -1,4 +1,4 @@
-import { EditorState, CupImageItem } from './state'
+import { EditorState, CupImageItem, WorkingItem, CupImageData } from './state'
 
 export type ProductObject = {
   id: string,
@@ -24,8 +24,17 @@ export default {
         }
       })
     }
-    state.items.forEach((item: CupImageItem) => {
-      items.push(item)
+    state.workingObject.items.forEach((item: WorkingItem) => {
+      items.push({
+        type: item.type,
+        data: <CupImageData>{
+          bodyId: item.bodyId,
+          hairstyleId: item.hairstyleId,
+          id: item.id,
+          name: item.name,
+          variantId: item.variantId,
+        }
+      })
     })
 
     return {
@@ -35,9 +44,9 @@ export default {
     }
   },
 
-  cups: (state: EditorState) => state.product.items.cups,
-  backgrounds: (state: EditorState) => state.product.items.backgrounds,
-  quotes: (state: EditorState) => state.product.items.quotes,
+  cups: (state: EditorState) => state.product?.items.cups,
+  backgrounds: (state: EditorState) => state.product.items?.backgrounds,
+  quotes: (state: EditorState) => state.product?.items.quotes,
   dogs: (state: EditorState) => state.dogs,
   cats: (state: EditorState) => state.cats,
   men: (state: EditorState) => state.men,
@@ -46,5 +55,6 @@ export default {
   count: (state: EditorState) => state.count,
   total: (state: EditorState) => state.total,
   price: (state: EditorState) => state.price,
-  title: (state: EditorState) => state.title
+  title: (state: EditorState) => state.title,
+  editMode: (state: EditorState) => state.editMode
 }

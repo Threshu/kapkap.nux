@@ -1,5 +1,4 @@
 import { $axios } from '~/utils/api'
-import { Pet } from '~/store/cup/state'
 
 // @ts-ignore
 export const getCups = async ({ commit }) => {

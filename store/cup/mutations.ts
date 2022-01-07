@@ -54,10 +54,6 @@ export default {
     state.total = total
   },
 
-  addItem (state: EditorState, item: WorkingItem) {
-    state.workingObject.items.push(item)
-  },
-
   recalculateTotal (state: EditorState) {
     state.total = state.price * state.count
   },
@@ -72,9 +68,15 @@ export default {
     this.recalculateTotal(state)
   },
 
+  resetWorkingObject (state: EditorState) {
+    state.workingObject = {
+      cupId: '',
+      items: []
+    }
+  },
+
   prepareRandomProduct (state: EditorState) {
     const count = randomIntFromInterval(2, 4)
-    let i: number = 0
     let randBody: number
     let randHair: number
     let typeRand: number
@@ -90,7 +92,7 @@ export default {
           if (state.men) {
             randBody = randomIntFromInterval(0, state.men.bodies.length - 1)
             randHair = randomIntFromInterval(0, state.men.hairstyles.black.all.length - 1)
-            this.addItem(state, {
+            state.workingObject.items.push({
               type: 'man',
               bodyId: state.men.bodies[randBody].bodyId,
               bodyImageUrl: state.men.bodies[randBody].bodyImageUrl,
@@ -104,7 +106,7 @@ export default {
           if (state.women) {
             randBody = randomIntFromInterval(0, state.women.bodies.length - 1)
             randHair = randomIntFromInterval(0, state.women.hairstyles.black.bun.length - 1)
-            this.addItem(state, {
+            state.workingObject.items.push({
               type: 'woman',
               bodyId: state.women.bodies[randBody].bodyId,
               bodyImageUrl: state.women.bodies[randBody].bodyImageUrl,
@@ -115,27 +117,31 @@ export default {
           break
 
         case 3:
-          petsArray = Object.entries(state.dogs.pets)
-          randPet = randomIntFromInterval(0, petsArray.length - 1)
-          pet = petsArray[randPet][1]
-          randVariant = randomIntFromInterval(0, pet.length - 1)
-          this.addItem(state, {
-            type: 'dog',
-            id: pet[0].id,
-            variantId: pet[randVariant].variantId
-          })
+          if (state.dogs?.pets) {
+            petsArray = Object.entries(state.dogs.pets)
+            randPet = randomIntFromInterval(0, petsArray.length - 1)
+            pet = petsArray[randPet][1]
+            randVariant = randomIntFromInterval(0, pet.length - 1)
+            state.workingObject.items.push({
+              type: 'dog',
+              id: pet[0].id,
+              variantId: pet[randVariant].variantId
+            })
+          }
           break
 
         case 4:
-          petsArray = Object.entries(state.dogs.pets)
-          randPet = randomIntFromInterval(0, petsArray.length - 1)
-          pet = petsArray[randPet][1]
-          randVariant = randomIntFromInterval(0, pet.length - 1)
-          this.addItem(state, {
-            type: 'cat',
-            id: pet[0].id,
-            variantId: pet[randVariant].variantId
-          })
+          if (state.cats?.pets) {
+            petsArray = Object.entries(state.dogs.pets || [])
+            randPet = randomIntFromInterval(0, petsArray.length - 1)
+            pet = petsArray[randPet][1]
+            randVariant = randomIntFromInterval(0, pet.length - 1)
+            state.workingObject.items.push({
+              type: 'cat',
+              id: pet[0].id,
+              variantId: pet[randVariant].variantId
+            })
+          }
           break
       }
     }

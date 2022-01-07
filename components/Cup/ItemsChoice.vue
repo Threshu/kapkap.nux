@@ -172,7 +172,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Mutation, Vue } from 'nuxt-property-decorator'
 import Summary from '~/components/Cup/Summary.vue'
 
 @Component({
@@ -181,6 +181,8 @@ import Summary from '~/components/Cup/Summary.vue'
   }
 })
 export default class ItemsChoice extends Vue {
+  @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
+
   removeBox = false
   removeItemId = null
   objectData: any = []
@@ -210,13 +212,13 @@ export default class ItemsChoice extends Vue {
       // this.cupObject.items.push(this.tempObject)
     }
     // this.productPreview()
-    this.resetTempObject()
+    this.resetWorkingObject()
     // this.showEditModal = false
   }
 
   editCancel () {
     // this.showEditModal = false
-    this.resetTempObject()
+    this.resetWorkingObject()
     this.objectData = []
   }
 
@@ -291,19 +293,6 @@ export default class ItemsChoice extends Vue {
 
   setHairStyle (hairstyleId: string) {
     this.tempObject.hairstyleId = hairstyleId
-  }
-
-  resetTempObject () {
-    this.tempObject = {
-      name: '',
-      type: '',
-      edit: '',
-      bodyId: '',
-      variantId: '',
-      bodyImageUrl: '',
-      hairColor: 'black',
-      hairstyleId: ''
-    }
   }
 }
 </script>
