@@ -30,7 +30,6 @@ import { Component, Getter, Action, Vue, Prop, Mutation } from 'nuxt-property-de
 import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
-import { Cats, Product } from '~/store/cup/state'
 
 @Component({
   components: {
@@ -49,6 +48,7 @@ export default class Cup extends Vue {
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
   @Mutation('app/setIsMobile') setIsMobile!: Function
 
+  @Action('cup/increaseQuantity') increaseQuantity!: Function
   @Action('cup/loadDogs') loadDogs!: any
   @Action('cup/loadCats') loadCats!: any
   @Action('cup/loadMen') loadMen!: any
@@ -79,7 +79,7 @@ export default class Cup extends Vue {
     } else {
       this.resetWorkingObject()
       this.prepareRandomProduct()
-      // this.increaseQuantity()
+      this.increaseQuantity()
     }
 
     this.getProductPreview()

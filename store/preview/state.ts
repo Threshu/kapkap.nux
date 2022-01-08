@@ -3,7 +3,7 @@ export enum Side {
   Back = 'back'
 }
 
-export type Preview = {
+export type PreviewState = {
   previewId: string
   frontImageUrl: string,
   backImageUrl: string,
@@ -11,6 +11,6 @@ export type Preview = {
   currentSide: Side
 }
 
-export default () => (<Preview>{
+export default () => (<PreviewState>{
   currentSide: Side.Front
 })

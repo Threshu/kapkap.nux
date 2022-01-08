@@ -75,7 +75,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import { ProductObject } from '~/store/cup/getters'
 
 @Component({
@@ -91,9 +91,10 @@ export default class Summary extends Vue {
   @Getter('cup/editMode') editMode!: boolean
 
   @Mutation('cup/setTotal') setTotal!: Function
-  @Mutation('cup/increaseQuantity') increaseQuantity!: Function
   @Mutation('cup/decreaseQuantity') decreaseQuantity!: Function
   @Mutation('cup/recalculateTotal') recalculateTotal!: Function
+
+  @Action('cup/increaseQuantity') increaseQuantity!: Function
 
   formatPrice (value: number) {
     if (!value) {

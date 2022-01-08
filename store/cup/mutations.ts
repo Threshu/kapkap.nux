@@ -55,12 +55,10 @@ export default {
 
   increaseQuantity (state: EditorState) {
     state.count++
-    this.recalculateTotal(state)
   },
 
   decreaseQuantity (state: EditorState) {
     state.count--
-    this.recalculateTotal(state)
   },
 
   resetWorkingObject (state: EditorState) {

@@ -4,7 +4,7 @@
       v-if="frontImage"
       class="frontCup"
       :class="{'active': frontImage === activePreview}"
-      @click="setPreview(frontImage)"
+      @click="setActivePreview('front')"
     >
       Przód kubka
     </button>
@@ -12,7 +12,7 @@
       v-if="backImage"
       :class="{'active': backImage === activePreview}"
       class="backCup"
-      @click="setPreview(backImage)"
+      @click="setActivePreview('back')"
     >
       Tył kubka
     </button>
@@ -46,16 +46,20 @@
 </template>
 
 <script  lang="ts">
-import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Vue, Watch } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 
-@Component({
-  components: {
-  }
-})
+@Component
 export default class Preview extends Vue {
   @Getter('preview/frontImage') frontImage!: string
   @Getter('preview/backImage') backImage!: string
   @Getter('preview/activePreview') activePreview!: string
+
+  @Mutation('preview/setActivePreview') setActivePreview!: Function
+
+  @Watch('frontImage')
+  watch () {
+    console.log('preview', this.frontImage, this.backImage, this.activePreview)
+  }
 }
 </script>

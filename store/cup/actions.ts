@@ -1,5 +1,5 @@
 import { $axios } from '~/utils/api'
-import { Product } from '~/store/cup/state'
+import { EditorState, Product } from '~/store/cup/state'
 
 export const loadCups = async ({ commit }: any) => {
   try {
@@ -53,4 +53,14 @@ export const loadProduct = async ({ commit }: any, payload: Product) => {
       commit('setProduct', res.data)
     }
   } catch {}
+}
+
+export const increaseQuantity = ({ commit }: any) => {
+  commit('increaseQuantity')
+  commit('recalculateTotal')
+}
+
+export const decreaseQuantity = ({ commit }: any) => {
+  commit('decreaseQuantity')
+  commit('recalculateTotal')
 }
