@@ -70,21 +70,14 @@
         </button>
       </div>
     </div>
-
-    <Summary />
   </div>
 </template>
 
 <script  lang="ts">
 import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
-import Summary from '~/components/Cup/Summary.vue'
 import { Cup } from '~/store/cup/state'
 
-@Component({
-  components: {
-    Summary
-  }
-})
+@Component
 export default class CupChoice extends Vue {
   @Getter('cup/cups') cups!: Cup[]
   @Getter('cup/cupId') cupId!: string

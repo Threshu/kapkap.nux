@@ -166,20 +166,13 @@
         </button>
       </div>
     </div>
-
-    <Summary />
   </div>
 </template>
 
 <script  lang="ts">
 import { Component, Mutation, Vue } from 'nuxt-property-decorator'
-import Summary from '~/components/Cup/Summary.vue'
 
-@Component({
-  components: {
-    Summary
-  }
-})
+@Component
 export default class ItemsChoice extends Vue {
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
 

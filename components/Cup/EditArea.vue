@@ -19,18 +19,21 @@
       />
     </div>
 
-    <CupChoice
-      v-show="confMenu === 1"
-    />
-    <BackgroundChoice
-      v-if="confMenu === 2"
-    />
-    <ItemsChoice
-      v-if="confMenu === 3"
-    />
-    <QuoteChoice
-      v-if="confMenu === 4"
-    />
+    <div>
+      <CupChoice
+        v-show="confMenu === 1"
+      />
+      <BackgroundChoice
+        v-if="confMenu === 2"
+      />
+      <ItemsChoice
+        v-if="confMenu === 3"
+      />
+      <QuoteChoice
+        v-if="confMenu === 4"
+      />
+    </div>
+    <Summary />
   </div>
 </template>
 
@@ -41,10 +44,11 @@ import CupChoice from '~/components/Cup/CupChoice.vue'
 import BackgroundChoice from '~/components/Cup/BackgroundChoice.vue'
 import ItemsChoice from '~/components/Cup/ItemsChoice.vue'
 import QuoteChoice from '~/components/Cup/QuoteChoice.vue'
+import Summary from '~/components/Cup/Summary.vue'
 
 @Component({
   components: {
-    CupChoice, BackgroundChoice, ItemsChoice, QuoteChoice
+    CupChoice, BackgroundChoice, ItemsChoice, QuoteChoice, Summary
   }
 })
 export default class EditArea extends Vue {

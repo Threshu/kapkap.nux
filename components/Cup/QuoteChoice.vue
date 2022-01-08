@@ -69,21 +69,14 @@
         </button>
       </div>
     </div>
-
-    <Summary />
   </div>
 </template>
 
 <script  lang="ts">
 import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
-import Summary from '~/components/Cup/Summary.vue'
 import { Quote } from '~/store/cup/state'
 
-@Component({
-  components: {
-    Summary
-  }
-})
+@Component
 export default class QuoteChoice extends Vue {
   @Getter('app/isMobile') isMobile!: boolean
   @Getter('cup/quotes') quotes!: Quote[]

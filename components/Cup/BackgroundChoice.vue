@@ -69,22 +69,15 @@
         </button>
       </div>
     </div>
-
-    <Summary />
   </div>
 </template>
 
 <script lang="ts">
 
 import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
-import Summary from '~/components/Cup/Summary.vue'
 import { Background } from '~/store/cup/state'
 
-@Component({
-  components: {
-    Summary
-  }
-})
+@Component
 export default class BackgroundChoice extends Vue {
   @Getter('cup/backgrounds') backgrounds!: Background[]
   @Getter('cup/backgroundId') backgroundId!: string

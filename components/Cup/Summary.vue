@@ -99,7 +99,6 @@ export default class Summary extends Vue {
   @Watch('numberOfCups')
   setNumberOfCups () {
     this.setQuantity(this.numberOfCups)
-    this.$forceUpdate()
   }
 
   count () {
@@ -108,14 +107,18 @@ export default class Summary extends Vue {
 
   increaseQuantity () {
     this.numberOfCups = this.count() + 1
+    if (this.numberOfCups > 99) {
+      this.numberOfCups = 99
+    }
     this.setQuantity(this.numberOfCups)
-    this.$forceUpdate()
   }
 
   decreaseQuantity () {
     this.numberOfCups = this.count() - 1
+    if (this.numberOfCups < 1) {
+      this.numberOfCups = 1
+    }
     this.setQuantity(this.numberOfCups)
-    this.$forceUpdate()
   }
 
   formatPrice (value: number) {
