@@ -26,7 +26,8 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Action, Vue, Prop, Mutation } from 'nuxt-property-decorator'
+import { Component, Action, Vue, Prop, Mutation, Getter } from 'nuxt-property-decorator'
+import { mapGetters } from 'vuex'
 import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
@@ -39,10 +40,10 @@ import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
 export default class Cup extends Vue {
   @Prop(String) readonly productId!: string
 
-  @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('app/isMobile') isMobile!: boolean
-  @Getter('cup/editMode') editMode!: boolean
   @Getter('cup/title') title!: string
+  @Getter('app/isMobile') isMobile!: boolean
+  @Getter('defaults/isLoaded') isLoaded!: boolean
+  @Getter('cup/editMode') editMode!: boolean
 
   @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function

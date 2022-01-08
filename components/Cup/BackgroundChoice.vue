@@ -76,7 +76,7 @@
 
 <script lang="ts">
 
-import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
 import Summary from '~/components/Cup/Summary.vue'
 import { Background } from '~/store/cup/state'
 
@@ -90,7 +90,7 @@ export default class BackgroundChoice extends Vue {
   @Getter('cup/backgroundId') backgroundId!: string
   @Getter('app/isMobile') isMobile!: boolean
 
-  @Mutation('cup/setBackground') setBackground!: Function
+  @Action('cup/setBackground') setBackground!: Function
 
   itemsPerPage: number = 9
   page: number = 1

@@ -1,66 +1,89 @@
 import { $axios } from '~/utils/api'
-import { EditorState, Product } from '~/store/cup/state'
+import { Product } from '~/store/cup/state'
 
-export const loadCups = async ({ commit }: any) => {
-  try {
-    const res = await $axios.get('/cups')
-    if (res) {
-      commit('setCups', res)
+export default {
+  loadCups: async ({ commit }: any) => {
+    try {
+      const res = await $axios.get('/cups')
+      if (res) {
+        commit('setCups', res)
+      }
+    } catch {
     }
-  } catch {}
-}
+  },
 
-export const loadDogs = async ({ commit }: any) => {
-  try {
-    const res = await $axios.get('/dogs')
-    if (res?.data?.pets) {
-      commit('setDogs', res.data.pets)
+  loadDogs: async ({ commit }: any) => {
+    try {
+      const res = await $axios.get('/dogs')
+      if (res?.data?.pets) {
+        commit('setDogs', res.data.pets)
+      }
+    } catch {
     }
-  } catch {}
-}
+  },
 
-export const loadCats = async ({ commit }: any) => {
-  try {
-    const res = await $axios.get('/cats')
-    if (res?.data?.pets) {
-      commit('setCats', res.data.pets)
+  loadCats: async ({ commit }: any) => {
+    try {
+      const res = await $axios.get('/cats')
+      if (res?.data?.pets) {
+        commit('setCats', res.data.pets)
+      }
+    } catch {
     }
-  } catch {}
-}
+  },
 
-export const loadMen = async ({ commit }: any) => {
-  try {
-    const res = await $axios.get('/gender/male')
-    if (res?.data) {
-      commit('setMen', res.data)
+  loadMen: async ({ commit }: any) => {
+    try {
+      const res = await $axios.get('/gender/male')
+      if (res?.data) {
+        commit('setMen', res.data)
+      }
+    } catch {
     }
-  } catch {}
-}
+  },
 
-export const loadWomen = async ({ commit }: any) => {
-  try {
-    const res = await $axios.get('/gender/female')
-    if (res?.data) {
-      commit('setWomen', res.data)
+  loadWomen: async ({ commit }: any) => {
+    try {
+      const res = await $axios.get('/gender/female')
+      if (res?.data) {
+        commit('setWomen', res.data)
+      }
+    } catch {
     }
-  } catch {}
-}
+  },
 
-export const loadProduct = async ({ commit }: any, payload: Product) => {
-  try {
-    const res = await $axios.get('/product/' + payload.id)
-    if (res?.data) {
-      commit('setProduct', res.data)
+  loadProduct: async ({ commit }: any, payload: Product) => {
+    try {
+      const res = await $axios.get('/product/' + payload.id)
+      if (res?.data) {
+        commit('setProduct', res.data)
+      }
+    } catch {
     }
-  } catch {}
-}
+  },
 
-export const increaseQuantity = ({ commit }: any) => {
-  commit('increaseQuantity')
-  commit('recalculateTotal')
-}
+  increaseQuantity: ({ commit }: any) => {
+    commit('increaseQuantity')
+    commit('recalculateTotal')
+  },
 
-export const decreaseQuantity = ({ commit }: any) => {
-  commit('decreaseQuantity')
-  commit('recalculateTotal')
+  decreaseQuantity: ({ commit }: any) => {
+    commit('decreaseQuantity')
+    commit('recalculateTotal')
+  },
+
+  setCup: ({ commit, dispatch } : any, cupId: string) => {
+    commit('setCup', cupId)
+    dispatch('preview/getProductPreview')
+  },
+
+  setBackground: ({ commit, dispatch } : any, backgroundId: string) => {
+    commit('setBackground', backgroundId)
+    dispatch('preview/getProductPreview')
+  },
+
+  setQuote: ({ commit, dispatch } : any, quoteId: string) => {
+    commit('setQuote', quoteId)
+    dispatch('preview/getProductPreview')
+  },
 }

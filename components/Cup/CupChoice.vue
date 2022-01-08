@@ -76,7 +76,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
 import Summary from '~/components/Cup/Summary.vue'
 import { Cup } from '~/store/cup/state'
 
@@ -90,7 +90,7 @@ export default class CupChoice extends Vue {
   @Getter('cup/cupId') CupId!: string
   @Getter('app/isMobile') isMobile!: boolean
 
-  @Mutation('cup/setCup') setCup!: Function
+  @Action('cup/setCup') setCup!: Function
 
   itemsPerPage: number = 4
   page: number = 1

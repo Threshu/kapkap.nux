@@ -4,7 +4,7 @@
       Dodaj cytat
     </h3>
 
-    <div v-if="cups" class="quotesList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
+    <div v-if="quotes" class="quotesList" :class="{'desktop': !isMobile, 'mobile': isMobile}">
       <div v-if="!isMobile">
         <div
           v-for="(item, index) in quotes.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage)"
@@ -75,7 +75,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
 import Summary from '~/components/Cup/Summary.vue'
 import { Quote } from '~/store/cup/state'
 
@@ -89,7 +89,7 @@ export default class QuoteChoice extends Vue {
   @Getter('cup/quotes') quotes!: Quote[]
   @Getter('cup/quoteId') quoteId!: string
 
-  @Mutation('cup/setQuote') setQuote!: Function
+  @Action('cup/setQuote') setQuote!: Function
 
   itemsPerPage: number = 9
   page: number = 1

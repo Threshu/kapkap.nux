@@ -1,3 +1,4 @@
+import { Vue } from 'nuxt-property-decorator'
 import { Cats, Dogs, Men, Product, EditorState, Women, Pet } from '~/store/cup/state'
 
 const randomIntFromInterval = (min: number, max: number) => {
@@ -28,37 +29,37 @@ export default {
     state.total = 0
     state.title = product.title
     state.price = product.price
+    Vue.set(state, '', '')
   },
 
   setCup (state: EditorState, cupId: string) {
     state.workingObject.cupId = cupId
-    // dispatch('preview/getProductPreview')
   },
 
   setBackground (state: EditorState, backgroundId: string) {
     state.workingObject.backgroundId = backgroundId
-    // dispatch('preview/getProductPreview')
   },
 
   setQuote (state: EditorState, quoteId: string) {
     state.workingObject.quoteId = quoteId
-    // dispatch('preview/getProductPreview')
   },
 
   setTotal (state: EditorState, total: number) {
     state.total = total
+    Vue.set(state, '', '')
   },
 
   recalculateTotal (state: EditorState) {
     state.total = state.price * state.count
+    Vue.set(state, '', '')
   },
 
   increaseQuantity (state: EditorState) {
-    state.count++
+    Vue.set(state, 'count', state.count < 99 ? state.count + 1 : 99)
   },
 
   decreaseQuantity (state: EditorState) {
-    state.count--
+    Vue.set(state, 'count', state.count > 1 ? state.count - 1 : 1)
   },
 
   resetWorkingObject (state: EditorState) {
@@ -68,6 +69,7 @@ export default {
       quoteId: '',
       items: []
     }
+    Vue.set(state, '', '')
   },
 
   prepareRandomProduct (state: EditorState) {
@@ -144,5 +146,6 @@ export default {
           break
       }
     }
+    Vue.set(state, '', '')
   }
 }
