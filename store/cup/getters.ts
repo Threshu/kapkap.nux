@@ -58,5 +58,6 @@ export default {
   title: (state: EditorState) => state.title,
   editMode: (state: EditorState) => state.editMode,
   cupId: (state: EditorState) => state.workingObject?.cupId,
-  backgroundId: (state: EditorState) => state.workingObject?.backgroundId
+  backgroundId: (state: EditorState) => state.workingObject?.backgroundId,
+  items: (state: EditorState) => state.workingObject?.items
 }

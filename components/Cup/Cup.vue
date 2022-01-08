@@ -1,7 +1,5 @@
 <template>
   <section class="categoryBox">
-    <div v-if="showModal || showEditModal" class="overflow" />
-
     <div class="collection-wrapper productBoxBg">
       <div class="container">
         <div class="row">
@@ -30,7 +28,6 @@ import { Component, Action, Vue, Prop, Mutation, Getter } from 'nuxt-property-de
 import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
-import { mapGetters } from 'vuex'
 
 @Component({
   components: {
@@ -56,9 +53,6 @@ export default class Cup extends Vue {
   @Action('cup/loadWomen') loadWomen!: any
   @Action('cup/loadProduct') loadProduct!: Function
   @Action('preview/getProductPreview') getProductPreview!: Function
-
-  showModal = false
-  showEditModal = false
 
   // old
   showConf = true

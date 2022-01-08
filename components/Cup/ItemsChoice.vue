@@ -20,7 +20,7 @@
             <button class="down" @click="downItem(index)" />
           </div>
         </div>
-        <div v-if="removeItemId == index" class="removeBox">
+        <div v-if="removeItemId === index" class="removeBox">
           <button class="cancelRemove" @click="removeItem(null)">
             Anuluj
           </button>
@@ -166,15 +166,23 @@
         </button>
       </div>
     </div>
+
+    <div v-if="showModal || showEditModal" class="overflow" />
   </div>
 </template>
 
 <script  lang="ts">
-import { Component, Mutation, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { WorkingItem } from '~/store/cup/state'
 
 @Component
 export default class ItemsChoice extends Vue {
+  @Getter('cup/items') items!: WorkingItem[]
+
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
+
+  showModal = false
+  showEditModal = false
 
   removeBox = false
   removeItemId = null
@@ -192,34 +200,34 @@ export default class ItemsChoice extends Vue {
 
   newCupObject (data: Object, type: String) {
     this.objectData = data
-    // this.showModal = false
+    this.showModal = false
     this.objectData.type = type
-    // this.showEditModal = true
+    this.showEditModal = true
   }
 
   pushObject (type: any, edit: any) {
     this.tempObject.type = type
     if (typeof edit === 'number') {
-      // this.cupObject.items[edit] = this.tempObject
+      this.items[edit] = this.tempObject
     } else {
-      // this.cupObject.items.push(this.tempObject)
+      this.items.push(this.tempObject)
     }
     // this.productPreview()
     this.resetWorkingObject()
-    // this.showEditModal = false
+    this.showEditModal = false
   }
 
   editCancel () {
-    // this.showEditModal = false
+    this.showEditModal = false
     this.resetWorkingObject()
     this.objectData = []
   }
 
   editItem (itemIndex: number) {
-    // this.tempObject = this.cupObject.items[itemIndex]
-    // this.showModal = false
-    // this.showEditModal = true
-    // this.tempObject = this.cupObject.items[itemIndex]
+    this.tempObject = this.cupObject.items[itemIndex]
+    this.showModal = false
+    this.showEditModal = true
+    this.tempObject = this.cupObject.items[itemIndex]
     if (typeof itemIndex === 'number') {
       this.tempObject.edit = itemIndex
     }
