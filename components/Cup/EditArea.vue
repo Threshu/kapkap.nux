@@ -20,7 +20,7 @@
     </div>
 
     <CupChoice
-      v-if="confMenu === 1"
+      v-show="confMenu === 1"
     />
     <BackgroundChoice
       v-if="confMenu === 2"

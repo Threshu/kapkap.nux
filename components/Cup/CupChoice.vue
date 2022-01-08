@@ -87,7 +87,7 @@ import { Cup } from '~/store/cup/state'
 })
 export default class CupChoice extends Vue {
   @Getter('cup/cups') cups!: Cup[]
-  @Getter('cup/cupId') CupId!: string
+  @Getter('cup/cupId') cupId!: string
   @Getter('app/isMobile') isMobile!: boolean
 
   @Action('cup/setCup') setCup!: Function

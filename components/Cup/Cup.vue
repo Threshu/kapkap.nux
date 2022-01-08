@@ -27,10 +27,10 @@
 
 <script  lang="ts">
 import { Component, Action, Vue, Prop, Mutation, Getter } from 'nuxt-property-decorator'
-import { mapGetters } from 'vuex'
 import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
+import { mapGetters } from 'vuex'
 
 @Component({
   components: {
@@ -49,7 +49,7 @@ export default class Cup extends Vue {
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
   @Mutation('app/setIsMobile') setIsMobile!: Function
 
-  @Action('cup/increaseQuantity') increaseQuantity!: Function
+  @Action('cup/setQuantity') setQuantity!: Function
   @Action('cup/loadDogs') loadDogs!: any
   @Action('cup/loadCats') loadCats!: any
   @Action('cup/loadMen') loadMen!: any
@@ -80,7 +80,7 @@ export default class Cup extends Vue {
     } else {
       this.resetWorkingObject()
       this.prepareRandomProduct()
-      this.increaseQuantity()
+      this.setQuantity(1)
     }
 
     this.getProductPreview()

@@ -62,13 +62,8 @@ export default {
     }
   },
 
-  increaseQuantity: ({ commit }: any) => {
-    commit('increaseQuantity')
-    commit('recalculateTotal')
-  },
-
-  decreaseQuantity: ({ commit }: any) => {
-    commit('decreaseQuantity')
+  setQuantity: ({ commit }: any, quantity: number) => {
+    commit('setQuantity', quantity)
     commit('recalculateTotal')
   },
 

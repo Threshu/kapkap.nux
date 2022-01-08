@@ -5,21 +5,20 @@
         <span class="qty-label">Sztuk:</span>
         <div class="qty-flex">
           <button class="qty-minus" @click="decreaseQuantity">
-            -
+            &dash;
           </button>
           <input
-            v-model="count"
+            v-model="numberOfCups"
             type="number"
             class="qty-input"
-            @keyup="recalculateTotal"
           >
           <button class="qty-plus" @click="increaseQuantity">
-            +
+            &plus;
           </button>
         </div>
       </div>
 
-      <span class="price-sep">x</span>
+      <span class="price-sep">&times;</span>
 
       <div class="price-box">
         <span class="price-label">Cena za sztukę:</span>
@@ -28,12 +27,12 @@
         </div>
       </div>
 
-      <span class="sum-sep">=</span>
+      <span class="sum-sep">&equals;</span>
 
       <div class="sum-box">
         <span class="sum-label">Suma:</span>
         <div class="sum-val">
-          {{ formatPrice(total) }} zł
+          {{ formatPrice(total()) }} zł
         </div>
       </div>
     </div>
@@ -75,26 +74,49 @@
 </template>
 
 <script  lang="ts">
-import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Mutation, Vue, Watch } from 'nuxt-property-decorator'
 import { ProductObject } from '~/store/cup/getters'
 
-@Component({
-  components: {
-  }
-})
+@Component
 export default class Summary extends Vue {
-  @Getter('cup/count') count!: number
   @Getter('cup/price') price!: number
-  @Getter('cup/total') total!: number
+  // @Getter('cup/total') total!: number
   @Getter('cup/productObject') productObject!: ProductObject
   @Getter('preview/previewId') previewId!: string
   @Getter('cup/editMode') editMode!: boolean
 
   @Mutation('cup/setTotal') setTotal!: Function
-  @Mutation('cup/decreaseQuantity') decreaseQuantity!: Function
   @Mutation('cup/recalculateTotal') recalculateTotal!: Function
 
-  @Action('cup/increaseQuantity') increaseQuantity!: Function
+  @Action('cup/setQuantity') setQuantity!: Function
+
+  total () {
+    return this.$store.state.cup.total
+  }
+
+  numberOfCups: number = this.count() || 1
+
+  @Watch('numberOfCups')
+  setNumberOfCups () {
+    this.setQuantity(this.numberOfCups)
+    this.$forceUpdate()
+  }
+
+  count () {
+    return this.$store.state.cup.count
+  }
+
+  increaseQuantity () {
+    this.numberOfCups = this.count() + 1
+    this.setQuantity(this.numberOfCups)
+    this.$forceUpdate()
+  }
+
+  decreaseQuantity () {
+    this.numberOfCups = this.count() - 1
+    this.setQuantity(this.numberOfCups)
+    this.$forceUpdate()
+  }
 
   formatPrice (value: number) {
     if (!value) {

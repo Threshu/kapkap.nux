@@ -28,8 +28,7 @@ export default {
     state.count = 0
     state.total = 0
     state.title = product.title
-    state.price = product.price
-    Vue.set(state, '', '')
+    Vue.set(state, 'price', product.price)
   },
 
   setCup (state: EditorState, cupId: string) {
@@ -45,31 +44,29 @@ export default {
   },
 
   setTotal (state: EditorState, total: number) {
-    state.total = total
-    Vue.set(state, '', '')
+    Vue.set(state, 'total', total)
   },
 
   recalculateTotal (state: EditorState) {
-    state.total = state.price * state.count
-    Vue.set(state, '', '')
+    Vue.set(state, 'total', state.price * state.count)
   },
 
-  increaseQuantity (state: EditorState) {
-    Vue.set(state, 'count', state.count < 99 ? state.count + 1 : 99)
-  },
-
-  decreaseQuantity (state: EditorState) {
-    Vue.set(state, 'count', state.count > 1 ? state.count - 1 : 1)
+  setQuantity (state: EditorState, quantity: number) {
+    if (quantity < 1) {
+      quantity = 1
+    } else if (quantity > 99) {
+      quantity = 99
+    }
+    Vue.set(state, 'count', quantity)
   },
 
   resetWorkingObject (state: EditorState) {
-    state.workingObject = {
+    Vue.set(state, 'workingObject', {
       cupId: '',
       backgroundId: '',
       quoteId: '',
       items: []
-    }
-    Vue.set(state, '', '')
+    })
   },
 
   prepareRandomProduct (state: EditorState) {
@@ -146,6 +143,5 @@ export default {
           break
       }
     }
-    Vue.set(state, '', '')
   }
 }
