@@ -1,7 +1,7 @@
 import { Basket } from '@/store/basket/state'
 import { STATUS_PENDING } from '~/store/defaults/types'
 
-type Defaults = {
+export type Defaults = {
   status: string,
   defaultPetImageUrl: string,
   headerMessages: string[],
