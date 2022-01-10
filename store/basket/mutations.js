@@ -12,13 +12,8 @@ export default {
     state.basket = basket
   },
   setBasketItemCount (state, basket) {
-    var tempStorage = []
-    if (localStorage.cup) {
-      tempStorage = JSON.parse(localStorage.cup)
-      tempStorage[basket.index].count = basket.count
-      localStorage.cup = JSON.stringify(tempStorage)
-      state.basket = tempStorage
-    }
+    state.basket.basket.products[basket.index].number = basket.count
+    console.log(state.basket)
   },
 
   editBasket (state, index) {

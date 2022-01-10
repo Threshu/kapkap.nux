@@ -122,7 +122,7 @@
                           <button
                             type="button"
                             class="btn quantity-left-minus"
-                            @click="changeProductQuantity(index, item.count - 1)"
+                            @click="changeProductQuantity(index, item.number - 1)"
                           >
                             <i class="fa fa-angle-left" />
                           </button>
@@ -130,14 +130,14 @@
                         <input
                           type="text"
                           name="quantity"
-                          :value="item.count"
+                          :value="item.number"
                           readOnly="true"
                           class="form-control input-number"
                         >
                         <span class="input-group-prepend">
                           <button
                             class="btn quantity-right-plus"
-                            @click="changeProductQuantity(index, item.count + 1)"
+                            @click="changeProductQuantity(index, item.number + 1)"
                           >
                             <i class="fa fa-angle-right" />
                           </button>
@@ -163,7 +163,7 @@
                     <h2
                       class="td-color"
                     >
-                      {{ calculateItemTotal(item.price, item.count) }} zł
+                      {{ item.price }} zł
                     </h2>
                   </td>
                 </tr>
@@ -174,7 +174,7 @@
               <tfoot>
                 <tr>
                   <td>Suma:</td>
-                  <td><h2>{{ total }} zł</h2></td>
+                  <td><h2>{{ basket.basket.totalPrice }} zł</h2></td>
                 </tr>
               </tfoot>
             </table>
@@ -235,12 +235,12 @@ export default class Basket extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
 
   @Action('preview/fetchCartPreviews') fetchCartPreviews!: any
-  @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
+  @Action('basket/setBasket') setBasket!: any
   @Mutation('basket/editBasket') editBasket!: any
   @Mutation('basket/removeItem') removeItem!: any
+  @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
   @Getter('basket/basket') basket!: any
 
-  total: any = 0
   cartItems: any = []
 
   suscribe: any = this.$store.subscribe((mutation, state) => {
@@ -248,34 +248,29 @@ export default class Basket extends Vue {
       this.setCartItems(mutation.payload)
     }
 
-    if (mutation.type === 'basket/setBasketItemCount') {
-      this.setCartItems(state.basket.basket)
-    }
+
   })
 
   setCartItems (items: any) {
     this.cartItems = items
-    this.calculateTotal()
-  }
-
-  calculateTotal () {
-    this.total = 0
-    this.cartItems.forEach((item: any) => {
-      if (item) {
-        this.total = this.total + item.count * item.price
-      }
-    })
   }
 
   removeFromCart (index: number) {
     this.removeItem(index)
     this.cartItems.splice(index, 1)
-    this.calculateTotal()
   }
 
-  changeProductQuantity (index: number, count: number) {
-    this.setBasketItemCount({ index, count })
+  async changeProductQuantity (index: number, count: number) {  
+    const editBasket = {
+      'token': this.basket.token,
+      'number': count,
+      'previewId': this.basket.basket.products[index].previewId,
+      'product': {'product': this.basket.basket.products[index]}
+    }
+    console.log('basket', editBasket)
+    const basket = await this.$store.dispatch('basket/setBasket', editBasket)
   }
+
 
   calculateItemTotal (price: any, number: number) {
     return price * number
@@ -293,7 +288,7 @@ export default class Basket extends Vue {
   async getBasket () {
     if (localStorage.basketToken) {
       await this.$store.dispatch('basket/getBasket', { token: localStorage.basketToken }).then(() => {
-        console.log('aaa', this.basket)
+        this.cartItems = this.basket.basket.products
       })
     }
   }
