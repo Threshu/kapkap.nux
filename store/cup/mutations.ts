@@ -1,5 +1,5 @@
 import { Vue } from 'nuxt-property-decorator'
-import { Cats, Dogs, Men, Product, EditorState, Women, Pet } from '~/store/cup/state'
+import { Cats, Dogs, Men, Product, EditorState, Women, Pet, WorkingItem } from '~/store/cup/state'
 
 const randomIntFromInterval = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -37,6 +37,10 @@ export default {
 
   setBackground (state: EditorState, backgroundId: string) {
     state.workingObject.backgroundId = backgroundId
+  },
+
+  setItem (state: EditorState, payload: any) {
+    Vue.set(state.workingObject.items, payload.index, payload.item)
   },
 
   setQuote (state: EditorState, quoteId: string) {

@@ -6,10 +6,10 @@
     <div class="objectsList">
       <div v-for="(item, index) in items" :key="index" class="objectItem">
         <div class="objectRow">
-          <div class="objImage">
+          <div class="objImage" v-if="item && item.bodyImageUrl">
             <img :src="item.bodyImageUrl">
           </div>
-          <div class="objName">
+          <div class="objName" v-if="item && item.name">
             {{ item.name }}
           </div>
 
@@ -173,13 +173,19 @@
 
 <script  lang="ts">
 import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
-import { WorkingItem } from '~/store/cup/state'
+import { WorkingItem, Women, Men, Cats, Dogs} from '~/store/cup/state'
 
 @Component
 export default class ItemsChoice extends Vue {
   @Getter('cup/items') items!: WorkingItem[]
-
+  @Getter('cup/editMode') editMode!: boolean
+  @Getter('cup/women') women!: Women[]
+  @Getter('cup/men') men!: Men[]
+  @Getter('cup/cats') cats!: Cats[]
+  @Getter('cup/dogs') dogs!: Dogs[]
+  @Mutation('cup/setItem') setItem!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
+
 
   showModal = false
   showEditModal = false
@@ -198,6 +204,18 @@ export default class ItemsChoice extends Vue {
     hairstyleId: ''
   }
 
+  resetTempOBject () {
+    this.tempObject = {
+      type: '',
+      edit: '',
+      bodyId: '',
+      variantId: '',
+      bodyImageUrl: '',
+      hairColor: 'black',
+      hairstyleId: ''
+    }
+  }
+
   newCupObject (data: Object, type: String) {
     this.objectData = data
     this.showModal = false
@@ -208,48 +226,49 @@ export default class ItemsChoice extends Vue {
   pushObject (type: any, edit: any) {
     this.tempObject.type = type
     if (typeof edit === 'number') {
-      this.items[edit] = this.tempObject
+      this.setItem({'index': edit, 'item': this.tempObject})
     } else {
-      this.items.push(this.tempObject)
+      this.setItem({'index': this.items.length, 'item': this.tempObject})
     }
-    // this.productPreview()
-    this.resetWorkingObject()
+    this.resetTempOBject()
     this.showEditModal = false
+    // this.productPreview()
   }
 
   editCancel () {
     this.showEditModal = false
-    this.resetWorkingObject()
+    // this.resetWorkingObject()
     this.objectData = []
   }
 
   editItem (itemIndex: number) {
-    this.tempObject = this.cupObject.items[itemIndex]
+    this.tempObject = { ...this.items[itemIndex] }
     this.showModal = false
     this.showEditModal = true
-    this.tempObject = this.cupObject.items[itemIndex]
+    
     if (typeof itemIndex === 'number') {
       this.tempObject.edit = itemIndex
     }
 
     switch (this.tempObject.type) {
       case 'cat':
-        // this.objectData = this.cats
+        this.objectData = this.cats
         this.objectData.type = this.tempObject.type
         break
       case 'dog':
-        // this.objectData = this.dogs
+        this.objectData = this.dogs
         this.objectData.type = this.tempObject.type
         break
       case 'woman':
-        // this.objectData = this.women
+        this.objectData = this.women
         this.objectData.type = this.tempObject.type
         break
       case 'man':
-        // this.objectData = this.men
+        this.objectData = this.men
         this.objectData.type = this.tempObject.type
         break
     }
+
   }
 
   topItem (index: number) {
@@ -282,6 +301,7 @@ export default class ItemsChoice extends Vue {
   }
 
   setFigure (bodyId: string, bodyImageUrl: string) {
+    console.log("xxxxx")
     this.tempObject.bodyId = bodyId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
