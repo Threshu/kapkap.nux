@@ -36,7 +36,7 @@
 
       <div v-if="showEditModal" class="modal">
         <button class="closeModal" @click="showEditModal = false">
-          ✕
+          &times;
         </button>
         <h3 class="modalTitle">
           {{ objectData.title }}
@@ -54,7 +54,7 @@
               v-for="(item, index) in objectData.bodies"
               :key="index"
               class="objItem"
-              :class="[item.bodyId == tempObject.bodyId ? 'selected' : '']"
+              :class="[item.bodyId === tempObject.bodyId ? 'selected' : '']"
               @click="setFigure(item.bodyId, item.bodyImageUrl)"
             >
               <img
@@ -72,7 +72,7 @@
               v-for="(item, index) in objectData.hairstyles"
               :key="index"
               class="objItem"
-              :class="[index == tempObject.hairColor ? 'selected' : '']"
+              :class="[index === tempObject.hairColor ? 'selected' : '']"
             >
               <div class="colorItem" :class="index" @click="setHairColor(index)" />
             </div>
@@ -88,7 +88,7 @@
                 v-for="(item1, index1) in item"
                 :key="index1"
                 class="objItem"
-                :class="item1.hairstyleId == tempObject.hairstyleId ? 'selected' : ''"
+                :class="item1.hairstyleId === tempObject.hairstyleId ? 'selected' : ''"
                 @click="setHairStyle(item1.hairstyleId)"
               >
                 <img
@@ -108,7 +108,7 @@
                 v-for="(item, index) in dogs"
                 :key="index"
                 class="objItem"
-                :class="item.variantId == tempObject.variantId ? 'selected' : ''"
+                :class="item.variantId === tempObject.variantId ? 'selected' : ''"
                 @click="setPet(item.variantId, item.id, item.imageUrl)"
               >
                 <img
@@ -133,7 +133,7 @@
         class="modal"
       >
         <button class="closeModal" @click="showModal = false">
-          ✕
+          &times;
         </button>
         <h3 class="modalTitle">
           Kogo lub co chcesz dodać?
@@ -166,13 +166,11 @@
         </button>
       </div>
     </div>
-
-    <div v-if="showModal || showEditModal" class="overflow" />
   </div>
 </template>
 
 <script  lang="ts">
-import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Mutation, Vue, Watch } from 'nuxt-property-decorator'
 import { WorkingItem, Women, Men, Cats, Dogs } from '~/store/cup/state'
 
 @Component
@@ -206,6 +204,16 @@ export default class ItemsChoice extends Vue {
     bodyImageUrl: '',
     hairColor: 'black',
     hairstyleId: ''
+  }
+
+  @Watch('showModal')
+  onChangeModal (value: boolean) {
+    this.$emit('changeModal', value)
+  }
+
+  @Watch('showEditModal')
+  onChangeEditModal (value: boolean) {
+    this.$emit('changeEditModal', value)
   }
 
   resetTempOBject () {

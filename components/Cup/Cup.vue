@@ -13,13 +13,21 @@
               {{ title }}
             </h2>
             <Preview />
-            <EditArea />
+            <EditArea
+              @changeModal="changeModal"
+              @changeEditModal="changeEditModal"
+            />
           </div>
         </div>
       </div>
     </div>
 
     <RelatedProducts v-if="false" />
+
+    <div
+      v-if="showModal || showEditModal"
+      class="overflow"
+    />
   </section>
 </template>
 
@@ -53,6 +61,9 @@ export default class Cup extends Vue {
   @Action('cup/loadWomen') loadWomen!: any
   @Action('cup/loadProduct') loadProduct!: Function
   @Action('preview/getProductPreview') getProductPreview!: Function
+
+  showModal = false
+  showEditModal = false
 
   // old
   showConf = true
@@ -90,6 +101,14 @@ export default class Cup extends Vue {
 
   checkIfMobile () {
     this.setIsMobile(window.innerWidth <= 1350)
+  }
+
+  changeModal (value: boolean) {
+    this.showModal = value
+  }
+
+  changeEditModal (value: boolean) {
+    this.showEditModal = value
   }
 }
 </script>
