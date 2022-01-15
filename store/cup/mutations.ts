@@ -1,11 +1,11 @@
 import { Vue } from 'nuxt-property-decorator'
 import { Cats, Dogs, Men, Product, EditorState, Women, Pet } from '~/store/cup/state'
 
-const randomIntFromInterval = (min: number, max: number) => {
+function randomIntFromInterval (min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function moveArrayItemToNewIndex(arr: any, oldIndex: number, newIndex: number) {
+function moveArrayItemToNewIndex (arr: any, oldIndex: number, newIndex: number) {
   arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0])
   return arr
 }
