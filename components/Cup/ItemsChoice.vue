@@ -6,22 +6,22 @@
     <div class="objectsList">
       <div v-for="(item, index) in items" :key="index" class="objectItem">
         <div class="objectRow">
-          <div class="objImage" v-if="item && item.bodyImageUrl">
+          <div v-if="item && item.bodyImageUrl" class="objImage">
             <img :src="item.bodyImageUrl">
           </div>
-          <div class="objName" v-if="item && item.name">
+          <div v-if="item && item.name" class="objName">
             {{ item.name }}
           </div>
 
           <div class="objActions">
             <button class="edit" @click="editItem(index)" />
-            <button class="remove" @click="removeItem(index)" />
-            <button class="top" @click="topItem(index)" />
-            <button class="down" @click="downItem(index)" />
+            <button class="remove" @click="setItemIdToRemove(index)" />
+            <button class="top" @click="moveItemUp(index)" />
+            <button class="down" @click="moveItemDown(index)" />
           </div>
         </div>
         <div v-if="removeItemId === index" class="removeBox">
-          <button class="cancelRemove" @click="removeItem(null)">
+          <button class="cancelRemove" @click="cancelRemove">
             Anuluj
           </button>
           <button class="acceptRemove" @click="removeItem(index, true)">
@@ -172,8 +172,8 @@
 </template>
 
 <script  lang="ts">
-import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
-import { WorkingItem, Women, Men, Cats, Dogs} from '~/store/cup/state'
+import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { WorkingItem, Women, Men, Cats, Dogs } from '~/store/cup/state'
 
 @Component
 export default class ItemsChoice extends Vue {
@@ -183,15 +183,19 @@ export default class ItemsChoice extends Vue {
   @Getter('cup/men') men!: Men[]
   @Getter('cup/cats') cats!: Cats[]
   @Getter('cup/dogs') dogs!: Dogs[]
+
   @Mutation('cup/setItem') setItem!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
 
+  @Action('cup/moveItemUp') moveItemUp!: Function
+  @Action('cup/moveItemDown') moveItemDown!: Function
+  @Action('cup/removeItem') removeItem!: Function
 
   showModal = false
   showEditModal = false
 
   removeBox = false
-  removeItemId = null
+  removeItemId = -1
   objectData: any = []
 
   tempObject: any = {
@@ -226,9 +230,9 @@ export default class ItemsChoice extends Vue {
   pushObject (type: any, edit: any) {
     this.tempObject.type = type
     if (typeof edit === 'number') {
-      this.setItem({'index': edit, 'item': this.tempObject})
+      this.setItem({ index: edit, item: this.tempObject })
     } else {
-      this.setItem({'index': this.items.length, 'item': this.tempObject})
+      this.setItem({ index: this.items.length, item: this.tempObject })
     }
     this.resetTempOBject()
     this.showEditModal = false
@@ -245,7 +249,7 @@ export default class ItemsChoice extends Vue {
     this.tempObject = { ...this.items[itemIndex] }
     this.showModal = false
     this.showEditModal = true
-    
+
     if (typeof itemIndex === 'number') {
       this.tempObject.edit = itemIndex
     }
@@ -268,32 +272,6 @@ export default class ItemsChoice extends Vue {
         this.objectData.type = this.tempObject.type
         break
     }
-
-  }
-
-  topItem (index: number) {
-    // this.moveArrayItemToNewIndex(this.cupObject.items, index, index - 1)
-    // this.productPreview()
-  }
-
-  downItem (index: number) {
-    // this.moveArrayItemToNewIndex(this.cupObject.items, index, index + 1)
-    // this.productPreview()
-  }
-
-  removeItem (itemId: any, confirmRemove: Boolean = false) {
-    if (confirmRemove) {
-      // this.cupObject.items.splice(itemId, 1)
-      this.removeItemId = null
-      // this.productPreview()
-    } else {
-      this.removeItemId = itemId
-    }
-  }
-
-  moveArrayItemToNewIndex (arr: any, oldIndex: number, newIndex: number) {
-    arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0])
-    return arr
   }
 
   setHairColor (color: string) {
@@ -301,7 +279,7 @@ export default class ItemsChoice extends Vue {
   }
 
   setFigure (bodyId: string, bodyImageUrl: string) {
-    console.log("xxxxx")
+    console.log('xxxxx')
     this.tempObject.bodyId = bodyId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
@@ -314,6 +292,14 @@ export default class ItemsChoice extends Vue {
 
   setHairStyle (hairstyleId: string) {
     this.tempObject.hairstyleId = hairstyleId
+  }
+
+  setItemIdToRemove (index: number) {
+    this.removeItemId = index
+  }
+
+  cancelRemove () {
+    this.removeItemId = -1
   }
 }
 </script>

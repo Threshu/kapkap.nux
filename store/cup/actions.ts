@@ -81,4 +81,19 @@ export default {
     commit('setQuote', quoteId)
     dispatch('preview/getProductPreview')
   },
+
+  moveItemUp: ({ commit, dispatch } : any, index: number) => {
+    commit('moveItemUp', index)
+    dispatch('preview/getProductPreview')
+  },
+
+  moveItemDown: ({ commit, dispatch } : any, index: number) => {
+    commit('moveItemDown', index)
+    dispatch('preview/getProductPreview')
+  },
+
+  removeItem: ({ commit, dispatch } : any, index: number) => {
+    commit('removeItem', index)
+    dispatch('preview/getProductPreview')
+  }
 }
