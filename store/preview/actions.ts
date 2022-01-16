@@ -7,9 +7,12 @@ export default {
     getters
   }: any) => {
     const apiData = {
-      ...rootGetters['cup/productObject'],
+      product: rootGetters['cup/productObject'],
       previewId: getters.previewId
     }
+
+    console.log('API data', apiData)
+
     const result = await $axios.post('/preview', apiData)
     if (result?.data) {
       commit('setPreviewId', result.data.previewId)

@@ -3,7 +3,7 @@ import { PreviewState, Side } from '~/store/preview/state'
 
 export default {
   setPreviewImages: (state: PreviewState, { frontImageUrl, backImageUrl }: any) => {
-    state.frontImageUrl = frontImageUrl
+    Vue.set(state, 'frontImageUrl', frontImageUrl)
     Vue.set(state, 'backImageUrl', backImageUrl)
   },
 

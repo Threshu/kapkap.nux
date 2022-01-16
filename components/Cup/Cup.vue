@@ -9,9 +9,6 @@
             :class="{'productModalBox': isMobile}"
             class="productBox"
           >
-            <h2 v-if="title">
-              {{ title }}
-            </h2>
             <Preview />
             <EditArea
               @changeModal="changeModal"
