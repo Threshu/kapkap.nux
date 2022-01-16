@@ -39,19 +39,19 @@
           &times;
         </button>
         <h3 class="modalTitle">
-          {{ objectData.title }}
+          {{ popupData.title }}
         </h3>
 
         <div class="modalContent edit">
           <input v-model="tempObject.name" class="objectName" type="text" placeholder="Imię" ref="name">
 
-          <div v-if="objectData.bodies" class="objectsBox">
+          <div v-if="popupData.bodies" class="objectsBox">
             <h4 class="objectTitle">
               Sylwetka
             </h4>
 
             <div
-              v-for="(item, index) in objectData.bodies"
+              v-for="(item, index) in popupData.bodies"
               :key="index"
               class="objItem"
               :class="[item.bodyId === tempObject.bodyId ? 'selected' : '']"
@@ -64,12 +64,12 @@
             </div>
           </div>
 
-          <div v-if="objectData.hairstyles" class="objectsBox color">
+          <div v-if="popupData.hairstyles" class="objectsBox color">
             <h4 class="objectTitle">
               Kolor włosów
             </h4>
             <div
-              v-for="(item, index) in objectData.hairstyles"
+              v-for="(item, index) in popupData.hairstyles"
               :key="index"
               class="objItem"
               :class="[index === tempObject.hairColor ? 'selected' : '']"
@@ -78,12 +78,12 @@
             </div>
           </div>
 
-          <div v-if="objectData.hairstyles && objectData.hairstyles[tempObject.hairColor]" class="objectsBox">
+          <div v-if="popupData.hairstyles && popupData.hairstyles[tempObject.hairColor]" class="objectsBox">
             <h4 class="objectTitle">
               Rodzaj włosów
             </h4>
 
-            <div v-for="(item, index) in objectData.hairstyles[tempObject.hairColor]" :key="index">
+            <div v-for="(item, index) in popupData.hairstyles[tempObject.hairColor]" :key="index">
               <div
                 v-for="(item1, index1) in item"
                 :key="index1"
@@ -98,9 +98,9 @@
               </div>
             </div>
           </div>
-          <div v-if="objectData.type==='dog' || objectData.type==='cat'" class="objectsBox">
+          <div v-if="popupData.type==='dog' || popupData.type==='cat'" class="objectsBox">
             <div
-              v-for="(dogs, breed) in objectData"
+              v-for="(dogs, breed) in popupData"
               :key="breed"
             >
               <span class="breed">{{ breed }}</span>
@@ -124,7 +124,7 @@
         <button class="cancel" @click="editCancel()">
           Anuluj
         </button>
-        <button class="add" @click="pushObject(objectData.type, tempObject.edit)">
+        <button class="add" @click="pushObject(popupData.type, tempObject.edit)">
           Zapisz
         </button>
       </div>
@@ -189,13 +189,16 @@ export default class ItemsChoice extends Vue {
   @Action('cup/removeItem') removeItem!: Function
   @Action('cup/setItem') setItem!: Function
 
-  showModal = false
-  showEditModal = false
+  showModal: boolean = false
+  showEditModal: boolean = false
 
-  removeBox = false
-  removeItemId = -1
-  objectData: any = []
+  removeBox: boolean = false
+  removeItemId: number = -1
 
+  // data to be displayed in the popup when adding or editing an object
+  popupData: any = []
+
+  // temporary object created in the popup when adding or editing
   tempObject: any = {
     type: '',
     edit: '',
@@ -229,9 +232,9 @@ export default class ItemsChoice extends Vue {
   }
 
   newCupObject (data: Object, type: String) {
-    this.objectData = data
+    this.popupData = data
     this.showModal = false
-    this.objectData.type = type
+    this.popupData.type = type
     this.showEditModal = true
   }
 
@@ -249,7 +252,7 @@ export default class ItemsChoice extends Vue {
   editCancel () {
     this.showEditModal = false
     this.resetTempObject()
-    this.objectData = []
+    this.popupData = []
   }
 
   editItem (itemIndex: number) {
@@ -261,20 +264,20 @@ export default class ItemsChoice extends Vue {
 
     switch (this.tempObject.type) {
       case 'cat':
-        this.objectData = this.cats
-        this.objectData.type = this.tempObject.type
+        this.popupData = this.cats
+        this.popupData.type = this.tempObject.type
         break
       case 'dog':
-        this.objectData = this.dogs
-        this.objectData.type = this.tempObject.type
+        this.popupData = this.dogs
+        this.popupData.type = this.tempObject.type
         break
       case 'woman':
-        this.objectData = this.women
-        this.objectData.type = this.tempObject.type
+        this.popupData = this.women
+        this.popupData.type = this.tempObject.type
         break
       case 'man':
-        this.objectData = this.men
-        this.objectData.type = this.tempObject.type
+        this.popupData = this.men
+        this.popupData.type = this.tempObject.type
         break
     }
   }
