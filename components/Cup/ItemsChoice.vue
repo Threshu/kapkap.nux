@@ -20,7 +20,7 @@
             <button class="down" @click="moveItemDown(index)" />
           </div>
         </div>
-        <div v-if="removeItemId === index" class="removeBox">
+        <div v-if="removeItemIndex === index" class="removeBox">
           <button class="cancelRemove" @click="cancelRemove">
             Anuluj
           </button>
@@ -193,7 +193,7 @@ export default class ItemsChoice extends Vue {
   showEditModal: boolean = false
 
   removeBox: boolean = false
-  removeItemId: number = -1
+  removeItemIndex: number = -1
 
   // data to be displayed in the popup when adding or editing an object
   popupData: any = []
@@ -303,11 +303,11 @@ export default class ItemsChoice extends Vue {
   }
 
   setItemIdToRemove (index: number) {
-    this.removeItemId = index
+    this.removeItemIndex = index
   }
 
   cancelRemove () {
-    this.removeItemId = -1
+    this.removeItemIndex = -1
   }
 }
 </script>
