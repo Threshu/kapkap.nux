@@ -56,6 +56,10 @@ export default {
     Vue.set(state, 'total', total)
   },
 
+  setEditMode (state: EditorState, editMode: boolean) {
+    Vue.set(state, 'editMode', editMode)
+  },
+
   recalculateTotal (state: EditorState) {
     Vue.set(state, 'total', state.price * state.count)
   },

@@ -38,34 +38,57 @@
     </div>
 
     <div class="confButtons">
-      <button
-        v-if="!editMode"
-        class="next"
-        @click="buyNow()"
+      <template
+        v-if="confMenu < 4"
       >
-        Kup Teraz
-      </button>
-      <button
-        v-if="!editMode"
-        class="next fl"
-        @click="addToCart()"
+        <button
+          v-if="!editMode"
+          class="next"
+          @click="openNextEditor"
+        >
+          Dalej
+        </button>
+        <button
+          v-if="!editMode"
+          class="next fl"
+          @click="openPrevEditor"
+        >
+          Wstecz
+        </button>
+      </template>
+      <template
+        v-else-if="!editMode"
       >
-        Dodaj do koszyka
-      </button>
-      <button
-        v-if="editMode"
-        class="next"
-        @click="saveCartItem()"
+        <button
+          class="next"
+          @click="buyNow()"
+        >
+          Kup Teraz
+        </button>
+        <button
+          class="next fl"
+          @click="addToCart()"
+        >
+          Dodaj do koszyka
+        </button>
+      </template>
+      <template
+        v-else-if="editMode"
       >
-        Zapisz
-      </button>
-      <button
-        v-if="editMode"
-        class="next fl"
-        @click="backToCart()"
-      >
-        Wróć
-      </button>
+        <button
+          class="next"
+          @click="saveCartItem()"
+        >
+          Zapisz
+        </button>
+        <button
+          class="next fl"
+          @click="backToCart()"
+        >
+          Wróć
+        </button>
+      </template>
+
       <button class="reset" @click="reset()">
         Resetuj i zacznij od nowa
       </button>
@@ -74,11 +97,13 @@
 </template>
 
 <script  lang="ts">
-import { Action, Component, Getter, Mutation, Vue, Watch } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Mutation, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { ProductObject } from '~/store/cup/getters'
 
 @Component
 export default class Summary extends Vue {
+  @Prop(Number) readonly confMenu!: number
+
   @Getter('cup/price') price!: number
   // @Getter('cup/total') total!: number
   @Getter('cup/productObject') productObject!: ProductObject
@@ -103,6 +128,20 @@ export default class Summary extends Vue {
 
   count () {
     return this.$store.state.cup.count
+  }
+
+  openPrevEditor () {
+    if (this.confMenu > 1) {
+      this.$emit('changeEditor', this.confMenu - 1)
+    } else {
+      this.$emit('closeConfigurator')
+    }
+  }
+
+  openNextEditor () {
+    if (this.confMenu < 4) {
+      this.$emit('changeEditor', this.confMenu + 1)
+    }
   }
 
   increaseQuantity () {

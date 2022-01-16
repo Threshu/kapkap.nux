@@ -33,7 +33,10 @@
         v-if="confMenu === 4"
       />
     </div>
-    <Summary />
+    <Summary
+      :conf-menu="confMenu"
+      @changeEditor="changeConfMenu"
+    />
   </div>
 </template>
 
@@ -55,6 +58,10 @@ export default class EditArea extends Vue {
   confMenu = 1
 
   openCupItems (id: number) {
+    this.confMenu = id
+  }
+
+  changeConfMenu (id: number) {
     this.confMenu = id
   }
 }

@@ -16,6 +16,7 @@
             <EditArea
               @changeModal="changeModal"
               @changeEditModal="changeEditModal"
+              @closeConfigurator="closeConfigurator"
             />
           </div>
         </div>
@@ -53,6 +54,7 @@ export default class Cup extends Vue {
   @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
   @Mutation('app/setIsMobile') setIsMobile!: Function
+  @Mutation('cup/setEditMode') setEditMode!: Function
 
   @Action('cup/setQuantity') setQuantity!: Function
   @Action('cup/loadDogs') loadDogs!: any
@@ -94,8 +96,10 @@ export default class Cup extends Vue {
   setupEdit () {
     const editObj = JSON.parse(localStorage.cup)
     if (editObj[this.$store.state.basket.edit]) {
-      this.editMode = true
+      this.setEditMode(true)
       // this.cupObject = editObj[this.$store.state.basket.edit]
+    } else {
+      this.setEditMode(false)
     }
   }
 
@@ -109,6 +113,10 @@ export default class Cup extends Vue {
 
   changeEditModal (value: boolean) {
     this.showEditModal = value
+  }
+
+  closeConfigurator () {
+    this.showConf = false
   }
 }
 </script>
