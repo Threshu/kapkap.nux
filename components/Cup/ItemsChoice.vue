@@ -43,7 +43,7 @@
         </h3>
 
         <div class="modalContent edit">
-          <input v-model="tempObject.name" class="objectName" type="text" placeholder="Imię">
+          <input v-model="tempObject.name" class="objectName" type="text" placeholder="Imię" ref="name">
 
           <div v-if="objectData.bodies" class="objectsBox">
             <h4 class="objectTitle">
@@ -182,12 +182,12 @@ export default class ItemsChoice extends Vue {
   @Getter('cup/cats') cats!: Cats[]
   @Getter('cup/dogs') dogs!: Dogs[]
 
-  @Mutation('cup/setItem') setItem!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
 
   @Action('cup/moveItemUp') moveItemUp!: Function
   @Action('cup/moveItemDown') moveItemDown!: Function
   @Action('cup/removeItem') removeItem!: Function
+  @Action('cup/setItem') setItem!: Function
 
   showModal = false
   showEditModal = false
@@ -216,7 +216,7 @@ export default class ItemsChoice extends Vue {
     this.$emit('changeEditModal', value)
   }
 
-  resetTempOBject () {
+  resetTempObject () {
     this.tempObject = {
       type: '',
       edit: '',
@@ -242,14 +242,13 @@ export default class ItemsChoice extends Vue {
     } else {
       this.setItem({ index: this.items.length, item: this.tempObject })
     }
-    this.resetTempOBject()
+    this.resetTempObject()
     this.showEditModal = false
-    // this.productPreview()
   }
 
   editCancel () {
     this.showEditModal = false
-    // this.resetWorkingObject()
+    this.resetTempObject()
     this.objectData = []
   }
 
@@ -258,9 +257,7 @@ export default class ItemsChoice extends Vue {
     this.showModal = false
     this.showEditModal = true
 
-    if (typeof itemIndex === 'number') {
-      this.tempObject.edit = itemIndex
-    }
+    this.tempObject.edit = itemIndex
 
     switch (this.tempObject.type) {
       case 'cat':

@@ -45,7 +45,7 @@ export default {
   },
 
   setItem (state: EditorState, payload: any) {
-    Vue.set(state.workingObject.items, payload.index, payload.item)
+    Vue.set(state.workingObject.items, payload.index, { ...payload.item })
   },
 
   setQuote (state: EditorState, quoteId: string) {

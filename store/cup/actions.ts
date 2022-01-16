@@ -69,31 +69,36 @@ export default {
 
   setCup: ({ commit, dispatch } : any, cupId: string) => {
     commit('setCup', cupId)
-    dispatch('preview/getProductPreview')
+    dispatch('preview/getProductPreview', null, { root: true })
   },
 
   setBackground: ({ commit, dispatch } : any, backgroundId: string) => {
     commit('setBackground', backgroundId)
-    dispatch('preview/getProductPreview')
+    dispatch('preview/getProductPreview', null, { root: true })
   },
 
   setQuote: ({ commit, dispatch } : any, quoteId: string) => {
     commit('setQuote', quoteId)
-    dispatch('preview/getProductPreview')
+    dispatch('preview/getProductPreview', null, { root: true })
   },
 
   moveItemUp: ({ commit, dispatch } : any, index: number) => {
     commit('moveItemUp', index)
-    dispatch('preview/getProductPreview')
+    dispatch('preview/getProductPreview', null, { root: true })
   },
 
   moveItemDown: ({ commit, dispatch } : any, index: number) => {
     commit('moveItemDown', index)
-    dispatch('preview/getProductPreview')
+    dispatch('preview/getProductPreview', null, { root: true })
   },
 
   removeItem: ({ commit, dispatch } : any, index: number) => {
     commit('removeItem', index)
-    dispatch('preview/getProductPreview')
+    dispatch('preview/getProductPreview', null, { root: true })
+  },
+
+  setItem: ({ commit, dispatch } : any, payload: any) => {
+    commit('setItem', payload)
+    dispatch('preview/getProductPreview', null, { root: true })
   }
 }
