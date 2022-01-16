@@ -135,6 +135,7 @@ export default class Summary extends Vue {
       this.$emit('changeEditor', this.confMenu - 1)
     } else {
       this.$emit('closeConfigurator')
+      this.$router.push('/kubki')
     }
   }
 
