@@ -1217,12 +1217,13 @@
 								z-index: 2;
 							}
 							.modalContent {
-								height: calc(100vh - 45px);
+								height: calc(100vh - 42px);
 								overflow: auto;
 								display: flex;
 								flex-wrap: wrap;
 								justify-content: center;
 								align-items: center;
+								padding-top: 50px;
 							}
 							.modalTitle {
 								position: absolute;

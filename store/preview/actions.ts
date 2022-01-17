@@ -7,7 +7,7 @@ export default {
     getters
   }: any) => {
     const apiData = {
-      product: rootGetters['cup/productObject'],
+      ...rootGetters['cup/productObject'],
       previewId: getters.previewId
     }
 
