@@ -11,8 +11,6 @@ export default {
       previewId: getters.previewId
     }
 
-    console.log('API data', apiData)
-
     const result = await $axios.post('/preview', apiData)
     if (result?.data) {
       commit('setPreviewId', result.data.previewId)

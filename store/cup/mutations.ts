@@ -92,8 +92,7 @@ export default {
     let pet: Pet[]
     let petsArray: any[]
 
-    const randCup: number = randomIntFromInterval(0, state.product.items.cups.length - 1)
-    state.workingObject.cupId = state.product.items.cups[randCup].id
+    state.workingObject.cupId = state.product.items.cups[0].id
     state.workingObject.backgroundId = state.product.backgroundId
 
     for (let i = 0; i < count; i++) {

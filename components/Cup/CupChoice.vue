@@ -74,7 +74,7 @@
 </template>
 
 <script  lang="ts">
-import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
 import { Cup } from '~/store/cup/state'
 
 @Component
@@ -85,15 +85,8 @@ export default class CupChoice extends Vue {
 
   @Action('cup/setCup') setCup!: Function
 
-  @Mutation('app/setIsMobile') setIsMobile!: Function
-
   itemsPerPage: number = 4
   page: number = 1
-
-  mounted () {
-    this.checkIfMobile()
-    console.log('mobi2', this.isMobile)
-  }
 
   goToPage (page: number) {
     const maxPage = Math.ceil(this.cups.length / this.itemsPerPage)
@@ -101,9 +94,6 @@ export default class CupChoice extends Vue {
     if (page > 0 && page <= maxPage) {
       this.page = page
     }
-  }
-  async checkIfMobile () {
-    await this.setIsMobile(window.innerWidth <= 1350)
   }
 }
 </script>
