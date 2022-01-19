@@ -22,7 +22,6 @@
         <image-zoom
           class="desktop"
           :regular="activePreview"
-          :zoom="activePreview"
           alt="Podgląd wygenerowanego obrazu kubka"
           hover-message="Najedź myszką, aby powiększyć obraz"
         />

@@ -924,11 +924,9 @@
 					margin-top: 70px;
 					text-align: center;
 					max-height: 468px;
+          overflow: hidden;
 
 					img {
-						//max-width: 580px;
-						width: auto;
-						max-width: 100%;
 						height: auto;
 						cursor: pointer;
 					}
