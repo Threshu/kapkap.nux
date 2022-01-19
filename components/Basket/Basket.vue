@@ -236,7 +236,7 @@ export default class Basket extends Vue {
 
   @Action('preview/fetchCartPreviews') fetchCartPreviews!: any
   @Action('basket/setBasket') setBasket!: any
-  @Mutation('basket/editBasket') editBasket!: any
+  @Action('basket/editBasket') editBasket!: any
   @Mutation('basket/removeItem') removeItem!: any
   @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
   @Getter('basket/basket') basket!: any
@@ -268,7 +268,7 @@ export default class Basket extends Vue {
       'productId': this.basket.basket.products[index].productId,
       'product': this.basket.basket.products[index]
     }
-    this.setBasket(editBasket);
+    this.editBasket(editBasket);
   }
 
 

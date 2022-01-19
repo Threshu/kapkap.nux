@@ -6,6 +6,12 @@ export const setBasket = async ({ commit }, apiData) => {
   return res
 }
 
+export const editBasket = async ({ commit }, apiData) => {
+  const res = await $axios.patch('/basket', apiData)
+  commit('setBasket', res.data)
+  return res
+}
+
 export const getBasket = async ({ commit }, payload) => {
   try {
     const res = await $axios.get('/basket/' + payload.token)
