@@ -91,15 +91,17 @@ export default {
     let randVariant: number
     let pet: Pet[]
     let petsArray: any[]
+    let maxHumans = Math.ceil(count / 2)
+    let i = 0
 
     state.workingObject.cupId = state.product.items.cups[0].id
     state.workingObject.backgroundId = state.product.backgroundId
 
-    for (let i = 0; i < count; i++) {
+    while (i < count) {
       typeRand = randomIntFromInterval(1, 4)
       switch (typeRand) {
         case 1:
-          if (state.men) {
+          if (state.men && maxHumans > 0) {
             randBody = randomIntFromInterval(0, state.men.bodies.length - 1)
             randHair = randomIntFromInterval(0, state.men.hairstyles.black.all.length - 1)
             state.workingObject.items.push({
@@ -109,11 +111,13 @@ export default {
               hairColor: 'black',
               hairstyleId: state.men.hairstyles.black.all[randHair].hairstyleId
             })
+            i++
+            maxHumans--
           }
           break
 
         case 2:
-          if (state.women) {
+          if (state.women && maxHumans > 0) {
             randBody = randomIntFromInterval(0, state.women.bodies.length - 1)
             randHair = randomIntFromInterval(0, state.women.hairstyles.black.bun.length - 1)
             state.workingObject.items.push({
@@ -123,12 +127,14 @@ export default {
               hairColor: 'black',
               hairstyleId: state.women.hairstyles.black.bun[randHair].hairstyleId
             })
+            i++
+            maxHumans--
           }
           break
 
         case 3:
-          if (state.dogs?.pets) {
-            petsArray = Object.entries(state.dogs.pets)
+          if (state.dogs) {
+            petsArray = Object.entries(state.dogs)
             randPet = randomIntFromInterval(0, petsArray.length - 1)
             pet = petsArray[randPet][1]
             randVariant = randomIntFromInterval(0, pet.length - 1)
@@ -137,12 +143,13 @@ export default {
               id: pet[0].id,
               variantId: pet[randVariant].variantId
             })
+            i++
           }
           break
 
         case 4:
-          if (state.cats?.pets) {
-            petsArray = Object.entries(state.dogs.pets || [])
+          if (state.cats) {
+            petsArray = Object.entries(state.dogs || [])
             randPet = randomIntFromInterval(0, petsArray.length - 1)
             pet = petsArray[randPet][1]
             randVariant = randomIntFromInterval(0, pet.length - 1)
@@ -151,6 +158,7 @@ export default {
               id: pet[0].id,
               variantId: pet[randVariant].variantId
             })
+            i++
           }
           break
       }
