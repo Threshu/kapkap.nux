@@ -28,17 +28,9 @@ export type Pet = {
   tags?: string[]
 }
 
-export type Dogs = {
-  success: boolean,
-  title: string,
-  pets: Record<string, Pet[]>
-}
+export type Dogs = Record<string, Pet[]>
 
-export type Cats = {
-  success: boolean,
-  title: string,
-  pets: Record<string, Pet[]>
-}
+export type Cats = Record<string, Pet[]>
 
 export type Body = {
   bodyId: string,
