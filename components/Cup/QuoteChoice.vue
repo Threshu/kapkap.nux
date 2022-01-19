@@ -13,7 +13,7 @@
           :class="{'selected': item.quoteId === quoteId}"
           @click="setQuote(item.quoteId)"
         >
-          <img :src="item.quoteImageUrl" :alt="`Cytat: ${item.quoteTitle}`" />
+          <img :src="item.quoteImageUrl" :alt="`Cytat: ${item.quoteTitle}`">
         </div>
       </div>
       <div v-if="isMobile">
@@ -24,7 +24,7 @@
           :class="{'selected': item.quoteId === quoteId}"
           @click="setQuote(item.quoteId)"
         >
-          <img :src="item.quoteImageUrl" :alt="`Cytat: ${item.quoteTitle}`" />
+          <img :src="item.quoteImageUrl" :alt="`Cytat: ${item.quoteTitle}`">
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
           class="prevAll"
           @click="goToPage(1)"
         >
-          &lt;&lt;
+          &laquo;
         </button>
 
         <button
@@ -59,13 +59,13 @@
           class="next"
           @click="goToPage(page + 1)"
         >
-          >
+          &gt;
         </button>
         <button
           class="nextAll"
           @click="goToPage(Math.ceil(quotes.length / itemsPerPage))"
         >
-          >>
+          &raquo;
         </button>
       </div>
     </div>

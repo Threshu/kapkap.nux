@@ -37,7 +37,7 @@ export default {
   },
 
   setCup (state: EditorState, cupId: string) {
-    state.workingObject.cupId = cupId
+    Vue.set(state.workingObject, 'cupId', cupId)
   },
 
   setBackground (state: EditorState, backgroundId: string) {
@@ -49,7 +49,7 @@ export default {
   },
 
   setQuote (state: EditorState, quoteId: string) {
-    state.workingObject.quoteId = quoteId
+    Vue.set(state.workingObject, 'quoteId', quoteId)
   },
 
   setTotal (state: EditorState, total: number) {
