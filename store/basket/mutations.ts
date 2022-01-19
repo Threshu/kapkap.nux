@@ -2,6 +2,7 @@ import { Vue } from 'nuxt-property-decorator'
 import { BasketContainer, BasketState, Product } from '~/store/basket/state'
 
 export default {
+  // @todo check if it is working properly
   removeItem (state: BasketState, index: any) {
     let tempStorage = []
     if (localStorage.cup) {
@@ -16,11 +17,13 @@ export default {
     Vue.set(state, 'basket', basket)
   },
 
+  // @todo
   setBasketItemCount (state: BasketState, basket: any) {
     state.basket.products[basket.index].number = basket.count
     console.log(state.basket)
   },
 
+  // @todo
   editBasket (state: BasketState, index: any) {
     state.edit = index
   },

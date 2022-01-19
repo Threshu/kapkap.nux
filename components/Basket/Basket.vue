@@ -251,6 +251,8 @@ export default class Basket extends Vue {
     return !this.cartItems.length
   }
 
+  // @todo - we have to base on basketItemId, not on index!
+  // @todo - removing only via mutation
   removeFromCart (index: number) {
     this.removeItem(index)
     this.cartItems.splice(index, 1)
@@ -274,6 +276,7 @@ export default class Basket extends Vue {
     this.editBasket(basket)
   }
 
+  // @todo
   editProduct (index: number) {
     this.editBasket(index)
     this.$router.push('/kubek/xxx')

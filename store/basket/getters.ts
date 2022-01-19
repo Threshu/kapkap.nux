@@ -5,6 +5,6 @@ export default {
   cartItems: (state: BasketState): Product[] => state.basket?.products || [],
   totalPrice: (state: BasketState): number => state.basket?.totalPrice || 0.00,
 
-  // ???
+  // @todo
   editb: (state: BasketState) => state.edit
 }

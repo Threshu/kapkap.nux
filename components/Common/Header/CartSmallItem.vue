@@ -24,6 +24,7 @@ export default class CartSmallItem extends Vue {
 
   @Mutation('basket/removeItem') removeItem!: any
 
+  // @todo - we have to base on basketItemId, not on index!
   onRemoveFromCart (index: any) {
     this.removeItem(index)
   }

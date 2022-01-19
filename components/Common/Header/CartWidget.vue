@@ -60,6 +60,7 @@ export default class CartWidget extends Vue {
   @Getter('basket/basket') basket!: BasketContainer
   @Getter('basket/totalPrice') totalPrice!: number
 
+  // @todo - we have to base on basketItemId, not on index!
   removeCartItem (index: number) {
     this.cartItems.splice(index, 1)
   }
