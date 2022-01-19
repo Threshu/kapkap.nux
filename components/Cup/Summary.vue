@@ -109,25 +109,23 @@ export default class Summary extends Vue {
   @Getter('cup/productObject') productObject!: ProductObject
   @Getter('preview/previewId') previewId!: string
   @Getter('cup/editMode') editMode!: boolean
+  @Getter('cup/count') count!: number
 
   @Mutation('cup/setTotal') setTotal!: Function
   @Mutation('cup/recalculateTotal') recalculateTotal!: Function
 
   @Action('cup/setQuantity') setQuantity!: Function
+  @Action('basket/setBasket') setBasket!: Function
 
   total () {
     return this.$store.state.cup.total
   }
 
-  numberOfCups: number = this.count() || 1
+  numberOfCups: number = this.count || 1
 
   @Watch('numberOfCups')
   setNumberOfCups () {
     this.setQuantity(this.numberOfCups)
-  }
-
-  count () {
-    return this.$store.state.cup.count
   }
 
   openPrevEditor () {
@@ -146,7 +144,7 @@ export default class Summary extends Vue {
   }
 
   increaseQuantity () {
-    this.numberOfCups = this.count() + 1
+    this.numberOfCups = this.count + 1
     if (this.numberOfCups > 99) {
       this.numberOfCups = 99
     }
@@ -154,7 +152,7 @@ export default class Summary extends Vue {
   }
 
   decreaseQuantity () {
-    this.numberOfCups = this.count() - 1
+    this.numberOfCups = this.count - 1
     if (this.numberOfCups < 1) {
       this.numberOfCups = 1
     }
@@ -180,7 +178,8 @@ export default class Summary extends Vue {
       token: localStorage.basketToken
     }
 
-    const basket = await this.$store.dispatch('basket/setBasket', basketObj)
+    const basket = await this.setBasket(basketObj);
+
     if (basket) {
       localStorage.basketToken = basket.data.token
     }

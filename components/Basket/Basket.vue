@@ -163,7 +163,7 @@
                     <h2
                       class="td-color"
                     >
-                      {{ item.price }} zł
+                      {{ item.price*item.number }} zł
                     </h2>
                   </td>
                 </tr>
@@ -265,16 +265,12 @@ export default class Basket extends Vue {
       'token': this.basket.token,
       'number': count,
       'previewId': this.basket.basket.products[index].previewId,
-      'product': {'product': this.basket.basket.products[index]}
+      'productId': this.basket.basket.products[index].productId,
+      'product': this.basket.basket.products[index]
     }
-    console.log('basket', editBasket)
-    const basket = await this.$store.dispatch('basket/setBasket', editBasket)
+    this.setBasket(editBasket);
   }
 
-
-  calculateItemTotal (price: any, number: number) {
-    return price * number
-  }
 
   processCartPreviews () {
     this.fetchCartPreviews(this.cartItems)
@@ -289,6 +285,7 @@ export default class Basket extends Vue {
     if (localStorage.basketToken) {
       await this.$store.dispatch('basket/getBasket', { token: localStorage.basketToken }).then(() => {
         this.cartItems = this.basket.basket.products
+        console.log(this.cartItems)
       })
     }
   }
