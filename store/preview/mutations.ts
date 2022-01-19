@@ -8,6 +8,7 @@ export default {
   },
 
   setActivePreview: (state: PreviewState, side: Side) => {
+    Vue.set(state, 'currentSide', side)
     if (side === Side.Front) {
       Vue.set(state, 'activePreviewImageUrl', state.frontImageUrl)
     } else {
@@ -17,5 +18,9 @@ export default {
 
   setPreviewId: (state: PreviewState, id: string) => {
     Vue.set(state, 'previewId', id)
+  },
+
+  setSide: (state: PreviewState, side: Side) => {
+    Vue.set(state, 'currentSide', side)
   }
 }
