@@ -94,10 +94,13 @@ export default {
     let maxHumans = Math.ceil(count / 2)
     let i = 0
 
+    // safeCounter is used to avoid an infinite loop and a page crash
+    let safeCounter = 100
+
     state.workingObject.cupId = state.product.items.cups[0].id
     state.workingObject.backgroundId = state.product.backgroundId
 
-    while (i < count) {
+    while (i < count && safeCounter > 0) {
       typeRand = randomIntFromInterval(1, 4)
       switch (typeRand) {
         case 1:
@@ -162,6 +165,7 @@ export default {
           }
           break
       }
+      safeCounter--
     }
   },
 
