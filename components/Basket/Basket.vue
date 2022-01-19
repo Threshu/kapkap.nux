@@ -265,7 +265,7 @@ export default class Basket extends Vue {
       'token': this.basket.token,
       'number': count,
       'previewId': this.basket.basket.products[index].previewId,
-      'productId': this.basket.basket.products[index].productId,
+      'productId': this.basket.basket.products[index].id,
       'product': this.basket.basket.products[index]
     }
     this.editBasket(editBasket);
