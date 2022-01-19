@@ -76,7 +76,7 @@ export default class CartWidget extends Vue {
 
   setCartItems (items: any) {
     this.cartItems = items.basket
-    this.itemsNumber = this.cartItems.products.length
+    this.itemsNumber = this.cartItems?.products?.length || 0
   }
 
   mounted () {

@@ -1,3 +1,5 @@
+import { CupImageItem } from '~/store/cup/state'
+
 export type Dog = {
   id: string,
   variantIndex: number,
@@ -5,25 +7,28 @@ export type Dog = {
 }
 
 export type Product = {
-  id: string,
+  cartItemId: string,
+  productId: string,
   previewId: string,
-  productSetName: string,
   price: number,
   number: number,
-  dogIds: Dog[],
-  quoteIds: string[],
-  maleHairstyleIds: string[],
-  femaleHairstyleIds: string[],
-  maleBodyIds: string[],
-  femaleBodyIds: string[],
-  humanNames: string[]
-  frontImageUrl: string,
-  backImageUrl: string
+  items: CupImageItem[]
+  frontThumbnail: string,
+  backThumbnail: string,
+  title: string,
+  cupId: string
 }
 
-export type Basket = {
-  products: Product[],
-  totalPrice: number
+export type BasketContainer = {
+  beforeDiscount: number,
+  discountValue: number,
+  totalPrice: number,
+  products: Product[]
 }
 
-export default () => (<Basket>{})
+export type BasketState = {
+  basket: BasketContainer,
+  edit: any
+}
+
+export default () => (<BasketState>{})

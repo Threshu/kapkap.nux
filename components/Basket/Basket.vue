@@ -40,7 +40,7 @@
                   <!-- PREVIEWS -->
                   <td>
                     <NuxtLink
-                      to="`/edytuj-produkt/${item.id}`"
+                      to="`/edytuj-produkt/${item.cartItemId}`"
                     >
                       <div class="small-preview cart">
                         <template
@@ -75,7 +75,7 @@
                   <!-- PRODUCT NAME -->
                   <td>
                     <NuxtLink
-                      :to="`/edytuj-produkt/${item.id}`"
+                      :to="`/edytuj-produkt/${item.itemCartId}`"
                     >
                       {{ item.title }}
                     </NuxtLink>
@@ -174,7 +174,7 @@
               <tfoot>
                 <tr>
                   <td>Suma:</td>
-                  <td><h2>{{ basket.basket.totalPrice }} zł</h2></td>
+                  <td><h2>{{ basket.totalPrice }} zł</h2></td>
                 </tr>
               </tfoot>
             </table>
@@ -227,28 +227,29 @@ import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorato
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import SmallLoader from '~/components/Common/SmallLoader.vue'
 import { STATUS_LOADED } from '~/store/defaults/types'
+import { BasketContainer } from '~/store/basket/state'
 
 @Component({
   components: { SmallLoader, Breadcrumb }
 })
 export default class Basket extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
+  @Getter('basket/basket') basket!: BasketContainer
 
-  @Action('preview/fetchCartPreviews') fetchCartPreviews!: any
-  @Action('basket/setBasket') setBasket!: any
-  @Action('basket/editBasket') editBasket!: any
   @Mutation('basket/removeItem') removeItem!: any
   @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
-  @Getter('basket/basket') basket!: any
+
+  @Action('preview/fetchCartPreviews') fetchCartPreviews!: Function
+  @Action('basket/setBasket') setBasket!: Function
+  @Action('basket/loadBasket') loadBasket!: Function
+  @Action('basket/editBasket') editBasket!: Function
 
   cartItems: any = []
 
-  suscribe: any = this.$store.subscribe((mutation, state) => {
+  subscribe: any = this.$store.subscribe((mutation: any) => {
     if (mutation.type === 'basket/setBasket') {
       this.setCartItems(mutation.payload)
     }
-
-
   })
 
   setCartItems (items: any) {
@@ -260,17 +261,16 @@ export default class Basket extends Vue {
     this.cartItems.splice(index, 1)
   }
 
-  async changeProductQuantity (index: number, count: number) {  
+  changeProductQuantity (index: number, count: number) {
     const editBasket = {
-      'token': this.basket.token,
-      'number': count,
-      'previewId': this.basket.basket.products[index].previewId,
-      'productId': this.basket.basket.products[index].id,
-      'product': this.basket.basket.products[index]
+      token: localStorage.basketToken,
+      number: count,
+      previewId: this.basket?.products[index].previewId,
+      productId: this.basket?.products[index].productId,
+      product: this.basket?.products[index]
     }
-    this.editBasket(editBasket);
+    this.editBasket(editBasket)
   }
-
 
   processCartPreviews () {
     this.fetchCartPreviews(this.cartItems)
@@ -281,17 +281,9 @@ export default class Basket extends Vue {
     this.$router.push('/kubek/xxx')
   }
 
-  async getBasket () {
-    if (localStorage.basketToken) {
-      await this.$store.dispatch('basket/getBasket', { token: localStorage.basketToken }).then(() => {
-        this.cartItems = this.basket.basket.products
-        console.log(this.cartItems)
-      })
-    }
-  }
-
   mounted () {
-    this.getBasket()
+    this.loadBasket()
+    this.cartItems = this.basket.products
     if (this.isLoaded) {
       this.processCartPreviews()
     } else {

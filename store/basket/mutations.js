@@ -1,6 +1,6 @@
 export default {
   removeItem (state, index) {
-    var tempStorage = []
+    let tempStorage = []
     if (localStorage.cup) {
       tempStorage = JSON.parse(localStorage.cup)
     }
@@ -8,9 +8,11 @@ export default {
     localStorage.cup = JSON.stringify(tempStorage)
     state.basket = tempStorage
   },
+
   setBasket (state, basket) {
     state.basket = basket
   },
+
   setBasketItemCount (state, basket) {
     state.basket.basket.products[basket.index].number = basket.count
     console.log(state.basket)
@@ -30,4 +32,3 @@ export default {
     })
   }
 }
-

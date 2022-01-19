@@ -12,7 +12,7 @@ export default {
     items.push({
       type: 'background',
       data: {
-        id: state.workingObject.backgroundId
+        id: state.workingObject?.backgroundId
       }
     })
 
@@ -20,7 +20,7 @@ export default {
       items.push({
         type: 'quote',
         data: {
-          id: state.workingObject.quoteId
+          id: state.workingObject?.quoteId
         }
       })
     }
