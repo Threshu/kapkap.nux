@@ -1,4 +1,5 @@
 import { $axios } from '~/utils/api'
+import { Product } from '~/store/basket/state'
 
 export default {
   getProductPreview: async ({
@@ -19,21 +20,19 @@ export default {
     }
   },
 
-  fetchCartPreviews: ({ commit, dispatch }: any, cart: any) => {
-    if (cart) {
-      cart.forEach(function (cartItem: any, index: number) {
-        dispatch('getProductPreview', {
-          product: cartItem,
-          previewId: cartItem.previewId
-        }).then((data: any) => {
-          commit('basket/setPreviewImage', {
-            cartItemIndex: index,
-            frontImageUrl: data.frontImageUrl,
-            backImageUrl: data.backImageUrl,
-            previewId: data.previewId
-          }, { root: true })
-        })
+  fetchCartPreviews: ({ commit, dispatch, rootGetters }: any) => {
+    rootGetters['cart/basket']?.products?.forEach(function (cartItem: Product, index: number) {
+      dispatch('getProductPreview', {
+        product: cartItem,
+        previewId: cartItem.previewId
+      }).then((data: any) => {
+        commit('basket/setPreviewImage', {
+          cartItemIndex: index,
+          frontImageUrl: data.frontImageUrl,
+          backImageUrl: data.backImageUrl,
+          previewId: data.previewId
+        }, { root: true })
       })
-    }
+    })
   }
 }

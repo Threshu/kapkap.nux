@@ -19,8 +19,8 @@ export default {
       const token = localStorage.basketToken
       if (token) {
         const res = await $axios.get('/basket/' + token)
-        if (res?.data) {
-          commit('setBasket', res.data)
+        if (res?.data?.basket) {
+          commit('setBasket', res.data.basket)
         }
       }
     } catch {

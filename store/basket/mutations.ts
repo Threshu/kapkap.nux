@@ -1,3 +1,4 @@
+import { Vue } from 'nuxt-property-decorator'
 import { BasketContainer, BasketState, Product } from '~/store/basket/state'
 
 export default {
@@ -12,7 +13,7 @@ export default {
   },
 
   setBasket (state: BasketState, basket: BasketContainer) {
-    state.basket = basket
+    Vue.set(state, 'basket', basket)
   },
 
   setBasketItemCount (state: BasketState, basket: any) {

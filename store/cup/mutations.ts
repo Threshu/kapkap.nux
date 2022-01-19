@@ -28,11 +28,10 @@ export default {
   },
 
   setProduct (state: EditorState, product: Product) {
-    state.product = product
-
-    state.count = 0
-    state.total = 0
-    state.title = product.title
+    Vue.set(state, 'product', product)
+    Vue.set(state, 'count', 1)
+    Vue.set(state, 'total', product.price)
+    Vue.set(state, 'title', product.title)
     Vue.set(state, 'price', product.price)
   },
 

@@ -1,5 +1,4 @@
 import { $axios } from '~/utils/api'
-import { Product } from '~/store/cup/state'
 
 export default {
   loadCups: async ({ commit }: any) => {

@@ -20,7 +20,8 @@ import { Component, Mutation, Prop, Vue } from 'nuxt-property-decorator'
 @Component
 export default class CartSmallItem extends Vue {
   @Prop({ required: true }) item!: any
-  @Prop({ required: true }) index!: any
+  @Prop({ required: true }) index!: number
+
   @Mutation('basket/removeItem') removeItem!: any
 
   onRemoveFromCart (index: any) {

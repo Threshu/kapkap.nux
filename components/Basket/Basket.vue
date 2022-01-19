@@ -5,7 +5,7 @@
       v-if="!isLoaded"
     />
     <section
-      v-if="isLoaded && cartItems.length > 0"
+      v-if="isLoaded && !isEmpty"
       class="cart-section section-b-space"
     >
       <div class="container">
@@ -44,14 +44,14 @@
                     >
                       <div class="small-preview cart">
                         <template
-                          v-if="item.frontImageUrl && item.backImageUrl"
+                          v-if="item.frontThumbnail && item.backThumbnail"
                         >
                           <img
-                            :src="item.frontImageUrl"
+                            :src="item.frontThumbnail"
                             alt="thumbnail"
                           >
                           <img
-                            :src="item.backImageUrl"
+                            :src="item.backThumbnail"
                             alt="thumbnail"
                           >
                         </template>
@@ -174,7 +174,7 @@
               <tfoot>
                 <tr>
                   <td>Suma:</td>
-                  <td><h2>{{ basket.totalPrice }} zł</h2></td>
+                  <td><h2>{{ totalPrice }} zł</h2></td>
                 </tr>
               </tfoot>
             </table>
@@ -236,6 +236,8 @@ import { ProductObject } from '~/store/cup/getters'
 export default class Basket extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('basket/basket') basket!: BasketContainer
+  @Getter('basket/cartItems') cartItems!: Product[]
+  @Getter('basket/totalPrice') totalPrice!: number
 
   @Mutation('basket/removeItem') removeItem!: any
   @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
@@ -245,19 +247,9 @@ export default class Basket extends Vue {
   @Action('basket/loadBasket') loadBasket!: Function
   @Action('basket/editBasket') editBasket!: Function
 
-  get cartItems (): Product[] {
-    return this.basket?.products || []
+  get isEmpty (): boolean {
+    return !this.cartItems.length
   }
-
-  // subscribe: any = this.$store.subscribe((mutation: any) => {
-  //   if (mutation.type === 'basket/setBasket') {
-  //     this.setCartItems(mutation.payload)
-  //   }
-  // })
-  //
-  // setCartItems (items: any) {
-  //   this.cartItems = items
-  // }
 
   removeFromCart (index: number) {
     this.removeItem(index)
@@ -291,18 +283,14 @@ export default class Basket extends Vue {
     this.loadBasket()
 
     if (this.isLoaded) {
-      this.processCartPreviews()
+      this.fetchCartPreviews()
     } else {
       this.$store.watch(state => state.defaults.status, (newValue: string) => {
         if (newValue === STATUS_LOADED) {
-          this.processCartPreviews()
+          this.fetchCartPreviews()
         }
       })
     }
-  }
-
-  processCartPreviews () {
-    this.fetchCartPreviews(this.cartItems)
   }
 }
 </script>

@@ -180,7 +180,7 @@
                                   <i class="fa fa-star" />
                                 </div>
 
-                                <NuxtLink :to="`kubek/` + item.id" class="nuxt-link-exact-active nuxt-link-active">
+                                <NuxtLink :to="`kubek/` + item.productId" class="nuxt-link-exact-active nuxt-link-active">
                                   <h6>{{ item.title }}</h6>
                                 </NuxtLink>
 
