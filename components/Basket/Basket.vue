@@ -227,7 +227,8 @@ import { Action, Component, Getter, Mutation, Vue } from 'nuxt-property-decorato
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import SmallLoader from '~/components/Common/SmallLoader.vue'
 import { STATUS_LOADED } from '~/store/defaults/types'
-import { BasketContainer } from '~/store/basket/state'
+import { BasketContainer, Product, ProductUpdateRequest } from '~/store/basket/state'
+import { ProductObject } from '~/store/cup/getters'
 
 @Component({
   components: { SmallLoader, Breadcrumb }
@@ -244,17 +245,19 @@ export default class Basket extends Vue {
   @Action('basket/loadBasket') loadBasket!: Function
   @Action('basket/editBasket') editBasket!: Function
 
-  cartItems: any = []
-
-  subscribe: any = this.$store.subscribe((mutation: any) => {
-    if (mutation.type === 'basket/setBasket') {
-      this.setCartItems(mutation.payload)
-    }
-  })
-
-  setCartItems (items: any) {
-    this.cartItems = items
+  get cartItems (): Product[] {
+    return this.basket?.products || []
   }
+
+  // subscribe: any = this.$store.subscribe((mutation: any) => {
+  //   if (mutation.type === 'basket/setBasket') {
+  //     this.setCartItems(mutation.payload)
+  //   }
+  // })
+  //
+  // setCartItems (items: any) {
+  //   this.cartItems = items
+  // }
 
   removeFromCart (index: number) {
     this.removeItem(index)
@@ -262,18 +265,21 @@ export default class Basket extends Vue {
   }
 
   changeProductQuantity (index: number, count: number) {
-    const editBasket = {
+    const product: ProductObject = {
+      cupId: this.cartItems[index].cupId,
+      items: this.cartItems[index].items,
+      productId: this.cartItems[index].productId
+    }
+
+    const basket: ProductUpdateRequest = {
       token: localStorage.basketToken,
       number: count,
-      previewId: this.basket?.products[index].previewId,
-      productId: this.basket?.products[index].productId,
-      product: this.basket?.products[index]
+      previewId: this.cartItems[index].previewId,
+      cartItemId: this.cartItems[index].cartItemId,
+      product
     }
-    this.editBasket(editBasket)
-  }
 
-  processCartPreviews () {
-    this.fetchCartPreviews(this.cartItems)
+    this.editBasket(basket)
   }
 
   editProduct (index: number) {
@@ -283,7 +289,7 @@ export default class Basket extends Vue {
 
   mounted () {
     this.loadBasket()
-    this.cartItems = this.basket.products
+
     if (this.isLoaded) {
       this.processCartPreviews()
     } else {
@@ -293,6 +299,10 @@ export default class Basket extends Vue {
         }
       })
     }
+  }
+
+  processCartPreviews () {
+    this.fetchCartPreviews(this.cartItems)
   }
 }
 </script>

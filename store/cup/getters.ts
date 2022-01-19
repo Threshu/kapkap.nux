@@ -1,7 +1,7 @@
 import { EditorState, CupImageItem, WorkingItem, CupImageData } from './state'
 
 export type ProductObject = {
-  id: string,
+  productId: string,
   cupId: string,
   items: CupImageItem[]
 }
@@ -38,7 +38,7 @@ export default {
     })
 
     return {
-      id: state.product.id,
+      productId: state.product.productId,
       cupId: state.workingObject.cupId,
       items
     }

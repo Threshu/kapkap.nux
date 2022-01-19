@@ -73,7 +73,7 @@ export default class Cup extends Vue {
       this.loadCats(),
       this.loadMen(),
       this.loadWomen(),
-      this.loadProduct({ id: this.productId })
+      this.loadProduct(this.productId)
     ])
 
     this.checkIfMobile()

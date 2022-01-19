@@ -5,7 +5,7 @@ export default {
     const result = await $axios.$get('/defaults')
     commit('setDefaults', result)
     if (result.basket) {
-      commit('basket/setBasket', result.basket)
+      commit('basket/setBasket', result.basket, { root: true })
     }
   }
 }

@@ -62,7 +62,7 @@ export type Women = {
 }
 
 export type Product = {
-  id: string,
+  productId: string,
   success: boolean,
   title: string,
   items: {

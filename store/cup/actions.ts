@@ -52,9 +52,9 @@ export default {
     }
   },
 
-  loadProduct: async ({ commit }: any, payload: Product) => {
+  loadProduct: async ({ commit }: any, productId: string) => {
     try {
-      const res = await $axios.get('/product/' + payload.id)
+      const res = await $axios.get('/product/' + productId)
       if (res?.data) {
         commit('setProduct', res.data)
       }

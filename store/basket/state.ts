@@ -1,10 +1,5 @@
 import { CupImageItem } from '~/store/cup/state'
-
-export type Dog = {
-  id: string,
-  variantIndex: number,
-  name: string
-}
+import { ProductObject } from '~/store/cup/getters'
 
 export type Product = {
   cartItemId: string,
@@ -17,6 +12,21 @@ export type Product = {
   backThumbnail: string,
   title: string,
   cupId: string
+}
+
+export type ProductAddRequest = {
+  token: string,
+  number: number,
+  previewId: string,
+  product: ProductObject
+}
+
+export type ProductUpdateRequest = {
+  token: string,
+  number: number,
+  previewId: string,
+  product: ProductObject
+  cartItemId: string
 }
 
 export type BasketContainer = {

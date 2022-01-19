@@ -99,6 +99,7 @@
 <script  lang="ts">
 import { Action, Component, Getter, Mutation, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { ProductObject } from '~/store/cup/getters'
+import { ProductAddRequest } from '~/store/basket/state'
 
 @Component
 export default class Summary extends Vue {
@@ -115,7 +116,7 @@ export default class Summary extends Vue {
   @Mutation('cup/recalculateTotal') recalculateTotal!: Function
 
   @Action('cup/setQuantity') setQuantity!: Function
-  @Action('basket/setBasket') setBasket!: Function
+  @Action('basket/addToBasket') addToBasket!: Function
 
   total () {
     return this.$store.state.cup.total
@@ -170,19 +171,15 @@ export default class Summary extends Vue {
   buyNow () {
   }
 
-  async addToCart () {
-    const basketObj = {
+  addToCart () {
+    const basket: ProductAddRequest = {
       product: this.productObject,
       previewId: this.previewId,
       number: this.count,
       token: localStorage.basketToken
     }
 
-    const basket = await this.setBasket(basketObj);
-
-    if (basket) {
-      localStorage.basketToken = basket.data.token
-    }
+    this.addToBasket(basket)
   }
 
   saveCartItem () {
