@@ -54,6 +54,7 @@ import Summary from '~/components/Cup/Summary.vue'
     CupChoice, BackgroundChoice, ItemsChoice, QuoteChoice, Summary
   }
 })
+
 export default class EditArea extends Vue {
   confMenu = 1
 

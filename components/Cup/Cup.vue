@@ -14,6 +14,7 @@
               @changeModal="changeModal"
               @changeEditModal="changeEditModal"
               @closeConfigurator="closeConfigurator"
+              :product-id="productId"
             />
           </div>
         </div>
