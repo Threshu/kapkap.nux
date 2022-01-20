@@ -20,11 +20,10 @@ export default {
   // @todo
   setBasketItemCount (state: BasketState, basket: any) {
     state.basket.products[basket.index].number = basket.count
-    console.log(state.basket)
   },
 
   // @todo
-  editBasket (state: BasketState, index: any) {
+  setEditBasket (state: BasketState, index: any) {
     state.edit = index
   },
 

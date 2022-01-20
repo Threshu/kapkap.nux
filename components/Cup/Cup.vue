@@ -48,11 +48,11 @@ export default class Cup extends Vue {
   @Getter('app/isMobile') isMobile!: boolean
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('cup/editMode') editMode!: boolean
+  @Getter('basket/basket') basket!: BasketContainer
 
   @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
   @Mutation('app/setIsMobile') setIsMobile!: Function
-  @Mutation('cup/setEditMode') setEditMode!: Function
 
   @Action('cup/setQuantity') setQuantity!: Function
   @Action('cup/loadDogs') loadDogs!: any
@@ -80,7 +80,9 @@ export default class Cup extends Vue {
     this.checkIfMobile()
     window.addEventListener('resize', this.checkIfMobile)
 
-    if (Number.isInteger(this.$store.state.basket.edit)) {
+    console.log(this.editMode, 'edd')
+
+    if (this.editMode) {
       this.setupEdit()
     } else {
       this.resetWorkingObject()
@@ -92,13 +94,7 @@ export default class Cup extends Vue {
   }
 
   setupEdit () {
-    const editObj = JSON.parse(localStorage.cup)
-    if (editObj[this.$store.state.basket.edit]) {
-      this.setEditMode(true)
-      // this.cupObject = editObj[this.$store.state.basket.edit]
-    } else {
-      this.setEditMode(false)
-    }
+    console.log(this.editMode, 'edittt');
   }
 
   checkIfMobile () {

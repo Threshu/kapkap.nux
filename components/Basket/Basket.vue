@@ -241,6 +241,7 @@ export default class Basket extends Vue {
 
   @Mutation('basket/removeItem') removeItem!: any
   @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
+  @Mutation('cup/setEditMode') setEditMode!: any
 
   @Action('preview/fetchCartPreviews') fetchCartPreviews!: Function
   @Action('basket/setBasket') setBasket!: Function
@@ -276,10 +277,9 @@ export default class Basket extends Vue {
     this.editBasket(basket)
   }
 
-  // @todo
   editProduct (index: number) {
-    this.editBasket(index)
-    this.$router.push('/kubek/xxx')
+    this.setEditMode(true)
+    this.$router.push('/kubek/' + this.basket.products[index].productId)
   }
 
   mounted () {
