@@ -81,6 +81,18 @@ export default {
     })
   },
 
+  editWorkingObject (state: EditorState, payload: any) {
+    let backgroundId = payload.items.find((backgroundId: any) => backgroundId.type === "background"); 
+    let quoteId = payload.items.find((quoteId: any) => quoteId.type === "quote"); 
+
+    Vue.set(state, 'workingObject', {
+      cupId: payload.cupId,
+      backgroundId: backgroundId?.data.id,
+      quoteId: quoteId?.data.id,
+      items: payload.items
+    })
+  },
+
   prepareRandomProduct (state: EditorState) {
     const count = randomIntFromInterval(2, 4)
     let randBody: number
@@ -140,10 +152,12 @@ export default {
             randPet = randomIntFromInterval(0, petsArray.length - 1)
             pet = petsArray[randPet][1]
             randVariant = randomIntFromInterval(0, pet.length - 1)
+
             state.workingObject.items.push({
               type: 'dog',
               id: pet[0].id,
-              variantId: pet[randVariant].variantId
+              variantId: pet[randVariant].variantId,
+              bodyImageUrl: pet[randVariant].imageUrl
             })
             i++
           }
@@ -158,7 +172,8 @@ export default {
             state.workingObject.items.push({
               type: 'cat',
               id: pet[0].id,
-              variantId: pet[randVariant].variantId
+              variantId: pet[randVariant].variantId,
+              bodyImageUrl: pet[randVariant].imageUrl,
             })
             i++
           }

@@ -35,7 +35,7 @@ import { Component, Action, Vue, Prop, Mutation, Getter } from 'nuxt-property-de
 import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
-
+import { BasketContainer } from '~/store/basket/state'
 @Component({
   components: {
     EditArea, Preview, RelatedProducts

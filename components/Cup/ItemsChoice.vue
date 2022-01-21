@@ -5,7 +5,7 @@
     </h3>
     <div class="objectsList">
       <div v-for="(item, index) in items" :key="index" class="objectItem">
-        <div class="objectRow">
+        <div class="objectRow" v-if="item.type != 'quote' && item.type != 'background'">
           <div v-if="item && item.bodyImageUrl" class="objImage">
             <img :src="item.bodyImageUrl">
           </div>
@@ -287,7 +287,6 @@ export default class ItemsChoice extends Vue {
   }
 
   setFigure (bodyId: string, bodyImageUrl: string) {
-    console.log('xxxxx')
     this.tempObject.bodyId = bodyId
     this.tempObject.bodyImageUrl = bodyImageUrl
   }

@@ -242,11 +242,14 @@ export default class Basket extends Vue {
   @Mutation('basket/removeItem') removeItem!: any
   @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
   @Mutation('cup/setEditMode') setEditMode!: any
+  @Mutation('cup/editWorkingObject') editWorkingObject!: Function
+  @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
 
   @Action('preview/fetchCartPreviews') fetchCartPreviews!: Function
   @Action('basket/setBasket') setBasket!: Function
   @Action('basket/loadBasket') loadBasket!: Function
   @Action('basket/editBasket') editBasket!: Function
+  @Action('preview/getProductPreview') getProductPreview!: Function
 
   get isEmpty (): boolean {
     return !this.cartItems.length
@@ -279,6 +282,9 @@ export default class Basket extends Vue {
 
   editProduct (index: number) {
     this.setEditMode(true)
+    this.resetWorkingObject()
+    this.editWorkingObject(this.basket.products[index])
+    this.getProductPreview()
     this.$router.push('/kubek/' + this.basket.products[index].productId)
   }
 
