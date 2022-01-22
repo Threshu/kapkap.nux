@@ -48,9 +48,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Getter, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Action, Vue } from 'nuxt-property-decorator'
 import CartSmallItem from '~/components/Common/Header/CartSmallItem.vue'
-import { BasketContainer, Product } from '~/store/basket/state'
+import { BasketContainer, Product, ProductUpdateRequest } from '~/store/basket/state'
+import { ProductObject } from '~/store/cup/getters'
 
 @Component({
   components: { CartSmallItem }
@@ -60,9 +61,6 @@ export default class CartWidget extends Vue {
   @Getter('basket/basket') basket!: BasketContainer
   @Getter('basket/totalPrice') totalPrice!: number
 
-  // @todo - we have to base on basketItemId, not on index!
-  removeCartItem (index: number) {
-    this.cartItems.splice(index, 1)
-  }
+
 }
 </script>

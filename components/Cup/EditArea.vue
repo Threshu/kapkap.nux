@@ -28,6 +28,7 @@
       />
       <ItemsChoice
         v-if="confMenu === 3"
+        :editMode="editMode"
       />
       <QuoteChoice
         v-if="confMenu === 4"
@@ -41,7 +42,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import CupChoice from '~/components/Cup/CupChoice.vue'
 import BackgroundChoice from '~/components/Cup/BackgroundChoice.vue'
@@ -56,6 +57,7 @@ import Summary from '~/components/Cup/Summary.vue'
 })
 
 export default class EditArea extends Vue {
+  @Prop(Boolean) readonly editMode!: boolean
   confMenu = 1
 
   openCupItems (id: number) {

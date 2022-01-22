@@ -15,6 +15,7 @@
               @changeEditModal="changeEditModal"
               @closeConfigurator="closeConfigurator"
               :product-id="productId"
+              :editMode="editMode"
             />
           </div>
         </div>
@@ -43,11 +44,11 @@ import { BasketContainer } from '~/store/basket/state'
 })
 export default class Cup extends Vue {
   @Prop(String) readonly productId!: string
+  @Prop(Boolean) readonly editMode!: boolean
 
   @Getter('cup/title') title!: string
   @Getter('app/isMobile') isMobile!: boolean
   @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('cup/editMode') editMode!: boolean
   @Getter('basket/basket') basket!: BasketContainer
 
   @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
@@ -79,8 +80,6 @@ export default class Cup extends Vue {
 
     this.checkIfMobile()
     window.addEventListener('resize', this.checkIfMobile)
-
-    console.log(this.editMode, 'edd')
 
     if (this.editMode) {
       this.setupEdit()

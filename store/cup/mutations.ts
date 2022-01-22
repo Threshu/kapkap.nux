@@ -40,7 +40,7 @@ export default {
   },
 
   setBackground (state: EditorState, backgroundId: string) {
-    state.workingObject.backgroundId = backgroundId
+    Vue.set(state.workingObject, 'backgroundId', backgroundId)
   },
 
   setItem (state: EditorState, payload: any) {
@@ -55,8 +55,8 @@ export default {
     Vue.set(state, 'total', total)
   },
 
-  setEditMode (state: EditorState, editMode: boolean) {
-    Vue.set(state, 'editMode', editMode)
+  setEditIndex (state: EditorState, editIndex: number) {
+    Vue.set(state, 'editIndex', editIndex)
   },
 
   recalculateTotal (state: EditorState) {
@@ -121,7 +121,6 @@ export default {
             state.workingObject.items.push({
               type: 'man',
               bodyId: state.men.bodies[randBody].bodyId,
-              bodyImageUrl: state.men.bodies[randBody].bodyImageUrl,
               hairColor: 'black',
               hairstyleId: state.men.hairstyles.black.all[randHair].hairstyleId
             })
@@ -137,7 +136,6 @@ export default {
             state.workingObject.items.push({
               type: 'woman',
               bodyId: state.women.bodies[randBody].bodyId,
-              bodyImageUrl: state.women.bodies[randBody].bodyImageUrl,
               hairColor: 'black',
               hairstyleId: state.women.hairstyles.black.bun[randHair].hairstyleId
             })
@@ -157,7 +155,6 @@ export default {
               type: 'dog',
               id: pet[0].id,
               variantId: pet[randVariant].variantId,
-              bodyImageUrl: pet[randVariant].imageUrl
             })
             i++
           }
@@ -165,7 +162,7 @@ export default {
 
         case 4:
           if (state.cats) {
-            petsArray = Object.entries(state.dogs || [])
+            petsArray = Object.entries(state.cats || [])
             randPet = randomIntFromInterval(0, petsArray.length - 1)
             pet = petsArray[randPet][1]
             randVariant = randomIntFromInterval(0, pet.length - 1)
@@ -173,7 +170,6 @@ export default {
               type: 'cat',
               id: pet[0].id,
               variantId: pet[randVariant].variantId,
-              bodyImageUrl: pet[randVariant].imageUrl,
             })
             i++
           }

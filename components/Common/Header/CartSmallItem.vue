@@ -15,18 +15,35 @@
 </template>
 
 <script lang="ts">
-import { Component, Mutation, Prop, Vue } from 'nuxt-property-decorator'
-
+import { Component, Mutation, Prop, Action, Getter, Vue } from 'nuxt-property-decorator'
+import { BasketContainer, Product, ProductUpdateRequest } from '~/store/basket/state'
+import { ProductObject } from '~/store/cup/getters'
 @Component
 export default class CartSmallItem extends Vue {
   @Prop({ required: true }) item!: any
   @Prop({ required: true }) index!: number
 
   @Mutation('basket/removeItem') removeItem!: any
+  @Action('basket/editBasket') editBasket!: Function
+  @Getter('basket/cartItems') cartItems!: Product[]
 
-  // @todo - we have to base on basketItemId, not on index!
-  onRemoveFromCart (index: any) {
-    this.removeItem(index)
+  onRemoveFromCart (index: number) {
+    const product: ProductObject = {
+      cupId: this.cartItems[index].cupId,
+      items: this.cartItems[index].items,
+      productId: this.cartItems[index].productId
+    }
+
+    const basket: ProductUpdateRequest = {
+      token: localStorage.basketToken,
+      number: 0,
+      previewId: this.cartItems[index].previewId,
+      cartItemId: this.cartItems[index].cartItemId,
+      product
+    }
+
+    this.editBasket(basket)
   }
+
 }
 </script>

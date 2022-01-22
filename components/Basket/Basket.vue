@@ -241,7 +241,7 @@ export default class Basket extends Vue {
 
   @Mutation('basket/removeItem') removeItem!: any
   @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
-  @Mutation('cup/setEditMode') setEditMode!: any
+  @Mutation('cup/setEditIndex') setEditIndex!: any
   @Mutation('cup/editWorkingObject') editWorkingObject!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
 
@@ -255,11 +255,22 @@ export default class Basket extends Vue {
     return !this.cartItems.length
   }
 
-  // @todo - we have to base on basketItemId, not on index!
-  // @todo - removing only via mutation
   removeFromCart (index: number) {
-    this.removeItem(index)
-    this.cartItems.splice(index, 1)
+    const product: ProductObject = {
+      cupId: this.cartItems[index].cupId,
+      items: this.cartItems[index].items,
+      productId: this.cartItems[index].productId
+    }
+
+    const basket: ProductUpdateRequest = {
+      token: localStorage.basketToken,
+      number: 0,
+      previewId: this.cartItems[index].previewId,
+      cartItemId: this.cartItems[index].cartItemId,
+      product
+    }
+
+    this.editBasket(basket)
   }
 
   changeProductQuantity (index: number, count: number) {
@@ -281,11 +292,12 @@ export default class Basket extends Vue {
   }
 
   editProduct (index: number) {
-    this.setEditMode(true)
+    this.setEditIndex(index)
     this.resetWorkingObject()
+    console.log(this.basket.products[index], 'xxx')
     this.editWorkingObject(this.basket.products[index])
     this.getProductPreview()
-    this.$router.push('/kubek/' + this.basket.products[index].productId)
+    this.$router.push('/edytuj-produkt/' + this.basket.products[index].productId)
   }
 
   mounted () {

@@ -131,7 +131,7 @@ export type EditorState = {
   count: number,
   price: number,
   title: string,
-  editMode: boolean,
+  editIndex: number,
 
   workingObject: WorkingObject,
 }

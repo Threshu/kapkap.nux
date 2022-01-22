@@ -56,7 +56,7 @@ export default {
   total: (state: EditorState) => state.total,
   price: (state: EditorState) => state.price,
   title: (state: EditorState) => state.title,
-  editMode: (state: EditorState) => state.editMode,
+  editIndex: (state: EditorState) => state.editIndex,
   cupId: (state: EditorState) => state.workingObject?.cupId,
   backgroundId: (state: EditorState) => state.workingObject?.backgroundId,
   items: (state: EditorState) => state.workingObject?.items,
