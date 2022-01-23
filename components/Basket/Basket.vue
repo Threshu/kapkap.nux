@@ -40,7 +40,7 @@
                   <!-- PREVIEWS -->
                   <td>
                     <NuxtLink
-                      to="`/edytuj-produkt/${item.cartItemId}`"
+                      :to="`/edytuj-produkt/${item.cartItemId}`"
                     >
                       <div class="small-preview cart">
                         <template
@@ -147,7 +147,7 @@
                   </td>
                   <td>
                     <NuxtLink
-                      :to="`/edytuj-produkt/` + item.cartItemId"
+                      :to="`/edytuj-produkt/${item.cartItemId}`"
                     >
                       <button
                         class="btn quantity-right-plus separated"

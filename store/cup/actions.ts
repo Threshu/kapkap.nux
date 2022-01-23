@@ -1,4 +1,5 @@
 import { $axios } from '~/utils/api'
+import { Product as CartProduct } from '~/store/basket/state'
 
 export default {
   loadCups: async ({ commit }: any) => {
@@ -99,5 +100,15 @@ export default {
   setItem: ({ commit, dispatch } : any, payload: any) => {
     commit('setItem', payload)
     dispatch('preview/getProductPreview', null, { root: true })
+  },
+
+  loadProductFromCart: async ({ commit, dispatch, rootGetters } : any, cartItemId: string): Promise<string> => {
+    await dispatch('basket/loadBasket', null, { root: true })
+    const basket = rootGetters['basket/basket']
+    const cartItem: CartProduct = basket.products.find((product: CartProduct) => product.cartItemId === cartItemId)
+    commit('setWorkingObjectFromCart', cartItem)
+    commit('setQuantity', cartItem.number)
+
+    return cartItem.productId
   }
 }

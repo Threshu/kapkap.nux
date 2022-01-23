@@ -80,22 +80,22 @@ export type Product = {
  * Real state data
  */
 export type HumanImageData = {
-  bodyId: string,
-  hairstyleId: string,
+  bodyId?: string,
+  hairstyleId?: string,
   name?: string
 }
 
 export type AnimalImageData = {
-  id: string,
-  variantId: string,
+  id?: string,
+  variantId?: string,
   name?: string
 }
 
 export type IdOnlyImageData = {
-  id: string
+  id?: string
 }
 
-export type CupImageData = HumanImageData | AnimalImageData | IdOnlyImageData
+export type CupImageData = HumanImageData & AnimalImageData & IdOnlyImageData
 
 export type CupImageItem = {
   type: string,

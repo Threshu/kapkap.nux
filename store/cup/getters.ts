@@ -70,6 +70,7 @@ export default {
   men: (state: EditorState) => state.men,
   women: (state: EditorState) => state.women,
   product: (state: EditorState) => state.product,
+  productId: (state: EditorState) => state.product?.productId,
   count: (state: EditorState) => state.count,
   total: (state: EditorState) => state.total,
   price: (state: EditorState) => state.price,

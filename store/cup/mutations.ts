@@ -1,5 +1,17 @@
 import { Vue } from 'nuxt-property-decorator'
-import { Cats, Dogs, Men, Product, EditorState, Women, Pet } from '~/store/cup/state'
+import {
+  Cats,
+  Dogs,
+  Men,
+  Product,
+  EditorState,
+  Women,
+  Pet,
+  CupImageItem,
+  IdOnlyImageData,
+  WorkingObject, WorkingItem
+} from '~/store/cup/state'
+import { BasketContainer, Product as CartProduct } from '~/store/basket/state'
 
 function randomIntFromInterval (min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -40,8 +52,8 @@ export default {
 
   setBackground (state: EditorState, backgroundId: string) {
     if (state.editMode) {
-      const bgIndex = state.workingObject.items.findIndex(background => background.type === 'background')
-      Vue.set(state.workingObject.items[bgIndex].data, 'id', backgroundId)
+      // const bgIndex = state.workingObject.items.findIndex(background => background.type === 'background')
+      // Vue.set(state.workingObject.items[bgIndex].data, 'id', backgroundId)
     } else {
       Vue.set(state.workingObject, 'backgroundId', backgroundId)
     }
@@ -85,14 +97,26 @@ export default {
     })
   },
 
-  editWorkingObject (state: EditorState, payload: any) {
-    const backgroundId = payload.items.find((backgroundId: any) => backgroundId.type === 'background')
-    const quoteId = payload.items.find((quoteId: any) => quoteId.type === 'quote')
-    Vue.set(state, 'workingObject', {
-      cupId: payload.cupId,
-      backgroundId: backgroundId.data.id,
-      quoteId: quoteId?.data.id,
-      items: payload.items
+  setWorkingObjectFromCart (state: EditorState, product: CartProduct) {
+    const background: CupImageItem = product.items.find((item: CupImageItem) => item.type === 'background')!
+    const quote: CupImageItem = product.items.find((item: CupImageItem) => item.type === 'quote')!
+    const items: WorkingItem[] = product.items.map((item: CupImageItem) => (<WorkingItem>{
+      type: item.type,
+      bodyId: item.data.bodyId,
+      hairstyleId: item.data.hairstyleId,
+      id: item.data.id,
+      variantId: item.data.variantId,
+      name: item.data.name
+      // @todo
+      // bodyImageUrl
+      // hairColor
+    }))
+
+    Vue.set(state, 'workingObject', <WorkingObject>{
+      backgroundId: background?.data.id,
+      quoteId: quote?.data.id,
+      cupId: product.cupId,
+      items
     })
   },
 

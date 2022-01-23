@@ -1,6 +1,6 @@
 <template>
   <Cup
-    :product-id="productId"
+    :cart-item-id="cartItemId"
     :edit-mode="true"
   />
 </template>
@@ -13,7 +13,7 @@ export default {
   components: { Cup },
 
   asyncData ({ params }: any) {
-    return { productId: params.productId }
+    return { cartItemId: params.cartItemId }
   },
 
   head () {

@@ -37,6 +37,7 @@ import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
 import { BasketContainer } from '~/store/basket/state'
+import { Product } from '~/store/cup/state'
 
 @Component({
   components: {
@@ -45,9 +46,11 @@ import { BasketContainer } from '~/store/basket/state'
 })
 export default class Cup extends Vue {
   @Prop(String) readonly productId!: string
+  @Prop(String) readonly cartItemId!: string
   @Prop(Boolean) readonly editMode!: boolean
 
   @Getter('cup/title') title!: string
+  @Getter('cup/productId') productIdFromBasket!: string
   @Getter('app/isMobile') isMobile!: boolean
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('basket/basket') basket!: BasketContainer
@@ -65,7 +68,7 @@ export default class Cup extends Vue {
   @Action('cup/loadWomen') loadWomen!: any
   @Action('cup/loadProduct') loadProduct!: Function
   @Action('preview/getProductPreview') getProductPreview!: Function
-  @Action('basket/loadBasket') loadBasket!: Function
+  @Action('cup/loadProductFromCart') loadProductFromCart!: Function
 
   showModal = false
   showEditModal = false
@@ -75,16 +78,10 @@ export default class Cup extends Vue {
 
   async mounted () {
     this.setEditMode(this.editMode)
+
     let productId
     if (this.editMode) {
-      await this.loadBasket()
-      let product = this.basket.products.find((product: any) => product.cartItemId === this.productId);
-
-      console.log(product)
-
-      this.editWorkingObject(product)
-      productId = product.productId
-      this.setQuantity(product.number)
+      productId = await this.loadProductFromCart(this.cartItemId)
     } else {
       productId = this.productId
       this.resetWorkingObject()
