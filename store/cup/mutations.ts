@@ -51,11 +51,9 @@ export default {
   },
 
   setBackground (state: EditorState, backgroundId: string) {
+    Vue.set(state.workingObject, 'backgroundId', backgroundId)
     if (state.editMode) {
-      // const bgIndex = state.workingObject.items.findIndex(background => background.type === 'background')
-      // Vue.set(state.workingObject.items[bgIndex].data, 'id', backgroundId)
-    } else {
-      Vue.set(state.workingObject, 'backgroundId', backgroundId)
+      Vue.set(state.workingObject.items[0], 'id', backgroundId)
     }
   },
 
@@ -65,6 +63,9 @@ export default {
 
   setQuote (state: EditorState, quoteId: string) {
     Vue.set(state.workingObject, 'quoteId', quoteId)
+    if (state.editMode) {
+      Vue.set(state.workingObject.items[1], 'id', quoteId)
+    }
   },
 
   setTotal (state: EditorState, total: number) {

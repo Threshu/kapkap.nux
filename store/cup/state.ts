@@ -82,7 +82,9 @@ export type Product = {
 export type HumanImageData = {
   bodyId?: string,
   hairstyleId?: string,
-  name?: string
+  name?: string,
+  hairColor?: string,
+  bodyImageUrl?: string
 }
 
 export type AnimalImageData = {

@@ -129,8 +129,6 @@ export default class NavBar extends Vue {
   }
 
   onSwitchNav (event: any) {
-    console.log('onSwitchNav', event)
-
     if (event.target.parentElement.parentElement.parentElement.classList.contains('open-submenu')) {
       this.isMenuOpened = false
       event.target.parentElement.parentElement.parentElement.classList.remove('open-submenu')

@@ -311,7 +311,6 @@ export default class ItemsChoice extends Vue {
 
   getObjectImage (item: any) {
     let petData
-    console.log('this.editMode', item)
     if (item.data) {
       petData = {
         'id': item.data.id,
@@ -323,7 +322,6 @@ export default class ItemsChoice extends Vue {
         'variantId': item.variantId,
       }
     }
-
     let ret;
     switch (item.type) {
       case 'man':

@@ -15,7 +15,7 @@
               @changeEditModal="changeEditModal"
               @closeConfigurator="closeConfigurator"
               :editMode="editMode"
-              :product-id="productId"
+              :cart-item-id="cartItemId"
             />
           </div>
         </div>
@@ -78,14 +78,12 @@ export default class Cup extends Vue {
 
   async mounted () {
     this.setEditMode(this.editMode)
-
     let productId
     if (this.editMode) {
       productId = await this.loadProductFromCart(this.cartItemId)
     } else {
       productId = this.productId
       this.resetWorkingObject()
-      this.prepareRandomProduct()
       this.setQuantity(1)
     }
 
@@ -97,7 +95,12 @@ export default class Cup extends Vue {
         this.loadWomen(),
         this.loadProduct(productId)
       ])
+      if (!this.editMode) {
+        this.prepareRandomProduct()
+      }
     }
+
+
 
     this.checkIfMobile()
     window.addEventListener('resize', this.checkIfMobile)

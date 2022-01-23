@@ -37,7 +37,7 @@
     <Summary
       :conf-menu="confMenu"
       :editMode="editMode"
-      :product-id="productId"
+      :cart-item-id="cartItemId"
       @changeEditor="changeConfMenu"
     />
   </div>
@@ -60,7 +60,7 @@ import Summary from '~/components/Cup/Summary.vue'
 
 export default class EditArea extends Vue {
   @Prop(Boolean) readonly editMode!: boolean
-  @Prop(String) readonly productId!: string
+  @Prop(String) readonly cartItemId!: string
 
   confMenu = 1
 

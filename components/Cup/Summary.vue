@@ -106,7 +106,7 @@ import { ProductAddRequest } from '~/store/cup/state'
 export default class Summary extends Vue {
   @Prop(Number) readonly confMenu!: number
   @Prop(Boolean) readonly editMode!: boolean
-  @Prop(String) readonly productId!: string
+  @Prop(String) readonly cartItemId!: string
 
   @Getter('cup/price') price!: number
   // @Getter('cup/total') total!: number
@@ -177,7 +177,7 @@ export default class Summary extends Vue {
       previewId: this.previewId,
       number: this.count,
       token: localStorage.basketToken,
-      cartItemId: this.productId
+      cartItemId: this.cartItemId
     }
 
     this.editBasket(basket)
