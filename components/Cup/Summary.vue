@@ -61,15 +61,15 @@
       >
         <button
           class="next"
-          @click="buyNow()"
-        >
-          Kup Teraz
-        </button>
-        <button
-          class="next fl"
           @click="addToCart()"
         >
           Dodaj do koszyka
+        </button>
+        <button
+          class="next fl"
+          @click="buyNow()"
+        >
+          Kup Teraz
         </button>
       </template>
       <template
