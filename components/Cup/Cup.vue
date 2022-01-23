@@ -37,6 +37,7 @@ import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
 import { BasketContainer } from '~/store/basket/state'
+
 @Component({
   components: {
     EditArea, Preview, RelatedProducts
@@ -77,7 +78,7 @@ export default class Cup extends Vue {
     let productId
     if (this.editMode) {
       await this.loadBasket()
-      let product = this.basket.products.find((product: any) => product.cartItemId === this.productId); 
+      let product = this.basket.products.find((product: any) => product.cartItemId === this.productId);
 
       console.log(product)
 
@@ -86,14 +87,10 @@ export default class Cup extends Vue {
       this.setQuantity(product.number)
     } else {
       productId = this.productId
-    }
-
-    if (!this.editMode) {
       this.resetWorkingObject()
       this.prepareRandomProduct()
       this.setQuantity(1)
     }
-
 
     if (productId) {
       await Promise.allSettled([
@@ -107,7 +104,6 @@ export default class Cup extends Vue {
 
     this.checkIfMobile()
     window.addEventListener('resize', this.checkIfMobile)
-
 
     this.getProductPreview()
   }

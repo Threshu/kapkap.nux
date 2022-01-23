@@ -40,8 +40,8 @@ export default {
 
   setBackground (state: EditorState, backgroundId: string) {
     if (state.editMode) {
-      const bgIndex = state.workingObject.items.findIndex(background => background.type ==="background");
-      Vue.set(state.workingObject.items[bgIndex].data, 'id', backgroundId) 
+      const bgIndex = state.workingObject.items.findIndex(background => background.type === 'background')
+      Vue.set(state.workingObject.items[bgIndex].data, 'id', backgroundId)
     } else {
       Vue.set(state.workingObject, 'backgroundId', backgroundId)
     }
@@ -86,8 +86,8 @@ export default {
   },
 
   editWorkingObject (state: EditorState, payload: any) {
-    let backgroundId = payload.items.find((backgroundId: any) => backgroundId.type === "background"); 
-    let quoteId = payload.items.find((quoteId: any) => quoteId.type === "quote"); 
+    const backgroundId = payload.items.find((backgroundId: any) => backgroundId.type === 'background')
+    const quoteId = payload.items.find((quoteId: any) => quoteId.type === 'quote')
     Vue.set(state, 'workingObject', {
       cupId: payload.cupId,
       backgroundId: backgroundId.data.id,
@@ -159,7 +159,7 @@ export default {
             state.workingObject.items.push({
               type: 'dog',
               id: pet[0].id,
-              variantId: pet[randVariant].variantId,
+              variantId: pet[randVariant].variantId
             })
             i++
           }
@@ -174,7 +174,7 @@ export default {
             state.workingObject.items.push({
               type: 'cat',
               id: pet[0].id,
-              variantId: pet[randVariant].variantId,
+              variantId: pet[randVariant].variantId
             })
             i++
           }

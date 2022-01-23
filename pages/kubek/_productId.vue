@@ -1,6 +1,7 @@
 <template>
   <Cup
     :product-id="productId"
+    :edit-mode="false"
   />
 </template>
 

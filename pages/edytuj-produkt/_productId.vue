@@ -1,7 +1,7 @@
 <template>
   <Cup
     :product-id="productId"
-    :editMode="true"
+    :edit-mode="true"
   />
 </template>
 
