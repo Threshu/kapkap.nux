@@ -181,7 +181,6 @@ export default class ItemsChoice extends Vue {
   @Getter('cup/men') men!: Men[]
   @Getter('cup/cats') cats!: Cats[]
   @Getter('cup/dogs') dogs!: Dogs[]
-  @Getter('cup/editIndex') editIndex!: Dogs[]
 
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
 
@@ -241,8 +240,8 @@ export default class ItemsChoice extends Vue {
 
   pushObject (type: any, edit: any) {
     this.tempObject.type = type
-    if (this.editMode) {
-      this.setItem({ index: this.editIndex, item: this.tempObject })
+    if (edit) {
+      this.setItem({ index: edit, item: this.tempObject })
     } else {
       this.setItem({ index: this.items.length, item: this.tempObject })
     }
@@ -310,17 +309,25 @@ export default class ItemsChoice extends Vue {
     this.removeItemIndex = -1
   }
 
-  getObjectImage (item: Object) {
-
-    if (this.editMode) {
-      item.id = item.data.id
-      item.variantId = item.data.variantId
+  getObjectImage (item: any) {
+    let petData
+    console.log('this.editMode', item)
+    if (item.data) {
+      petData = {
+        'id': item.data.id,
+        'variantId': item.data.variantId,
+      }
+    } else {
+      petData = {
+        'id': item.id,
+        'variantId': item.variantId,
+      }
     }
 
     let ret;
     switch (item.type) {
       case 'man':
-        let manImg = this.men.bodies.find(man => man.bodyId === (item.bodyId || item.data.bodyId))
+        let manImg = this.men.bodies.find(manx => manx.bodyId === (item.bodyId || item.data.bodyId))
         if (manImg) {
           return manImg.bodyImageUrl
         }
@@ -335,8 +342,8 @@ export default class ItemsChoice extends Vue {
 
       case 'cat':
           for (const [key, value] of Object.entries(this.cats)) {
-            value.forEach((catItem, index) => {
-              if (item.id == catItem.id) {
+            value.forEach((catItem: any, index: number) => {
+              if (petData.id == catItem.id) {
                 ret = catItem.imageUrl;
               }
             })
@@ -348,8 +355,8 @@ export default class ItemsChoice extends Vue {
 
       case 'dog':
         for (const [key1, value1] of Object.entries(this.dogs)) {
-          value1.forEach((dogItem, index) => {
-            if (item.id == dogItem.id && item.variantId == dogItem.variantId) {
+          value1.forEach((dogItem: any, index: number) => {
+            if (item.id == dogItem.id && petData.variantId == dogItem.variantId) {
               ret = dogItem.imageUrl;
             }
           })

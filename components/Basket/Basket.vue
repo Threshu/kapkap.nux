@@ -146,12 +146,15 @@
                     </div>
                   </td>
                   <td>
-                    <button
-                      class="btn quantity-right-plus separated"
-                      @click="editProduct(index)"
+                    <NuxtLink
+                      :to="`/edytuj-produkt/` + item.cartItemId"
                     >
-                      <i class="fa fa-pencil" />
-                    </button>
+                      <button
+                        class="btn quantity-right-plus separated"
+                      >
+                        <i class="fa fa-pencil" />
+                      </button>
+                    </NuxtLink>
                     <button
                       class="btn quantity-right-plus separated"
                       @click="removeFromCart(index)"
@@ -241,8 +244,6 @@ export default class Basket extends Vue {
 
   @Mutation('basket/removeItem') removeItem!: any
   @Mutation('basket/setBasketItemCount') setBasketItemCount!: any
-  @Mutation('cup/setEditIndex') setEditIndex!: any
-  @Mutation('cup/editWorkingObject') editWorkingObject!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
 
   @Action('preview/fetchCartPreviews') fetchCartPreviews!: Function
@@ -292,11 +293,6 @@ export default class Basket extends Vue {
   }
 
   editProduct (index: number) {
-    this.setEditIndex(index)
-    this.resetWorkingObject()
-    console.log(this.basket.products[index], 'xxx')
-    this.editWorkingObject(this.basket.products[index])
-    this.getProductPreview()
     this.$router.push('/edytuj-produkt/' + this.basket.products[index].productId)
   }
 

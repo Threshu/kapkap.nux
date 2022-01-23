@@ -36,6 +36,8 @@
     </div>
     <Summary
       :conf-menu="confMenu"
+      :editMode="editMode"
+      :product-id="productId"
       @changeEditor="changeConfMenu"
     />
   </div>
@@ -58,6 +60,8 @@ import Summary from '~/components/Cup/Summary.vue'
 
 export default class EditArea extends Vue {
   @Prop(Boolean) readonly editMode!: boolean
+  @Prop(String) readonly productId!: string
+
   confMenu = 1
 
   openCupItems (id: number) {

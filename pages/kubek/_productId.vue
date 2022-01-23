@@ -12,7 +12,7 @@ export default {
   components: { Cup },
 
   asyncData ({ params }: any) {
-    return { productId: params.productid }
+    return { productId: params.productId }
   },
 
   head () {

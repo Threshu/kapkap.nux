@@ -14,8 +14,8 @@
               @changeModal="changeModal"
               @changeEditModal="changeEditModal"
               @closeConfigurator="closeConfigurator"
-              :product-id="productId"
               :editMode="editMode"
+              :product-id="productId"
             />
           </div>
         </div>
@@ -54,6 +54,8 @@ export default class Cup extends Vue {
   @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
   @Mutation('app/setIsMobile') setIsMobile!: Function
+  @Mutation('cup/setEditMode') setEditMode!: Function
+  @Mutation('cup/editWorkingObject') editWorkingObject!: Function
 
   @Action('cup/setQuantity') setQuantity!: Function
   @Action('cup/loadDogs') loadDogs!: any
@@ -62,6 +64,7 @@ export default class Cup extends Vue {
   @Action('cup/loadWomen') loadWomen!: any
   @Action('cup/loadProduct') loadProduct!: Function
   @Action('preview/getProductPreview') getProductPreview!: Function
+  @Action('basket/loadBasket') loadBasket!: Function
 
   showModal = false
   showEditModal = false
@@ -70,30 +73,43 @@ export default class Cup extends Vue {
   showConf = true
 
   async mounted () {
-    await Promise.allSettled([
-      this.loadDogs(),
-      this.loadCats(),
-      this.loadMen(),
-      this.loadWomen(),
-      this.loadProduct(this.productId)
-    ])
-
-    this.checkIfMobile()
-    window.addEventListener('resize', this.checkIfMobile)
-
+    this.setEditMode(this.editMode)
+    let productId
     if (this.editMode) {
-      this.setupEdit()
+      await this.loadBasket()
+      let product = this.basket.products.find((product: any) => product.cartItemId === this.productId); 
+
+      console.log(product)
+
+      this.editWorkingObject(product)
+      productId = product.productId
+      this.setQuantity(product.number)
     } else {
+      productId = this.productId
+    }
+
+    if (!this.editMode) {
       this.resetWorkingObject()
       this.prepareRandomProduct()
       this.setQuantity(1)
     }
 
-    this.getProductPreview()
-  }
 
-  setupEdit () {
-    console.log(this.editMode, 'edittt');
+    if (productId) {
+      await Promise.allSettled([
+        this.loadDogs(),
+        this.loadCats(),
+        this.loadMen(),
+        this.loadWomen(),
+        this.loadProduct(productId)
+      ])
+    }
+
+    this.checkIfMobile()
+    window.addEventListener('resize', this.checkIfMobile)
+
+
+    this.getProductPreview()
   }
 
   checkIfMobile () {

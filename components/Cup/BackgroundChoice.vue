@@ -75,7 +75,7 @@
 <script lang="ts">
 
 import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
-import { Background } from '~/store/cup/state'
+import { Background, workingObject } from '~/store/cup/state'
 
 @Component
 export default class BackgroundChoice extends Vue {
@@ -95,5 +95,6 @@ export default class BackgroundChoice extends Vue {
       this.page = page
     }
   }
+
 }
 </script>

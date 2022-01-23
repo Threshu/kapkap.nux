@@ -29,7 +29,6 @@ export default {
 
   setProduct (state: EditorState, product: Product) {
     Vue.set(state, 'product', product)
-    Vue.set(state, 'count', 1)
     Vue.set(state, 'total', product.price)
     Vue.set(state, 'title', product.title)
     Vue.set(state, 'price', product.price)
@@ -40,7 +39,12 @@ export default {
   },
 
   setBackground (state: EditorState, backgroundId: string) {
-    Vue.set(state.workingObject, 'backgroundId', backgroundId)
+    if (state.editMode) {
+      const bgIndex = state.workingObject.items.findIndex(background => background.type ==="background");
+      Vue.set(state.workingObject.items[bgIndex].data, 'id', backgroundId) 
+    } else {
+      Vue.set(state.workingObject, 'backgroundId', backgroundId)
+    }
   },
 
   setItem (state: EditorState, payload: any) {
@@ -55,8 +59,8 @@ export default {
     Vue.set(state, 'total', total)
   },
 
-  setEditIndex (state: EditorState, editIndex: number) {
-    Vue.set(state, 'editIndex', editIndex)
+  setEditMode (state: EditorState, editMode: boolean) {
+    Vue.set(state, 'editMode', editMode)
   },
 
   recalculateTotal (state: EditorState) {
@@ -84,10 +88,9 @@ export default {
   editWorkingObject (state: EditorState, payload: any) {
     let backgroundId = payload.items.find((backgroundId: any) => backgroundId.type === "background"); 
     let quoteId = payload.items.find((quoteId: any) => quoteId.type === "quote"); 
-
     Vue.set(state, 'workingObject', {
       cupId: payload.cupId,
-      backgroundId: backgroundId?.data.id,
+      backgroundId: backgroundId.data.id,
       quoteId: quoteId?.data.id,
       items: payload.items
     })
@@ -108,8 +111,10 @@ export default {
     // safeCounter is used to avoid an infinite loop and a page crash
     let safeCounter = 100
 
-    state.workingObject.cupId = state.product.items.cups[0].id
-    state.workingObject.backgroundId = state.product.backgroundId
+    if (state.product) {
+      state.workingObject.backgroundId = state.product.backgroundId
+      state.workingObject.cupId = state.product.items.cups[0].id
+    }
 
     while (i < count && safeCounter > 0) {
       typeRand = randomIntFromInterval(1, 4)

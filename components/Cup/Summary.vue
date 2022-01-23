@@ -8,7 +8,7 @@
             &dash;
           </button>
           <input
-            v-model="numberOfCups"
+            v-model="count"
             type="number"
             class="qty-input"
           >
@@ -99,36 +99,31 @@
 <script  lang="ts">
 import { Action, Component, Getter, Mutation, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { ProductObject } from '~/store/cup/getters'
-import { ProductAddRequest } from '~/store/basket/state'
+import { ProductAddRequest, ProductUpdateRequest } from '~/store/basket/state'
+import { ProductAddRequest } from '~/store/cup/state'
 
 @Component
 export default class Summary extends Vue {
   @Prop(Number) readonly confMenu!: number
+  @Prop(Boolean) readonly editMode!: boolean
+  @Prop(String) readonly productId!: string
 
   @Getter('cup/price') price!: number
   // @Getter('cup/total') total!: number
   @Getter('cup/productObject') productObject!: ProductObject
   @Getter('preview/previewId') previewId!: string
-  @Getter('cup/editMode') editMode!: boolean
   @Getter('cup/count') count!: number
 
   @Mutation('cup/setTotal') setTotal!: Function
   @Mutation('cup/recalculateTotal') recalculateTotal!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
-  @Mutation('cup/setEditMode') setEditMode!: any
 
   @Action('cup/setQuantity') setQuantity!: Function
   @Action('basket/addToBasket') addToBasket!: Function
+  @Action('basket/editBasket') editBasket!: Function
 
   total () {
     return this.$store.state.cup.total
-  }
-
-  numberOfCups: number = this.count || 1
-
-  @Watch('numberOfCups')
-  setNumberOfCups () {
-    this.setQuantity(this.numberOfCups)
   }
 
   openPrevEditor () {
@@ -147,19 +142,11 @@ export default class Summary extends Vue {
   }
 
   increaseQuantity () {
-    this.numberOfCups = this.count + 1
-    if (this.numberOfCups > 99) {
-      this.numberOfCups = 99
-    }
-    this.setQuantity(this.numberOfCups)
+    this.setQuantity(this.count + 1)
   }
 
   decreaseQuantity () {
-    this.numberOfCups = this.count - 1
-    if (this.numberOfCups < 1) {
-      this.numberOfCups = 1
-    }
-    this.setQuantity(this.numberOfCups)
+    this.setQuantity(this.count - 1)
   }
 
   formatPrice (value: number) {
@@ -185,26 +172,24 @@ export default class Summary extends Vue {
   }
 
   saveCartItem () {
-    // let tempStorage: any = []
-    if (localStorage.cup) {
-      // tempStorage = JSON.parse(localStorage.cup)
+    const basket: ProductUpdateRequest = {
+      product: this.productObject,
+      previewId: this.previewId,
+      number: this.count,
+      token: localStorage.basketToken,
+      cartItemId: this.productId
     }
-    // tempStorage[this.$store.state.basket.edit] = this.cupObject
-    // this.setBasket(tempStorage)
-    this.reset()
-    // this.editBasket(null)
+
+    this.editBasket(basket)
     this.$router.push('/koszyk')
   }
 
   backToCart () {
-    // this.editBasket(null)
-    this.reset()
     this.$router.push('/koszyk')
   }
 
   reset () {
     this.resetWorkingObject()
-    this.setEditMode(false)
   }
 }
 </script>
