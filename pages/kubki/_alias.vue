@@ -168,7 +168,7 @@
                                   <span class="lable4">on sale</span>
                                 </div>
                                 <div class="front">
-                                  <img :src="item.imageURL" :alt="item.title" class="img-fluid bg-img">
+                                  <img :src="item.sampleImageURL" :alt="item.title" class="img-fluid bg-img">
                                 </div>
                               </div>
                               <div class="product-detail">
