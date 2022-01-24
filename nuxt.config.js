@@ -80,10 +80,10 @@ export default {
   ],
 
   i18n: {
-    locales: ['pl', 'en'],
+    locales: ['pl', 'en', 'cz'],
     defaultLocale: 'pl',
     ueI18n: {
-      fallbackLocale: 'en'
+      fallbackLocale: 'pl'
     },
     vueI18nLoader: true
   },
