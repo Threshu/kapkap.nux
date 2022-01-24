@@ -75,7 +75,7 @@
 <script lang="ts">
 
 import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
-import { Background, workingObject } from '~/store/cup/state'
+import { Background } from '~/store/cup/state'
 
 @Component
 export default class BackgroundChoice extends Vue {

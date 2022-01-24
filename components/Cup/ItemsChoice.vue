@@ -4,31 +4,39 @@
       Dodaj postać lub zwierzę
     </h3>
     <div class="objectsList">
-      <div v-for="(item, index) in items" :key="index" class="objectItem" v-if="item.type != 'quote' && item.type != 'background'">
-        <div class="objectRow">
-          <div v-if="item" class="objImage">
-            <img :src="getObjectImage(item)">
-          </div>
-          <div v-if="item && item.name" class="objName">
-            {{ item.name }}
-          </div>
+      <template
+        v-for="(item, index) in items"
+      >
+        <div
+          v-if="item.type != 'quote' && item.type != 'background'"
+          :key="index"
+          class="objectItem"
+        >
+          <div class="objectRow">
+            <div v-if="item" class="objImage">
+              <img :src="getObjectImage(item)">
+            </div>
+            <div v-if="item && item.name" class="objName">
+              {{ item.name }}
+            </div>
 
-          <div class="objActions">
-            <button class="edit" @click="editItem(index)" />
-            <button class="remove" @click="setItemIdToRemove(index)" />
-            <button class="top" @click="moveItemUp(index)" />
-            <button class="down" @click="moveItemDown(index)" />
+            <div class="objActions">
+              <button class="edit" @click="editItem(index)" />
+              <button class="remove" @click="setItemIdToRemove(index)" />
+              <button class="top" @click="moveItemUp(index)" />
+              <button class="down" @click="moveItemDown(index)" />
+            </div>
+          </div>
+          <div v-if="removeItemIndex === index" class="removeBox">
+            <button class="cancelRemove" @click="cancelRemove">
+              Anuluj
+            </button>
+            <button class="acceptRemove" @click="removeItem(index, true)">
+              Usuń
+            </button>
           </div>
         </div>
-        <div v-if="removeItemIndex === index" class="removeBox">
-          <button class="cancelRemove" @click="cancelRemove">
-            Anuluj
-          </button>
-          <button class="acceptRemove" @click="removeItem(index, true)">
-            Usuń
-          </button>
-        </div>
-      </div>
+      </template>
 
       <button class="addNew" @click="showModal = true">
         Dodaj
@@ -43,7 +51,7 @@
         </h3>
 
         <div class="modalContent edit">
-          <input v-model="tempObject.name" class="objectName" type="text" placeholder="Imię" ref="name">
+          <input ref="name" v-model="tempObject.name" class="objectName" type="text" placeholder="Imię">
 
           <div v-if="popupData.bodies" class="objectsBox">
             <h4 class="objectTitle">
@@ -171,16 +179,16 @@
 
 <script  lang="ts">
 import { Action, Component, Getter, Mutation, Prop, Vue, Watch } from 'nuxt-property-decorator'
-import { WorkingItem, Women, Men, Cats, Dogs } from '~/store/cup/state'
+import { WorkingItem, Women, Men, Cats, Dogs, Pet, Body } from '~/store/cup/state'
 
 @Component
 export default class ItemsChoice extends Vue {
   @Prop(Boolean) readonly editMode!: boolean
   @Getter('cup/items') items!: WorkingItem[]
-  @Getter('cup/women') women!: Women[]
-  @Getter('cup/men') men!: Men[]
-  @Getter('cup/cats') cats!: Cats[]
-  @Getter('cup/dogs') dogs!: Dogs[]
+  @Getter('cup/women') women!: Women
+  @Getter('cup/men') men!: Men
+  @Getter('cup/cats') cats!: Cats
+  @Getter('cup/dogs') dogs!: Dogs
 
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
 
@@ -309,63 +317,59 @@ export default class ItemsChoice extends Vue {
     this.removeItemIndex = -1
   }
 
-  getObjectImage (item: any) {
-    let petData
-    if (item.data) {
-      petData = {
-        'id': item.data.id,
-        'variantId': item.data.variantId,
-      }
-    } else {
-      petData = {
-        'id': item.id,
-        'variantId': item.variantId,
-      }
-    }
-    let ret;
+  getObjectImage (item: WorkingItem): string {
+    let foundUrl: Body
+    let url: string = ''
+
     switch (item.type) {
       case 'man':
-        let manImg = this.men.bodies.find(manx => manx.bodyId === (item.bodyId || item.data.bodyId))
-        if (manImg) {
-          return manImg.bodyImageUrl
+        foundUrl = this.men.bodies.find((man: Body) => man.bodyId === item.bodyId)!
+        if (foundUrl) {
+          return foundUrl.bodyImageUrl
         }
         break
 
       case 'woman':
-        let womanImg = this.women.bodies.find(woman => woman.bodyId === (item.bodyId || item.data.bodyId))
-        if (womanImg) {
-          return womanImg.bodyImageUrl
+        foundUrl = this.women.bodies.find((woman: Body) => woman.bodyId === item.bodyId)!
+        if (foundUrl) {
+          return foundUrl.bodyImageUrl
         }
         break
 
       case 'cat':
-          for (const [key, value] of Object.entries(this.cats)) {
-            value.forEach((catItem: any, index: number) => {
-              if (petData.id == catItem.id) {
-                ret = catItem.imageUrl;
-              }
-            })
-            if (ret) {
-              return ret
+        Object.values(this.cats).find((value: Pet[]) => {
+          value.find((catItem: Pet) => {
+            if (item.id === catItem.id && item.variantId === catItem.variantId) {
+              url = catItem.imageUrl
+              return true
             }
-          }
-        break
-
-      case 'dog':
-        for (const [key1, value1] of Object.entries(this.dogs)) {
-          value1.forEach((dogItem: any, index: number) => {
-            if (item.id == dogItem.id && petData.variantId == dogItem.variantId) {
-              ret = dogItem.imageUrl;
-            }
+            return false
           })
-          if (ret) {
-            return ret
-          }
+          return url !== ''
+        })
+        if (url) {
+          return url
         }
         break
 
+      case 'dog':
+        Object.values(this.cats).find((value: Pet[]) => {
+          value.find((dogItem: Pet) => {
+            if (item.id === dogItem.id && item.variantId === dogItem.variantId) {
+              url = dogItem.imageUrl
+              return true
+            }
+            return false
+          })
+          return url !== ''
+        })
+        if (url) {
+          return url
+        }
+        break
     }
 
+    return ''
   }
 }
 </script>

@@ -97,10 +97,9 @@
 </template>
 
 <script  lang="ts">
-import { Action, Component, Getter, Mutation, Prop, Vue, Watch } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Mutation, Prop, Vue } from 'nuxt-property-decorator'
 import { ProductObject } from '~/store/cup/getters'
 import { ProductAddRequest, ProductUpdateRequest } from '~/store/basket/state'
-import { ProductAddRequest } from '~/store/cup/state'
 
 @Component
 export default class Summary extends Vue {

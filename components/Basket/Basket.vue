@@ -75,7 +75,7 @@
                   <!-- PRODUCT NAME -->
                   <td>
                     <NuxtLink
-                      :to="`/edytuj-produkt/${item.itemCartId}`"
+                      :to="`/edytuj-produkt/${item.cartItemId}`"
                     >
                       {{ item.title }}
                     </NuxtLink>
