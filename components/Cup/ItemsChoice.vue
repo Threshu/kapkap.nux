@@ -15,6 +15,10 @@
           <div class="objectRow">
             <div v-if="item" class="objImage">
               <img :src="getObjectImage(item)">
+              <img
+                v-if="item.type === 'woman' || item.type === 'man' "
+                :src="getHairstyleImage(item)"
+              >
             </div>
             <div v-if="item && item.name" class="objName">
               {{ item.name }}
@@ -179,7 +183,7 @@
 
 <script  lang="ts">
 import { Action, Component, Getter, Mutation, Prop, Vue, Watch } from 'nuxt-property-decorator'
-import { WorkingItem, Women, Men, Cats, Dogs, Pet, Body } from '~/store/cup/state'
+import { WorkingItem, Women, Men, Cats, Dogs, Pet, Body, Hairstyle, Hairstyles } from '~/store/cup/state'
 
 @Component
 export default class ItemsChoice extends Vue {
@@ -315,6 +319,52 @@ export default class ItemsChoice extends Vue {
 
   cancelRemove () {
     this.removeItemIndex = -1
+  }
+
+  getHairstyleImage (item: WorkingItem): string {
+    let foundUrl: string = ''
+
+    switch (item.type) {
+      case 'man':
+        Object.values(this.men.hairstyles).find((rootHairstyles: Hairstyles) => {
+          Object.values(rootHairstyles).find((hairstyles: Hairstyle[]) => {
+            hairstyles.find((hairstyle: Hairstyle) => {
+              if (hairstyle.hairstyleId === item.hairstyleId) {
+                foundUrl = hairstyle.hairstyleImageUrl
+                return true
+              }
+              return false
+            })
+            return foundUrl !== ''
+          })
+          return foundUrl !== ''
+        })
+        if (foundUrl) {
+          return foundUrl
+        }
+        break
+
+      case 'woman':
+        Object.values(this.women.hairstyles).find((rootHairstyles: Hairstyles) => {
+          Object.values(rootHairstyles).find((hairstyles: Hairstyle[]) => {
+            hairstyles.find((hairstyle: Hairstyle) => {
+              if (hairstyle.hairstyleId === item.hairstyleId) {
+                foundUrl = hairstyle.hairstyleImageUrl
+                return true
+              }
+              return false
+            })
+            return foundUrl !== ''
+          })
+          return foundUrl !== ''
+        })
+        if (foundUrl) {
+          return foundUrl
+        }
+        break
+    }
+
+    return ''
   }
 
   getObjectImage (item: WorkingItem): string {
