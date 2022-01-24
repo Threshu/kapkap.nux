@@ -14,21 +14,13 @@
               :edit-mode="editMode"
               :cart-item-id="cartItemId"
               :menu="defaultMenu"
-              @changeModal="changeModal"
-              @changeEditModal="changeEditModal"
               @closeConfigurator="closeConfigurator"
             />
           </div>
         </div>
       </div>
     </div>
-
     <RelatedProducts v-if="false" />
-
-    <div
-      v-if="showModal || showEditModal"
-      class="overflow"
-    />
   </section>
 </template>
 
@@ -70,8 +62,6 @@ export default class Cup extends Vue {
   @Action('preview/getProductPreview') getProductPreview!: Function
   @Action('cup/loadProductFromCart') loadProductFromCart!: Function
 
-  showModal = false
-  showEditModal = false
   defaultMenu = 1
 
   // old
@@ -110,14 +100,6 @@ export default class Cup extends Vue {
 
   checkIfMobile () {
     this.setIsMobile(window.innerWidth <= 1350)
-  }
-
-  changeModal (value: boolean) {
-    this.showModal = value
-  }
-
-  changeEditModal (value: boolean) {
-    this.showEditModal = value
   }
 
   closeConfigurator () {
