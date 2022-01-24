@@ -28,7 +28,7 @@
       />
       <ItemsChoice
         v-if="confMenu === 3"
-        :editMode="editMode"
+        :edit-mode="editMode"
       />
       <QuoteChoice
         v-if="confMenu === 4"
@@ -36,7 +36,7 @@
     </div>
     <Summary
       :conf-menu="confMenu"
-      :editMode="editMode"
+      :edit-mode="editMode"
       :cart-item-id="cartItemId"
       @changeEditor="changeConfMenu"
     />
@@ -61,8 +61,13 @@ import Summary from '~/components/Cup/Summary.vue'
 export default class EditArea extends Vue {
   @Prop(Boolean) readonly editMode!: boolean
   @Prop(String) readonly cartItemId!: string
+  @Prop(Number) readonly menu!: number
 
   confMenu = 1
+
+  mounted () {
+    this.confMenu = this.menu
+  }
 
   openCupItems (id: number) {
     this.confMenu = id

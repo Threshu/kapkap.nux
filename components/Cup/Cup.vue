@@ -11,11 +11,12 @@
           >
             <Preview />
             <EditArea
+              :edit-mode="editMode"
+              :cart-item-id="cartItemId"
+              :menu="defaultMenu"
               @changeModal="changeModal"
               @changeEditModal="changeEditModal"
               @closeConfigurator="closeConfigurator"
-              :editMode="editMode"
-              :cart-item-id="cartItemId"
             />
           </div>
         </div>
@@ -37,7 +38,6 @@ import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
 import { BasketContainer } from '~/store/basket/state'
-import { Product } from '~/store/cup/state'
 
 @Component({
   components: {
@@ -72,6 +72,7 @@ export default class Cup extends Vue {
 
   showModal = false
   showEditModal = false
+  defaultMenu = 1
 
   // old
   showConf = true
@@ -80,6 +81,7 @@ export default class Cup extends Vue {
     this.setEditMode(this.editMode)
     let productId
     if (this.editMode) {
+      this.defaultMenu = 3
       productId = await this.loadProductFromCart(this.cartItemId)
     } else {
       productId = this.productId
@@ -99,8 +101,6 @@ export default class Cup extends Vue {
         this.prepareRandomProduct()
       }
     }
-
-
 
     this.checkIfMobile()
     window.addEventListener('resize', this.checkIfMobile)

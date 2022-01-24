@@ -326,7 +326,7 @@ export default class ItemsChoice extends Vue {
 
     switch (item.type) {
       case 'man':
-        Object.values(this.men.hairstyles).find((rootHairstyles: Hairstyles) => {
+        Object.values(this.men?.hairstyles || []).find((rootHairstyles: Hairstyles) => {
           Object.values(rootHairstyles).find((hairstyles: Hairstyle[]) => {
             hairstyles.find((hairstyle: Hairstyle) => {
               if (hairstyle.hairstyleId === item.hairstyleId) {
@@ -345,7 +345,7 @@ export default class ItemsChoice extends Vue {
         break
 
       case 'woman':
-        Object.values(this.women.hairstyles).find((rootHairstyles: Hairstyles) => {
+        Object.values(this.women?.hairstyles || []).find((rootHairstyles: Hairstyles) => {
           Object.values(rootHairstyles).find((hairstyles: Hairstyle[]) => {
             hairstyles.find((hairstyle: Hairstyle) => {
               if (hairstyle.hairstyleId === item.hairstyleId) {
@@ -373,21 +373,21 @@ export default class ItemsChoice extends Vue {
 
     switch (item.type) {
       case 'man':
-        foundUrl = this.men.bodies.find((man: Body) => man.bodyId === item.bodyId)!
+        foundUrl = (this.men?.bodies || []).find((man: Body) => man.bodyId === item.bodyId)!
         if (foundUrl) {
           return foundUrl.bodyImageUrl
         }
         break
 
       case 'woman':
-        foundUrl = this.women.bodies.find((woman: Body) => woman.bodyId === item.bodyId)!
+        foundUrl = (this.women?.bodies || []).find((woman: Body) => woman.bodyId === item.bodyId)!
         if (foundUrl) {
           return foundUrl.bodyImageUrl
         }
         break
 
       case 'cat':
-        Object.values(this.cats).find((value: Pet[]) => {
+        Object.values(this.cats || []).find((value: Pet[]) => {
           value.find((catItem: Pet) => {
             if (item.id === catItem.id && item.variantId === catItem.variantId) {
               url = catItem.imageUrl
@@ -403,7 +403,7 @@ export default class ItemsChoice extends Vue {
         break
 
       case 'dog':
-        Object.values(this.cats).find((value: Pet[]) => {
+        Object.values(this.dogs || []).find((value: Pet[]) => {
           value.find((dogItem: Pet) => {
             if (item.id === dogItem.id && item.variantId === dogItem.variantId) {
               url = dogItem.imageUrl
