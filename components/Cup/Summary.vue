@@ -73,7 +73,7 @@
         </button>
       </template>
       <template
-        v-else-if="editMode"
+        v-if="editMode"
       >
         <button
           class="next"
