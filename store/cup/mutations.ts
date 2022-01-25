@@ -8,10 +8,10 @@ import {
   Women,
   Pet,
   CupImageItem,
-  IdOnlyImageData,
-  WorkingObject, WorkingItem
+  WorkingObject,
+  WorkingItem
 } from '~/store/cup/state'
-import { BasketContainer, Product as CartProduct } from '~/store/basket/state'
+import { Product as CartProduct } from '~/store/basket/state'
 
 function randomIntFromInterval (min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min)
