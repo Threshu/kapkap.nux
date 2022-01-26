@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Getter, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Watch, Vue } from 'nuxt-property-decorator'
 import LogoImage from '../LogoImage.vue'
 import CartWidget from './CartWidget.vue'
 import NavBar from './NavBar.vue'
@@ -60,11 +60,17 @@ import { STATUS_LOADED } from '~/store/defaults/types'
 export default class Header extends Vue {
   @Getter('defaults/headerMessages') headerMessages!: string[]
   @Getter('defaults/isLoaded') isLoaded!: boolean
+  @Getter('app/isMobile') isMobile!: boolean
 
   headerMessage: string = ''
   showMessage: boolean = true
   messageIndex: number = 0
   showOverlay: boolean = false
+  routeName: any = this.$route?.name
+  @Watch('routeName')
+  onChangeRoute (value: boolean) {
+    console.log('xxxccc', value)
+  }
 
   mounted () {
     window.addEventListener('scroll', this.handleScroll);
@@ -76,6 +82,10 @@ export default class Header extends Vue {
           this.processMessages()
         }
       })
+    }
+
+    if (this.$route.name && this.$route.name.includes('kubek') && this.isMobile) {
+      this.showMessage = false
     }
   }
 

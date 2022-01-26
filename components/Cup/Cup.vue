@@ -68,6 +68,17 @@ export default class Cup extends Vue {
   showConf = true
 
   async mounted () {
+    if (this.isMobile) {
+      const messagesTopBox = document.querySelectorAll<HTMLElement>('.messages-top-box');
+      const header = document.querySelector('#sticky');
+      if (header && header.classList.contains("open-messages-box")) {
+        header.classList.remove("open-messages-box");
+      }
+      for (let i = 0; i < messagesTopBox.length; i ++) {
+          messagesTopBox[i].style.display = 'none';
+      }
+    }
+
     this.setEditMode(this.editMode)
     let productId
     if (this.editMode) {
