@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Getter, Watch, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Watch, Mutation, Vue } from 'nuxt-property-decorator'
 import LogoImage from '../LogoImage.vue'
 import CartWidget from './CartWidget.vue'
 import NavBar from './NavBar.vue'
@@ -59,21 +59,32 @@ import { STATUS_LOADED } from '~/store/defaults/types'
 })
 export default class Header extends Vue {
   @Getter('defaults/headerMessages') headerMessages!: string[]
-  @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('app/isMobile') isMobile!: boolean
+  @Getter('defaults/isLoaded') isLoaded!: boolean
+  @Mutation('app/setIsMobile') setIsMobile!: Function
 
   headerMessage: string = ''
   showMessage: boolean = true
   messageIndex: number = 0
   showOverlay: boolean = false
-  routeName: any = this.$route?.name
-  @Watch('routeName')
-  onChangeRoute (value: boolean) {
-    console.log('xxxccc', value)
+
+  @Watch('$route')
+  onChangeRoute (value: any) {
+    if (value.name.includes('kubek') && this.isMobile) {
+      this.showMessage = false
+    } else {
+      this.showMessage = true
+    }
+  }
+
+  checkIfMobile () {
+    this.setIsMobile(window.innerWidth <= 1350)
   }
 
   mounted () {
-    window.addEventListener('scroll', this.handleScroll);
+    this.checkIfMobile()
+    this.onChangeRoute(this.$route)
+    window.addEventListener('scroll', this.handleScroll)
     if (this.isLoaded) {
       this.processMessages()
     } else {
@@ -84,9 +95,7 @@ export default class Header extends Vue {
       })
     }
 
-    if (this.$route.name && this.$route.name.includes('kubek') && this.isMobile) {
-      this.showMessage = false
-    }
+    window.addEventListener('resize', this.checkIfMobile)
   }
 
   processMessages () {
@@ -102,14 +111,14 @@ export default class Header extends Vue {
   }
 
   handleScroll () {
-     let header = document.querySelector("#sticky > .container");
-     if (header) {
-        if (window.scrollY > 51 && !header.className.includes('scrolled')) {
-          header.classList.add('scrolled'); 
-        } else if (window.scrollY < 51) {
-          header.classList.remove('scrolled');
-        }
-     }
+    const header = document.querySelector('#sticky > .container')
+    if (header) {
+      if (window.scrollY > 51 && !header.className.includes('scrolled')) {
+        header.classList.add('scrolled')
+      } else if (window.scrollY < 51) {
+        header.classList.remove('scrolled')
+      }
+    }
   }
 
   onCloseBox () {
