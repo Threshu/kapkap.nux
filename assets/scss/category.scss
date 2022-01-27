@@ -250,8 +250,11 @@
 								color: #fff;
 								font-size: 18px;
 								position: absolute;
-								right: 15px;
-								bottom: 15px;
+								right: 0;
+								left: 0;
+								top: 0;
+								bottom: 0;
+								margin: auto;
 							}
 						}
 					}
@@ -275,17 +278,20 @@
 						&.selected {
 							opacity: 1;
 							&:before {
-								content: '✓';
+								content: "✓";
 								display: block;
-								width: 55px;
-								height: 55px;
+								width: 28px;
+								height: 28px;
 								background: #81BC32;
 								border-radius: 50%;
 								color: #fff;
-								font-size: 36px;
+								font-size: 18px;
 								position: absolute;
-								right: 25px;
-								bottom: 25px;
+								right: 0;
+								left: 0;
+								top: 0;
+								bottom: 0;
+								margin: auto;
 							}
 						}
 
@@ -650,13 +656,20 @@
 						&.selected {
 							opacity: 1;
 							&:before {
-								content: url("static/images/category/tick.svg");
+								content: "✓";
 								display: block;
+								width: 28px;
+								height: 28px;
+								background: #81BC32;
+								border-radius: 50%;
+								color: #fff;
+								font-size: 18px;
 								position: absolute;
-								margin: auto;
+								right: 0;
 								left: 0;
-								right:0;
-								top: 35%;
+								top: 0;
+								bottom: 0;
+								margin: auto;
 							}
 						}
 					}
@@ -1180,16 +1193,13 @@
 						.bgItem {
 							width: 115px !important;
 							margin: 0 10px 15px;
+							display: inline-flex;
+							align-items: center;
+							justify-content: center;
 
-							&.selected {
-								&:before {
-									right: 25px;
-									bottom: 5px;
-
-								}
-							}
 							img {
-								width: 80%;
+								width: 90%;
+								height: auto;
 							}
 						}
 
