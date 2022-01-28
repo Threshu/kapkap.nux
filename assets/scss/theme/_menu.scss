@@ -1895,7 +1895,7 @@ header {
         top: 0;
         height: 100vh;
         right: -300px;
-        z-index: 99;
+        z-index: 299;
         -webkit-transition: all 0.5s ease-in-out;
         transition: all 0.5s ease-in-out;
         overflow: scroll;
@@ -2738,7 +2738,6 @@ header {
           top: 16px;
           padding: 15px;
           border: 0;
-          background-color: #fff;
 
           .close-circle {
             i {

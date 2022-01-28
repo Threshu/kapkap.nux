@@ -1073,9 +1073,9 @@
 					display: block;
 					position: fixed;
 					background: #fff;
-					top: 0;
+					top: 87px;
 					left: 0;
-					z-index: 99999;
+					z-index: 199;
 					width: 100%;
 					height: 100%;
 					overflow: hidden;
@@ -1090,7 +1090,7 @@
 						.objectsList {
 							display: block;
 							overflow: auto;
-						    max-height: calc(100vh - 445px);
+						    max-height: calc(100vh - 532px);
 						    padding-bottom: 20px;
 
 						    &::-webkit-scrollbar-track {

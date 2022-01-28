@@ -49,7 +49,6 @@ export default class Cup extends Vue {
 
   @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
-  @Mutation('app/setIsMobile') setIsMobile!: Function
   @Mutation('cup/setEditMode') setEditMode!: Function
   @Mutation('cup/editWorkingObject') editWorkingObject!: Function
 
@@ -92,14 +91,7 @@ export default class Cup extends Vue {
       }
     }
 
-    this.checkIfMobile()
-    window.addEventListener('resize', this.checkIfMobile)
-
     this.getProductPreview()
-  }
-
-  checkIfMobile () {
-    this.setIsMobile(window.innerWidth <= 1350)
   }
 
   closeConfigurator () {

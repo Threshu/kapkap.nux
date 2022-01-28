@@ -20,7 +20,7 @@
       </div>
 
       <TopBar />
-      <div :class="`container ${headerMessage == '' || showMessage == false ? 'top' : ''}`">
+      <div :class="`container ${!headerMessage || !showMessage ? 'top' : ''}`">
         <div class="row">
           <div class="col-sm-12">
             <div class="main-menu">
@@ -47,18 +47,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Getter, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Watch } from 'nuxt-property-decorator'
 import LogoImage from '../LogoImage.vue'
 import CartWidget from './CartWidget.vue'
 import NavBar from './NavBar.vue'
 import TopBar from './TopBar.vue'
 import { STATUS_LOADED } from '~/store/defaults/types'
+import MobileSupport from '~/mixins/mobile'
 
 @Component({
   components: { TopBar, NavBar, CartWidget, LogoImage }
 })
-export default class Header extends Vue {
+export default class Header extends MobileSupport {
   @Getter('defaults/headerMessages') headerMessages!: string[]
+  @Getter('app/isMobile') isMobile!: boolean
   @Getter('defaults/isLoaded') isLoaded!: boolean
 
   headerMessage: string = ''
@@ -66,8 +68,14 @@ export default class Header extends Vue {
   messageIndex: number = 0
   showOverlay: boolean = false
 
+  @Watch('isMobile')
+  @Watch('$route')
+  onChange () {
+    this.showMessage = !(this.$route.fullPath.match(/^\/(?:kubek|edytuj-produkt)/) && this.isMobile)
+  }
+
   mounted () {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll)
     if (this.isLoaded) {
       this.processMessages()
     } else {
@@ -92,14 +100,16 @@ export default class Header extends Vue {
   }
 
   handleScroll () {
-     let header = document.querySelector("#sticky > .container");
-     if (header) {
-        if (window.scrollY > 51 && !header.className.includes('scrolled')) {
-          header.classList.add('scrolled'); 
-        } else if (window.scrollY < 51) {
-          header.classList.remove('scrolled');
-        }
-     }
+    const header = document.querySelector('#sticky > .container')
+    const headerHeight = 51
+
+    if (header) {
+      if (window.scrollY > headerHeight && !header.className.includes('scrolled')) {
+        header.classList.add('scrolled')
+      } else if (window.scrollY < headerHeight) {
+        header.classList.remove('scrolled')
+      }
+    }
   }
 
   onCloseBox () {
