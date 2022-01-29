@@ -30,15 +30,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-
-export type MenuCategory = {
-  path: string
-  title: string
-}
+import { Category } from '~/types/categories/types'
 
 @Component
 export default class CategoryMenu extends Vue {
-  @Prop() readonly categories: MenuCategory[] = []
+  @Prop() readonly categories!: Category[]
 }
 </script>
 

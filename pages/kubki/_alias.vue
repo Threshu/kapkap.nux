@@ -6,26 +6,12 @@
           <div class="col-lg-3">
             <div>
               <div class="row">
-                <div class="col-xl-12">
-                  <div class="filter-main-btn">
-                    <span class="filter-btn btn btn-theme">
-                      <i aria-hidden="true" class="fa fa-filter" /> Filter
-                    </span>
-                  </div>
-                </div>
+                <FilterBtn />
               </div>
-
               <div class="collection-filter">
                 <CategoryMenu :categories="categories" />
                 <ThemeCard />
-                <div class="collection-sidebar-banner">
-                  <a href="#">
-                    <img
-                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAScAAAG+BAMAAAAjHd/5AAAAG1BMVEXg4OAeHh6vr69/f39mZmY2NjZOTk7Hx8eXl5chZ5wZAAAACXBIWXMAAA7EAAAOxAGVKw4bAAADYUlEQVR4nO3XzVPaQBzG8TXEJEcjL3oMWGuPpS9jj9DqvUwVe4TOqD2iHeSaaB39s7uvCVhFx66nfj8HsiFs8vDbZBeEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAkwYe9d6b1a+9Lphu32sNdksy1Lu32au99du9Hn+dVOjxOT1XrIj0Zt/SpU+3hPt2RbdRaZls0TwZNj6EOd+U3b05kxZq5ENfr6r368i5B6kK1TaiwkQmx5TFUpk8urzI9ko14IOPFm8u7rB67UMOh3vRzj4FK4YY8s4nXk5V4JFR/OnLddKjgkco+k4phR2JN7q0v/XCyuWpDFbkOFX19kVBx3ZUnkZtkeaizng0VN4QOdfb2RULJAbDlkfFEsjF/bDvXm+vMvXEsbChZIR2qmLxIKFkbV56GfNAXQkW6hEnL7dfWXahuZkLtC/HmNhO+yTvJDl8sL15bC64uq28/zuVLMXK77bc2lLq/daiDuN8cqAnFr7OeukEUVZGwPjgcNMpUqlRVoWKZw4RSz6AO1dj+PhGvW8Kz/kTdKjqBCtW8EXH3qDwqS1UVKjxyofYnLtSBeu32/GbSE02hT1rIggW5bMSH5eFosyqUKDIbSt+EKlRsJvhw4U78d1M10YQqWW2zUV49L4+Py8VOP50mlJ4ITCg90nHZ04+xPmv/W2drkJez80qvPB5VhYpGLtSJcKHs0aq0PkRmNgj6aXO3Wvfm5ukizV2zO7GhzLxh7ilzaN9rqPn1tFpiqlBJ68JFDeozaXo6m7R3VWs4m7kFSvR9Zgrn199aGaUKJR+9sc1dS621rmvZgXSPryfugtpqr2yNbEM9epENHneU7R+d7Fy3hp2OmVCEHUpPLhaW3yJzrbZbZvUctZjc5TVBzCd9/oCJB9n8XvV1x3ZKN3NUND/Gd0JFG9WrH9Oj+b1ttZeoVui+eNskGGcPhgpaKr/Hn59B+kn9c5H/SsKfO7Pf6se6WDm4mW0N3OglC5v7Qol2fef8o8fRS8wjJIcoGadpUyeJ9+U7n5d0uhsq7qep+u/wEs47k79aT+7qPQ0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPiP/QE/M3ask3xnbAAAAABJRU5ErkJggg=="
-                      class="img-fluid"
-                    >
-                  </a>
-                </div>
+                <SidebarBanner />
               </div>
             </div>
           </div>
@@ -34,73 +20,9 @@
             <div class="page-main-content">
               <div class="row">
                 <div class="col-sm-12">
-                  <div class="top-banner-wrapper">
-                    <a href="#"><img src="/images/multicart/mega-menu/2.jpg" class="img-fluid"></a>
-                    <div class="top-banner-content small-section">
-                      <h4>fashion</h4>
-                      <h5>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </h5>
-                      <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.
-                      </p>
-                    </div>
-                  </div>
+                  <TopBanner />
                   <div class="collection-product-wrapper">
-                    <div class="product-top-filter">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="product-filter-content">
-                            <div class="search-count">
-                              <h5>Showing Products 1-12 of 199 Result</h5>
-                            </div>
-                            <div class="collection-view">
-                              <ul>
-                                <li><i class="fa fa-th grid-layout-view" /></li>
-                                <li><i class="fa fa-list-ul list-layout-view" /></li>
-                              </ul>
-                            </div>
-                            <div class="collection-grid-view">
-                              <ul>
-                                <li>
-                                  <img
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAALCAYAAABGbhwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo3RTVFMDIwQzZFRDMxMUU4OEUwRkJGODM0QzlEOEMyQiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo3RTVFMDIwRDZFRDMxMUU4OEUwRkJGODM0QzlEOEMyQiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdFNUUwMjBBNkVEMzExRTg4RTBGQkY4MzRDOUQ4QzJCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjdFNUUwMjBCNkVEMzExRTg4RTBGQkY4MzRDOUQ4QzJCIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+aawbRwAAAChJREFUeNpi/O9jzUAMYIHS/5HEGLGJMTEQCUYVEhXgjFjkUMQAAgwA1dUDot3XPXwAAAAASUVORK5CYII="
-                                    class="product-2-layout-view"
-                                  >
-                                </li>
-                                <li>
-                                  <img
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAALCAYAAACgR9dcAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4MTdCQTc3MTZFRDMxMUU4ODY2RUQxNEE4NTg2RDU3RiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4MTdCQTc3MjZFRDMxMUU4ODY2RUQxNEE4NTg2RDU3RiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjgxN0JBNzZGNkVEMzExRTg4NjZFRDE0QTg1ODZENTdGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjgxN0JBNzcwNkVEMzExRTg4NjZFRDE0QTg1ODZENTdGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+GjdbGgAAACxJREFUeNpi/O9jzUAuYIHS/5HEGIkVY2KgAIxqHjKaWdASAQOWhIFTDCDAAPN5BKPQTV51AAAAAElFTkSuQmCC"
-                                    class="product-3-layout-view"
-                                  >
-                                </li>
-                                <li>
-                                  <img
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4NkZEMTg5MzZFRDMxMUU4OTY5QUE1QjA4NDk4NzIzMCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4NkZEMTg5NDZFRDMxMUU4OTY5QUE1QjA4NDk4NzIzMCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg2RkQxODkxNkVEMzExRTg5NjlBQTVCMDg0OTg3MjMwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg2RkQxODkyNkVEMzExRTg5NjlBQTVCMDg0OTg3MjMwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+9SdPNAAAACtJREFUeNpi/O9jzUBNwAKl/yOJMVIixsRAZTBq4KiBFCRsRixyZIkBBBgAjU8FpEqHnOUAAAAASUVORK5CYII="
-                                    class="product-4-layout-view"
-                                  >
-                                </li>
-                                <li>
-                                  <img
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAALCAYAAABoKz2KAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4QTgwN0MxMTZFRDMxMUU4QUZCNUZCQ0YyNTU5NDAyMSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4QTgwN0MxMjZFRDMxMUU4QUZCNUZCQ0YyNTU5NDAyMSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjhBODA3QzBGNkVEMzExRThBRkI1RkJDRjI1NTk0MDIxIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjhBODA3QzEwNkVEMzExRThBRkI1RkJDRjI1NTk0MDIxIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+z4uoxgAAAC5JREFUeNpi/O9jzTAQgAVK/0cSY6SHGBPDAIFRi0ctHrWY6gUIIxY5mooBBBgANXMHprRYLDsAAAAASUVORK5CYII="
-                                    class="product-6-layout-view"
-                                  >
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="product-page-filter">
-                              <OrderBy @change="handleOrderChange" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <ProductTopFilters />
                     <div class="product-wrapper-grid">
                       <ProductsList :products="products" />
                     </div>
@@ -116,51 +38,42 @@
 </template>
 
 <script lang="ts">
-import { Action, Component, Getter, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Vue } from 'nuxt-property-decorator'
 import { useBrowserLocation } from '@vueuse/core'
 import { Jsonld } from 'nuxt-jsonld'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
-import OrderBy from '~/components/Category/OrderBy.vue'
-import ProductsList, { CategoryProduct } from '~/components/Category/ItemList.vue'
-import CategoryMenu, { MenuCategory } from '~/components/Category/CategoryMenu.vue'
+import ProductsList from '~/components/Category/ItemList.vue'
+import CategoryMenu from '~/components/Category/CategoryMenu.vue'
 import ThemeCard from '~/components/Category/ThemeCard.vue'
+import { Category, Product } from '~/types/categories/types'
+import TopBanner from '~/components/Category/TopBanner.vue'
+import ProductTopFilters from '~/components/Category/ProductTopFilters.vue'
+import SidebarBanner from '~/components/Category/SidebarBanner.vue'
+import FilterBtn from '~/components/Category/FilterBtn.vue'
 
 @Jsonld
 @Component({
   components: {
+    FilterBtn,
+    SidebarBanner,
     ThemeCard,
     CategoryMenu,
     ProductsList,
-    OrderBy,
-    Breadcrumb
+    Breadcrumb,
+    TopBanner,
+    ProductTopFilters
   }
 })
-
 export default class Cups extends Vue {
-  @Getter('defaults/isLoaded') isLoaded!: boolean
-  @Getter('categories/categories') cat!: any
-  @Action('categories/getCategories') getCats!: any
-  products: CategoryProduct[] = []
-  categories: MenuCategory[] = []
-  alias: any = []
-
-  asyncData ({ params }: any) {
-    const alias = params.alias
-    return { alias }
-  }
+  @Getter('categories/categories') categories!: Category[]
+  @Getter('categories/products') products!: Product[]
 
   async getCategories () {
-    await this.$store.dispatch('categories/getCategories').then(() => {
-      this.categories = this.cat.categories
-      this.products = this.cat.products
-    })
+    await this.$store.dispatch('categories/loadCategories')
   }
 
   mounted () {
     this.getCategories()
-  }
-
-  handleOrderChange (): void {
   }
 
   head () {

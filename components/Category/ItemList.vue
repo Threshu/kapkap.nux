@@ -38,17 +38,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-
-export type CategoryProduct = {
-  sampleImageURL: string
-  title: string
-  productId: string
-  price: number
-}
+import { Product } from '~/types/categories/types'
 
 @Component
 export default class ProductsList extends Vue {
-  @Prop() readonly products: CategoryProduct[] = []
+  @Prop() readonly products!: Product[]
 }
 </script>
 
