@@ -1041,6 +1041,7 @@
 				&.top {
 					position: fixed;
 					top: 0 !important;
+					max-width: 100%;
 				}
 
 				&.scrolled {
@@ -1457,3 +1458,17 @@
 		margin-bottom: 60px;
 	}
 }
+
+
+@media only screen and (min-width: 577px) {
+	.categoryBox {
+		.productBoxBg {
+			.productBox {
+				&.productModalBox {
+					top: 107px;
+				}
+			}
+		}
+	}
+}
+
