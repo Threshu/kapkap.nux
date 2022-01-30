@@ -233,6 +233,11 @@
 						cursor: pointer;
 						transition: all 0.3s;
 
+						img {
+							width: auto;
+							height: 100%;
+						}
+
 						&:hover {
 							opacity: 1;
 						}
@@ -642,6 +647,11 @@
 						transition: all 0.3s;
 						position: relative;
 						cursor: pointer;
+
+						img {
+							width: auto;
+							height: 100%;
+						}
 
 						&:hover {
 							opacity: 1;
@@ -1188,9 +1198,6 @@
 									bottom: 5px;
 
 								}
-							}
-							img {
-								width: 80%;
 							}
 						}
 
