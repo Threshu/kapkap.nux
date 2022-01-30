@@ -11,6 +11,7 @@
             v-model="count"
             type="number"
             class="qty-input"
+            disabled="disabled"
           >
           <button class="qty-plus" @click="increaseQuantity">
             &plus;
