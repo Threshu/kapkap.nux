@@ -1,7 +1,6 @@
 <template>
   <div class="productViewBox">
     <button
-      v-if="frontImage"
       class="frontCup"
       :class="{'active': frontImage === activePreview}"
       @click="setActivePreview('front')"
@@ -9,7 +8,6 @@
       Przód kubka
     </button>
     <button
-      v-if="backImage"
       :class="{'active': backImage === activePreview}"
       class="backCup"
       @click="setActivePreview('back')"
@@ -18,8 +16,10 @@
     </button>
 
     <div class="productView">
-      <div v-if="frontImage || backImage" class="productPreview">
+      <div class="productPreview">
+        <SmallLoader v-if="!activePreview"/>
         <image-zoom
+          v-if="activePreview"
           class="desktop"
           :regular="activePreview"
           alt="Podgląd wygenerowanego obrazu kubka"
@@ -27,9 +27,11 @@
         />
 
         <img
+          v-if="activePreview"
           class="mobile"
           :src="activePreview"
         >
+
       </div>
 
       <div v-if="false" class="shareBox">
@@ -47,8 +49,10 @@
 <script  lang="ts">
 import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
-
-@Component
+import SmallLoader from '~/components/Common/SmallLoader.vue'
+@Component({
+  components: { SmallLoader }
+})
 export default class Preview extends Vue {
   @Getter('preview/frontImage') frontImage!: string
   @Getter('preview/backImage') backImage!: string

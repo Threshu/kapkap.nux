@@ -150,7 +150,7 @@
 				    position: absolute;
 				    left: -80px;
 				    top: 90px;
-
+				    z-index: 5;
 					.confMenu1 {
 						width: 80px;
 						height: 80px;
@@ -944,18 +944,38 @@
 				float: right;
 				width: calc(50% - 30px);
 
-				.productPreview {
-					display: block;
-					margin-top: 70px;
-					text-align: center;
-					max-height: 468px;
-          overflow: hidden;
+				.productView {
+					position: relative;
+					.loader-wrapper:not(.loading-icon-wrapper).small {
+						height: 55px;
+						width: 55px;
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: 0;
+						right: 0;
+						margin: auto;
+						background: transparent;
+						z-index: 2;
+					}
 
-					img {
-						height: auto;
-						cursor: pointer;
+					.productPreview {
+						display: block;
+						margin-top: 70px;
+						text-align: center;
+						height: 470px;
+						overflow: hidden;
+						position: relative;
+
+						img {
+							height: auto;
+							cursor: pointer;
+							position: relative;
+							z-index: 3;
+						}
 					}
 				}
+				
 
 				.backCup,
 				.frontCup {
@@ -1368,6 +1388,7 @@
 					float: none;
 					width: auto;
 					padding: 8px 12px 0;
+					min-height: 38%;
 
 					.createCup {
 						padding: 10px;
@@ -1389,7 +1410,10 @@
 
 						.productPreview {
 							margin-top: 0;
+							min-height: 200px;
+							height: auto;
 							position: relative;
+							margin-bottom: 70px;
 
 							img {
 								width: 75%;
