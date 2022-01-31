@@ -2778,15 +2778,6 @@ header {
     }
   }
 
-  .brand-logo {
-    position: absolute;
-    left: 90px;
-    margin-right: -50%;
-    transform: translateX(-50%);
-    padding-top: 30px !important;
-    padding-bottom: 30px !important;
-  }
-
   .toggle-nav {
     padding-top: 30px;
     padding-bottom: 30px;
@@ -2906,5 +2897,16 @@ header {
         }
       }
     }
+  }
+}
+
+@media (max-width: 1350px) {
+  .brand-logo {
+    position: absolute;
+    left: 90px;
+    margin-right: -50%;
+    transform: translateX(-50%);
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
   }
 }
