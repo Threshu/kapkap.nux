@@ -956,7 +956,7 @@
 						right: 0;
 						margin: auto;
 						background: transparent;
-						z-index: 2;
+						z-index: 5;
 					}
 
 					.productPreview {
@@ -967,11 +967,21 @@
 						overflow: hidden;
 						position: relative;
 
+						.loading {
+							img {
+								opacity: 0.3;
+							}
+						}
+
 						img {
 							height: auto;
 							cursor: pointer;
 							position: relative;
 							z-index: 3;
+
+							&.loading {
+								opacity: 0.3;
+							}
 						}
 					}
 				}

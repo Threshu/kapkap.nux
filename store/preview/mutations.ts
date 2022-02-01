@@ -22,5 +22,9 @@ export default {
 
   setSide: (state: PreviewState, side: Side) => {
     Vue.set(state, 'currentSide', side)
+  },
+
+  setLoader: (state: PreviewState, value: boolean) => {
+    Vue.set(state, 'loader', value)
   }
 }
