@@ -58,7 +58,7 @@ export default class Preview extends Vue {
   @Getter('preview/frontImage') frontImage!: string
   @Getter('preview/backImage') backImage!: string
   @Getter('preview/activePreview') activePreview!: string
-  @Getter('preview/loader') loader!: string
+  @Getter('preview/loader') loader!: boolean
 
   @Mutation('preview/setActivePreview') setActivePreview!: Function
 }
