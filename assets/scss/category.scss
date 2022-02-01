@@ -223,7 +223,7 @@
 					height: 420px;
 
 					.bgItem {
-						width: 115px;
+						min-width: 145px;
 						height: 115px;
 						display: inline-block;
 						margin: 12px 10px;
@@ -1145,7 +1145,7 @@
 						.objectsList {
 							display: block;
 							overflow: auto;
-						    max-height: calc(100vh - 532px);
+						    max-height: calc(100vh - 540px);
 						    padding-bottom: 20px;
 
 						    &::-webkit-scrollbar-track {
@@ -1233,7 +1233,7 @@
 						height: auto;
 
 						.bgItem {
-							width: 115px !important;
+							min-width: 115px !important;
 							margin: 0 10px 15px;
 							display: inline-flex;
 							align-items: center;
@@ -1241,8 +1241,11 @@
 						}
 
 						.quoteItem {
-							padding: 0 20px;
-							margin: 0px 0 20px;
+							padding: 0;
+							margin: 12px;
+							width: 155px;
+						    min-height: 135px;
+						    vertical-align: top;
 
 							img {
 								width: 100%;
