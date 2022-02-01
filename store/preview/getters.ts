@@ -5,5 +5,6 @@ export default {
   frontImage: (state: PreviewState) => state.frontImageUrl,
   backImage: (state: PreviewState) => state.backImageUrl,
   currentSide: (state: PreviewState) => state.currentSide,
-  activePreview: (state: PreviewState) => state.activePreviewImageUrl
+  activePreview: (state: PreviewState) => state.activePreviewImageUrl,
+  loader: (state: PreviewState) => state.loader,
 }

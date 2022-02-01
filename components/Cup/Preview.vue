@@ -17,10 +17,11 @@
 
     <div class="productView">
       <div class="productPreview">
-        <SmallLoader v-if="!activePreview"/>
+        <SmallLoader v-if="loader" />
         <image-zoom
           v-if="activePreview"
           class="desktop"
+          :class="{'loading': loader}"
           :regular="activePreview"
           alt="Podgląd wygenerowanego obrazu kubka"
           hover-message="Najedź myszką, aby powiększyć obraz"
@@ -29,9 +30,9 @@
         <img
           v-if="activePreview"
           class="mobile"
+          :class="{'loading': loader}"
           :src="activePreview"
         >
-
       </div>
 
       <div v-if="false" class="shareBox">
@@ -57,6 +58,7 @@ export default class Preview extends Vue {
   @Getter('preview/frontImage') frontImage!: string
   @Getter('preview/backImage') backImage!: string
   @Getter('preview/activePreview') activePreview!: string
+  @Getter('preview/loader') loader!: string
 
   @Mutation('preview/setActivePreview') setActivePreview!: Function
 }

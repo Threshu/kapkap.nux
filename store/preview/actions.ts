@@ -11,12 +11,14 @@ export default {
       ...rootGetters['cup/productObject'],
       previewId: getters.previewId
     }
+    commit('setLoader', true)
 
     const result = await $axios.post('/preview', apiData)
     if (result?.data) {
       commit('setPreviewId', result.data.previewId)
       commit('setPreviewImages', { frontImageUrl: result.data.frontImageUrl, backImageUrl: result.data.backImageUrl })
       commit('setActivePreview', getters.currentSide)
+      commit('setLoader', false)
     }
   },
 
