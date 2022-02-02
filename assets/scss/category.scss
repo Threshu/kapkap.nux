@@ -228,7 +228,6 @@
 						display: inline-block;
 						margin: 12px 10px;
 						overflow: hidden;
-						opacity: 0.3;
 						position: relative;
 						cursor: pointer;
 						transition: all 0.3s;
@@ -238,13 +237,7 @@
 							height: 100%;
 						}
 
-						&:hover {
-							opacity: 1;
-						}
-
 						&.selected {
-							opacity: 1;
-
 							&:before {
 								content: '✓';
 								display: block;
@@ -273,15 +266,9 @@
 						margin: 0 25px 15px;
 						cursor: pointer;
 						position: relative;
-						opacity: 0.4;
 						transition: all 0.3s;
 
-						&:hover {
-							opacity: 1;
-						}
-
 						&.selected {
-							opacity: 1;
 							&:before {
 								content: "✓";
 								display: block;
@@ -377,7 +364,7 @@
 							overflow: auto;
 
 							.objectsBox {
-								text-align: left;
+								text-align: center;
 								margin-bottom: 20px;
 
 								.breed {
@@ -392,10 +379,6 @@
 									margin-left: 0;
 									height: auto;
 
-									&.selected {
-										opacity: 1;
-									}
-
 									.colorItem {
 										width: 52px;
 										max-height: 52px;
@@ -403,23 +386,27 @@
 										border-radius: 50%;
 
 										&.black {
-											background: #000;
+											background-color: #000;
 										}
 
 										&.blond {
-											background: rgb(220, 146, 19);
+											background-color: #bf9d80
 										}
 
 										&.brown {
-											background: rgb(189, 150, 122);
+											background-color: #664835;
 										}
 
 										&.dark_brown {
-											background: rgb(93, 56, 0);
+											background-color: #342417;
+										}
+
+										&.red {
+											background-color: #9e533c;
 										}
 
 										&.other {
-											background-color: green;
+											background-color: #959595;
 										}
 									}
 								}
@@ -450,32 +437,20 @@
 
 							.objectsBox {
 								overflow: hidden;
-
-								&:hover {
-									.objItem {
-										opacity: 0.3;
-									}
-								}
 							}
 
 							.objItem {
-							    width: 45px;
+							    min-width: 55px;
 							    height: 120px;
 							    text-align: center;
-							    margin: 5px 40px;
+							    margin: 15px;
 							    display: inline-block;
 							    opacity: 1;
 							    transition: all 0.3s;
 							    cursor: pointer;
 							    position: relative;
 
-							    &:hover {
-							    	opacity: 1 !important;
-							    }
-
 							    &.selected {
-							    	opacity: 1;
-
 							    	&:before {
 								    	content: "✓";
 								    	display: block;
@@ -487,8 +462,11 @@
 								    	font-size: 16px;
 								    	position: absolute;
 								    	line-height: 13px;
-								    	right: 3px;
-								    	top: 42px;
+								    	right: 0;
+								    	left: 0;
+								    	bottom: 0;
+								    	top: 0;
+								    	margin: auto;
 							    	}
 							    }
 
@@ -650,7 +628,6 @@
 						height: 115px;
 						display: inline-block;
 						margin: 8px 20px;
-						opacity: 0.3;
 						transition: all 0.3s;
 						position: relative;
 						cursor: pointer;
@@ -660,12 +637,7 @@
 							height: 100%;
 						}
 
-						&:hover {
-							opacity: 1;
-						}
-
 						&.selected {
-							opacity: 1;
 							&:before {
 								content: "✓";
 								display: block;
@@ -1145,7 +1117,7 @@
 						.objectsList {
 							display: block;
 							overflow: auto;
-						    max-height: calc(100vh - 540px);
+						    max-height: calc(65vh - 320px);
 						    padding-bottom: 20px;
 
 						    &::-webkit-scrollbar-track {
@@ -1278,7 +1250,7 @@
 								flex-wrap: wrap;
 								justify-content: center;
 								align-items: center;
-								padding-top: 50px;
+								padding-top: 100px;
 							}
 							.modalTitle {
 								position: absolute;
@@ -1402,7 +1374,6 @@
 					float: none;
 					width: auto;
 					padding: 8px 12px 0;
-					min-height: 38%;
 
 					.createCup {
 						padding: 10px;
@@ -1424,13 +1395,13 @@
 
 						.productPreview {
 							margin-top: 0;
-							min-height: 200px;
-							height: auto;
+							height: 35vh;
+							padding-bottom: 20px;
 							position: relative;
-							margin-bottom: 70px;
 
 							img {
-								width: 75%;
+								width: auto;
+								height: 100%;
 							}
 						}
 					}
@@ -1463,6 +1434,7 @@
 						right: 0;
 						bottom: 100px;
 						cursor: pointer;
+						z-index: 99;
 
 						&:hover {
 							font-size: 12px;
@@ -1497,12 +1469,6 @@
 				}
 			}
 		}
-	}
-}
-
-@media only screen and (min-width: 600px) and (max-width: 1350px)  {
-	.categoryBox .productBoxBg .productBox .productViewBox .productView .productPreview img {
-		width: 35%;
 	}
 }
 

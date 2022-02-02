@@ -114,6 +114,7 @@
             <div
               v-for="(dogs, breed) in popupData"
               :key="breed"
+              v-if="breed !== 'type'"
             >
               <span class="breed">{{ breed }}</span>
               <div
