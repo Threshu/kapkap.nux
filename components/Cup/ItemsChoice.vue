@@ -143,7 +143,7 @@
       </div>
       <div
         v-if="showModal"
-        class="modal"
+        class="modal objectChoice"
       >
         <button class="closeModal" @click="showModal = false">
           &times;

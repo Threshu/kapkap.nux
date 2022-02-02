@@ -289,7 +289,7 @@
 
 						img {
 							width: 200px;
-              height: auto;
+              				height: auto;
 						}
 					}
 				}
@@ -478,10 +478,21 @@
 
 							    img {
 							    	max-height: 90px;
-                    width: auto;
+                    				width: auto;
 							    }
 							}
+						}
 
+						&.objectChoice {
+							.modalContent {
+								padding-top: 80px;
+								.objItem {
+									margin: 20px;
+									.name {
+										display: block;
+									}
+								}
+							}
 						}
 					}
 
@@ -624,17 +635,17 @@
 					text-align: center;
 					height: 420px;
 					.quoteItem {
-						width: 135px;
-						height: 115px;
+						width: 125px;
+						height: auto;
 						display: inline-block;
-						margin: 8px 20px;
+						margin: 8px 23px;
 						transition: all 0.3s;
 						position: relative;
 						cursor: pointer;
 
 						img {
-							width: auto;
-							height: 100%;
+							width: 100%;
+							height: auto;
 						}
 
 						&.selected {
@@ -917,6 +928,7 @@
 				width: calc(50% - 30px);
 
 				.productView {
+					height: 615px;
 					position: relative;
 					.loader-wrapper:not(.loading-icon-wrapper).small {
 						height: 55px;
@@ -935,7 +947,6 @@
 						display: block;
 						margin-top: 70px;
 						text-align: center;
-						height: 470px;
 						overflow: hidden;
 						position: relative;
 
@@ -993,6 +1004,10 @@
 					line-height: 20px;
 					position: relative;
 					padding-left: 80px;
+
+					position: absolute;
+					width: 100%;
+					bottom: 0;
 
 					&:after {
 						content: '!';
@@ -1246,12 +1261,21 @@
 							.modalContent {
 								height: calc(100vh - 42px);
 								overflow: auto;
-								display: flex;
+								display: block;
 								flex-wrap: wrap;
 								justify-content: center;
 								align-items: center;
 								padding-top: 100px;
 							}
+
+							&.objectChoice {
+								padding-top: 107px;
+								.modalContent {
+									padding-top: 15vh;
+									height: calc(100vh - 149px);
+								}
+							}
+
 							.modalTitle {
 								position: absolute;
 								width: 100%;
@@ -1390,7 +1414,7 @@
 					}
 
 					.productView {
-						position: relative;
+						height: auto;
 						top: 10px;
 
 						.productPreview {
@@ -1492,8 +1516,28 @@
 				&.productModalBox {
 					top: 107px;
 				}
+
 			}
 		}
 	}
 }
 
+@media only screen and (max-width: 578px) {
+	.categoryBox {
+		.productBoxBg {
+			.productBox {
+				.productConfBox {
+					.objectsList {
+						.modal.objectChoice {
+							padding-top: 87px;
+							.modalContent {
+								height: calc(100vh - 129px);
+							}
+						}
+					}
+				}
+
+			}
+		}
+	}
+}
