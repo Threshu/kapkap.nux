@@ -18,7 +18,9 @@ export default {
       commit('setPreviewId', result.data.previewId)
       commit('setPreviewImages', { frontImageUrl: result.data.frontImageUrl, backImageUrl: result.data.backImageUrl })
       commit('setActivePreview', getters.currentSide)
-      commit('setLoader', false)
+      setTimeout(function() {
+        commit('setLoader', false)
+      }, 2000)
     }
   },
 
