@@ -65,7 +65,6 @@ export default class Preview extends Vue {
   @Mutation('preview/setLoader') setLoader!: Function
 
   onImageLoad () {
-    console.log(this.loader)
     this.setLoader(false)
   }
 }
