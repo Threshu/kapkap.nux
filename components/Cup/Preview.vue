@@ -32,6 +32,7 @@
           class="mobile"
           :class="{'loading': loader}"
           :src="activePreview"
+          @load="onImageLoad"
         >
       </div>
 
@@ -58,8 +59,14 @@ export default class Preview extends Vue {
   @Getter('preview/frontImage') frontImage!: string
   @Getter('preview/backImage') backImage!: string
   @Getter('preview/activePreview') activePreview!: string
-  @Getter('preview/loader') loader!: boolean
+  @Getter('preview/loaderVisible') loader!: boolean
 
   @Mutation('preview/setActivePreview') setActivePreview!: Function
+  @Mutation('preview/setLoader') setLoader!: Function
+
+  onImageLoad () {
+    console.log(this.loader)
+    this.setLoader(false)
+  }
 }
 </script>

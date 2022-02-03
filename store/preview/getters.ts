@@ -6,5 +6,6 @@ export default {
   backImage: (state: PreviewState) => state.backImageUrl,
   currentSide: (state: PreviewState) => state.currentSide,
   activePreview: (state: PreviewState) => state.activePreviewImageUrl,
-  loader: (state: PreviewState) => state.loader,
+  loaderVisible: (state: PreviewState) => state.loaderCounter > 0 || state.loaderVisible,
+  previewRequestNumber: (state: PreviewState) => state.previewRequestNumber
 }

@@ -9,9 +9,14 @@ export type PreviewState = {
   backImageUrl: string,
   activePreviewImageUrl: string,
   currentSide: Side,
-  loader: boolean
+  loaderVisible: boolean,
+  loaderCounter: number,
+  previewRequestNumber: number
 }
 
 export default () => (<PreviewState>{
-  currentSide: Side.Front
+  currentSide: Side.Front,
+  loaderVisible: false,
+  loaderCounter: 0,
+  previewRequestNumber: 0
 })

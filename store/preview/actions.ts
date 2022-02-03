@@ -11,17 +11,19 @@ export default {
       ...rootGetters['cup/productObject'],
       previewId: getters.previewId
     }
-    commit('setLoader', true)
+    commit('incLoadCounter')
+    commit('incPreviewRequestNumber')
+    const currentPreviewRequestNumber = getters.previewRequestNumber
 
     const result = await $axios.post('/preview', apiData)
-    if (result?.data) {
+    if (result?.data && currentPreviewRequestNumber === getters.previewRequestNumber) {
+      commit('setLoader', getters.frontImage !== result.data.frontImageUrl)
+      commit('setLoadCounter', 0)
       commit('setPreviewId', result.data.previewId)
       commit('setPreviewImages', { frontImageUrl: result.data.frontImageUrl, backImageUrl: result.data.backImageUrl })
       commit('setActivePreview', getters.currentSide)
-      setTimeout(function() {
-        commit('setLoader', false)
-      }, 2000)
     }
+    commit('decLoadCounter')
   },
 
   fetchCartPreviews: ({ commit, dispatch, rootGetters }: any) => {

@@ -24,7 +24,25 @@ export default {
     Vue.set(state, 'currentSide', side)
   },
 
-  setLoader: (state: PreviewState, value: boolean) => {
-    Vue.set(state, 'loader', value)
+  setLoader: (state: PreviewState, activate: boolean) => {
+    Vue.set(state, 'loaderVisible', activate)
+  },
+
+  decLoadCounter: (state: PreviewState) => {
+    if (state.loaderCounter > 0) {
+      Vue.set(state, 'loaderCounter', state.loaderCounter - 1)
+    }
+  },
+
+  incLoadCounter: (state: PreviewState) => {
+    Vue.set(state, 'loaderCounter', state.loaderCounter + 1)
+  },
+
+  setLoadCounter: (state: PreviewState, value: number) => {
+    Vue.set(state, 'loaderCounter', value)
+  },
+
+  incPreviewRequestNumber: (state: PreviewState) => {
+    state.previewRequestNumber++
   }
 }
