@@ -114,6 +114,7 @@
             <div
               v-for="(dogs, breed) in popupData"
               :key="breed"
+              v-if="breed !== 'type'"
             >
               <span class="breed">{{ breed }}</span>
               <div
@@ -142,7 +143,7 @@
       </div>
       <div
         v-if="showModal"
-        class="modal"
+        class="modal objectChoice"
       >
         <button class="closeModal" @click="showModal = false">
           &times;

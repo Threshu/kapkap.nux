@@ -223,12 +223,11 @@
 					height: 420px;
 
 					.bgItem {
-						width: 115px;
+						min-width: 145px;
 						height: 115px;
 						display: inline-block;
 						margin: 12px 10px;
 						overflow: hidden;
-						opacity: 0.3;
 						position: relative;
 						cursor: pointer;
 						transition: all 0.3s;
@@ -238,13 +237,7 @@
 							height: 100%;
 						}
 
-						&:hover {
-							opacity: 1;
-						}
-
 						&.selected {
-							opacity: 1;
-
 							&:before {
 								content: '✓';
 								display: block;
@@ -273,15 +266,9 @@
 						margin: 0 25px 15px;
 						cursor: pointer;
 						position: relative;
-						opacity: 0.4;
 						transition: all 0.3s;
 
-						&:hover {
-							opacity: 1;
-						}
-
 						&.selected {
-							opacity: 1;
 							&:before {
 								content: "✓";
 								display: block;
@@ -302,7 +289,7 @@
 
 						img {
 							width: 200px;
-              height: auto;
+              				height: auto;
 						}
 					}
 				}
@@ -377,7 +364,7 @@
 							overflow: auto;
 
 							.objectsBox {
-								text-align: left;
+								text-align: center;
 								margin-bottom: 20px;
 
 								.breed {
@@ -392,10 +379,6 @@
 									margin-left: 0;
 									height: auto;
 
-									&.selected {
-										opacity: 1;
-									}
-
 									.colorItem {
 										width: 52px;
 										max-height: 52px;
@@ -403,23 +386,27 @@
 										border-radius: 50%;
 
 										&.black {
-											background: #000;
+											background-color: #000;
 										}
 
 										&.blond {
-											background: rgb(220, 146, 19);
+											background-color: #bf9d80
 										}
 
 										&.brown {
-											background: rgb(189, 150, 122);
+											background-color: #664835;
 										}
 
 										&.dark_brown {
-											background: rgb(93, 56, 0);
+											background-color: #342417;
+										}
+
+										&.red {
+											background-color: #9e533c;
 										}
 
 										&.other {
-											background-color: green;
+											background-color: #959595;
 										}
 									}
 								}
@@ -450,32 +437,20 @@
 
 							.objectsBox {
 								overflow: hidden;
-
-								&:hover {
-									.objItem {
-										opacity: 0.3;
-									}
-								}
 							}
 
 							.objItem {
-							    width: 45px;
+							    min-width: 55px;
 							    height: 120px;
 							    text-align: center;
-							    margin: 5px 40px;
+							    margin: 15px;
 							    display: inline-block;
 							    opacity: 1;
 							    transition: all 0.3s;
 							    cursor: pointer;
 							    position: relative;
 
-							    &:hover {
-							    	opacity: 1 !important;
-							    }
-
 							    &.selected {
-							    	opacity: 1;
-
 							    	&:before {
 								    	content: "✓";
 								    	display: block;
@@ -487,8 +462,11 @@
 								    	font-size: 16px;
 								    	position: absolute;
 								    	line-height: 13px;
-								    	right: 3px;
-								    	top: 42px;
+								    	right: 0;
+								    	left: 0;
+								    	bottom: 0;
+								    	top: 0;
+								    	margin: auto;
 							    	}
 							    }
 
@@ -500,10 +478,21 @@
 
 							    img {
 							    	max-height: 90px;
-                    width: auto;
+                    				width: auto;
 							    }
 							}
+						}
 
+						&.objectChoice {
+							.modalContent {
+								padding-top: 80px;
+								.objItem {
+									margin: 20px;
+									.name {
+										display: block;
+									}
+								}
+							}
 						}
 					}
 
@@ -646,26 +635,20 @@
 					text-align: center;
 					height: 420px;
 					.quoteItem {
-						width: 135px;
-						height: 115px;
+						width: 125px;
+						height: auto;
 						display: inline-block;
-						margin: 8px 20px;
-						opacity: 0.3;
+						margin: 8px 23px;
 						transition: all 0.3s;
 						position: relative;
 						cursor: pointer;
 
 						img {
-							width: auto;
-							height: 100%;
-						}
-
-						&:hover {
-							opacity: 1;
+							width: 100%;
+							height: auto;
 						}
 
 						&.selected {
-							opacity: 1;
 							&:before {
 								content: "✓";
 								display: block;
@@ -945,6 +928,7 @@
 				width: calc(50% - 30px);
 
 				.productView {
+					height: 615px;
 					position: relative;
 					.loader-wrapper:not(.loading-icon-wrapper).small {
 						height: 55px;
@@ -963,7 +947,6 @@
 						display: block;
 						margin-top: 70px;
 						text-align: center;
-						height: 470px;
 						overflow: hidden;
 						position: relative;
 
@@ -1021,6 +1004,10 @@
 					line-height: 20px;
 					position: relative;
 					padding-left: 80px;
+
+					position: absolute;
+					width: 100%;
+					bottom: 0;
 
 					&:after {
 						content: '!';
@@ -1145,7 +1132,7 @@
 						.objectsList {
 							display: block;
 							overflow: auto;
-						    max-height: calc(100vh - 532px);
+						    max-height: calc(65vh - 320px);
 						    padding-bottom: 20px;
 
 						    &::-webkit-scrollbar-track {
@@ -1233,7 +1220,7 @@
 						height: auto;
 
 						.bgItem {
-							width: 115px !important;
+							min-width: 115px !important;
 							margin: 0 10px 15px;
 							display: inline-flex;
 							align-items: center;
@@ -1241,8 +1228,12 @@
 						}
 
 						.quoteItem {
-							padding: 0 20px;
-							margin: 0px 0 20px;
+							padding: 0;
+							margin: 12px;
+							width: 155px;
+						    min-height: 135px;
+						    height: auto;
+						    vertical-align: top;
 
 							img {
 								width: 100%;
@@ -1270,12 +1261,21 @@
 							.modalContent {
 								height: calc(100vh - 42px);
 								overflow: auto;
-								display: flex;
+								display: block;
 								flex-wrap: wrap;
 								justify-content: center;
 								align-items: center;
-								padding-top: 50px;
+								padding-top: 100px;
 							}
+
+							&.objectChoice {
+								padding-top: 107px;
+								.modalContent {
+									padding-top: 15vh;
+									height: calc(100vh - 149px);
+								}
+							}
+
 							.modalTitle {
 								position: absolute;
 								width: 100%;
@@ -1398,7 +1398,6 @@
 					float: none;
 					width: auto;
 					padding: 8px 12px 0;
-					min-height: 38%;
 
 					.createCup {
 						padding: 10px;
@@ -1415,18 +1414,18 @@
 					}
 
 					.productView {
-						position: relative;
+						height: auto;
 						top: 10px;
 
 						.productPreview {
 							margin-top: 0;
-							min-height: 200px;
-							height: auto;
+							height: 35vh;
+							padding-bottom: 20px;
 							position: relative;
-							margin-bottom: 70px;
 
 							img {
-								width: 75%;
+								width: auto;
+								height: 100%;
 							}
 						}
 					}
@@ -1459,6 +1458,7 @@
 						right: 0;
 						bottom: 100px;
 						cursor: pointer;
+						z-index: 99;
 
 						&:hover {
 							font-size: 12px;
@@ -1496,12 +1496,6 @@
 	}
 }
 
-@media only screen and (min-width: 600px) and (max-width: 1350px)  {
-	.categoryBox .productBoxBg .productBox .productViewBox .productView .productPreview img {
-		width: 35%;
-	}
-}
-
 @media only screen and (min-width: 1430px) and (max-width: 1550px)  {
 	.categoryBox .productBoxBg .productBox {
 		width: calc(100% - 150px);
@@ -1522,8 +1516,28 @@
 				&.productModalBox {
 					top: 107px;
 				}
+
 			}
 		}
 	}
 }
 
+@media only screen and (max-width: 578px) {
+	.categoryBox {
+		.productBoxBg {
+			.productBox {
+				.productConfBox {
+					.objectsList {
+						.modal.objectChoice {
+							padding-top: 87px;
+							.modalContent {
+								height: calc(100vh - 129px);
+							}
+						}
+					}
+				}
+
+			}
+		}
+	}
+}
