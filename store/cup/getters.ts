@@ -1,9 +1,10 @@
-import { EditorState, CupImageItem, WorkingItem, CupImageData } from './state'
+import { EditorState, CupImageItem, CupImageData } from './state'
 
 export type ProductObject = {
   productId: string,
   cupId: string,
-  items: CupImageItem[]
+  items: CupImageItem[],
+  previewId?: string
 }
 
 export default {
@@ -52,7 +53,6 @@ export default {
           }
         })
       }
-
     })
 
     return {

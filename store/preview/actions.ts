@@ -1,5 +1,28 @@
+import { ActionContext } from 'vuex/types'
 import { $axios } from '~/utils/api'
 import { Product } from '~/store/basket/state'
+import { PreviewState } from '~/store/preview/state'
+import { ProductObject } from '~/store/cup/getters'
+
+function basketItemToProduct (item: Product): ProductObject {
+  return <ProductObject>{
+    productId: item.productId,
+    cupId: item.cupId,
+    items: item.items,
+    previewId: item.previewId
+  }
+}
+
+async function changeItemPreview (commit: any, cartItem: Product) {
+  const result = await $axios.post('/preview', basketItemToProduct(cartItem))
+
+  commit('basket/setPreviewImage', {
+    cartItemId: cartItem.cartItemId,
+    frontImageUrl: result.data.frontImageUrl,
+    backImageUrl: result.data.backImageUrl,
+    previewId: result.data.previewId
+  }, { root: true })
+}
 
 export default {
   getProductPreview: async ({
@@ -26,19 +49,9 @@ export default {
     commit('decLoadCounter')
   },
 
-  fetchCartPreviews: ({ commit, dispatch, rootGetters }: any) => {
-    rootGetters['cart/basket']?.products?.forEach(function (cartItem: Product, index: number) {
-      dispatch('getProductPreview', {
-        product: cartItem,
-        previewId: cartItem.previewId
-      }).then((data: any) => {
-        commit('basket/setPreviewImage', {
-          cartItemIndex: index,
-          frontImageUrl: data.frontImageUrl,
-          backImageUrl: data.backImageUrl,
-          previewId: data.previewId
-        }, { root: true })
-      })
+  fetchCartPreviews: ({ commit, rootGetters }: ActionContext<PreviewState, PreviewState>) => {
+    rootGetters['basket/basket']?.products?.forEach(async (cartItem: Product) => {
+      await changeItemPreview(commit, cartItem)
     })
   }
 }

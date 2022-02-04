@@ -3,6 +3,13 @@ export enum Side {
   Back = 'back'
 }
 
+export type PreviewResponse = {
+  backImageUrl: string,
+  frontImageUrl: string,
+  previewId: string,
+  success: boolean
+}
+
 export type PreviewState = {
   previewId: string
   frontImageUrl: string,
