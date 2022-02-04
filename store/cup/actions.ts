@@ -1,5 +1,7 @@
+import { ActionContext } from 'vuex/types'
 import { $axios } from '~/utils/api'
 import { Product as CartProduct } from '~/store/basket/state'
+import { EditorState } from '~/store/cup/state'
 
 export default {
   loadCups: async ({ commit }: any) => {
@@ -102,12 +104,13 @@ export default {
     dispatch('preview/getProductPreview', null, { root: true })
   },
 
-  loadProductFromCart: async ({ commit, dispatch, rootGetters } : any, cartItemId: string): Promise<string> => {
+  loadProductFromCart: async ({ commit, dispatch, rootGetters } : ActionContext<EditorState, EditorState>, cartItemId: string): Promise<string> => {
     await dispatch('basket/loadBasket', null, { root: true })
     const basket = rootGetters['basket/basket']
     const cartItem: CartProduct = basket.products.find((product: CartProduct) => product.cartItemId === cartItemId)
     commit('setWorkingObjectFromCart', cartItem)
     commit('setQuantity', cartItem.number)
+    commit('preview/setPreviewId', cartItem.previewId, { root: true })
 
     return cartItem.productId
   }
