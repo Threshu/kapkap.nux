@@ -1,11 +1,12 @@
 <template>
   <div>
-    <Breadcrumb title="Podsumowanie zamówienia"/>
+    <Breadcrumb title="Podsumowanie zamówienia" />
+
     <section class="section-b-space">
       <div class="container padding-cls">
         <div class="checkout-page">
           <div class="checkout-form">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit="{handleSubmit(onSubmit)}">
               <div class="checkout row">
                 <div class="col-lg-6 col-sm-12 col-xs-12">
                   <div class="checkout-title">
@@ -13,9 +14,15 @@
                   </div>
 
                   <div class="address-tabs">
-                    <a class="tab-item"
-                      v-on:click="activeTab='billing'">Adres rozliczeniowy</a>
-                    <a class="tab-item" v-on:click="activeTab='delivery'">Inny adres dostawy</a>
+                    <a
+                      class="tab-item"
+                      @click="activeTab='billing'"
+                    >
+                      Adres rozliczeniowy
+                    </a>
+                    <a class="tab-item" @click="activeTab='delivery'">
+                      Inny adres dostawy
+                    </a>
                   </div>
 
                   <div v-if="activeTab == 'delivery'">
@@ -33,10 +40,11 @@
                   <div class="additionalInfo">
                     <p>Wpisz uwagi dotyczące zamówienia</p>
                     <textarea
+                      ref="{methods.register({required:"
                       rows="5"
                       name="additionalInfo"
                       :value="initialAdditionals.additionalInfo"
-                      ref={methods.register({required: false})}/>
+                    />
                   </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-xs-12">
@@ -46,21 +54,31 @@
                         <div>Nazwa kubka<span> Cena</span></div>
                       </div>
                       <ul class="qty">
-                        <li v-for="(item, index) in cartItems.products" :key="index" >
-                          {{item.title}} × {{item.number}}
-                          <span>{{calculateTotal(item, item.number)}} {{cartItems.payment.symbol}}</span>
+                        <li
+                          v-for="(item, index) in cartItems.products"
+                          :key="index">
+                          {{ item.title }} × {{ item.number }}
+                          <span>
+                            {{ calculateTotal(item, item.number) }} {{ cartItems.payment.symbol }}
+                          </span>
                         </li>
                       </ul>
                       <ul class="sub-total">
-                        <li>Suma <span
-                          class="count">{{cartItems.payment.orderTotal}}
-                          {{cartItems.payment.symbol}}</span></li>
+                        <li>
+                          Suma
+                          <span
+                            class="count"
+                          >
+                            {{ cartItems.payment.orderTotal }}
+                              {{ cartItems.payment.symbol }}
+                          </span>
+                        </li>
                         <CheckoutBoxes
                           title="Wybierz sposób dostawy"
                           group="shipping-group"
                           :types="shippingTypes"
                           :selected="initialAdditionals.shippingType"
-                          :inpostAddress="initialAdditionals.inpost"
+                          :inpost-address="initialAdditionals.inpost"
                         />
                       </ul>
 
@@ -72,14 +90,14 @@
                               <input
                                 type="text"
                                 name="coupon"
-                              />
+                              >
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-8">
                               <input
                                 class="btn-solid btn-small"
                                 type="button"
                                 value="Aktywuj"
-                              />
+                              >
                             </div>
                           </div>
                         </li>
@@ -89,7 +107,7 @@
                         <li>
                           Do zapłaty
                           <span class="count">
-                            {{cartItems.totalPrice}} {{cartItems.payment.symbol}}
+                            {{ cartItems.totalPrice }}&nbsp;{{ cartItems.payment.symbol }}
                           </span>
                         </li>
                       </ul>
@@ -109,7 +127,7 @@
                           class="btn-solid btn payment-btn"
                           type="submit"
                           value="zamów"
-                        />
+                        >
                       </div>
                     </div>
                   </div>
@@ -126,8 +144,8 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
-import CheckoutBoxes from './CheckoutBoxes.vue';
-import AddressForm from './AddressForm.vue';
+import CheckoutBoxes from './CheckoutBoxes.vue'
+import AddressForm from './AddressForm.vue'
 import orderJSON from '~/data/order.json'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 
@@ -135,8 +153,6 @@ import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 @Component({
   components: { Breadcrumb, CheckoutBoxes, AddressForm }
 })
-
-
 export default class Summary extends Vue {
   cartItems: any = orderJSON
   activeTab: any = 'delivery'
@@ -152,6 +168,7 @@ export default class Summary extends Vue {
     companyName: '',
     taxId: ''
   }
+
   delivery: any = {
     firstName: '',
     lastName: '',
@@ -197,14 +214,14 @@ export default class Summary extends Vue {
       label: `
         <img src="https://kapkap.eu/static/media/Przelewy24_logo.37ea72ff.svg" alt='payment online'/>
         <div className="type payment">Płatność on-line</div>
-      `,
+      `
     },
     {
       id: 'cashOnDelivery',
       label: `
         <img src="/static/media/banknoty.7ceb1b83.png" alt='cash on delivery'/>
         <div className="type payment">Płatność za pobraniem</div>
-      `,
+      `
     },
     {
       id: 'manualTransfer',
@@ -219,9 +236,8 @@ export default class Summary extends Vue {
     this.cartItems = orderJSON
   }
 
-  calculateTotal(product: any, numb: any) {
-    return parseFloat(product.price) * numb.toFixed(2);
+  calculateTotal (product: any, numb: any) {
+    return parseFloat(product.price) * numb.toFixed(2)
   }
-
 }
 </script>
