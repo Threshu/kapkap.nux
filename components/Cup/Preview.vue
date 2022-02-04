@@ -42,7 +42,7 @@
 
       <span class="cupInfo">
         Przedstawione zdjęcia mają jedynie charakter poglądowy. <br>
-        Docelowy kubek może różnić się kolorostycznie.
+        Docelowy kubek może różnić się kolorystycznie.
       </span>
     </div>
   </div>
