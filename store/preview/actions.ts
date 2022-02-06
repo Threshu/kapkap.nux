@@ -34,6 +34,7 @@ export default {
       ...rootGetters['cup/productObject'],
       previewId: getters.previewId
     }
+    commit('setLoader', true)
     commit('incLoadCounter')
     commit('incPreviewRequestNumber')
     const currentPreviewRequestNumber = getters.previewRequestNumber

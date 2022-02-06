@@ -949,6 +949,7 @@
 						text-align: center;
 						overflow: hidden;
 						position: relative;
+            height: 100%;
 
 						.loading {
 							img {
@@ -968,7 +969,7 @@
 						}
 					}
 				}
-				
+
 
 				.backCup,
 				.frontCup {
