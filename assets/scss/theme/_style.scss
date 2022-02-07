@@ -17280,9 +17280,8 @@ body {
   img {
     max-width: calc(50% - 10px);
     height: auto !important;
-    max-height: 90px;
+    max-height: auto;
     width: auto;
-    border: 2px solid;
   }
 }
 

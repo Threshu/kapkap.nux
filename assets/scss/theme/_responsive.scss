@@ -4054,15 +4054,12 @@
     tbody {
       tr {
         td {
-          &:first-child {
-            width: 43%;
-          }
-
           &:nth-last-child(-n+4) {
             display: none;
           }
 
           .mobile-cart-content {
+            flex-flow: row-reverse;
             display: flex;
           }
         }
@@ -7255,13 +7252,25 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 767px) {
   .cart-section {
+    .cart-buttons {
+      flex-wrap: wrap-reverse;
+
+      .continue-shopping {
+        background: transparent;
+        color: #000 !important;
+        border: 0;
+      }
+    }
+
     tbody {
       tr {
         td {
-          &:first-child {
-            display: none;
+          .mobile-cart-content {
+            .qty-box {
+              border: 0;
+            }
           }
         }
       }
