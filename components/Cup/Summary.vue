@@ -158,6 +158,7 @@ export default class Summary extends Vue {
   }
 
   buyNow () {
+    this.$router.push('/kasa')
   }
 
   addToCart () {
@@ -169,6 +170,7 @@ export default class Summary extends Vue {
     }
 
     this.addToBasket(basket)
+    this.$router.push('/koszyk')
   }
 
   saveCartItem () {
