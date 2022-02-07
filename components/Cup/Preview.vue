@@ -32,6 +32,7 @@
           class="mobile"
           :class="{'loading': loader}"
           :src="activePreview"
+          @load="onImageLoad"
         >
       </div>
 
@@ -41,7 +42,7 @@
 
       <span class="cupInfo">
         Przedstawione zdjęcia mają jedynie charakter poglądowy. <br>
-        Docelowy kubek może różnić się kolorostycznie.
+        Docelowy kubek może różnić się kolorystycznie.
       </span>
     </div>
   </div>
@@ -58,8 +59,13 @@ export default class Preview extends Vue {
   @Getter('preview/frontImage') frontImage!: string
   @Getter('preview/backImage') backImage!: string
   @Getter('preview/activePreview') activePreview!: string
-  @Getter('preview/loader') loader!: boolean
+  @Getter('preview/loaderVisible') loader!: boolean
 
   @Mutation('preview/setActivePreview') setActivePreview!: Function
+  @Mutation('preview/setLoader') setLoader!: Function
+
+  onImageLoad () {
+    this.setLoader(false)
+  }
 }
 </script>

@@ -110,4 +110,3 @@ export default class AddressForm extends Vue {
   @Prop({ type: Object, required: false }) form!: any
 }
 </script>
-

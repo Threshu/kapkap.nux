@@ -27,9 +27,9 @@ export default {
     state.edit = index
   },
 
-  setPreviewImage (state: BasketState, { cartItemIndex, frontImageUrl, backImageUrl, previewId }: any) {
-    state.basket.products.forEach(function (item: Product, index: number) {
-      if (index === cartItemIndex) {
+  setPreviewImage (state: BasketState, { cartItemId, frontImageUrl, backImageUrl, previewId }: any) {
+    state.basket.products.forEach(function (item: Product) {
+      if (item.cartItemId === cartItemId) {
         item.frontThumbnail = frontImageUrl
         item.backThumbnail = backImageUrl
         item.previewId = previewId
