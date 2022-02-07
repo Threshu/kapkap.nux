@@ -9,7 +9,9 @@ import {
   Pet,
   CupImageItem,
   WorkingObject,
-  WorkingItem
+  WorkingItem,
+  HairstyleColors,
+  HairstyleStyle
 } from '~/store/cup/state'
 import { Product as CartProduct } from '~/store/basket/state'
 
@@ -131,6 +133,11 @@ export default {
     let pet: Pet[]
     let petsArray: any[]
     let maxHumans = Math.ceil(count / 2)
+    const maleHair: HairstyleColors[] = ['black', 'blond', 'brown', 'dark_brown', 'other']
+    const femaleHair: HairstyleColors[] = ['black', 'blond', 'brown', 'dark_brown', 'red', 'other']
+    const hairstyles: HairstyleStyle[] = ['bun', 'mid_back', 'neck', 'shoulder', 'tie', 'upper_back']
+    let randHairColor: number
+    let randHairstyle: number
     let i = 0
 
     // safeCounter is used to avoid an infinite loop and a page crash
@@ -145,33 +152,43 @@ export default {
       typeRand = randomIntFromInterval(1, 4)
       switch (typeRand) {
         case 1:
-          if (state.men && maxHumans > 0) {
-            randBody = randomIntFromInterval(0, state.men.bodies.length - 1)
-            randHair = randomIntFromInterval(0, state.men.hairstyles.black.all.length - 1)
-            state.workingObject.items.push({
-              type: 'man',
-              bodyId: state.men.bodies[randBody].bodyId,
-              hairColor: 'black',
-              hairstyleId: state.men.hairstyles.black.all[randHair].hairstyleId
-            })
-            i++
-            maxHumans--
-          }
+          try {
+            if (state.men && maxHumans > 0) {
+              randBody = randomIntFromInterval(0, state.men.bodies.length - 1)
+              randHairColor = randomIntFromInterval(0, maleHair.length - 1)
+              randHair = randomIntFromInterval(0, state.men.hairstyles[maleHair[randHairColor]].all.length - 1)
+              state.workingObject.items.push({
+                type: 'man',
+                bodyId: state.men.bodies[randBody].bodyId,
+                hairColor: maleHair[randHairColor],
+                hairstyleId: state.men.hairstyles[maleHair[randHairColor]].all[randHair].hairstyleId
+              })
+              i++
+              maxHumans--
+            }
+          } catch (e) {}
           break
 
         case 2:
-          if (state.women && maxHumans > 0) {
-            randBody = randomIntFromInterval(0, state.women.bodies.length - 1)
-            randHair = randomIntFromInterval(0, state.women.hairstyles.black.bun.length - 1)
-            state.workingObject.items.push({
-              type: 'woman',
-              bodyId: state.women.bodies[randBody].bodyId,
-              hairColor: 'black',
-              hairstyleId: state.women.hairstyles.black.bun[randHair].hairstyleId
-            })
-            i++
-            maxHumans--
-          }
+          try {
+            if (state.women && maxHumans > 0) {
+              randBody = randomIntFromInterval(0, state.women.bodies.length - 1)
+              randHairColor = randomIntFromInterval(0, femaleHair.length - 1)
+              randHairstyle = randomIntFromInterval(0, hairstyles.length - 1)
+              randHair = randomIntFromInterval(
+                0,
+                state.women.hairstyles[femaleHair[randHairColor]][hairstyles[randHairstyle]].length - 1
+              )
+              state.workingObject.items.push({
+                type: 'woman',
+                bodyId: state.women.bodies[randBody].bodyId,
+                hairColor: femaleHair[randHairColor],
+                hairstyleId: state.women.hairstyles[femaleHair[randHairColor]][hairstyles[randHairstyle]][randHair].hairstyleId
+              })
+              i++
+              maxHumans--
+            }
+          } catch (e) {}
           break
 
         case 3:
