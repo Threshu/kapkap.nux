@@ -33,7 +33,7 @@
             <NuxtLink
               to="#"
               class="dropdown"
-              @click="handleSubmenu"
+              @click.native="handleSubmenu"
             >
               {{ option.title }}
               <span class="sub-arrow" />
@@ -102,7 +102,7 @@
             <NuxtLink
               :to="option.link"
               class="nav-link"
-              @click="onSwitchNav"
+              @click.native="onSwitchNav"
             >
               {{ option.title }}
             </NuxtLink>
