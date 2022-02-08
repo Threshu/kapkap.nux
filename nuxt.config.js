@@ -56,7 +56,8 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/stylelint
     // '@nuxtjs/stylelint-module'
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    'nuxt-compress'
   ],
 
   googleFonts: {
@@ -76,7 +77,19 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    'nuxt-i18n'
+    'nuxt-i18n',
+    [
+      'nuxt-compress',
+      {
+        gzip: {
+          threshold: 8192
+        },
+
+        brotli: {
+          threshold: 8192
+        }
+      }
+    ]
   ],
 
   i18n: {

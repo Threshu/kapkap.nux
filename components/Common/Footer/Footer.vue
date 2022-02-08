@@ -123,6 +123,7 @@ pl:
                       :key="option.key"
                       :to="option.link"
                       @click="/* switchNav */"
+                      :prefetch="false"
                     >
                       {{ option.title }}
                     </NuxtLink>
@@ -139,7 +140,7 @@ pl:
               <div class="footer-content">
                 <ul>
                   <li>
-                    <NuxtLink to="/o-nas">
+                    <NuxtLink to="/o-nas" :prefetch="false">
                       O nas
                     </NuxtLink>
                   </li>
@@ -147,12 +148,13 @@ pl:
                     <NuxtLink
                       rel="nofollow"
                       to="/regulamin-infografika"
+                      :prefetch="false"
                     >
                       Regulamin
                     </NuxtLink>
                   </li>
                   <li>
-                    <NuxtLink rel="nofollow" to="/polityka-prywatnosci">
+                    <NuxtLink rel="nofollow" to="/polityka-prywatnosci" :prefetch="false">
                       Polityka prywatności
                     </NuxtLink>
                   </li>
@@ -168,12 +170,12 @@ pl:
               <div class="footer-content">
                 <ul>
                   <li>
-                    <NuxtLink to="/faq">
+                    <NuxtLink to="/faq" :prefetch="false">
                       FAQ
                     </NuxtLink>
                   </li>
                   <li>
-                    <NuxtLink to="/kontakt">
+                    <NuxtLink to="/kontakt" :prefetch="false">
                       Kontakt
                     </NuxtLink>
                   </li>
