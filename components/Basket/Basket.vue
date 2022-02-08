@@ -83,12 +83,30 @@
                       <div class="col-xs-3">
                         <div class="qty-box">
                           <div class="input-group">
-                            <!-- !!! -->
+                            <span class="input-group-prepend">
+                              <button
+                                type="button"
+                                class="btn quantity-left-minus"
+                                @click="changeProductQuantity(index, item.number - 1)"
+                              >
+                                <i class="fa fa-angle-left" />
+                              </button>
+                            </span>
                             <input
-                              :value="item.count"
-                              type="number"
+                              type="text"
+                              name="quantity"
+                              :value="item.number"
+                              readOnly="true"
                               class="form-control input-number"
                             >
+                            <span class="input-group-prepend">
+                              <button
+                                class="btn quantity-right-plus"
+                                @click="changeProductQuantity(index, item.number + 1)"
+                              >
+                                <i class="fa fa-angle-right" />
+                              </button>
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -187,7 +205,7 @@
           <div class="col-xs-12 col-md-6">
             <NuxtLink
               to="/"
-              class="btn btn-solid"
+              class="btn btn-solid continue-shopping"
             >
               Kontynuuj zakupy
             </NuxtLink>
