@@ -1701,11 +1701,12 @@ span.breed {
   text-align: center;
   font-size: 18px;
   padding: 12px 0 10px;
-  border-bottom: 2px dashed #236d38;
   color: #fff;
   position: absolute;
   width: 100%;
   top: -45px;
+  white-space: nowrap;
+  overflow: hidden;
 
   .close {
     position: absolute;

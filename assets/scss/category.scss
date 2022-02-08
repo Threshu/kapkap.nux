@@ -547,6 +547,8 @@
 								font-size: 14px;
 								color: #414141;
 								margin-left: 35px;
+								max-width: calc(100% - 240px);
+								overflow: hidden;
 							}
 
 							.objActions {
