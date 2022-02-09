@@ -2013,3 +2013,34 @@ header {
     margin-top: 50px;
   }
 }
+
+  @media (max-width: 768px) {
+    .cart-section {
+      .product-name {
+        position: absolute;
+        top: 8px;
+        left: 20px;
+      }
+
+      .mob-price {
+        position: absolute;
+        top: 12px;
+        right: 0;
+      }
+
+      tbody tr {
+        position: relative;
+        
+        td {
+          &:first-child {
+            padding:30px 0 0;
+          }
+          .mobile-cart-content .qty-box .input-group .form-control {
+            width: 28px;
+          }
+        }
+      }
+    } 
+  }
+
+
