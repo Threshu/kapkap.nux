@@ -66,7 +66,7 @@ export default {
       Poppins: [200, 300, 400, 500, 700]
     },
     display: 'swap',
-    prefetch: true,
+    prefetch: false,
     preconnect: true,
     preload: true
   },

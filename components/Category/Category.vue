@@ -69,7 +69,7 @@ export default class Category extends Vue {
     await this.$store.dispatch('categories/loadCategories')
   }
 
-  mounted () {
+  created () {
     this.loadCategories()
   }
 }

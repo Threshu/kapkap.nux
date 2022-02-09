@@ -5,11 +5,10 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { useBrowserLocation } from '@vueuse/core'
-import Category from '~/components/Category/Category.vue'
 
 @Component({
   components: {
-    Category
+    Category: () => import('~/components/Category/Category.vue')
   }
 })
 export default class Cups extends Vue {
