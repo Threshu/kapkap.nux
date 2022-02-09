@@ -75,6 +75,7 @@
                   <!-- PRODUCT NAME -->
                   <td>
                     <NuxtLink
+                      class="product-name"
                       :to="`/edytuj-produkt/${item.cartItemId}`"
                     >
                       {{ item.title }}
@@ -110,7 +111,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-xs-3">
+                      <div class="col-xs-3 mob-price">
                         <h2 class="td-color">
                           {{ item.price }} zł
                         </h2>
