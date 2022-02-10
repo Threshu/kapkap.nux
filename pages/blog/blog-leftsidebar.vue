@@ -16,15 +16,11 @@
 </template>
 
 <script>
-import BlogSidebar from './widgets/blog-sidebar.vue'
-import BlogList from './widgets/blog-list.vue'
-import Breadcrumb from '~/components/Common/Breadcrumb.vue'
-
 export default {
   components: {
-    Breadcrumb,
-    BlogSidebar,
-    BlogList
+    Breadcrumb: () => import(/* webpackChunkName: "Breadcrumb" */ '~/components/Common/Breadcrumb.vue'),
+    BlogSidebar: () => import(/* webpackChunkName: "BlogSidebar" */ './widgets/blog-sidebar.vue'),
+    BlogList: () => import(/* webpackChunkName: "BlogList" */ './widgets/blog-list.vue')
   }
 }
 </script>

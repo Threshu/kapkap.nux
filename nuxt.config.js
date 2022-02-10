@@ -21,6 +21,9 @@ export default {
       { rel: 'preconnect', href: process.env.SITE_URL }
     ]
   },
+  router: {
+    prefetchLinks: false
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [

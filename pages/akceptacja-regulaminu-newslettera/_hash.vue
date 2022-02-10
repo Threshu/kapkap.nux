@@ -6,10 +6,11 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import NewsletterSuccessPage from '../../components/NewsletterSuccessPage.vue'
 
 export default {
-  components: { NewsletterSuccessPage },
+  components: {
+    NewsletterSuccessPage: () => import(/* webpackChunkName: "NewsletterSuccessPage" */ '~/components/NewsletterSuccessPage.vue')
+  },
 
   asyncData ({ params }: any) {
     const hash = params.hash

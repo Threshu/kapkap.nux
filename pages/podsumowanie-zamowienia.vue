@@ -4,10 +4,11 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import Summary from '~/components/Order/Summary.vue'
 
 export default {
-  components: { Summary },
+  components: {
+    Summary: () => import(/* webpackChunkName: "Summary" */ '~/components/Order/Summary.vue')
+  },
   head () {
     const location = useBrowserLocation()
 

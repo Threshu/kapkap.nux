@@ -8,7 +8,7 @@ import { useBrowserLocation } from '@vueuse/core'
 
 @Component({
   components: {
-    Category: () => import('~/components/Category/Category.vue')
+    Category: () => import(/* webpackChunkName: "Category" */ '~/components/Category/Category.vue')
   }
 })
 export default class Cups extends Vue {

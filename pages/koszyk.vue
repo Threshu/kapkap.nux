@@ -4,10 +4,11 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import Basket from '~/components/Basket/Basket.vue'
 
 export default {
-  components: { Basket },
+  components: {
+    Basket: () => import(/* webpackChunkName: "Contact" */ '~/components/Basket/Basket.vue')
+  },
   head () {
     const location = useBrowserLocation()
 

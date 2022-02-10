@@ -6,7 +6,9 @@
 import { useBrowserLocation } from '@vueuse/core'
 
 export default {
-  components: { HomePage: () => import('~/components/HomePage/HomePage.vue') },
+  components: {
+    HomePage: () => import(/* webpackChunkName: "HomePage" */ '~/components/HomePage/HomePage.vue')
+  },
   head () {
     const location = useBrowserLocation()
 

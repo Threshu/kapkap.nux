@@ -4,10 +4,11 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import RegulationsInfographics from '~/components/Regulations/RegulationsInfographics.vue'
 
 export default {
-  components: { RegulationsInfographics },
+  components: {
+    RegulationsInfographics: () => import(/* webpackChunkName: "RegulationsInfographics" */ '~/components/Regulations/RegulationsInfographics.vue')
+  },
   head () {
     const location = useBrowserLocation()
 

@@ -4,10 +4,11 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import AboutUs from '~/components/AboutUs/AboutUs.vue'
 
 export default {
-  components: { AboutUs },
+  components: {
+    AboutUs: () => import(/* webpackChunkName: "AboutUs" */ '~/components/AboutUs/AboutUs.vue')
+  },
   head () {
     const location = useBrowserLocation()
 

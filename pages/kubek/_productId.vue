@@ -7,10 +7,9 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import Cup from '@/components/Cup/Cup.vue'
 
 export default {
-  components: { Cup },
+  components: { Cup: () => import(/* webpackChunkName: "Cup" */ '@/components/Cup/Cup.vue') },
 
   asyncData ({ params }: any) {
     return { productId: params.productId }
