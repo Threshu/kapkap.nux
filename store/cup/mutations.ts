@@ -64,6 +64,11 @@ export default {
   },
 
   setQuote (state: EditorState, quoteId: string) {
+
+    if (state.workingObject.quoteId === quoteId) {
+      quoteId = ''
+    }
+
     Vue.set(state.workingObject, 'quoteId', quoteId)
     if (state.editMode) {
       Vue.set(state.workingObject.items[1], 'id', quoteId)
