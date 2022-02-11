@@ -65,7 +65,7 @@ export default {
 
   setQuote (state: EditorState, quoteId: string) {
 
-    if (state.workingObject.quoteId == quoteId) {
+    if (state.workingObject.quoteId === quoteId) {
       quoteId = ''
     }
 
