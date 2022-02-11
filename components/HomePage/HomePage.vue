@@ -13,7 +13,7 @@ pl:
     <section class="home-page section-b-space">
       <div class="home-slider">
         <h1 class="home-title">
-          Sklep z personalizowanymi<br>gadżetami i prezentami
+          Spersonalizowane kubki z grafiką na prezent
         </h1>
         <NuxtLink to="/kubki">
           <div class="infographic" />
