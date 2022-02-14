@@ -4,10 +4,9 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import Page404 from '~/components/Page404.vue'
 
 export default {
-  components: { Page404 },
+  components: { Page404: () => import(/* webpackChunkName: "Page404" */ '~/components/Page404.vue') },
   head () {
     const location = useBrowserLocation()
 

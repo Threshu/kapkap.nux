@@ -4,10 +4,11 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import RegulationsAccounts from '~/components/Regulations/RegulationsAccounts.vue'
 
 export default {
-  components: { RegulationsAccounts },
+  components: {
+    RegulationsAccounts: () => import(/* webpackChunkName: "RegulationsAccounts" */ '~/components/Regulations/RegulationsAccounts.vue')
+  },
   head () {
     const location = useBrowserLocation()
 

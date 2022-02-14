@@ -4,10 +4,11 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
-import Privacy from '~/components/Privacy/Privacy.vue'
 
 export default {
-  components: { Privacy },
+  components: {
+    Privacy: () => import(/* webpackChunkName: "Privacy" */ '~/components/Privacy/Privacy.vue')
+  },
   head () {
     const location = useBrowserLocation()
 
