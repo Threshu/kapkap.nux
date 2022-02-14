@@ -64,7 +64,7 @@ pl:
               <div class="media">
                 <svgFreeShipping />
                 <div class="media-body">
-                  <h4>{{ $t('freeShipping') }}</h4>
+                  <p class="media-title">{{ $t('freeShipping') }}</p>
                   <p>{{ $t('freeShippingWorldwide') }}</p>
                 </div>
               </div>
@@ -73,7 +73,7 @@ pl:
               <div class="media">
                 <svgService />
                 <div class="media-body">
-                  <h4>{{ $t('service24h7days') }}</h4>
+                  <p class="media-title">{{ $t('service24h7days') }}</p>
                   <p>{{ $t('helpForNew') }}</p>
                 </div>
               </div>
@@ -82,7 +82,7 @@ pl:
               <div class="media">
                 <svgOffer />
                 <div class="media-body">
-                  <h4>{{ $t('specialOffers') }}</h4>
+                  <p class="media-title">{{ $t('specialOffers') }}</p>
                   <p>{{ $t('newSpecialOffers') }}</p>
                 </div>
               </div>
@@ -120,7 +120,7 @@ pl:
                   :alt="image.alt"
                 />
               </NuxtLink>
-              <h3>{{ image.title }}</h3>
+              <p class="bestseller-name">{{ image.title }}</p>
 
               <NuxtLink
                 class="ch2-btn ch2-allow-all-btn ch2-btn-primary ch2-btn-text-xs"
@@ -137,23 +137,12 @@ pl:
         <div class="container">
           <div class="row">
             <div class="col-lg-6 static-article">
-              <h5 class="styled-small-header">
+              <h2 class="styled-small-header">
                 Wyjątkowa grafika
-              </h5>
-              <article>
-                Każdy z naszych kubków otrzymuje unikalny projekt graficzny, dzięki możliwości
-                błyskawicznego personalizowania.
-                Użytkownik nie musi tworzyć, czy też pozycjonować poszczególnych elementów na kubku.
-                Wszystko jest realizowane w tle przez aplikację, aby uzyskać najlepszy możliwy
-                efekt.
-                Położyliśmy nacisk na jakość grafiki, dlatego też zaprojektowaliśmy od nowa
-                każde tło, każdą z ras psów, wiele różnych postaci, które również można
-                personalizować oraz każdy cytat.
-                Prześledziliśmy najpopularniejsze rasy psów, aby nie zabrało żadnych dostępnych w Polsce, ale narysowaliśmy również bardziej egzotyczne, jak np. Łajki. Uwielbiamy psy, więc na pewno każdy znajdzie coś ciekawego dla siebie.
-                Jesteśmy otwarci na wszelkie sugestie, więc jeżeli uważasz, że coś trzeba poprawić, albo masz własny pomysł na grafikę, daj nam znać przez formularz kontaktowy, mailem lub za pomocą telefonu, a chętnie zaprojektujemy coś specjalnie dla ciebie.
-                W planach mamy stworzenie projektów dla sympatyków kotów. Mamy również interesujące projekty w głowie dla motocyklistów.
-                Zatem zaprojektuj z nami swój spersonalizowany, zabawny kubek, który umili Ci poranną kawę i zawsze będzie ci przypominać o ulubionych chwilach z twoim psem lub kotem.
-              </article>
+              </h2>
+              <p>
+                Każdy z naszych kubków na zamówienie otrzymuje unikalny projekt graficzny, dzięki możliwości błyskawicznego personalizowania. Użytkownik nie musi tworzyć, czy też pozycjonować poszczególnych elementów na kubku – wszystko realizowane jest w tle przez aplikację, która pozwala uzyskać jak najlepszy możliwy efekt. Położyliśmy nacisk na jakość grafiki, dlatego też zaprojektowaliśmy od nowa każde tło, każdą z ras psów, wiele różnych postaci, które również można personalizować oraz każdy cytat. Prześledziliśmy najpopularniejsze rasy psów, aby nie zabrakło żadnych dostępnych w Polsce, ale narysowaliśmy również te bardziej egzotyczne, jak np. Łajki. Uwielbiamy psy, więc na pewno każdy ich wielbiciel znajdzie coś ciekawego dla siebie. Jesteśmy otwarci na wszelkie sugestie, więc jeżeli uważasz, że coś trzeba poprawić, albo masz własny pomysł na grafikę, daj nam znać przez formularz kontaktowy, mailem lub za pomocą telefonu. Chętnie zaprojektujemy coś specjalnie dla Ciebie! W planach mamy także stworzenie projektów dla sympatyków kotów. Mamy również interesujące projekty w głowie idealne dla motocyklistów. Zaprojektuj z nami swój spersonalizowany, zabawny kubek, który umili Ci poranną kawę i zawsze będzie ci przypominać o ulubionych chwilach z twoim zwierzakiem.
+              </p>
             </div>
 
             <div class="col-lg-6">
@@ -173,9 +162,9 @@ pl:
       </div>
 
       <div class="home-product-slider">
-        <h3 class="styled-page-header">
+        <p class="styled-page-header">
           Cytaty
-        </h3>
+        </p>
         <VueSlickCarousel
           v-if="quotes && quotes.length"
           v-bind="sliderSettings"
@@ -204,10 +193,34 @@ pl:
         </VueSlickCarousel>
       </div>
 
+      <div class="article-photo-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="banner-section">
+                <Picture
+                  path="/images/main-page/28718_120027_front_clipped_rev_1.png"
+                  alt="Zabawny kubek z dziewczyną i jej corgi"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6 static-article">
+              <h2 class="styled-small-header">
+                Kubki personalizowane
+              </h2>
+              <p>
+                Wiemy, jak istotną rolę pełnią niewielkie prezenty wręczane bliskim, dlatego w naszej ofercie znaleźć można personalizowane kubki, które są świetnym pomysłem prezentowym dla ważnej osoby. Kubek wykonywany na zamówienie to nie tylko gwarancja najlepszej jakości, ale także oryginalne i nietuzinkowe rozwiązanie. Oferujemy kubek z cytatem, z grafiką lub całkowicie spersonalizowane kubki według własnych preferencji. Niezwykłą popularnością cieszą się nasze kubki ze śmiesznym napisem, jak również ciekawie wyglądające kubki z psami, które mogą być spersonalizowane np. pod kątem ulubionej pory roku. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <section class="faq-section section-b-space">
-        <h3 class="styled-page-header">
+        <p class="styled-page-header">
           FAQ
-        </h3>
+        </p>
         <div class="container">
           <div class="row">
             <div class="col-sm-12">
@@ -231,6 +244,31 @@ pl:
           </div>
         </div>
       </section>
+
+      <div class="article-photo-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 static-article">
+              <h2 class="styled-small-header">
+                Najlepszy pomysł na prezent
+              </h2>
+              <p>
+                Nie wiesz, co podarować bliskiej Ci osobie na prezent? Duży kubek to świetna opcja, zarówno praktyczna, jak i estetyczna. Podarunek dla faceta lub dla przyjaciółki w postaci spersonalizowanego przedmiotu pozwoli na wyrażenie swoich uczuć, a także pokazanie, że pamięta się o drobnych szczegółach, związanych z konkretną osobą. Jedna sztuka to za mało? Wybierz zestaw kubków na prezent, dzięki czemu obdarowana osoba będzie mogła posiadać niepowtarzalną kolekcję naczyń do picia z oryginalną grafiką. Postaw na nasze spersonalizowane kubki i zagwarantuj sobie oraz najbliższym najwyższą jakość produktów!
+              </p>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="banner-section">
+                <Picture
+                  path="/images/main-page/28718_120027_front_clipped_rev_1.png"
+                  alt="Zabawny kubek z dziewczyną i jej corgi"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
   </div>
 </template>
