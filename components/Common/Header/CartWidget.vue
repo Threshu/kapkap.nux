@@ -19,7 +19,7 @@
           />
         </template>
         <li
-          v-if="cartItems"
+          v-if="cartItems.length > 0"
           class="total"
         >
           <div>
@@ -32,7 +32,7 @@
         <li
           v-else
         >
-          <h5>Masz pusty koszyk.</h5>
+          <p>Masz pusty koszyk.</p>
         </li>
       </ul>
       <div class="buttons">

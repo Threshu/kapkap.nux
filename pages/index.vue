@@ -13,8 +13,13 @@ export default {
     const location = useBrowserLocation()
 
     return {
-      title: 'Strona główna - Sklep KapKap.eu',
-      meta: [],
+      title: 'Kubki personalizowane - na prezent, dla przyjaciela | KapKap',
+      meta: [
+        {
+          keywords: 'duży kubek personalizowany, kubek na zamówienie, kubek personalizowany, kubek prezent, kubek z cytatem, kubek z grafiką, kubek z napisem na zamówienie, kubek z personalizacją, kubek z psem, kubek ze śmiesznym napisem, kubki na zamówienie, kubki personalizowane, kubki spersonalizowane, kubki z cytatami, kubki z napisami śmieszne, kub- ki z personalizacją, kubki z psami, personalizowane kubki, personalizowany kubek, kubki psy, spersonalizowane kubki, kubek na prezent, zestaw kubków na prezent, kubek na prezent dla faceta, kubek na prezent dla przyjaciółki',
+          description: 'Postaw na oryginalne rozwiązania na prezent. Nasze spersonalizowane kubki przypadną do gustu każdej obdarowanej osobie!',
+        }
+      ],
       link: [
         {
           hid: 'canonical',

@@ -2112,10 +2112,14 @@ header {
     }
   }
 
-  h4 {
+  .media-title {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    font-size: 18px;
+    line-height: 1;
+    color: #000;
+    margin-bottom: .5rem;
   }
 
   p {
