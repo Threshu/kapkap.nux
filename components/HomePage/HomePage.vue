@@ -19,42 +19,42 @@ pl:
           <div class="infographic" />
         </NuxtLink>
 
-<!--      <VueSlickCarousel-->
-<!--          v-if="topSlider && topSlider.length"-->
-<!--          v-bind="topSliderSettings"-->
-<!--        >-->
-<!--          <template-->
-<!--            v-for="(image, key) in topSlider"-->
-<!--          >-->
-<!--            <div-->
-<!--              :key="key"-->
-<!--              class="home-slider-item"-->
-<!--            >-->
-<!--              <div-->
-<!--                v-if="image.news"-->
-<!--                class="new"-->
-<!--              >-->
-<!--                Nowość-->
-<!--              </div>-->
-<!--              <NuxtLink :to="image.url">-->
-<!--                <Picture-->
-<!--                  :path="`/images/main-page/top-slider/${image.filename}`"-->
-<!--                  :alt="image.alt"-->
-<!--                />-->
-<!--              </NuxtLink>-->
-<!--            </div>-->
-<!--          </template>-->
-<!--          &lt;!&ndash;          <template #prevArrow="">&ndash;&gt;-->
-<!--          &lt;!&ndash;            <div&ndash;&gt;-->
-<!--          &lt;!&ndash;              class="carousel-left"&ndash;&gt;-->
-<!--          &lt;!&ndash;            />&ndash;&gt;-->
-<!--          &lt;!&ndash;          </template>&ndash;&gt;-->
-<!--          &lt;!&ndash;          <template #nextArrow="">&ndash;&gt;-->
-<!--          &lt;!&ndash;            <div&ndash;&gt;-->
-<!--          &lt;!&ndash;              class="carousel-right"&ndash;&gt;-->
-<!--          &lt;!&ndash;            />&ndash;&gt;-->
-<!--          &lt;!&ndash;          </template>&ndash;&gt;-->
-<!--        </VueSlickCarousel>-->
+      <!--      <VueSlickCarousel-->
+      <!--          v-if="topSlider && topSlider.length"-->
+      <!--          v-bind="topSliderSettings"-->
+      <!--        >-->
+      <!--          <template-->
+      <!--            v-for="(image, key) in topSlider"-->
+      <!--          >-->
+      <!--            <div-->
+      <!--              :key="key"-->
+      <!--              class="home-slider-item"-->
+      <!--            >-->
+      <!--              <div-->
+      <!--                v-if="image.news"-->
+      <!--                class="new"-->
+      <!--              >-->
+      <!--                Nowość-->
+      <!--              </div>-->
+      <!--              <NuxtLink :to="image.url">-->
+      <!--                <Picture-->
+      <!--                  :path="`/images/main-page/top-slider/${image.filename}`"-->
+      <!--                  :alt="image.alt"-->
+      <!--                />-->
+      <!--              </NuxtLink>-->
+      <!--            </div>-->
+      <!--          </template>-->
+      <!--          &lt;!&ndash;          <template #prevArrow="">&ndash;&gt;-->
+      <!--          &lt;!&ndash;            <div&ndash;&gt;-->
+      <!--          &lt;!&ndash;              class="carousel-left"&ndash;&gt;-->
+      <!--          &lt;!&ndash;            />&ndash;&gt;-->
+      <!--          &lt;!&ndash;          </template>&ndash;&gt;-->
+      <!--          &lt;!&ndash;          <template #nextArrow="">&ndash;&gt;-->
+      <!--          &lt;!&ndash;            <div&ndash;&gt;-->
+      <!--          &lt;!&ndash;              class="carousel-right"&ndash;&gt;-->
+      <!--          &lt;!&ndash;            />&ndash;&gt;-->
+      <!--          &lt;!&ndash;          </template>&ndash;&gt;-->
+      <!--        </VueSlickCarousel>-->
       </div>
 
       <div class="article-photo-box no-padding">
@@ -64,7 +64,9 @@ pl:
               <div class="media">
                 <svgFreeShipping />
                 <div class="media-body">
-                  <p class="media-title">{{ $t('freeShipping') }}</p>
+                  <p class="media-title">
+                    {{ $t('freeShipping') }}
+                  </p>
                   <p>{{ $t('freeShippingWorldwide') }}</p>
                 </div>
               </div>
@@ -73,7 +75,9 @@ pl:
               <div class="media">
                 <svgService />
                 <div class="media-body">
-                  <p class="media-title">{{ $t('service24h7days') }}</p>
+                  <p class="media-title">
+                    {{ $t('service24h7days') }}
+                  </p>
                   <p>{{ $t('helpForNew') }}</p>
                 </div>
               </div>
@@ -82,7 +86,9 @@ pl:
               <div class="media">
                 <svgOffer />
                 <div class="media-body">
-                  <p class="media-title">{{ $t('specialOffers') }}</p>
+                  <p class="media-title">
+                    {{ $t('specialOffers') }}
+                  </p>
                   <p>{{ $t('newSpecialOffers') }}</p>
                 </div>
               </div>
@@ -120,7 +126,9 @@ pl:
                   :alt="image.alt"
                 />
               </NuxtLink>
-              <p class="bestseller-name">{{ image.title }}</p>
+              <p class="bestseller-name">
+                {{ image.title }}
+              </p>
 
               <NuxtLink
                 class="ch2-btn ch2-allow-all-btn ch2-btn-primary ch2-btn-text-xs"
@@ -209,13 +217,12 @@ pl:
                 Kubki personalizowane
               </h2>
               <p>
-                Wiemy, jak istotną rolę pełnią niewielkie prezenty wręczane bliskim, dlatego w naszej ofercie znaleźć można personalizowane kubki, które są świetnym pomysłem prezentowym dla ważnej osoby. Kubek wykonywany na zamówienie to nie tylko gwarancja najlepszej jakości, ale także oryginalne i nietuzinkowe rozwiązanie. Oferujemy kubek z cytatem, z grafiką lub całkowicie spersonalizowane kubki według własnych preferencji. Niezwykłą popularnością cieszą się nasze kubki ze śmiesznym napisem, jak również ciekawie wyglądające kubki z psami, które mogą być spersonalizowane np. pod kątem ulubionej pory roku. 
+                Wiemy, jak istotną rolę pełnią niewielkie prezenty wręczane bliskim, dlatego w naszej ofercie znaleźć można personalizowane kubki, które są świetnym pomysłem prezentowym dla ważnej osoby. Kubek wykonywany na zamówienie to nie tylko gwarancja najlepszej jakości, ale także oryginalne i nietuzinkowe rozwiązanie. Oferujemy kubek z cytatem, z grafiką lub całkowicie spersonalizowane kubki według własnych preferencji. Niezwykłą popularnością cieszą się nasze kubki ze śmiesznym napisem, jak również ciekawie wyglądające kubki z psami, które mogą być spersonalizowane np. pod kątem ulubionej pory roku.
               </p>
             </div>
           </div>
         </div>
       </div>
-
 
       <section class="faq-section section-b-space">
         <p class="styled-page-header">
@@ -234,7 +241,7 @@ pl:
                   <b-collapse :id="'accordion-' + index" visible accordion="my-accordion" role="tabpanel">
                     <b-card-body>
                       <b-card-text>
-                        <p v-html="item.answer"></p>
+                        <p v-html="item.answer" />
                       </b-card-text>
                     </b-card-body>
                   </b-collapse>
@@ -268,7 +275,6 @@ pl:
           </div>
         </div>
       </div>
-
     </section>
   </div>
 </template>
@@ -277,13 +283,13 @@ pl:
 import { useBrowserLocation } from '@vueuse/core'
 import { Component, Vue } from 'nuxt-property-decorator'
 import VueSlickCarousel from 'vue-slick-carousel'
+import { Jsonld } from 'nuxt-jsonld'
 
 import svgFreeShipping from '@/components/HomePage/icons/svgFreeShipping'
 import svgOffer from '@/components/HomePage/icons/svgOffer'
 import svgService from '@/components/HomePage/icons/svgService'
 import Picture from '@/components/Common/Picture'
 
-import { Jsonld } from 'nuxt-jsonld'
 import topSliderJSON from '~/data/topSlider.json'
 import newsJSON from '~/data/news.json'
 import quotesJSON from '~/data/quotes.json'
