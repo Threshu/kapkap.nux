@@ -59,14 +59,8 @@
                         <template
                           v-else
                         >
-                          <img
-                            src="/images/cart/kubek-lewy-90.webp"
-                            alt="thumbnail"
-                          >
-                          <img
-                            src="/images/cart/kubek-prawy-90.webp"
-                            alt="thumbnail"
-                          >
+                          <Picture path="/images/cart/kubek-lewy-90.jpg" alt="thumbnail" />
+                          <Picture path="/images/cart/kubek-prawy-90.jpg" alt="thumbnail" />
                         </template>
                       </div>
                     </NuxtLink>
@@ -251,9 +245,10 @@ import SmallLoader from '~/components/Common/SmallLoader.vue'
 import { STATUS_LOADED } from '~/store/defaults/types'
 import { BasketContainer, Product, ProductUpdateRequest } from '~/store/basket/state'
 import { ProductObject } from '~/store/cup/getters'
+import Picture from '~/components/Common/Picture.vue'
 
 @Component({
-  components: { SmallLoader, Breadcrumb }
+  components: { Picture, SmallLoader, Breadcrumb }
 })
 export default class Basket extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
