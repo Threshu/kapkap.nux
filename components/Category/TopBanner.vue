@@ -1,13 +1,7 @@
 <template>
   <div class="top-banner-wrapper">
-    <a href="#">
-      <img src="/images/multicart/mega-menu/2.jpg" class="img-fluid">
-    </a>
     <div class="top-banner-content small-section">
       <h4>fashion</h4>
-      <h5>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      </h5>
       <p>
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
         the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
