@@ -15,6 +15,17 @@ import Footer from '@/components/Common/Footer/Footer'
 export default {
   components: { Footer, Header, Popup },
 
+  head() {
+    return {
+      link: [
+        {
+          rel: 'canonical',
+          href: 'https://www.kapkap.eu' + this.$route.path
+        }
+      ]
+    }
+  },
+
   async mounted () {
     await this.$store.dispatch('defaults/load')
   }
