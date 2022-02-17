@@ -6,3 +6,8 @@ Disallow: /prywatnosc/
 Disallow: /my-account/
 Disallow: /dostawa/
 Disallow: /v1/*
+Disallow: /feed
+Disallow: /sledz-zamowienie
+Disallow: /polityka-prywatnosci
+Disallow: /regulamin-infografika
+Sitemap: https://kapkap.eu/sitemap.xml

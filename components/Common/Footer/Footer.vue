@@ -83,6 +83,15 @@ pl:
               </form>
             </div>
           </div>
+          <div class="row" v-if="isHomePage">
+            <div class="col-lg-12">
+              <div class="container">
+                <div class="tag-box">
+                  duży kubek personalizowany, kubek na zamówienie, kubek personalizowany, kubek prezent, kubek z cytatem, kubek z grafiką, kubek z napisem na zamówienie, kubek z personalizacją, kubek z psem, kubek ze śmiesznym napisem, kubki na zamówienie, kubki personalizowane, kubki spersonalizowane, kubki z cytatami, kubki z napisami śmieszne, kub- ki z personalizacją, kubki z psami, personalizowane kubki, personalizowany kubek, kubki psy, spersonalizowane kubki, kubek na prezent, zestaw kubków na prezent, kubek na prezent dla faceta, kubek na prezent dla przyjaciółki
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </div>
