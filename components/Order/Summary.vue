@@ -212,6 +212,7 @@ export default class Summary extends Vue {
   billing: any = {
     firstName: '',
     lastName: '',
+    name: '',
     phone: '',
     email: '',
     address: '',
@@ -299,11 +300,16 @@ export default class Summary extends Vue {
 
     sendOrder() {
         this.delivery.additionalData = this.additionalData
+
+        this.billing.name = this.billing.firstName + this.billing.lastName
+        this.billing.country = 'pl'
         let order = {
             billing: this.billing,
             delivery: this.delivery,
             additionalInfo: this.initialAdditionals.additionalInfo,
-            payment: this.initialAdditionals.payment
+            payment: {
+                'method': this.initialAdditionals.payment
+            }
         }
         this.makeOrder(order);
     }
