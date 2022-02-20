@@ -25,5 +25,26 @@ export default {
       }
     } catch {
     }
+  },
+
+  applyCoupon: async ({ commit }: any, coupon: string) => {
+    const res = await $axios.post('/coupon', {
+        token: localStorage.basketToken,
+        coupon
+    })
+    console.log('res', res);
+  },
+
+  makeOrder: async ({ commit }: any, order: any) => {
+    const clientTime = new Date();
+    const formattedClientTime = clientTime.toISOString();
+    const res = await $axios.post('/order', {
+        clientTime: formattedClientTime,
+        token: localStorage.basketToken,
+        ...order,
+    })
+
+    console.log('makeOrder', res)
   }
+
 }

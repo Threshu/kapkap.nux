@@ -1944,8 +1944,11 @@ header {
     border: 0;
     cursor: pointer;
     background: transparent;
+    margin: 0 5px;
 
-    &.active {
+
+    &:hover,
+    &.selected {
       color: #28a745;
     }
   }
@@ -2061,3 +2064,11 @@ header {
   }
 
 
+.geowidget {
+  min-height: 442px;
+  margin-bottom: 10px;
+}
+
+.order-box .qty img {
+  width: 75px;
+}

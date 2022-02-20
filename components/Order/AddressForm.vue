@@ -20,7 +20,7 @@
           <input
               type="text"
               name="first_name"
-              :value="form.firstName"
+              v-model="form.firstName"
           />
         </div>
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -28,7 +28,7 @@
           <input
               type="text"
               name="last_name"
-              :value="form.lastName"
+              v-model="form.lastName"
           />
         </div>
       </div>
@@ -39,7 +39,7 @@
           <input
               type="text"
               name="companyName"
-              :value="form.companyName"
+              v-model="form.companyName"
           />
         </div>
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -47,7 +47,7 @@
           <input
               type="text"
               name="taxId"
-              :value="form.taxId"
+              v-model="form.taxId"
           />
         </div>
       </div>
@@ -58,7 +58,7 @@
           <input
               type="text"
               name="phone"
-              :value="form.phone"
+              v-model="form.phone"
           />
         </div>
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -66,7 +66,7 @@
           <input
               type="text"
               name="email"
-              :value="form.email"
+              v-model="form.email"
           />
         </div>
       </div>
@@ -74,22 +74,29 @@
       <div class="row">
         <div class="form-group col-md-6 col-sm-12 col-xs-12">
           <div class="field-label small-letters">Adres pocztowy</div>
-          <input type="text"
-                 name="address"
-                 :value="form.address"
+          <input 
+            type="text"
+            name="address"
+            v-model="form.address"
           />
         </div>
         <div class="form-group col-md-6 col-sm-12 col-xs-12">
           <div class="field-label small-letters">Miasto</div>
-          <input type="text" name="city" :value="form.city"/>
+          <input 
+            type="text" 
+            name="city"
+            v-model="form.city"
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
           <div class="field-label small-letters">Kod pocztowy</div>
-          <input type="text" name="zip"
-                 :value="form.zip"
+          <input 
+            type="text" 
+            name="zip"
+            v-model="form.zip"
           />
         </div>
       </div>
