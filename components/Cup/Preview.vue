@@ -52,6 +52,7 @@
 import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import SmallLoader from '~/components/Common/SmallLoader.vue'
+
 @Component({
   components: { SmallLoader }
 })

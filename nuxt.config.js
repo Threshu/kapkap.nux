@@ -109,14 +109,6 @@ export default {
     baseURL: process.env.API_URL
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    vendor: [
-      // https://www.npmjs.com/package/vue-image-zoomer
-      'vue-image-zoomer'
-    ]
-  },
-
   env: {
     phone: process.env.PHONE,
     phoneFormatted: process.env.PHONE_FORMATTED,
