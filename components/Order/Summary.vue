@@ -333,6 +333,8 @@ export default class Summary extends Vue {
 
   async sendOrder () {
     this.delivery.additionalData = this.additionalData
+    this.delivery.name = this.billing.firstName + ' ' + this.billing.lastName
+    this.delivery.country = 'pl'
     this.billing.name = this.billing.firstName + ' ' + this.billing.lastName
     this.billing.country = 'pl'
     const order = {
