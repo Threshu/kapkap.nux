@@ -6,7 +6,7 @@
       <div class="container padding-cls">
         <div class="checkout-page">
           <div class="checkout-form">
-            <form method="POST" @submit="sendOrder">
+            <form method="POST" @submit.prevent="sendOrder">
               <div class="checkout row">
                 <div class="col-lg-6 col-sm-12 col-xs-12">
                   <div class="checkout-title">
@@ -45,7 +45,6 @@
                   <div class="additionalInfo">
                     <p>Wpisz uwagi dotyczące zamówienia</p>
                     <textarea
-                      ref="{methods.register({required:"
                       v-model="initialAdditionals.additionalInfo"
                       rows="5"
                       name="additionalInfo"
@@ -330,7 +329,7 @@ export default class Summary extends Vue {
     this.applyCoupon(this.coupon)
   }
 
-  sendOrder () {
+  async sendOrder () {
     this.delivery.additionalData = this.additionalData
     this.billing.name = this.billing.firstName + ' ' + this.billing.lastName
     this.billing.country = 'pl'
@@ -342,10 +341,10 @@ export default class Summary extends Vue {
         method: this.initialAdditionals.payment
       }
     }
-    const response = this.makeOrder(order)
-    if (response && response.success === true) {
-      if (response.redirectUrl !== '') {
-        window.location.href = response.redirectUrl
+    const response = await this.makeOrder(order)
+    if (response.data && response.data.success === true) {
+      if (response.data.redirectUrl !== '') {
+        window.location.href = response.data.redirectUrl
       } else {
         window.location.href = '/dziekujemy-za-zamowienie'
       }
