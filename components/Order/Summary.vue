@@ -86,7 +86,7 @@
                         <div class="input-box shipping-box">
                           <h4>Wybierz sposób dostawy</h4>
                           <ul class="icons shipping-select-container">
-                            <li v-for="(type, index) in shippingTypes" class="shipping-option" :key="`shipping-${type.id}`">
+                            <li v-for="type in shippingTypes" :key="`shipping-${type.id}`" class="shipping-option">
                               <input
                                 :id="`shipment-group-${type.id}`"
                                 v-model="delivery.method"
@@ -334,15 +334,15 @@ export default class Summary extends Vue {
     this.delivery.additionalData = this.additionalData
     this.billing.name = this.billing.firstName + ' ' + this.billing.lastName
     this.billing.country = 'pl'
-    let order = {
+    const order = {
       billing: this.billing,
       delivery: this.delivery,
       additionalInfo: this.initialAdditionals.additionalInfo,
       payment: {
-        'method': this.initialAdditionals.payment
+        method: this.initialAdditionals.payment
       }
     }
-    let response = this.makeOrder(order)
+    const response = this.makeOrder(order)
     if (response && response.success === true) {
       if (response.redirectUrl !== '') {
         window.location.href = response.redirectUrl
@@ -376,7 +376,7 @@ export default class Summary extends Vue {
   }
 
   mounted () {
-    let self = this
+    const self = this
     if ((window as any).easyPack) {
       (window as any).easyPackAsyncInit = function () {
         (window as any).easyPack.init({
@@ -392,8 +392,8 @@ export default class Summary extends Vue {
         });
         (window as any).easyPack.mapWidget('easypack-map', function (point: any) {
           self.setInpostData(point)
-        });
-      };
+        })
+      }
     }
   }
 }
