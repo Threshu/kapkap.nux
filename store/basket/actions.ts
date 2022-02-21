@@ -32,7 +32,7 @@ export default {
         token: localStorage.basketToken,
         coupon
     })
-    console.log('res', res);
+    commit('setBasket', res.data.basket)
   },
 
   makeOrder: async ({ commit }: any, order: any) => {
@@ -44,7 +44,7 @@ export default {
         ...order,
     })
 
-    console.log('makeOrder', res)
+    return res
   }
 
 }

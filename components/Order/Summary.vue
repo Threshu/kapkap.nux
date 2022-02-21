@@ -6,6 +6,7 @@
       <div class="container padding-cls">
         <div class="checkout-page">
           <div class="checkout-form">
+            <form method="POST" @submit="sendOrder">
               <div class="checkout row">
                 <div class="col-lg-6 col-sm-12 col-xs-12">
                   <div class="checkout-title">
@@ -15,15 +16,16 @@
                   <div class="address-tabs">
                     <button
                       class="tab-item"
-                      @click="activeTab='billing'"
                       :class="{'selected' : activeTab === 'billing'}"
+                      @click="activeTab='billing'"
                     >
                       Adres rozliczeniowy
                     </button>
-                    <button 
-                      class="tab-item" 
+                    <button
+                      class="tab-item"
                       :class="{'selected' : activeTab === 'delivery'}"
-                      @click="activeTab='delivery'">
+                      @click="activeTab='delivery'"
+                    >
                       Inny adres dostawy
                     </button>
                   </div>
@@ -44,9 +46,9 @@
                     <p>Wpisz uwagi dotyczące zamówienia</p>
                     <textarea
                       ref="{methods.register({required:"
+                      v-model="initialAdditionals.additionalInfo"
                       rows="5"
                       name="additionalInfo"
-                      v-model="initialAdditionals.additionalInfo"
                     />
                   </div>
                 </div>
@@ -59,8 +61,12 @@
                       <ul class="qty">
                         <li
                           v-for="(item, index) in cartItems"
-                          :key="index">
-                          <img :src="item.frontThumbnail" width="50px"/>
+                          :key="index"
+                        >
+                          <img
+                            :src="item.frontThumbnail"
+                            width="50px"
+                          >
                           {{ item.title }} × {{ item.number }}
                           <span>
                             {{ calculateTotal(item, item.number) }} zł
@@ -73,46 +79,55 @@
                           <span
                             class="count"
                           >
-                            {{ totalPrice }}
-                              zł
+                            {{ totalPrice }} zł
                           </span>
                         </li>
-
 
                         <div class="input-box shipping-box">
                           <h4>Wybierz sposób dostawy</h4>
                           <ul class="icons shipping-select-container">
                             <li v-for="(type, index) in shippingTypes" class="shipping-option" :key="`shipping-${type.id}`">
                               <input
-                                  type="radio"
-                                  name="shipment-group"
-                                  :id="`shipment-group-${type.id}`"
-                                  :checked="delivery.method === type.id"
-                                  :value="type.id"
-                                  v-model="delivery.method"
+                                :id="`shipment-group-${type.id}`"
+                                v-model="delivery.method"
+                                type="radio"
+                                name="shipment-group"
+                                :checked="delivery.method === type.id"
+                                :value="type.id"
+                              >
+                              <label
+                                class="corner-picker"
+                                :for="`shipment-group-${type.id}`"
+                                @click="triggerResize"
+                                v-html="type.label"
                               />
-                              <label class="corner-picker" :for="`shipment-group-${type.id}`" v-html="type.label"></label>
                             </li>
                           </ul>
-                            <div class="title inpost-address">
-                                <div>Paczkomat</div>
-                                <div v-if="additionalData" class="data">{{Object.values(additionalData)}}</div>
+                          <div
+                            v-show="delivery.method === 'PACZKOMATY'"
+                            class="title inpost-address"
+                            @click="showInpostMap = true"
+                          >
+                            <div v-if="additionalData.name" class="data">
+                              <span>Paczkomat</span>
+                              {{ additionalData.name }}
+                              {{ additionalData.city }}
+                              {{ additionalData.street }}
+                              {{ additionalData.building_number }}
+                              {{ additionalData.post_code }}
                             </div>
-                              <div
-                                  v-show="delivery.method === 'PACZKOMATY'"
-                                  id="inpost-geo"
-                                  duration="180"
-                                  height="300"
-                              >
-                                <div class="geowidget">
-                                    <div id="easypack-map"></div>
-                                </div>
-
+                          </div>
+                          <div
+                            v-show="delivery.method === 'PACZKOMATY' && showInpostMap"
+                            id="inpost-geo"
+                            duration="180"
+                            height="300"
+                          >
+                            <div class="geowidget">
+                              <div id="easypack-map" />
                             </div>
+                          </div>
                         </div>
-
-
-
                       </ul>
 
                       <ul class="total">
@@ -121,9 +136,9 @@
                           <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-8">
                               <input
+                                v-model="coupon"
                                 type="text"
                                 name="coupon"
-                                v-model="coupon"
                               >
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-8">
@@ -150,32 +165,31 @@
 
                     <div class="payment-box">
                       <div class="upper-box">
-
                         <div class="input-box shipping-box">
                           <h4>Wybierz sposób płatności</h4>
                           <ul class="icons shipping-select-container">
-                            <li v-for="(type, index) in paymentTypes" class="shipping-option" :key="`shipping-${type.id}`">
+                            <li v-for="(type) in paymentTypes" :key="`shipping-${type.id}`" class="shipping-option">
                               <input
-                                  type="radio"
-                                  name="payment-group"
-                                  :id="`payment-group-${type.id}`"
-                                  :checked="initialAdditionals.paymentOption === type.id"
-                                  :value="type.id"
-                                  v-model="initialAdditionals.payment"
+                                :id="`payment-group-${type.id}`"
+                                v-model="initialAdditionals.payment"
+                                type="radio"
+                                name="payment-group"
+                                :checked="initialAdditionals.paymentOption === type.id"
+                                :value="type.id"
+                              >
+                              <label
+                                class="corner-picker"
+                                :for="`payment-group-${type.id}`"
+                                v-html="type.label"
                               />
-                              <label class="corner-picker" :for="`payment-group-${type.id}`" v-html="type.label"></label>
                             </li>
                           </ul>
                         </div>
-
-
-
                       </div>
                       <div class="text-right">
                         <input
                           class="btn-solid btn payment-btn"
                           type="submit"
-                          @click="sendOrder"
                           value="zamów"
                         >
                       </div>
@@ -183,6 +197,7 @@
                   </div>
                 </div>
               </div>
+            </form>
           </div>
         </div>
       </div>
@@ -195,7 +210,7 @@ import { Component, Getter, Action, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
 import AddressForm from './AddressForm.vue'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
-import { BasketContainer, Product, ProductUpdateRequest } from '~/store/basket/state'
+import { BasketContainer, Product } from '~/store/basket/state'
 
 @Jsonld
 @Component({
@@ -208,7 +223,8 @@ export default class Summary extends Vue {
   @Action('basket/applyCoupon') applyCoupon!: Function
   @Action('basket/makeOrder') makeOrder!: Function
 
-  activeTab: any = 'delivery'
+  showInpostMap: boolean = true
+  activeTab: any = 'billing'
   billing: any = {
     firstName: '',
     lastName: '',
@@ -222,7 +238,9 @@ export default class Summary extends Vue {
     companyName: '',
     taxId: ''
   }
+
   coupon: string = ''
+
   delivery: any = {
     firstName: '',
     lastName: '',
@@ -234,10 +252,25 @@ export default class Summary extends Vue {
     isCompany: false,
     companyName: '',
     taxId: '',
-    method: 'COURIER_INPOST',
+    method: 'INPOST_COURIER'
   }
 
-    additionalData: any = {}
+  additionalData: any = {
+    building_number: null,
+    city: null,
+    post_code: null,
+    province: null,
+    street: null,
+    functions: null,
+    location: null,
+    latitude: null,
+    longitude: null,
+    location_247: null,
+    location_date: null,
+    name: null,
+    opening_hours: null,
+    type: null
+  }
 
   initialAdditionals: any = {
     accountAnswer: false,
@@ -250,7 +283,7 @@ export default class Summary extends Vue {
 
   shippingTypes: any = [
     {
-      id: 'COURIER_INPOST',
+      id: 'INPOST_COURIER',
       label: `
         <span class="type">Kurier</span>
         <img src="https://kapkap.eu/static/media/logo-paczkomaty-inpost-kurier.f596ebe0.png" alt="inpost"/>
@@ -276,80 +309,92 @@ export default class Summary extends Vue {
     {
       id: 'CASH_ON_DELIVERY',
       label: `
-        <img src="https://kapkap.eu/static/media/banknoty.7ceb1b83.png" alt='cash on delivery'/>
+        <img src="/images/banknoty.png" alt='cash on delivery'/>
         <div className="type payment">Płatność za pobraniem</div>
       `
     },
     {
       id: 'TRANSFER',
       label: `
-        <img src="https://kapkap.eu/static/media/przelew-poczta.png"" alt='manual transfer'/>
+        <img src="/images/przelew.png"" alt='manual transfer'/>
         <div className="type payment">Przelew na konto</div>
       `
     }
   ];
 
+  calculateTotal (product: any, numb: any) {
+    return parseFloat(product.price) * numb.toFixed(2)
+  }
 
-    calculateTotal (product: any, numb: any) {
-        return parseFloat(product.price) * numb.toFixed(2)
+  addCoupon () {
+    this.applyCoupon(this.coupon)
+  }
+
+  sendOrder () {
+    this.delivery.additionalData = this.additionalData
+    this.billing.name = this.billing.firstName + ' ' + this.billing.lastName
+    this.billing.country = 'pl'
+    let order = {
+      billing: this.billing,
+      delivery: this.delivery,
+      additionalInfo: this.initialAdditionals.additionalInfo,
+      payment: {
+        'method': this.initialAdditionals.payment
+      }
     }
-
-    addCoupon () {
-        this.applyCoupon(this.coupon);
+    let response = this.makeOrder(order)
+    if (response && response.success === true) {
+      if (response.redirectUrl !== '') {
+        window.location.href = response.redirectUrl
+      } else {
+        window.location.href = '/dziekujemy-za-zamowienie'
+      }
     }
+  }
 
-    sendOrder() {
-        this.delivery.additionalData = this.additionalData
+  setInpostData (point: any) {
+    this.additionalData.building_number = point.address_details.building_number
+    this.additionalData.city = point.address_details.city
+    this.additionalData.flat_number = point.address_details.flat_number
+    this.additionalData.post_code = point.address_details.post_code
+    this.additionalData.province = point.address_details.province
+    this.additionalData.street = point.address_details.street
+    this.additionalData.functions = point.functions
+    this.additionalData.location = point.location
+    this.additionalData.latitude = point.latitude
+    this.additionalData.longitude = point.longitude
+    this.additionalData.location_247 = point.location_247
+    this.additionalData.location_date = point.location_date
+    this.additionalData.name = point.name
+    this.additionalData.opening_hours = point.opening_hours
+    this.additionalData.type = point.type
+    this.showInpostMap = false
+  }
 
-        this.billing.name = this.billing.firstName + this.billing.lastName
-        this.billing.country = 'pl'
-        let order = {
-            billing: this.billing,
-            delivery: this.delivery,
-            additionalInfo: this.initialAdditionals.additionalInfo,
-            payment: {
-                'method': this.initialAdditionals.payment
-            }
-        }
-        this.makeOrder(order);
+  triggerResize () {
+    window.dispatchEvent(new Event('resize'))
+  }
+
+  mounted () {
+    let self = this
+    if ((window as any).easyPack) {
+      (window as any).easyPackAsyncInit = function () {
+        (window as any).easyPack.init({
+          defaultLocale: 'pl',
+          mapType: 'osm',
+          searchType: 'osm',
+          points: {
+            types: ['parcel_locker']
+          },
+          map: {
+            initialTypes: ['parcel_locker']
+          }
+        });
+        (window as any).easyPack.mapWidget('easypack-map', function (point: any) {
+          self.setInpostData(point)
+        });
+      };
     }
-
-    mounted () {
-        let self = this
-        if ((window as any).easyPack) {
-          (window as any).easyPackAsyncInit = function () {
-              (window as any).easyPack.init({
-                  defaultLocale: 'pl',
-                  mapType: 'osm',
-                  searchType: 'osm',
-                  points: {
-                      types: ['parcel_locker']
-                  },
-                  map: {
-                      initialTypes: ['parcel_locker']
-                  }
-              });
-
-              (window as any).easyPack.mapWidget('easypack-map', function (point: any) {
-                    self.additionalData.building_number = point.address_details.building_number
-                    self.additionalData.city = point.address_details.city
-                    self.additionalData.flat_number = point.address_details.flat_number
-                    self.additionalData.post_code = point.address_details.post_code
-                    self.additionalData.province = point.address_details.province
-                    self.additionalData.street = point.address_details.street
-                    self.additionalData.functions = point.functions
-                    self.additionalData.location = point.location
-                    self.additionalData.latitude = point.latitude
-                    self.additionalData.longitude = point.longitude
-                    self.additionalData.location_247 = point.location_247
-                    self.additionalData.location_date = point.location_date
-                    self.additionalData.name = point.name
-                    self.additionalData.opening_hours = point.opening_hours
-                    self.additionalData.type = point.type
-              });
-          };
-        }
-    }
-
+  }
 }
 </script>
