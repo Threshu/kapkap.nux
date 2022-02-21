@@ -18,6 +18,7 @@
                       class="tab-item"
                       :class="{'selected' : activeTab === 'billing'}"
                       @click="activeTab='billing'"
+                      type="button"
                     >
                       Adres rozliczeniowy
                     </button>
@@ -25,6 +26,7 @@
                       class="tab-item"
                       :class="{'selected' : activeTab === 'delivery'}"
                       @click="activeTab='delivery'"
+                      type="button"
                     >
                       Inny adres dostawy
                     </button>
