@@ -1,10 +1,5 @@
 <template>
   <div class="collection-filter-block">
-    <div class="collection-mobile-back">
-      <span class="filter-back">
-        <i aria-hidden="true" class="fa fa-angle-left" /> back
-      </span>
-    </div>
     <div class="collection-collapse-block open">
       <h3
         class="collapse-block-title not-collapsed"
@@ -38,6 +33,13 @@ export default class CategoryMenu extends Vue {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.collapse-block-title {
+  position: relative;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 30px 0 0 0;
+}
 </style>

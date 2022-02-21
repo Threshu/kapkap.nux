@@ -12,11 +12,7 @@
     <div class="collection-filter" :class="{ 'openFilterbar' : filter }">
       <div class="collection-filter-block">
         <!-- brand filter start -->
-        <div class="collection-mobile-back">
-          <span class="filter-back" @click="filter = !filter">
-            <i class="fa fa-angle-left" aria-hidden="true" /> back
-          </span>
-        </div>
+        <BackArrow @backClick="filter = !filter" />
         <div class="collection-collapse-block open">
           <h3 v-b-toggle.category class="collapse-block-title">
             Category
@@ -135,9 +131,11 @@
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/antd.css'
 import { Component, Getter, State, Vue } from 'nuxt-property-decorator'
+import BackArrow from '~/components/Common/BackArrow.vue'
 
 @Component({
   components: {
+    BackArrow,
     VueSlider
   }
 })
@@ -203,3 +201,24 @@ export default class Sidebar extends Vue {
   }
 }
 </script>
+
+<style scoped lang="scss">
+.collection-mobile-back {
+  padding: 15px 0;
+  //border-bottom: 1px solid lighten($black, 86.5%);
+  display: none;
+
+  span {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #000;
+    cursor: pointer;
+
+    i {
+      font-size: 20px;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+  }
+}
+</style>

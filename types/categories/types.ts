@@ -3,6 +3,7 @@ export type Category = {
   path: string
   position: number
   title: string
+  description: string
 }
 
 export type Product = {
@@ -19,4 +20,5 @@ export type CategoriesState = {
   products: Product[]
   categories: Category[]
   success: boolean
+  lastVisited: Record<string, Product>
 }
