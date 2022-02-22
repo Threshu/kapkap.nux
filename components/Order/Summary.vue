@@ -380,24 +380,24 @@ export default class Summary extends Vue {
 
   mounted () {
     const self = this
-    if ((window as any).easyPack) {
-      (window as any).easyPackAsyncInit = function () {
-        (window as any).easyPack.init({
-          defaultLocale: 'pl',
-          mapType: 'osm',
-          searchType: 'osm',
-          points: {
-            types: ['parcel_locker']
-          },
-          map: {
-            initialTypes: ['parcel_locker']
-          }
-        });
-        (window as any).easyPack.mapWidget('easypack-map', function (point: any) {
-          self.setInpostData(point)
-        })
+      if ((window as any).easyPack && process.client) {
+        (window as any).easyPackAsyncInit = function () {
+          (window as any).easyPack.init({
+            defaultLocale: 'pl',
+            mapType: 'osm',
+            searchType: 'osm',
+            points: {
+              types: ['parcel_locker']
+            },
+            map: {
+              initialTypes: ['parcel_locker']
+            }
+          });
+          (window as any).easyPack.mapWidget('easypack-map', function (point: any) {
+            self.setInpostData(point)
+          })
+        }
       }
-    }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <Summary />
+  <Summary :key="$route.fullPath"/>
 </template>
 
 <script lang="ts">
@@ -26,6 +26,16 @@ export default {
           rel: 'shortcut icon',
           href: '/favicon.ico',
           type: 'image/x-icon'
+        },
+        { 
+          rel: 'stylesheet', 
+          href: 'https://geowidget.easypack24.net/css/easypack.css' 
+        }
+
+      ],
+      script: [
+        {
+          src: 'https://geowidget.easypack24.net/js/sdk-for-javascript.js'
         }
       ]
     }

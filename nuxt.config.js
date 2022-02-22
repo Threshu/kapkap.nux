@@ -19,12 +19,6 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'preconnect', href: process.env.SITE_URL },
-      { rel: 'stylesheet', href: 'https://geowidget.easypack24.net/css/easypack.css' }
-    ],
-    script: [
-      {
-        src: 'https://geowidget.easypack24.net/js/sdk-for-javascript.js'
-      }
     ]
   },
   router: {
