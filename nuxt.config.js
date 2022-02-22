@@ -18,7 +18,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preconnect', href: process.env.SITE_URL }
+      { rel: 'preconnect', href: process.env.SITE_URL },
     ]
   },
   router: {
