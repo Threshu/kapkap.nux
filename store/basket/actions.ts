@@ -33,18 +33,6 @@ export default {
         coupon
     })
     commit('setBasket', res.data.basket)
-  },
-
-  makeOrder: async ({ commit }: any, order: any) => {
-    const clientTime = new Date();
-    const formattedClientTime = clientTime.toISOString();
-    const res = await $axios.post('/order', {
-        clientTime: formattedClientTime,
-        token: localStorage.basketToken,
-        ...order,
-    })
-
-    return res
   }
 
 }

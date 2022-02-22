@@ -222,7 +222,7 @@ export default class Summary extends Vue {
   @Getter('basket/basket') basket!: BasketContainer
   @Getter('basket/totalPrice') totalPrice!: number
   @Action('basket/applyCoupon') applyCoupon!: Function
-  @Action('basket/makeOrder') makeOrder!: Function
+  @Action('order/makeOrder') makeOrder!: Function
 
   showInpostMap: boolean = true
   activeTab: any = 'billing'
