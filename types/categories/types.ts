@@ -6,19 +6,7 @@ export type Category = {
   description: string
 }
 
-export type Product = {
-  avgGrade: number
-  backgroundId: string
-  numberOfGrades: number
-  price: number
-  productId: string
-  sampleImageURL: string
-  title: string
-}
-
 export type CategoriesState = {
-  products: Product[]
   categories: Category[]
   success: boolean
-  lastVisited: Record<string, Product>
 }

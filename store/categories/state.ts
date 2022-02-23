@@ -2,9 +2,7 @@ import { CategoriesState } from '~/types/categories/types'
 
 const categoriesState: CategoriesState = {
   success: false,
-  categories: [],
-  products: [],
-  lastVisited: { }
+  categories: []
 }
 
 export default () => categoriesState

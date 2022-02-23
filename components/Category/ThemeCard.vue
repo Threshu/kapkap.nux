@@ -40,8 +40,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Product } from '~/types/categories/types'
 import RatingStars from '~/components/Common/RatingStars.vue'
+import { Product } from '~/types/products/types'
 @Component({
   components: { RatingStars }
 })

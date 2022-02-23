@@ -1,37 +1,29 @@
 <template>
-  <Category />
+  <ProductsList :products="products" @addLastVisited="handleAddLastVisited" />
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { useBrowserLocation } from '@vueuse/core'
+import ProductsList from '~/components/Category/ItemList.vue'
+import { Product } from '~/types/products/types'
 
 @Component({
   components: {
-    Category: () => import(/* webpackChunkName: "Category" */ '~/components/Category/Category.vue')
+    ProductsList
   }
 })
-export default class Cups extends Vue {
-  head () {
-    const location = useBrowserLocation()
+export default class Products extends Vue {
+  products = []
 
-    return {
-      title: 'Kubki klasy premium - Sklep KapKap.eu',
-      meta: [],
-      link: [
-        {
-          hid: 'canonical',
-          rel: 'canonical',
-          href: location.value.href
-        },
-        {
-          hid: 'shortcut icon',
-          rel: 'shortcut icon',
-          href: '/favicon.ico',
-          type: 'image/x-icon'
-        }
-      ]
-    }
+  beforeRouteUpdate () {
+  }
+
+  mounted () {
+  }
+
+  handleAddLastVisited (product: Product) {
+    this.$store.dispatch('products/addLastVisited', product)
   }
 }
+
 </script>
