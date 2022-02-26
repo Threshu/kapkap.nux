@@ -1,19 +1,17 @@
 <template>
-  <Basket />
+  <Personalization />
 </template>
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
 
 export default {
-  components: {
-    Basket: () => import(/* webpackChunkName: "Basket" */ '~/components/Basket/Basket.vue')
-  },
+  components: { Personalization: () => import(/* webpackChunkName: "Personalization" */ '~/components/Personalization/Personalization.vue') },
   head () {
     const location = useBrowserLocation()
 
     return {
-      title: 'Koszyk - Sklep KapKap.eu',
+      title: 'Personalizowane kubki - Sklep KapKap.eu',
       meta: [],
       link: [
         {

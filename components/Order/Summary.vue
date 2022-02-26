@@ -6,7 +6,7 @@
       <div class="container padding-cls">
         <div class="checkout-page">
           <div class="checkout-form">
-            <form onSubmit="{handleSubmit(onSubmit)}">
+            <form method="POST" @submit.prevent="sendOrder">
               <div class="checkout row">
                 <div class="col-lg-6 col-sm-12 col-xs-12">
                   <div class="checkout-title">
@@ -14,15 +14,22 @@
                   </div>
 
                   <div class="address-tabs">
-                    <a
+                    <button
                       class="tab-item"
+                      :class="{'selected' : activeTab === 'billing'}"
                       @click="activeTab='billing'"
+                      type="button"
                     >
                       Adres rozliczeniowy
-                    </a>
-                    <a class="tab-item" @click="activeTab='delivery'">
+                    </button>
+                    <button
+                      class="tab-item"
+                      :class="{'selected' : activeTab === 'delivery'}"
+                      @click="activeTab='delivery'"
+                      type="button"
+                    >
                       Inny adres dostawy
-                    </a>
+                    </button>
                   </div>
 
                   <div v-if="activeTab == 'delivery'">
@@ -40,10 +47,9 @@
                   <div class="additionalInfo">
                     <p>Wpisz uwagi dotyczące zamówienia</p>
                     <textarea
-                      ref="{methods.register({required:"
+                      v-model="initialAdditionals.additionalInfo"
                       rows="5"
                       name="additionalInfo"
-                      :value="initialAdditionals.additionalInfo"
                     />
                   </div>
                 </div>
@@ -55,11 +61,16 @@
                       </div>
                       <ul class="qty">
                         <li
-                          v-for="(item, index) in cartItems.products"
-                          :key="index">
+                          v-for="(item, index) in cartItems"
+                          :key="index"
+                        >
+                          <img
+                            :src="item.frontThumbnail"
+                            width="50px"
+                          >
                           {{ item.title }} × {{ item.number }}
                           <span>
-                            {{ calculateTotal(item, item.number) }} {{ cartItems.payment.symbol }}
+                            {{ calculateTotal(item, item.number) }} zł
                           </span>
                         </li>
                       </ul>
@@ -69,17 +80,55 @@
                           <span
                             class="count"
                           >
-                            {{ cartItems.payment.orderTotal }}
-                              {{ cartItems.payment.symbol }}
+                            {{ totalPrice }} zł
                           </span>
                         </li>
-                        <CheckoutBoxes
-                          title="Wybierz sposób dostawy"
-                          group="shipping-group"
-                          :types="shippingTypes"
-                          :selected="initialAdditionals.shippingType"
-                          :inpost-address="initialAdditionals.inpost"
-                        />
+
+                        <div class="input-box shipping-box">
+                          <h4>Wybierz sposób dostawy</h4>
+                          <ul class="icons shipping-select-container">
+                            <li v-for="type in shippingTypes" :key="`shipping-${type.id}`" class="shipping-option">
+                              <input
+                                :id="`shipment-group-${type.id}`"
+                                v-model="delivery.method"
+                                type="radio"
+                                name="shipment-group"
+                                :checked="delivery.method === type.id"
+                                :value="type.id"
+                              >
+                              <label
+                                class="corner-picker"
+                                :for="`shipment-group-${type.id}`"
+                                @click="triggerResize"
+                                v-html="type.label"
+                              />
+                            </li>
+                          </ul>
+                          <div
+                            v-show="delivery.method === 'PACZKOMATY'"
+                            class="title inpost-address"
+                            @click="showInpostMap = true"
+                          >
+                            <div v-if="additionalData.name" class="data">
+                              <span>Paczkomat</span>
+                              {{ additionalData.name }}
+                              {{ additionalData.city }}
+                              {{ additionalData.street }}
+                              {{ additionalData.building_number }}
+                              {{ additionalData.post_code }}
+                            </div>
+                          </div>
+                          <div
+                            v-show="delivery.method === 'PACZKOMATY' && showInpostMap"
+                            id="inpost-geo"
+                            duration="180"
+                            height="300"
+                          >
+                            <div class="geowidget">
+                              <div id="easypack-map" />
+                            </div>
+                          </div>
+                        </div>
                       </ul>
 
                       <ul class="total">
@@ -88,6 +137,7 @@
                           <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-8">
                               <input
+                                v-model="coupon"
                                 type="text"
                                 name="coupon"
                               >
@@ -97,6 +147,7 @@
                                 class="btn-solid btn-small"
                                 type="button"
                                 value="Aktywuj"
+                                @click="addCoupon"
                               >
                             </div>
                           </div>
@@ -107,7 +158,7 @@
                         <li>
                           Do zapłaty
                           <span class="count">
-                            {{ cartItems.totalPrice }}&nbsp;{{ cartItems.payment.symbol }}
+                            {{ totalPrice }}&nbsp;zł
                           </span>
                         </li>
                       </ul>
@@ -115,12 +166,26 @@
 
                     <div class="payment-box">
                       <div class="upper-box">
-                        <CheckoutBoxes
-                          title="Wybierz sposób płatności"
-                          :types="paymentTypes"
-                          :selected="initialAdditionals.paymentOption"
-                          group="payment-group"
-                        />
+                        <div class="input-box shipping-box">
+                          <h4>Wybierz sposób płatności</h4>
+                          <ul class="icons shipping-select-container">
+                            <li v-for="(type) in paymentTypes" :key="`shipping-${type.id}`" class="shipping-option">
+                              <input
+                                :id="`payment-group-${type.id}`"
+                                v-model="initialAdditionals.payment"
+                                type="radio"
+                                name="payment-group"
+                                :checked="initialAdditionals.paymentOption === type.id"
+                                :value="type.id"
+                              >
+                              <label
+                                class="corner-picker"
+                                :for="`payment-group-${type.id}`"
+                                v-html="type.label"
+                              />
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                       <div class="text-right">
                         <input
@@ -142,32 +207,40 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Action, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
-import CheckoutBoxes from './CheckoutBoxes.vue'
 import AddressForm from './AddressForm.vue'
-import orderJSON from '~/data/order.json'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
+import { BasketContainer, Product } from '~/store/basket/state'
 
 @Jsonld
 @Component({
-  components: { Breadcrumb, CheckoutBoxes, AddressForm }
+  components: { Breadcrumb, AddressForm }
 })
 export default class Summary extends Vue {
-  cartItems: any = orderJSON
-  activeTab: any = 'delivery'
+  @Getter('basket/cartItems') cartItems!: Product[]
+  @Getter('basket/basket') basket!: BasketContainer
+  @Getter('basket/totalPrice') totalPrice!: number
+  @Action('basket/applyCoupon') applyCoupon!: Function
+  @Action('order/makeOrder') makeOrder!: Function
+
+  showInpostMap: boolean = true
+  activeTab: any = 'billing'
   billing: any = {
-    firstName: 'Jan',
-    lastName: 'Kowalski',
-    phone: '666-777-888',
-    email: 'jan.kowalski@gmail.com',
-    address: 'Słoneczna 8',
-    city: 'Warszawa',
-    zip: '22-022',
+    firstName: '',
+    lastName: '',
+    name: '',
+    phone: '',
+    email: '',
+    address: '',
+    city: '',
+    zip: '',
     isCompany: false,
     companyName: '',
     taxId: ''
   }
+
+  coupon: string = ''
 
   delivery: any = {
     firstName: '',
@@ -179,28 +252,46 @@ export default class Summary extends Vue {
     zip: '',
     isCompany: false,
     companyName: '',
-    taxId: ''
+    taxId: '',
+    method: 'INPOST_COURIER'
+  }
+
+  additionalData: any = {
+    building_number: null,
+    city: null,
+    post_code: null,
+    province: null,
+    street: null,
+    functions: null,
+    location: null,
+    latitude: null,
+    longitude: null,
+    location_247: null,
+    location_date: null,
+    name: null,
+    opening_hours: null,
+    type: null
   }
 
   initialAdditionals: any = {
     accountAnswer: false,
-    paymentOption: 0,
-    shippingType: 1,
+    payment: 'ONLINE',
+    shippingType: 0,
     inpost: null,
     coupon: '',
-    additionalInfo: 'Jakieś dodatkowe info'
+    additionalInfo: ''
   }
 
   shippingTypes: any = [
     {
-      id: 'freeShipping',
+      id: 'INPOST_COURIER',
       label: `
         <span class="type">Kurier</span>
         <img src="https://kapkap.eu/static/media/logo-paczkomaty-inpost-kurier.f596ebe0.png" alt="inpost"/>
       `
     },
     {
-      id: 'inpost',
+      id: 'PACZKOMATY',
       label: `
         <span class="type">Paczkomaty</span>
         <img src="https://kapkap.eu/static/media/logo-paczkomaty-inpost-kurier.f596ebe0.png" alt="inpost"/>
@@ -210,34 +301,103 @@ export default class Summary extends Vue {
 
   paymentTypes: any = [
     {
-      id: 'paymentOnline',
+      id: 'ONLINE',
       label: `
         <img src="https://kapkap.eu/static/media/Przelewy24_logo.37ea72ff.svg" alt='payment online'/>
         <div className="type payment">Płatność on-line</div>
       `
     },
     {
-      id: 'cashOnDelivery',
+      id: 'CASH_ON_DELIVERY',
       label: `
-        <img src="/static/media/banknoty.7ceb1b83.png" alt='cash on delivery'/>
+        <img src="/images/banknoty.png" alt='cash on delivery'/>
         <div className="type payment">Płatność za pobraniem</div>
       `
     },
     {
-      id: 'manualTransfer',
+      id: 'TRANSFER',
       label: `
-        <img src="=" alt='manual transfer'/>
+        <img src="/images/przelew.png"" alt='manual transfer'/>
         <div className="type payment">Przelew na konto</div>
       `
     }
   ];
 
-  mounted () {
-    this.cartItems = orderJSON
-  }
-
   calculateTotal (product: any, numb: any) {
     return parseFloat(product.price) * numb.toFixed(2)
+  }
+
+  addCoupon () {
+    this.applyCoupon(this.coupon)
+  }
+
+  async sendOrder () {
+    this.delivery.additionalData = this.additionalData
+    this.delivery.name = this.billing.firstName + ' ' + this.billing.lastName
+    this.delivery.country = 'pl'
+    this.billing.name = this.billing.firstName + ' ' + this.billing.lastName
+    this.billing.country = 'pl'
+    const order = {
+      billing: this.billing,
+      delivery: this.delivery,
+      additionalInfo: this.initialAdditionals.additionalInfo,
+      payment: {
+        method: this.initialAdditionals.payment
+      }
+    }
+    const response = await this.makeOrder(order)
+    if (response.data && response.data.success === true) {
+      if (response.data.redirectUrl !== '') {
+        window.location.href = response.data.redirectUrl
+      } else {
+        window.location.href = '/dziekujemy-za-zamowienie'
+      }
+    }
+  }
+
+  setInpostData (point: any) {
+    this.additionalData.building_number = point.address_details.building_number
+    this.additionalData.city = point.address_details.city
+    this.additionalData.flat_number = point.address_details.flat_number
+    this.additionalData.post_code = point.address_details.post_code
+    this.additionalData.province = point.address_details.province
+    this.additionalData.street = point.address_details.street
+    this.additionalData.functions = point.functions
+    this.additionalData.location = point.location
+    this.additionalData.latitude = point.latitude
+    this.additionalData.longitude = point.longitude
+    this.additionalData.location_247 = point.location_247
+    this.additionalData.location_date = point.location_date
+    this.additionalData.name = point.name
+    this.additionalData.opening_hours = point.opening_hours
+    this.additionalData.type = point.type
+    this.showInpostMap = false
+  }
+
+  triggerResize () {
+    window.dispatchEvent(new Event('resize'))
+  }
+
+  mounted () {
+    const self = this
+      if ((window as any).easyPack && process.client) {
+        (window as any).easyPackAsyncInit = function () {
+          (window as any).easyPack.init({
+            defaultLocale: 'pl',
+            mapType: 'osm',
+            searchType: 'osm',
+            points: {
+              types: ['parcel_locker']
+            },
+            map: {
+              initialTypes: ['parcel_locker']
+            }
+          });
+          (window as any).easyPack.mapWidget('easypack-map', function (point: any) {
+            self.setInpostData(point)
+          })
+        }
+      }
   }
 }
 </script>

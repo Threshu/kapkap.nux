@@ -18,7 +18,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preconnect', href: process.env.SITE_URL }
+      { rel: 'preconnect', href: process.env.SITE_URL },
     ]
   },
   router: {
@@ -112,14 +112,6 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: process.env.API_URL
-  },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    vendor: [
-      // https://www.npmjs.com/package/vue-image-zoomer
-      'vue-image-zoomer'
-    ]
   },
 
   env: {

@@ -4,93 +4,127 @@
       <div class="row">
         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <input
+            id="isCompany"
+            v-model="form.isCompany"
             type="checkbox"
             name="isCompany"
-            v-model="form.isCompany"
-            id="isCompany"
             :checked="form.isCompany"
-          />
+          >
           &ensp; <label>Zamówienie firmowe</label>
         </div>
       </div>
 
-      <div class="row" v-if="!form.isCompany">
+      <div v-if="!form.isCompany" class="row">
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <div class="field-label small-letters">Imię</div>
+          <div class="field-label small-letters">
+            Imię
+          </div>
           <input
-              type="text"
-              name="first_name"
-              :value="form.firstName"
-          />
+            v-model="form.firstName"
+            type="text"
+            name="first_name"
+            required
+          >
         </div>
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <div class="field-label small-letters">Nazwisko</div>
+          <div class="field-label small-letters">
+            Nazwisko
+          </div>
           <input
-              type="text"
-              name="last_name"
-              :value="form.lastName"
-          />
+            v-model="form.lastName"
+            type="text"
+            name="last_name"
+            required
+          >
         </div>
       </div>
 
-      <div class="row" v-if="form.isCompany">
+      <div v-if="form.isCompany" class="row">
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <div class="field-label small-letters">Nazwa firmy</div>
+          <div class="field-label small-letters">
+            Nazwa firmy
+          </div>
           <input
-              type="text"
-              name="companyName"
-              :value="form.companyName"
-          />
+            v-model="form.companyName"
+            type="text"
+            name="companyName"
+            required
+          >
         </div>
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <div class="field-label">NIP</div>
+          <div class="field-label">
+            NIP
+          </div>
           <input
-              type="text"
-              name="taxId"
-              :value="form.taxId"
-          />
+            v-model="form.taxId"
+            type="text"
+            name="taxId"
+            required
+          >
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <div class="field-label small-letters">Numer telefonu</div>
+          <div class="field-label small-letters">
+            Numer telefonu
+          </div>
           <input
-              type="text"
-              name="phone"
-              :value="form.phone"
-          />
+            v-model="form.phone"
+            type="text"
+            name="phone"
+            required
+          >
         </div>
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <div class="field-label small-letters">Adres email</div>
+          <div class="field-label small-letters">
+            Adres email
+          </div>
           <input
-              type="text"
-              name="email"
-              :value="form.email"
-          />
+            v-model="form.email"
+            type="text"
+            name="email"
+            required
+          >
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6 col-sm-12 col-xs-12">
-          <div class="field-label small-letters">Adres pocztowy</div>
-          <input type="text"
-                 name="address"
-                 :value="form.address"
-          />
+          <div class="field-label small-letters">
+            Adres pocztowy
+          </div>
+          <input
+            v-model="form.address"
+            type="text"
+            name="address"
+            required
+          >
         </div>
         <div class="form-group col-md-6 col-sm-12 col-xs-12">
-          <div class="field-label small-letters">Miasto</div>
-          <input type="text" name="city" :value="form.city"/>
+          <div class="field-label small-letters">
+            Miasto
+          </div>
+          <input
+            v-model="form.city"
+            type="text"
+            name="city"
+            required
+          >
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <div class="field-label small-letters">Kod pocztowy</div>
-          <input type="text" name="zip"
-                 :value="form.zip"
-          />
+          <div class="field-label small-letters">
+            Kod pocztowy
+          </div>
+          <input
+            v-model="form.zip"
+            type="text"
+            name="zip"
+            required
+          >
         </div>
       </div>
     </div>

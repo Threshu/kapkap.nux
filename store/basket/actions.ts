@@ -25,5 +25,14 @@ export default {
       }
     } catch {
     }
+  },
+
+  applyCoupon: async ({ commit }: any, coupon: string) => {
+    const res = await $axios.post('/coupon', {
+        token: localStorage.basketToken,
+        coupon
+    })
+    commit('setBasket', res.data.basket)
   }
+
 }

@@ -841,6 +841,7 @@ label {
     align-content: center;
     flex-wrap: nowrap;
     padding: 0;
+    margin-bottom: 20px;
 
     @media (max-width: 768px) {
       display: block;
@@ -949,12 +950,14 @@ label {
 }
 
 .geowidget {
-  height: 382px;
+  width: 100%;
+  height: 400px;
   margin-bottom: 10px;
 }
 
 .inpost-address {
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .payment-btn {
@@ -1610,6 +1613,14 @@ span.breed {
     }
   }
 
+  .tag-box {
+    color: #6e776f;
+    border-top: 1px solid #404040;
+    margin-top: 20px;
+    padding-top: 20px;
+    line-height: 25px;
+  }
+
   background-color: #222;
 
   .sub-footer {
@@ -1936,8 +1947,11 @@ header {
     border: 0;
     cursor: pointer;
     background: transparent;
+    margin: 0 5px;
 
-    &.active {
+
+    &:hover,
+    &.selected {
       color: #28a745;
     }
   }
@@ -2053,3 +2067,11 @@ header {
   }
 
 
+.geowidget {
+  min-height: 442px;
+  margin-bottom: 10px;
+}
+
+.order-box .qty img {
+  width: 75px;
+}
