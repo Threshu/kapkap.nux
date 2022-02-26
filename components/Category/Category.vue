@@ -74,7 +74,6 @@ export default class Category extends Vue {
   staticTitle = 'Lorem Ipsum is simply'
 
   get prod (): Product[] {
-    console.log('asdas', this.products)
     return this.products
   }
 
