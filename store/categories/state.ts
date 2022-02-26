@@ -1,9 +1,8 @@
-import { CategoriesState } from '~/types/categories/types'
+import { CategoriesState } from '~/types/store/categories/types'
 
 const categoriesState: CategoriesState = {
   success: false,
-  categories: [],
-  products: []
+  categories: []
 }
 
 export default () => categoriesState

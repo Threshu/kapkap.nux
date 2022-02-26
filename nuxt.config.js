@@ -43,6 +43,7 @@ export default {
     '~/plugins/preview.client.js',
     '~/plugins/jsonld',
     '~/plugins/axios-accessor',
+    '~/plugins/filters',
     { src: '~plugins/zoom', ssr: false }
   ],
 
@@ -73,6 +74,9 @@ export default {
     preconnect: true,
     preload: true
   },
+  styleResources: {
+    scss: ['./assets/scss/theme/_variables.scss']
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -80,6 +84,7 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
     'nuxt-i18n',
     [
       'nuxt-compress',

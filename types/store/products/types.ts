@@ -1,10 +1,3 @@
-export type Category = {
-  id: string
-  path: string
-  position: number
-  title: string
-}
-
 export type Product = {
   avgGrade: number
   backgroundId: string
@@ -15,8 +8,8 @@ export type Product = {
   title: string
 }
 
-export type CategoriesState = {
+export type ProductsState = {
   products: Product[]
-  categories: Category[]
   success: boolean
+  lastVisited: Record<string, Product>
 }
