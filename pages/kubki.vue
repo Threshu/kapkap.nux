@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, Watch } from 'nuxt-property-decorator'
 import { useBrowserLocation } from '@vueuse/core'
 import Category from '~/components/Category/Category.vue'
 
@@ -35,9 +35,21 @@ export default class Cups extends Vue {
     }
   }
 
-  created () {
-    this.$store.dispatch('categories/loadCategories')
-    this.$store.dispatch('products/loadLastVisited')
+  async created (): Promise<void> {
+    const categories = this.$store.dispatch('categories/loadCategories')
+    const lastVisited = this.$store.dispatch('products/loadLastVisited')
+    await Promise.all([categories, lastVisited])
+    this.loadProducts()
+  }
+
+  @Watch('$route')
+  handleRouterChange () {
+    this.loadProducts()
+  }
+
+  loadProducts () {
+    const { path } = this.$route
+    this.$store.dispatch('products/loadProducts', path)
   }
 }
 </script>

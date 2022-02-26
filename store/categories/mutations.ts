@@ -1,4 +1,4 @@
-import { CategoriesState } from '~/types/categories/types'
+import { CategoriesState } from '~/types/store/categories/types'
 
 export default {
   setStateForCategories (state: CategoriesState, categories: CategoriesState) {

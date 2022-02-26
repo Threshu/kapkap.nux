@@ -1,4 +1,4 @@
-import { ProductsState } from '~/types/products/types'
+import { ProductsState } from '~/types/store/products/types'
 
 const productsState: ProductsState = {
   success: false,

@@ -1,4 +1,4 @@
-import { Product, ProductsState } from '~/types/products/types'
+import { Product, ProductsState } from '~/types/store/products/types'
 
 export default {
   products: (state: ProductsState) => state.products,

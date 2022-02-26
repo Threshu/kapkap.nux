@@ -24,7 +24,7 @@
                   <TopBanner :title="title" :description="description" />
                   <div class="collection-product-wrapper">
                     <div class="product-wrapper-grid">
-                      <NuxtChild />
+                      <ProductsList :products="prod" @addLastVisited="handleAddLastVisited" />
                     </div>
                   </div>
                 </div>
@@ -45,8 +45,8 @@ import ThemeCard from '~/components/Category/ThemeCard.vue'
 import CategoryMenu from '~/components/Category/CategoryMenu.vue'
 import ProductsList from '~/components/Category/ItemList.vue'
 import TopBanner from '~/components/Category/TopBanner.vue'
-import { Category as CategoryType } from '~/types/categories/types'
-import { Product } from '~/types/products/types'
+import { Category as CategoryType } from '~/types/store/categories/types'
+import { Product } from '~/types/store/products/types'
 
 @Component({
   components: {
@@ -60,8 +60,8 @@ import { Product } from '~/types/products/types'
 })
 export default class Category extends Vue {
   @Getter('categories/categories') categories!: CategoryType[]
-  @Getter('products/products') products!: Product[]
   @Getter('products/lastVisited') lastVisited!: Product[]
+  @Getter('products/products') products!: Product[]
 
   staticDescription = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been\n' +
     '        the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley\n' +
@@ -72,6 +72,11 @@ export default class Category extends Vue {
     '        Lorem Ipsum.'
 
   staticTitle = 'Lorem Ipsum is simply'
+
+  get prod (): Product[] {
+    console.log('asdas', this.products)
+    return this.products
+  }
 
   get title (): string {
     const category = this.findCategoryItem()

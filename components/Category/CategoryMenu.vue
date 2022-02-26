@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Category } from '~/types/categories/types'
+import { Category } from '~/types/store/categories/types'
 
 @Component
 export default class CategoryMenu extends Vue {
