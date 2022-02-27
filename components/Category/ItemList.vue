@@ -17,7 +17,7 @@
               </div>
             </div>
             <div class="product-detail">
-              <RatingStars active="3" />
+              <RatingStars active="5" />
               <h6>{{ product.title }}</h6>
               <h4>{{ product.price | currency }}</h4>
             </div>

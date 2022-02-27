@@ -1,27 +1,30 @@
 <template>
-  <section class="categoryBox">
-    <div class="collection-wrapper productBoxBg">
-      <div class="container">
-        <div class="row">
-          <div
-            v-if="(showConf || !isMobile) && isLoaded"
-            :ref="{'productModalBox': isMobile}"
-            :class="{'productModalBox': isMobile}"
-            class="productBox"
-          >
-            <Preview />
-            <EditArea
-              :edit-mode="editMode"
-              :cart-item-id="cartItemId"
-              :menu="defaultMenu"
-              @closeConfigurator="closeConfigurator"
-            />
+  <div>
+    <Breadcrumb v-if="false" title="Kreator kubka" />
+    <section class="categoryBox">
+      <div class="collection-wrapper productBoxBg">
+        <div class="container">
+          <div class="row">
+            <div
+              v-if="(showConf || !isMobile) && isLoaded"
+              :ref="{'productModalBox': isMobile}"
+              :class="{'productModalBox': isMobile}"
+              class="productBox"
+            >
+              <Preview />
+              <EditArea
+                :edit-mode="editMode"
+                :cart-item-id="cartItemId"
+                :menu="defaultMenu"
+                @closeConfigurator="closeConfigurator"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <RelatedProducts v-if="false" />
-  </section>
+      <RelatedProducts v-if="false" />
+    </section>
+  </div>
 </template>
 
 <script  lang="ts">
@@ -30,10 +33,11 @@ import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
 import { BasketContainer } from '~/store/basket/state'
+import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 
 @Component({
   components: {
-    EditArea, Preview, RelatedProducts
+    EditArea, Preview, RelatedProducts, Breadcrumb
   }
 })
 export default class Cup extends Vue {

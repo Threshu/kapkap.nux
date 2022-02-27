@@ -20,7 +20,7 @@
                       <img :src="product.sampleImageURL" :alt="product.title">
                     </div>
                     <div class="item-content">
-                      <RatingStars :active="4" />
+                      <RatingStars :active="5" />
                       <h6>{{ product.title }}</h6>
                       <h4>
                         {{ product.price | currency }}
