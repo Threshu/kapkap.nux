@@ -20,11 +20,11 @@
                       <img :src="product.sampleImageURL" :alt="product.title">
                     </div>
                     <div class="item-content">
-                      <RatingStars :active="5" />
+<!--                      <RatingStars :active="5" />-->
                       <h6>{{ product.title }}</h6>
                       <h4>
                         {{ product.price | currency }}
-                        <del>{{ product.price | currency }}</del>
+                        <del>{{ (product.price + 10) | currency }}</del>
                       </h4>
                     </div>
                   </div>
