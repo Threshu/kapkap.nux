@@ -137,10 +137,11 @@
         <button class="cancel" @click="editCancel()">
           Anuluj
         </button>
-        <button class="add" @click="pushObject(popupData.type, tempObject.edit)">
+        <button class="add" @click="pushObject(popupData.type, tempObject.editIndex)">
           Zapisz
         </button>
       </div>
+
       <div
         v-if="showModal"
         class="modal objectChoice"
@@ -154,19 +155,19 @@
 
         <div class="modalContent">
           <div class="objItem" @click="newCupObject(women, 'woman')">
-            <img src="/images/cup_page/sample_woman.png">
+            <img src="/images/cup_page/sample_woman.png" alt="Kobieta">
             <span class="name">Kobietę</span>
           </div>
           <div class="objItem" @click="newCupObject(men, 'man')">
-            <img src="/images/cup_page/sample_man.png">
+            <img src="/images/cup_page/sample_man.png" alt="Mężczyzna">
             <span class="name">Mężczyznę</span>
           </div>
           <div class="objItem" @click="newCupObject(dogs, 'dog')">
-            <img src="/images/cup_page/sample_dog.png">
+            <img src="/images/cup_page/sample_dog.png" alt="Pies">
             <span class="name">Psa</span>
           </div>
           <div class="objItem" @click="newCupObject(cats, 'cat')">
-            <img src="/images/cup_page/sample_cat.png">
+            <img src="/images/cup_page/sample_cat.png" alt="Kot">
             <span class="name">Kota</span>
           </div>
         </div>
@@ -214,7 +215,7 @@ export default class ItemsChoice extends Vue {
   // temporary object created in the popup when adding or editing
   tempObject: any = {
     type: '',
-    edit: '',
+    edit: false,
     bodyId: '',
     variantId: '',
     bodyImageUrl: '',
@@ -235,7 +236,7 @@ export default class ItemsChoice extends Vue {
   resetTempObject () {
     this.tempObject = {
       type: '',
-      edit: '',
+      editIndex: false,
       bodyId: '',
       variantId: '',
       bodyImageUrl: '',
@@ -249,12 +250,13 @@ export default class ItemsChoice extends Vue {
     this.showModal = false
     this.popupData.type = type
     this.showEditModal = true
+    this.resetTempObject()
   }
 
-  pushObject (type: any, edit: any) {
+  pushObject (type: any, editIndex: any) {
     this.tempObject.type = type
-    if (edit) {
-      this.setItem({ index: edit, item: this.tempObject })
+    if (editIndex) {
+      this.setItem({ index: editIndex, item: this.tempObject })
     } else {
       this.setItem({ index: this.items.length, item: this.tempObject })
     }
@@ -272,8 +274,7 @@ export default class ItemsChoice extends Vue {
     this.tempObject = { ...this.items[itemIndex] }
     this.showModal = false
     this.showEditModal = true
-
-    this.tempObject.edit = itemIndex
+    this.tempObject.editIndex = itemIndex
 
     switch (this.tempObject.type) {
       case 'cat':
