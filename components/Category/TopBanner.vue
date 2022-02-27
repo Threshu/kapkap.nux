@@ -1,6 +1,6 @@
 <template>
   <div class="top-banner-wrapper">
-    <div class="top-banner-content small-section">
+    <div class="top-banner-content small-section pt-0">
       <h4>{{ title }}</h4>
       <p>{{ description }}</p>
     </div>

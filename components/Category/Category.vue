@@ -1,30 +1,30 @@
 <template>
-  <section class="section-b-space ratio_asos">
-    <div class="collection-wrapper">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <div>
-              <div class="row">
-                <FilterBtn />
-              </div>
-              <div class="collection-filter">
-                <CategoryMenu :categories="categories" />
-                <ClientOnly>
-                  <ThemeCard :last-visited="lastVisited" />
-                </ClientOnly>
+  <div>
+    <Breadcrumb title="Kubki" />
+    <section class="section-b-space ratio_asos">
+      <div class="collection-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3">
+              <div>
+                <div class="collection-filter">
+                  <CategoryMenu :categories="categories" />
+                  <ClientOnly>
+                    <ThemeCard :last-visited="lastVisited" />
+                  </ClientOnly>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="collection-content col">
-            <div class="page-main-content">
-              <div class="row">
-                <div class="col-sm-12">
-                  <TopBanner :title="title" :description="description" />
-                  <div class="collection-product-wrapper">
-                    <div class="product-wrapper-grid">
-                      <ProductsList :products="prod" @addLastVisited="handleAddLastVisited" />
+            <div class="collection-content col">
+              <div class="page-main-content">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <TopBanner :title="title" :description="description" />
+                    <div class="collection-product-wrapper">
+                      <div class="product-wrapper-grid">
+                        <ProductsList :products="prod" @addLastVisited="handleAddLastVisited" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -33,8 +33,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -63,15 +63,13 @@ export default class Category extends Vue {
   @Getter('products/lastVisited') lastVisited!: Product[]
   @Getter('products/products') products!: Product[]
 
-  staticDescription = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been\n' +
-    '        the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley\n' +
-    '        of type and scrambled it to make a type specimen book. It has survived not only five centuries,\n' +
-    '        but also the leap into electronic typesetting, remaining essentially unchanged. It was\n' +
-    '        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,\n' +
-    '        and more recently with desktop publishing software like Aldus PageMaker including versions of\n' +
-    '        Lorem Ipsum.'
+  staticDescription = 'Stwórz własny kubek w parę minut. Dodawaj dowolną liczbę osób dodając własną fryzurę\n' +
+    '        oraz rysunek postaci, wybierając wśród wielu szablonów kobiet i mężczyzn.\n' +
+    '        Na kubku możesz umieścić psa dowolnej rasy z już gotowych rysunków. Nic nie musisz rysować samodzielnie.\n' +
+    '        Jeżeli chcesz umieścić na kubku swojego kota, dwa lub więcej, możesz to zrobić w kolejnym kroku\n' +
+    '        po wybraniu jednego z produktów.'
 
-  staticTitle = 'Lorem Ipsum is simply'
+  staticTitle = 'Personalizowane kubki'
 
   get prod (): Product[] {
     return this.products

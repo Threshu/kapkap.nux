@@ -5,11 +5,10 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'nuxt-property-decorator'
 import { useBrowserLocation } from '@vueuse/core'
-import Category from '~/components/Category/Category.vue'
 
 @Component({
   components: {
-    Category
+    Category: () => import(/* webpackChunkName: "Category" */ '~/components/Category/Category.vue')
   }
 })
 export default class Cups extends Vue {
@@ -39,17 +38,17 @@ export default class Cups extends Vue {
     const categories = this.$store.dispatch('categories/loadCategories')
     const lastVisited = this.$store.dispatch('products/loadLastVisited')
     await Promise.all([categories, lastVisited])
-    this.loadProducts()
+    await this.loadProducts()
   }
 
   @Watch('$route')
-  handleRouterChange () {
-    this.loadProducts()
+  async handleRouterChange () {
+    await this.loadProducts()
   }
 
-  loadProducts () {
+  async loadProducts () {
     const { path } = this.$route
-    this.$store.dispatch('products/loadProducts', path)
+    await this.$store.dispatch('products/loadProducts', path)
   }
 }
 </script>
