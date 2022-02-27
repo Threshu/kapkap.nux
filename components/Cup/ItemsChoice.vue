@@ -55,25 +55,42 @@
         </h3>
 
         <div class="modalContent edit">
-          <input ref="name" v-model="tempObject.name" class="objectName" type="text" placeholder="Imię">
+          <input
+            ref="name"
+            v-model="tempObject.name"
+            class="objectName"
+            placeholder="Imię"
+            type="text"
+          >
+          <input
+            v-if="popupData.type === 'dog' || popupData.type === 'cat'"
+            ref="name"
+            v-model="search"
+            class="objectName"
+            type="text"
+            placeholder="Wyszukaj wg nazwy rasy"
+          >
 
           <div v-if="popupData.bodies" class="objectsBox">
             <h4 class="objectTitle">
               Sylwetka
             </h4>
 
-            <div
+            <template
               v-for="(item, index) in popupData.bodies"
-              :key="index"
-              class="objItem"
-              :class="[item.bodyId === tempObject.bodyId ? 'selected' : '']"
-              @click="setFigure(item.bodyId, item.bodyImageUrl)"
             >
-              <img
-                alt="product body icon"
-                :src="item.bodyImageUrl"
+              <div
+                :key="index"
+                class="objItem"
+                :class="[item.bodyId === tempObject.bodyId ? 'selected' : '']"
+                @click="setFigure(item.bodyId, item.bodyImageUrl)"
               >
-            </div>
+                <img
+                  alt="product body icon"
+                  :src="item.bodyImageUrl"
+                >
+              </div>
+            </template>
           </div>
 
           <div v-if="popupData.hairstyles" class="objectsBox color">
@@ -110,27 +127,34 @@
               </div>
             </div>
           </div>
-          <div v-if="popupData.type==='dog' || popupData.type==='cat'" class="objectsBox">
-            <div
+          <div
+            v-if="popupData.type === 'dog' || popupData.type === 'cat'"
+            :key="refreshKey"
+            class="objectsBox"
+          >
+            <template
               v-for="(dogs, breed) in popupData"
-              :key="breed"
-              v-if="breed !== 'type'"
             >
-              <span class="breed">{{ breed }}</span>
               <div
-                v-for="(item, index) in dogs"
-                :key="index"
-                class="objItem"
-                :class="item.variantId === tempObject.variantId ? 'selected' : ''"
-                @click="setPet(item.variantId, item.id, item.imageUrl)"
+                v-if="breed !== 'type' && toDisplay(breed)"
+                :key="breed"
               >
-                <img
-                  v-if="item.imageUrl"
-                  alt="product body icon"
-                  :src="item.imageUrl"
+                <span class="breed">{{ breed }}</span>
+                <div
+                  v-for="(item, index) in dogs"
+                  :key="index"
+                  class="objItem"
+                  :class="item.variantId === tempObject.variantId ? 'selected' : ''"
+                  @click="setPet(item.variantId, item.id, item.imageUrl)"
                 >
+                  <img
+                    v-if="item.imageUrl"
+                    alt="product body icon"
+                    :src="item.imageUrl"
+                  >
+                </div>
               </div>
-            </div>
+            </template>
           </div>
         </div>
 
@@ -205,6 +229,8 @@ export default class ItemsChoice extends Vue {
 
   showModal: boolean = false
   showEditModal: boolean = false
+  search: string = ''
+  refreshKey: number = 0
 
   removeBox: boolean = false
   removeItemIndex: number = -1
@@ -223,6 +249,11 @@ export default class ItemsChoice extends Vue {
     hairstyleId: ''
   }
 
+  @Watch('search')
+  onChangeSearch () {
+    this.refreshKey++
+  }
+
   @Watch('showModal')
   onChangeModal (value: boolean) {
     this.$emit('changeModal', value)
@@ -231,6 +262,11 @@ export default class ItemsChoice extends Vue {
   @Watch('showEditModal')
   onChangeEditModal (value: boolean) {
     this.$emit('changeEditModal', value)
+  }
+
+  toDisplay (breed: string): boolean {
+    const r = new RegExp(this.search, 'i')
+    return this.search === '' || breed.search(r) !== -1
   }
 
   resetTempObject () {

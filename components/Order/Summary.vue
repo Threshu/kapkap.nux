@@ -17,16 +17,16 @@
                     <button
                       class="tab-item"
                       :class="{'selected' : activeTab === 'billing'}"
-                      @click="activeTab='billing'"
                       type="button"
+                      @click="activeTab='billing'"
                     >
                       Adres rozliczeniowy
                     </button>
                     <button
                       class="tab-item"
                       :class="{'selected' : activeTab === 'delivery'}"
-                      @click="activeTab='delivery'"
                       type="button"
+                      @click="activeTab='delivery'"
                     >
                       Inny adres dostawy
                     </button>
@@ -107,7 +107,7 @@
                           <div
                             v-show="delivery.method === 'PACZKOMATY'"
                             class="title inpost-address"
-                            @click="showInpostMap = true"
+                            @click="openMap"
                           >
                             <div v-if="additionalData.name" class="data">
                               <span>Paczkomat</span>
@@ -121,8 +121,8 @@
                           <div
                             v-show="delivery.method === 'PACZKOMATY' && showInpostMap"
                             id="inpost-geo"
-                            duration="180"
-                            height="300"
+                            data-duration="180"
+                            data-height="300"
                           >
                             <div class="geowidget">
                               <div id="easypack-map" />
@@ -207,7 +207,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Getter, Action, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Action, Vue, Mutation } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
 import AddressForm from './AddressForm.vue'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
@@ -221,6 +221,10 @@ export default class Summary extends Vue {
   @Getter('basket/cartItems') cartItems!: Product[]
   @Getter('basket/basket') basket!: BasketContainer
   @Getter('basket/totalPrice') totalPrice!: number
+  @Getter('app/isEasyPackLoaded') isEasyPackLoaded!: boolean
+
+  @Mutation('app/setEasyPackAsLoaded') setEasyPackAsLoaded!: Function
+
   @Action('basket/applyCoupon') applyCoupon!: Function
   @Action('order/makeOrder') makeOrder!: Function
 
@@ -304,21 +308,21 @@ export default class Summary extends Vue {
       id: 'ONLINE',
       label: `
         <img src="https://kapkap.eu/static/media/Przelewy24_logo.37ea72ff.svg" alt='payment online'/>
-        <div className="type payment">Płatność on-line</div>
+        <div class="type payment">Płatność on-line</div>
       `
     },
     {
       id: 'CASH_ON_DELIVERY',
       label: `
         <img src="/images/banknoty.png" alt='cash on delivery'/>
-        <div className="type payment">Płatność za pobraniem</div>
+        <div class="type payment">Płatność za pobraniem</div>
       `
     },
     {
       id: 'TRANSFER',
       label: `
         <img src="/images/przelew.png"" alt='manual transfer'/>
-        <div className="type payment">Przelew na konto</div>
+        <div class="type payment">Przelew na konto</div>
       `
     }
   ];
@@ -379,25 +383,46 @@ export default class Summary extends Vue {
   }
 
   mounted () {
+    const self = this;
+
+    // https://dokumentacja-inpost.atlassian.net/wiki/spaces/PL/pages/7438409/Geowidget+v4+User+s+Guide+New
+    (window as any).easyPackAsyncInit = function () {
+      self.openMap(false)
+      self.setEasyPackAsLoaded()
+    }
+  }
+
+  openMap (openWidget: boolean = true) {
     const self = this
-      if ((window as any).easyPack && process.client) {
-        (window as any).easyPackAsyncInit = function () {
-          (window as any).easyPack.init({
-            defaultLocale: 'pl',
-            mapType: 'osm',
-            searchType: 'osm',
-            points: {
-              types: ['parcel_locker']
-            },
-            map: {
-              initialTypes: ['parcel_locker']
-            }
-          });
-          (window as any).easyPack.mapWidget('easypack-map', function (point: any) {
-            self.setInpostData(point)
-          })
-        }
+    this.isNeedMapRender('easypack-map');
+    (window as any).easyPack.init({
+      defaultLocale: 'pl',
+      mapType: 'osm',
+      searchType: 'osm',
+      points: {
+        types: ['parcel_locker']
+      },
+      map: {
+        useGeolocation: true,
+        initialTypes: ['parcel_locker'],
+        googleKey: 'AIzaSyCUBttKx4hbiP81yPkR_aV0N8jA1750OLc'
       }
+    });
+    (window as any).easyPack.mapWidget('easypack-map', function (point: any) {
+      self.setInpostData(point)
+    })
+    if (openWidget) {
+      this.showInpostMap = true
+    }
+  }
+
+  isNeedMapRender (name: string) {
+    const node = document.getElementById(name)
+    if (node) {
+      while (node.childNodes.length > 0) {
+        node.removeChild(node.childNodes[0])
+      }
+    }
   }
 }
 </script>

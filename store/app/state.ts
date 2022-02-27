@@ -1,5 +1,8 @@
 export type AppState = {
-  isMobile: boolean
+  isMobile: boolean,
+  isEasyPackLoaded: boolean
 }
 
-export default () => (<AppState>{})
+export default () => (<AppState>{
+  isEasyPackLoaded: false
+})
