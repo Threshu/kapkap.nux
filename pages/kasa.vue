@@ -35,7 +35,8 @@ export default {
       ],
       script: [
         {
-          src: 'https://geowidget.easypack24.net/js/sdk-for-javascript.js'
+          src: 'https://geowidget.easypack24.net/js/sdk-for-javascript.js',
+          async: true
         }
       ]
     }

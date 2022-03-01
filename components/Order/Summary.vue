@@ -90,10 +90,10 @@
                             <li v-for="type in shippingTypes" :key="`shipping-${type.id}`" class="shipping-option">
                               <input
                                 :id="`shipment-group-${type.id}`"
-                                v-model="delivery.method"
+                                v-model="deliveryMethod"
                                 type="radio"
                                 name="shipment-group"
-                                :checked="delivery.method === type.id"
+                                :checked="deliveryMethod === type.id"
                                 :value="type.id"
                               >
                               <label
@@ -105,7 +105,7 @@
                             </li>
                           </ul>
                           <div
-                            v-show="delivery.method === 'PACZKOMATY'"
+                            v-if="deliveryMethod === 'PACZKOMATY'"
                             class="title inpost-address"
                             @click="openMap"
                           >
@@ -119,8 +119,8 @@
                             </div>
                           </div>
                           <div
-                            v-show="delivery.method === 'PACZKOMATY' && showInpostMap"
                             id="inpost-geo"
+                            :class="{ 'hide-map': !visibility}"
                             data-duration="180"
                             data-height="300"
                           >
@@ -227,6 +227,18 @@ export default class Summary extends Vue {
 
   @Action('basket/applyCoupon') applyCoupon!: Function
   @Action('order/makeOrder') makeOrder!: Function
+
+  get visibility (): boolean {
+    return this.delivery.method === 'PACZKOMATY'
+  }
+
+  get deliveryMethod (): string {
+    return this.delivery.method
+  }
+
+  set deliveryMethod (val: string) {
+    this.$set(this.delivery, 'method', val)
+  }
 
   showInpostMap: boolean = true
   activeTab: any = 'billing'
@@ -383,18 +395,18 @@ export default class Summary extends Vue {
   }
 
   mounted () {
-    const self = this;
-
     // https://dokumentacja-inpost.atlassian.net/wiki/spaces/PL/pages/7438409/Geowidget+v4+User+s+Guide+New
-    (window as any).easyPackAsyncInit = function () {
-      self.openMap(false)
-      self.setEasyPackAsLoaded()
+    (window as any).easyPackAsyncInit = () => {
+      this.openMap()
+      this.setEasyPackAsLoaded()
     }
   }
 
-  openMap (openWidget: boolean = true) {
-    const self = this
-    this.isNeedMapRender('easypack-map');
+  destroyed () {
+    (window as any).easyPack = {}
+  }
+
+  openMap () {
     (window as any).easyPack.init({
       defaultLocale: 'pl',
       mapType: 'osm',
@@ -408,21 +420,20 @@ export default class Summary extends Vue {
         googleKey: 'AIzaSyCUBttKx4hbiP81yPkR_aV0N8jA1750OLc'
       }
     });
-    (window as any).easyPack.mapWidget('easypack-map', function (point: any) {
-      self.setInpostData(point)
+    (window as any).easyPack.mapWidget('easypack-map', (point: any) => {
+      this.setInpostData(point)
     })
-    if (openWidget) {
-      this.showInpostMap = true
-    }
-  }
-
-  isNeedMapRender (name: string) {
-    const node = document.getElementById(name)
-    if (node) {
-      while (node.childNodes.length > 0) {
-        node.removeChild(node.childNodes[0])
-      }
-    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.hide-map {
+  visibility: hidden;
+  ::v-deep .map-widget {
+    visibility: hidden !important;
+    height: 0 ;
+  }
+}
+
+</style>
