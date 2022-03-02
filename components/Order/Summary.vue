@@ -93,8 +93,8 @@
                                 v-model="deliveryMethod"
                                 type="radio"
                                 name="shipment-group"
-                                :checked="deliveryMethod === type.id"
                                 :value="type.id"
+                                @click="handleChangeDeliveryMethod(type.id)"
                               >
                               <label
                                 class="corner-picker"
@@ -304,14 +304,16 @@ export default class Summary extends Vue {
       label: `
         <span class="type">Kurier</span>
         <img src="https://kapkap.eu/static/media/logo-paczkomaty-inpost-kurier.f596ebe0.png" alt="inpost"/>
-      `
+      `,
+      checked: 'checked'
     },
     {
       id: 'PACZKOMATY',
       label: `
         <span class="type">Paczkomaty</span>
         <img src="https://kapkap.eu/static/media/logo-paczkomaty-inpost-kurier.f596ebe0.png" alt="inpost"/>
-      `
+      `,
+      checked: ''
     }
   ];
 
@@ -345,6 +347,10 @@ export default class Summary extends Vue {
 
   addCoupon () {
     this.applyCoupon(this.coupon)
+  }
+
+  handleChangeDeliveryMethod (method: string) {
+    this.$set(this.delivery, 'method', method)
   }
 
   async sendOrder () {
