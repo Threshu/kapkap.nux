@@ -120,7 +120,7 @@
                           </div>
                           <div
                             id="inpost-geo"
-                            :class="{ 'hide-map': !visibility}"
+                            :class="{ 'hide-map': !isMapVisible}"
                             data-duration="180"
                             data-height="300"
                           >
@@ -228,7 +228,7 @@ export default class Summary extends Vue {
   @Action('basket/applyCoupon') applyCoupon!: Function
   @Action('order/makeOrder') makeOrder!: Function
 
-  get visibility (): boolean {
+  get isMapVisible (): boolean {
     return this.delivery.method === 'PACZKOMATY'
   }
 
@@ -436,9 +436,10 @@ export default class Summary extends Vue {
 <style lang="scss" scoped>
 .hide-map {
   visibility: hidden;
+  height: 0;
   ::v-deep .map-widget {
     visibility: hidden !important;
-    height: 0 ;
+    height: 0;
   }
 }
 

@@ -8,6 +8,14 @@
     "link": "/kubki"
   },
   {
+    "link": "/personalizacja",
+    "title": "Personalizacja"
+  },
+  {
+    "link": "/blog/blog-leftsidebar",
+    "title": "Blog"
+  },
+  {
     "link": "/kontakt",
     "title": "Kontakt"
   }
