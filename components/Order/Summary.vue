@@ -303,7 +303,7 @@ export default class Summary extends Vue {
       id: 'INPOST_COURIER',
       label: `
         <span class="type">Kurier</span>
-        <img src="https://kapkap.eu/static/media/logo-paczkomaty-inpost-kurier.f596ebe0.png" alt="inpost"/>
+        <img src="/images/logo-paczkomaty-inpost-kurier.png" alt="inpost"/>
       `,
       checked: 'checked'
     },
@@ -311,7 +311,7 @@ export default class Summary extends Vue {
       id: 'PACZKOMATY',
       label: `
         <span class="type">Paczkomaty</span>
-        <img src="https://kapkap.eu/static/media/logo-paczkomaty-inpost-kurier.f596ebe0.png" alt="inpost"/>
+        <img src="/images/logo-paczkomaty-inpost-kurier.png" alt="inpost"/>
       `,
       checked: ''
     }
@@ -321,7 +321,7 @@ export default class Summary extends Vue {
     {
       id: 'ONLINE',
       label: `
-        <img src="https://kapkap.eu/static/media/Przelewy24_logo.37ea72ff.svg" alt='payment online'/>
+        <img src="/images/Przelewy24_logo.svg" alt='payment online'/>
         <div class="type payment">Płatność on-line</div>
       `
     },
