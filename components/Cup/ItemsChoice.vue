@@ -291,7 +291,7 @@ export default class ItemsChoice extends Vue {
 
   pushObject (type: any, editIndex: any) {
     this.tempObject.type = type
-    if (editIndex) {
+    if (editIndex !== false) {
       this.setItem({ index: editIndex, item: this.tempObject })
     } else {
       this.setItem({ index: this.items.length, item: this.tempObject })
