@@ -15,7 +15,7 @@
           @click="onSwitchNav"
         >
           <div class="mobile-back text-right">
-            <span>Back</span>
+            <span>Wróć</span>
             <i class="fa fa-angle-right pl-2" aria-hidden="true" />
           </div>
         </li>

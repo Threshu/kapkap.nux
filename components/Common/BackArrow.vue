@@ -1,7 +1,7 @@
 <template>
   <div class="back-arrow">
     <span class="back" @click="$emit('backClick' )">
-      <i class="fa fa-angle-left" aria-hidden="true" /> back
+      <i class="fa fa-angle-left" aria-hidden="true" /> wróć
     </span>
   </div>
 </template>
