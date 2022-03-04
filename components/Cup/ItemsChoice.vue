@@ -279,6 +279,26 @@ export default class ItemsChoice extends Vue {
       hairColor: 'black',
       hairstyleId: ''
     }
+
+    let hairstyle: any
+    let pet: any
+    switch (this.popupData.type) {
+      case 'man':
+      case 'woman':
+        hairstyle = Object.values(this.popupData?.hairstyles?.[this.tempObject.hairColor] || {})
+        if (hairstyle?.[0]?.[0] && this.popupData?.bodies?.[0]) {
+          this.setFigure(this.popupData.bodies[0].bodyId, this.popupData.bodies[0].bodyImageUrl)
+          this.setHairStyle(hairstyle[0][0].hairstyleId)
+        }
+        break
+      case 'cat':
+      case 'dog':
+        pet = Object.values(this.popupData)
+        if (pet?.[0]?.[0]) {
+          this.setPet(pet[0][0].variantId, pet[0][0].id, pet[0][0].imageUrl)
+        }
+        break
+    }
   }
 
   newCupObject (data: Object, type: String) {
@@ -334,6 +354,12 @@ export default class ItemsChoice extends Vue {
 
   setHairColor (color: string) {
     this.tempObject.hairColor = color
+
+    const hairstyle: any = Object.values(this.popupData?.hairstyles?.[this.tempObject.hairColor] || {})
+    if (hairstyle?.[0]?.[0] && this.popupData?.bodies?.[0]) {
+      this.setFigure(this.popupData.bodies[0].bodyId, this.popupData.bodies[0].bodyImageUrl)
+      this.setHairStyle(hairstyle[0][0].hairstyleId)
+    }
   }
 
   setFigure (bodyId: string, bodyImageUrl: string) {
@@ -341,10 +367,10 @@ export default class ItemsChoice extends Vue {
     this.tempObject.bodyImageUrl = bodyImageUrl
   }
 
-  setPet (variantId: any, id: any, bodyImageUrl: any) {
+  setPet (variantId: any, id: any, petImageUrl: any) {
     this.tempObject.id = id
     this.tempObject.variantId = variantId
-    this.tempObject.bodyImageUrl = bodyImageUrl
+    this.tempObject.bodyImageUrl = petImageUrl
   }
 
   setHairStyle (hairstyleId: string) {
