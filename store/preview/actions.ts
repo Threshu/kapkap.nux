@@ -39,7 +39,15 @@ export default {
     commit('incPreviewRequestNumber')
     const currentPreviewRequestNumber = getters.previewRequestNumber
 
-    const result = await $axios.post('/preview', apiData)
+    let result: any
+    try {
+      result = await $axios.post('/preview', apiData)
+    } catch {
+      commit('setLoader', false)
+      commit('setLoadCounter', 0)
+      result = false
+    }
+
     if (result?.data && currentPreviewRequestNumber === getters.previewRequestNumber) {
       commit('setLoader', getters.frontImage !== result.data.frontImageUrl)
       commit('setLoadCounter', 0)
