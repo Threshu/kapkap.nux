@@ -17,9 +17,10 @@
               </div>
             </div>
             <div class="product-detail">
-<!--              <RatingStars active="5" />-->
+              <!--              <RatingStars active="5" />-->
               <h6>{{ product.title }}</h6>
-              <h4>{{ product.price | currency }}
+              <h4>
+                {{ product.price | currency }}
                 <del>{{ (product.price + 10) | currency }}</del>
               </h4>
             </div>
@@ -41,7 +42,7 @@ export default class ProductsList extends Vue {
   @Prop({ default: [] }) readonly products!: Product[]
 
   handleItemClick (product: Product) {
-    this.$emit('addLastVisited', product)
+    this.$emit('addLastVisited', { addDate: new Date(), product })
   }
 }
 </script>
