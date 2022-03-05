@@ -1,7 +1,7 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
-  ssr: false,
+  target: 'server',
+  ssr: true,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -122,5 +122,9 @@ export default {
     companyZip: process.env.COMPANY_ZIP,
     companyCity: process.env.COMPANY_CITY,
     companyMail: process.env.COMPANY_MAIL
+  },
+
+  server: {
+    port: process.env.PORT
   }
 }
