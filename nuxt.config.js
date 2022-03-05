@@ -18,7 +18,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preconnect', href: process.env.SITE_URL },
+      { rel: 'preconnect', href: process.env.SITE_URL }
     ]
   },
   router: {
@@ -125,6 +125,7 @@ export default {
   },
 
   server: {
+    host: '0.0.0.0',
     port: process.env.PORT
   }
 }
