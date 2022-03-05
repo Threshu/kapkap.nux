@@ -1,7 +1,7 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
-  ssr: false,
+  target: 'server',
+  ssr: true,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -18,7 +18,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preconnect', href: process.env.SITE_URL },
+      { rel: 'preconnect', href: process.env.SITE_URL }
     ]
   },
   router: {
@@ -122,5 +122,10 @@ export default {
     companyZip: process.env.COMPANY_ZIP,
     companyCity: process.env.COMPANY_CITY,
     companyMail: process.env.COMPANY_MAIL
+  },
+
+  server: {
+    host: '0.0.0.0',
+    port: process.env.PORT
   }
 }
