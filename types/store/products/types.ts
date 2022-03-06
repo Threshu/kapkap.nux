@@ -8,9 +8,14 @@ export type Product = {
   title: string
 }
 
+export type LastVisited = {
+  product: Product
+  addDate: string
+}
+
 export type ProductsState = {
   path: string
   products: Product[]
   success: boolean
-  lastVisited: Record<string, Product>
+  lastVisited: LastVisited[]
 }

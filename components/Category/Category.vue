@@ -46,7 +46,7 @@ import CategoryMenu from '~/components/Category/CategoryMenu.vue'
 import ProductsList from '~/components/Category/ItemList.vue'
 import TopBanner from '~/components/Category/TopBanner.vue'
 import { Category as CategoryType } from '~/types/store/categories/types'
-import { Product } from '~/types/store/products/types'
+import { LastVisited, Product } from '~/types/store/products/types'
 
 @Component({
   components: {
@@ -86,8 +86,8 @@ export default class Category extends Vue {
     return category ?? null
   }
 
-  handleAddLastVisited (product: Product) {
-    this.$store.dispatch('products/addLastVisited', product)
+  handleAddLastVisited (item: LastVisited) {
+    this.$store.dispatch('products/addLastVisited', item)
   }
 }
 </script>

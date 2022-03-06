@@ -9,14 +9,9 @@ const localStorageService = {
     return null
   },
 
-  setObjectData: (key: string, value: Record<string, any>) => {
+  setData: (key: string, value: Record<string, any>) => {
     if (process.client) {
-      const item = localStorageService.getData(key)
-      const combined = {
-        ...item ?? {},
-        ...value
-      }
-      const str = JSON.stringify(combined)
+      const str = JSON.stringify(value)
       localStorage.setItem(key, str)
     }
   }

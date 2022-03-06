@@ -1,9 +1,11 @@
 import { ActionContext } from 'vuex/types'
 import { $axios } from '~/utils/api'
 import localStorageService from '~/services/localStorageService'
-import { Product, ProductsState } from '~/types/store/products/types'
+import { LastVisited, ProductsState } from '~/types/store/products/types'
 import { Category } from '~/types/store/categories/types'
 import { RootState } from '~/types/store/root'
+
+const MAX_STORAGE_ITEMS = 4
 
 export const loadProducts = async ({
   commit,
@@ -26,16 +28,29 @@ export const loadProducts = async ({
 }
 
 export const loadLastVisited = async ({ commit }: ActionContext<ProductsState, RootState>) => {
-  const res = await localStorageService.getData('lastVisited') ?? {}
-  for (const [key, _] of Object.entries(res)) {
-    commit('setLastVisited', res[key])
-  }
+  const res = await localStorageService.getData('lastVisited') ?? []
+  res.forEach((i: LastVisited) => commit('setLastVisited', i))
 }
 
 export const addLastVisited = (
   { commit }: ActionContext<ProductsState, RootState>,
-  payload: Product
+  { product, addDate }: LastVisited
 ) => {
-  localStorageService.setObjectData('lastVisited', { [payload.productId]: payload })
-  commit('setLastVisited', payload)
+  const item = {
+    addDate,
+    product
+  }
+  const storageItems = localStorageService.getData('lastVisited') ?? []
+  const productIndex = storageItems.findIndex((i: LastVisited) => i.product.productId === item.product.productId)
+  const items = [...storageItems]
+  if (productIndex > -1) {
+    items[productIndex].addDate = addDate
+  } else {
+    items.push(item)
+  }
+
+  // @ts-ignore
+  const sorted = items.sort((a, b) => new Date(b.addDate) - new Date(a.addDate))
+  localStorageService.setData('lastVisited', sorted.slice(0, MAX_STORAGE_ITEMS))
+  commit('setLastVisited', item)
 }
