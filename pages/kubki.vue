@@ -34,7 +34,7 @@ export default class Cups extends Vue {
     }
   }
 
-  async created () {
+  async fetch () {
     // if (process.server) {
     const categories = this.$store.dispatch('categories/loadCategories')
     const lastVisited = this.$store.dispatch('products/loadLastVisited')
