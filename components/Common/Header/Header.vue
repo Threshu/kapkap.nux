@@ -74,8 +74,7 @@ export default class Header extends MobileSupport {
     this.showMessage = !(this.$route.fullPath.match(/^\/(?:kubek|edytuj-produkt)/) && this.isMobile)
   }
 
-  mounted () {
-    window.addEventListener('scroll', this.handleScroll)
+  created () {
     if (this.isLoaded) {
       this.processMessages()
     } else {
@@ -85,6 +84,10 @@ export default class Header extends MobileSupport {
         }
       })
     }
+  }
+
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
   }
 
   processMessages () {

@@ -70,7 +70,7 @@ export default class Cup extends Vue {
   // old
   showConf = true
 
-  async mounted () {
+  async created () {
     this.setEditMode(this.editMode)
     let productId
     if (this.editMode) {

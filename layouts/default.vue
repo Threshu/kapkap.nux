@@ -15,7 +15,7 @@ import Footer from '@/components/Common/Footer/Footer'
 export default {
   components: { Footer, Header, Popup },
 
-  head() {
+  head () {
     return {
       link: [
         {
@@ -26,7 +26,7 @@ export default {
     }
   },
 
-  async mounted () {
+  async created () {
     await this.$store.dispatch('defaults/load')
   }
 }

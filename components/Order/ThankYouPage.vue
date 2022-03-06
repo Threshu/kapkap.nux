@@ -124,7 +124,7 @@ export default class ThankYou extends Vue {
   CheckDate: any = this.current.toLocaleDateString('pl-PL', this.options).toString()
   deliveryDate: any = this.nextDay.toLocaleDateString('pl-PL', this.options).toString()
 
-  async mounted () {
+  async created () {
     this.order = await this.getOrder()
   }
 

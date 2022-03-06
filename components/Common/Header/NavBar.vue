@@ -124,7 +124,7 @@ export default class NavBar extends Vue {
   mobileNav = false
   isMenuOpened = false
 
-  mounted () {
+  created () {
     this.menuOptions = menu
   }
 
@@ -141,7 +141,7 @@ export default class NavBar extends Vue {
   setOverlayShown (show: boolean) {
     const size: any = useWindowSize()
     if (size.width.value > 1200) {
-      if (show === true) {
+      if (show) {
         this.$emit('showOverlay')
         this.isMenuOpened = true
       } else {
