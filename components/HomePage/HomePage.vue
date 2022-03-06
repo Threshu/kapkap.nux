@@ -377,9 +377,7 @@ export default class HomePage extends Vue {
     }]
   }
 
-  mounted () {
-    const location = useBrowserLocation()
-    this.location = location.value.href
+  created () {
     this.topSlider = ((arr) => {
       const newArr = arr.slice()
       for (let i = newArr.length - 1; i > 0; i--) {
@@ -391,6 +389,11 @@ export default class HomePage extends Vue {
     this.news = newsJSON
     this.quotes = quotesJSON
     this.faqs = faqJSON
+  }
+
+  mounted () {
+    const location = useBrowserLocation()
+    this.location = location.value.href
   }
 
   changeSelectedFaq (faqIndex) {

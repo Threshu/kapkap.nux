@@ -34,7 +34,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 export default class NewsletterSuccessPage extends Vue {
   @Prop({ type: String, required: true }) hash!: string
 
-  async mounted () {
+  async created () {
     try {
       await this.$axios.post(`/newsletter/${this.hash}`)
     } catch (err) {

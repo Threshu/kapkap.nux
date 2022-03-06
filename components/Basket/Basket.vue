@@ -310,7 +310,7 @@ export default class Basket extends Vue {
     this.$router.push('/edytuj-produkt/' + this.basket.products[index].productId)
   }
 
-  mounted () {
+  created () {
     this.loadBasket()
 
     if (this.isLoaded) {

@@ -36,7 +36,7 @@ export default class LogoImage extends Vue {
     return this.$store.state.defaults.defaultPetImageUrl
   }
 
-  mounted () {
+  created () {
     this.petImage = this.petUrl
 
     this.$store.watch(state => state.defaults.status, (newValue: string) => {

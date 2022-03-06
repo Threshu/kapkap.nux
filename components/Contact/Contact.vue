@@ -193,7 +193,7 @@ export default class Contact extends Vue {
       this.mMessage = 'Odpowiemy na tę wiadomość w ciągu paru godzin.<br/> Wysłaliśmy również potwierdzenie ' +
                 'wysłania tej wiadomości na twój adres e-mail.'
       this.mTitle = 'Dziękujemy za kontakt'
-    } catch (err) {
+    } catch (err: any) {
       this.showModal = true
       this.mMessage = err.message
       this.mTitle = 'Wystąpił błąd'

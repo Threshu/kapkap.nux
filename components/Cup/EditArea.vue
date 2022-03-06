@@ -75,7 +75,7 @@ export default class EditArea extends Vue {
   showModal = false
   showEditModal = false
 
-  mounted () {
+  created () {
     this.confMenu = this.menu
   }
 

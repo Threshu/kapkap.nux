@@ -46,7 +46,7 @@ export default class Faq extends Vue {
   faqs: any = []
   selectedFaq: number = 0
 
-  mounted () {
+  created () {
     this.faqs = faqJSON
   }
 
