@@ -34,12 +34,12 @@ export default class Cups extends Vue {
     }
   }
 
-  fetch (): Promise<any> {
+  async created () {
     // if (process.server) {
     const categories = this.$store.dispatch('categories/loadCategories')
     const lastVisited = this.$store.dispatch('products/loadLastVisited')
     const products = this.loadProducts()
-    return Promise.all([categories, lastVisited, products])
+    await Promise.all([categories, lastVisited, products])
   }
 
   @Watch('$route')
