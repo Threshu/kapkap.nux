@@ -22,13 +22,13 @@
 
       <div>
         <CupChoice
-          v-show="confMenu === 1"
+          v-show="confMenu === 3"
         />
         <BackgroundChoice
           v-if="confMenu === 2"
         />
         <ItemsChoice
-          v-if="confMenu === 3"
+          v-if="confMenu === 1"
           :edit-mode="editMode"
           @changeModal="changeModal"
           @changeEditModal="changeEditModal"
