@@ -26,7 +26,7 @@ export default {
     }
   },
 
-  async created () {
+  async beforeMount () {
     await this.$store.dispatch('defaults/load')
   }
 }
