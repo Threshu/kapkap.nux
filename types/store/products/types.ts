@@ -9,6 +9,7 @@ export type Product = {
 }
 
 export type ProductsState = {
+  path: string
   products: Product[]
   success: boolean
   lastVisited: Record<string, Product>

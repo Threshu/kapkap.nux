@@ -8,5 +8,8 @@ export default {
   setLastVisited (state: ProductsState, product: Product) {
     const item = { [product.productId]: product }
     state.lastVisited = { ...state.lastVisited, ...item }
+  },
+  setPath (state: ProductsState, path: string) {
+    state.path = path
   }
 }

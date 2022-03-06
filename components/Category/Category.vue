@@ -23,7 +23,7 @@
                     <TopBanner :title="title" :description="description" />
                     <div class="collection-product-wrapper">
                       <div class="product-wrapper-grid">
-                        <ProductsList :products="prod" @addLastVisited="handleAddLastVisited" />
+                        <ProductsList @addLastVisited="handleAddLastVisited" />
                       </div>
                     </div>
                   </div>
@@ -61,7 +61,6 @@ import { Product } from '~/types/store/products/types'
 export default class Category extends Vue {
   @Getter('categories/categories') categories!: CategoryType[]
   @Getter('products/lastVisited') lastVisited!: Product[]
-  @Getter('products/products') products!: Product[]
 
   staticDescription = 'Stwórz własny kubek w parę minut. Dodawaj dowolną liczbę osób dodając własną fryzurę\n' +
     '        oraz rysunek postaci, wybierając wśród wielu szablonów kobiet i mężczyzn.\n' +
@@ -70,10 +69,6 @@ export default class Category extends Vue {
     '        po wybraniu jednego z produktów.'
 
   staticTitle = 'Personalizowane kubki'
-
-  get prod (): Product[] {
-    return this.products
-  }
 
   get title (): string {
     const category = this.findCategoryItem()

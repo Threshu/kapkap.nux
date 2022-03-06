@@ -31,14 +31,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Vue } from 'nuxt-property-decorator'
 import RatingStars from '~/components/Common/RatingStars.vue'
 import { Product } from '~/types/store/products/types'
 @Component({
   components: { RatingStars }
 })
 export default class ProductsList extends Vue {
-  @Prop({ default: [] }) readonly products!: Product[]
+  @Getter('products/products') products!: Product[]
 
   handleItemClick (product: Product) {
     this.$emit('addLastVisited', product)

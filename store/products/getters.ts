@@ -9,5 +9,6 @@ export default {
       .keys(lastVisited).reduce((acc: Product[], curr) => {
         return [...acc, lastVisited[curr]]
       }, [])
-  }
+  },
+  path: (state: ProductsState) => state.path
 }
