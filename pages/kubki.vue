@@ -38,8 +38,8 @@ export default class Cups extends Vue {
     // if (process.server) {
     const categories = this.$store.dispatch('categories/loadCategories')
     const lastVisited = this.$store.dispatch('products/loadLastVisited')
-    const products = this.loadProducts()
-    await Promise.all([categories, lastVisited, products])
+    await Promise.all([categories, lastVisited])
+    await this.loadProducts()
   }
 
   @Watch('$route')
@@ -47,9 +47,9 @@ export default class Cups extends Vue {
     await this.loadProducts()
   }
 
-  loadProducts (): Promise<any> {
+  async loadProducts () {
     const { path } = this.$route
-    return this.$store.dispatch('products/loadProducts', path)
+    await this.$store.dispatch('products/loadProducts', path)
   }
 }
 </script>
