@@ -29,7 +29,11 @@ export const loadProducts = async ({
 
 export const loadLastVisited = async ({ commit }: ActionContext<ProductsState, RootState>) => {
   const res = await localStorageService.getData('lastVisited') ?? []
-  res.forEach((i: LastVisited) => commit('setLastVisited', i))
+  if (!Array.isArray(res)) {
+    localStorageService.setData('lastVisited', [])
+  } else {
+    res.forEach((i: LastVisited) => commit('setLastVisited', i))
+  }
 }
 
 export const addLastVisited = (
