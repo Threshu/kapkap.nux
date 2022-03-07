@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Getter, Vue } from 'nuxt-property-decorator'
+import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import FilterBtn from '~/components/Category/FilterBtn.vue'
 import ThemeCard from '~/components/Category/ThemeCard.vue'
@@ -61,6 +61,8 @@ import { LastVisited, Product } from '~/types/store/products/types'
 export default class Category extends Vue {
   @Getter('categories/categories') categories!: CategoryType[]
   @Getter('products/lastVisited') lastVisited!: Product[]
+  @Getter('products/products') products!: Product[]
+  @Mutation('products/addLastVisited') addLastVisited!: Function
 
   staticDescription = 'Stwórz własny kubek w parę minut. Dodawaj dowolną liczbę osób dodając własną fryzurę\n' +
     '        oraz rysunek postaci, wybierając wśród wielu szablonów kobiet i mężczyzn.\n' +
@@ -87,7 +89,7 @@ export default class Category extends Vue {
   }
 
   handleAddLastVisited (item: LastVisited) {
-    this.$store.dispatch('products/addLastVisited', item)
+    this.addLastVisited(item)
   }
 }
 </script>
