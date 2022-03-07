@@ -35,6 +35,10 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    console.log(window.innerWidth)
+    document.getElementsByTagName("html")[0].classList.add('no-scroll')
   }
 }
 </script>
