@@ -1,3 +1,7 @@
+.no-scroll {
+	overflow: hidden;
+}
+
 .overflow {
 	position: absolute;
 	background: #000;
@@ -1138,7 +1142,7 @@
 						.objectsList {
 							display: block;
 							overflow: auto;
-						    max-height: calc(65vh - 320px);
+						    max-height: calc(75vh - 320px);
 						    padding-bottom: 20px;
 
 						    &::-webkit-scrollbar-track {
@@ -1425,7 +1429,7 @@
 
 						.productPreview {
 							margin-top: 0;
-							height: 35vh;
+							height: 25vh;
 							padding-bottom: 20px;
 							position: relative;
 
