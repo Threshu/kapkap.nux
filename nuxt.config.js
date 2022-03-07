@@ -61,7 +61,8 @@ export default {
     // https://go.nuxtjs.dev/stylelint
     // '@nuxtjs/stylelint-module'
     '@nuxtjs/google-fonts',
-    'nuxt-compress'
+    'nuxt-compress',
+    '@nuxtjs/google-analytics'
   ],
 
   googleFonts: {
@@ -127,5 +128,9 @@ export default {
   server: {
     host: '0.0.0.0',
     port: process.env.PORT
+  },
+
+  googleAnalytics: {
+    id: 'UA-194230785-1'
   }
 }
