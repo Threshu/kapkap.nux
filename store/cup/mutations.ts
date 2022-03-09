@@ -14,6 +14,7 @@ import {
   HairstyleStyle
 } from '~/store/cup/state'
 import { Product as CartProduct } from '~/store/basket/state'
+import sessionStorageService from '~/services/sessionStorage'
 
 function randomIntFromInterval (min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -64,7 +65,6 @@ export default {
   },
 
   setQuote (state: EditorState, quoteId: string) {
-
     if (state.workingObject.quoteId === quoteId) {
       quoteId = ''
     }
@@ -129,6 +129,11 @@ export default {
   },
 
   prepareRandomProduct (state: EditorState) {
+    const data = sessionStorageService.getData(`workingProduct-${state.product?.productId}`)
+    if (data) {
+      state.workingObject = data.workingObject
+      return
+    }
     const count = randomIntFromInterval(2, 4)
     let randBody: number
     let randHair: number

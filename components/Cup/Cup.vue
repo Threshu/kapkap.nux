@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Breadcrumb v-if="false" title="Kreator kubka" />
     <section class="categoryBox">
       <div class="collection-wrapper productBoxBg">
         <div class="container">
@@ -22,7 +21,6 @@
           </div>
         </div>
       </div>
-      <RelatedProducts v-if="false" />
     </section>
   </div>
 </template>
@@ -31,13 +29,11 @@
 import { Component, Action, Vue, Prop, Mutation, Getter } from 'nuxt-property-decorator'
 import EditArea from '~/components/Cup/EditArea.vue'
 import Preview from '~/components/Cup/Preview.vue'
-import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
 import { BasketContainer } from '~/store/basket/state'
-import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 
 @Component({
   components: {
-    EditArea, Preview, RelatedProducts, Breadcrumb
+    EditArea, Preview
   }
 })
 export default class Cup extends Vue {
