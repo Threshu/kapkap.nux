@@ -35,7 +35,7 @@
             <button class="cancelRemove" @click="cancelRemove">
               Anuluj
             </button>
-            <button class="acceptRemove" @click="removeItem(index, true)">
+            <button class="acceptRemove" @click="removeItemFn(index)">
               Usuń
             </button>
           </div>
@@ -383,6 +383,11 @@ export default class ItemsChoice extends Vue {
 
   cancelRemove () {
     this.removeItemIndex = -1
+  }
+
+  removeItemFn (index: number) {
+    this.removeItem(index, true)
+    this.cancelRemove()
   }
 
   getHairstyleImage (item: WorkingItem): string {
