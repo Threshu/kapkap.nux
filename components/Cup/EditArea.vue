@@ -59,7 +59,7 @@ import BackgroundChoice from '~/components/Cup/BackgroundChoice.vue'
 import ItemsChoice from '~/components/Cup/ItemsChoice.vue'
 import QuoteChoice from '~/components/Cup/QuoteChoice.vue'
 import Summary from '~/components/Cup/Summary.vue'
-
+import { Side } from '~/store/preview/state'
 @Component({
   components: {
     CupChoice, BackgroundChoice, ItemsChoice, QuoteChoice, Summary
@@ -90,9 +90,9 @@ export default class EditArea extends Vue {
   openCupItems (id: number) {
     this.confMenu = id
     if (id === 4) {
-      this.setActivePreview('back')
+      this.setActivePreview(Side.Back)
     } else {
-      this.setActivePreview('front')
+      this.setActivePreview(Side.Front)
     }
   }
 
