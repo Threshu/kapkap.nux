@@ -52,7 +52,7 @@
 </template>
 
 <script  lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Mutation, Vue } from 'nuxt-property-decorator'
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'
 import CupChoice from '~/components/Cup/CupChoice.vue'
 import BackgroundChoice from '~/components/Cup/BackgroundChoice.vue'
@@ -70,7 +70,7 @@ export default class EditArea extends Vue {
   @Prop(Boolean) readonly editMode!: boolean
   @Prop(String) readonly cartItemId!: string
   @Prop(Number) readonly menu!: number
-
+  @Mutation('preview/setActivePreview') setActivePreview!: Function
   confMenu = 1
   showModal = false
   showEditModal = false
@@ -89,6 +89,11 @@ export default class EditArea extends Vue {
 
   openCupItems (id: number) {
     this.confMenu = id
+    if (id === 4) {
+      this.setActivePreview('back')
+    } else {
+      this.setActivePreview('front')
+    }
   }
 
   changeConfMenu (id: number) {
