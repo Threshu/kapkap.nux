@@ -4,19 +4,19 @@
       <div class="confMenu">
         <div
           :class="`confMenu1 ${confMenu === 1 ? 'active' : ''}`"
-          @click="openCupItems(1)"
+          @click="changeConfMenu(1)"
         />
         <div
           :class="`confMenu2 ${confMenu === 2 ? 'active' : ''}`"
-          @click="openCupItems(2)"
+          @click="changeConfMenu(2)"
         />
         <div
           :class="`confMenu3 ${confMenu === 3 ? 'active' : ''}`"
-          @click="openCupItems(3)"
+          @click="changeConfMenu(3)"
         />
         <div
           :class="`confMenu4 ${confMenu === 4 ? 'active' : ''}`"
-          @click="openCupItems(4)"
+          @click="changeConfMenu(4)"
         />
       </div>
 
@@ -87,17 +87,13 @@ export default class EditArea extends Vue {
     this.showEditModal = value
   }
 
-  openCupItems (id: number) {
+  changeConfMenu (id: number) {
     this.confMenu = id
     if (id === 4) {
       this.setActivePreview(Side.Back)
     } else {
       this.setActivePreview(Side.Front)
     }
-  }
-
-  changeConfMenu (id: number) {
-    this.confMenu = id
   }
 }
 </script>
