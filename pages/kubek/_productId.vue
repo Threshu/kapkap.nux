@@ -41,7 +41,7 @@ export default class CupView extends Vue {
         }
       ]
     }
-  },
+  }
 
   mounted () {
     if (process.client) {
