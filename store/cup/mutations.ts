@@ -128,7 +128,7 @@ export default {
     })
   },
 
-  prepareRandomProduct (state: EditorState) {
+  prepareProductForCup (state: EditorState) {
     const data = sessionStorageService.getData(`workingProduct-${state.product?.productId}`)
     if (data) {
       state.workingObject = data.workingObject
