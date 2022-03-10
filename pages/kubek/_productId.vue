@@ -7,13 +7,19 @@
 
 <script lang="ts">
 import { useBrowserLocation } from '@vueuse/core'
+import { Action, Component, Vue } from 'nuxt-property-decorator'
 
-export default {
-  components: { Cup: () => import(/* webpackChunkName: "Cup" */ '@/components/Cup/Cup.vue') },
-
+@Component({
+  components: {
+    Cup: () => import(/* webpackChunkName: "Cup" */ '@/components/Cup/Cup.vue')
+  },
   asyncData ({ params }: any) {
     return { productId: params.productId }
-  },
+  }
+})
+export default class CupView extends Vue {
+  @Action('cup/saveConfigurationForProduct') saveConfigurationForProduct!: Function
+  productId: string = ''
 
   head () {
     const location = useBrowserLocation()
@@ -42,6 +48,10 @@ export default {
       console.log(window.innerWidth)
       document.getElementsByTagName('html')[0].classList.add('no-scroll')
     }
+  }
+
+  destroyed () {
+    this.saveConfigurationForProduct(this.productId)
   }
 }
 </script>

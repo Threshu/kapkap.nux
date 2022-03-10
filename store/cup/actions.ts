@@ -2,9 +2,11 @@ import { ActionContext } from 'vuex/types'
 import { $axios } from '~/utils/api'
 import { Product as CartProduct } from '~/store/basket/state'
 import { EditorState } from '~/store/cup/state'
+import sessionStorageService from '~/services/sessionStorage'
+import { RootState } from '~/types/store/root'
 
 export default {
-  loadCups: async ({ commit }: any) => {
+  loadCups: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
       const res = await $axios.get('/cups')
       if (res) {
@@ -14,7 +16,7 @@ export default {
     }
   },
 
-  loadDogs: async ({ commit }: any) => {
+  loadDogs: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
       const res = await $axios.get('/dogs')
       if (res?.data?.pets) {
@@ -24,7 +26,7 @@ export default {
     }
   },
 
-  loadCats: async ({ commit }: any) => {
+  loadCats: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
       const res = await $axios.get('/cats')
       if (res?.data?.pets) {
@@ -34,7 +36,7 @@ export default {
     }
   },
 
-  loadMen: async ({ commit }: any) => {
+  loadMen: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
       const res = await $axios.get('/gender/male')
       if (res?.data) {
@@ -44,7 +46,7 @@ export default {
     }
   },
 
-  loadWomen: async ({ commit }: any) => {
+  loadWomen: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
       const res = await $axios.get('/gender/female')
       if (res?.data) {
@@ -54,7 +56,7 @@ export default {
     }
   },
 
-  loadProduct: async ({ commit }: any, productId: string) => {
+  loadProduct: async ({ commit }: ActionContext<EditorState, RootState>, productId: string) => {
     try {
       const res = await $axios.get('/product/' + productId)
       if (res?.data) {
@@ -64,47 +66,47 @@ export default {
     }
   },
 
-  setQuantity: ({ commit }: any, quantity: number) => {
+  setQuantity: ({ commit }: ActionContext<EditorState, RootState>, quantity: number) => {
     commit('setQuantity', quantity)
     commit('recalculateTotal')
   },
 
-  setCup: ({ commit, dispatch } : any, cupId: string) => {
+  setCup: ({ commit, dispatch } : ActionContext<EditorState, RootState>, cupId: string) => {
     commit('setCup', cupId)
     dispatch('preview/getProductPreview', null, { root: true })
   },
 
-  setBackground: ({ commit, dispatch } : any, backgroundId: string) => {
+  setBackground: ({ commit, dispatch } : ActionContext<EditorState, RootState>, backgroundId: string) => {
     commit('setBackground', backgroundId)
     dispatch('preview/getProductPreview', null, { root: true })
   },
 
-  setQuote: ({ commit, dispatch } : any, quoteId: string) => {
+  setQuote: ({ commit, dispatch } : ActionContext<EditorState, RootState>, quoteId: string) => {
     commit('setQuote', quoteId)
     dispatch('preview/getProductPreview', null, { root: true })
   },
 
-  moveItemUp: ({ commit, dispatch } : any, index: number) => {
+  moveItemUp: ({ commit, dispatch } : ActionContext<EditorState, RootState>, index: number) => {
     commit('moveItemUp', index)
     dispatch('preview/getProductPreview', null, { root: true })
   },
 
-  moveItemDown: ({ commit, dispatch } : any, index: number) => {
+  moveItemDown: ({ commit, dispatch } : ActionContext<EditorState, RootState>, index: number) => {
     commit('moveItemDown', index)
     dispatch('preview/getProductPreview', null, { root: true })
   },
 
-  removeItem: ({ commit, dispatch } : any, index: number) => {
+  removeItem: ({ commit, dispatch } : ActionContext<EditorState, RootState>, index: number) => {
     commit('removeItem', index)
     dispatch('preview/getProductPreview', null, { root: true })
   },
 
-  setItem: ({ commit, dispatch } : any, payload: any) => {
+  setItem: ({ commit, dispatch } : ActionContext<EditorState, RootState>, payload: any) => {
     commit('setItem', payload)
     dispatch('preview/getProductPreview', null, { root: true })
   },
 
-  loadProductFromCart: async ({ commit, dispatch, rootGetters } : ActionContext<EditorState, EditorState>, cartItemId: string): Promise<string> => {
+  loadProductFromCart: async ({ commit, dispatch, rootGetters } : ActionContext<EditorState, RootState>, cartItemId: string): Promise<string> => {
     await dispatch('basket/loadBasket', null, { root: true })
     const basket = rootGetters['basket/basket']
     const cartItem: CartProduct = basket.products.find((product: CartProduct) => product.cartItemId === cartItemId)
@@ -113,5 +115,10 @@ export default {
     commit('preview/setPreviewId', cartItem.previewId, { root: true })
 
     return cartItem.productId
+  },
+
+  saveConfigurationForProduct: ({ state }: ActionContext<EditorState, RootState>, productId: string): void => {
+    const data = { items: state.product.items, workingObject: state.workingObject }
+    sessionStorageService.setData(`workingProduct-${productId}`, data)
   }
 }
