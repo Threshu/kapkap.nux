@@ -311,7 +311,10 @@ export default class Basket extends Vue {
   }
 
   created () {
-    this.loadBasket()
+    if (process.client) {
+      this.loadBasket()
+      this.fetchCartPreviews()
+    }
 
     if (this.isLoaded) {
       this.fetchCartPreviews()

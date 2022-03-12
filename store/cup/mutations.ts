@@ -65,13 +65,26 @@ export default {
 
   setQuote (state: EditorState, quoteId: string) {
 
-    if (state.workingObject.quoteId === quoteId) {
+    if (state.workingObject.quoteId === quoteId && !state.editMode) {
       quoteId = ''
     }
 
     Vue.set(state.workingObject, 'quoteId', quoteId)
     if (state.editMode) {
-      Vue.set(state.workingObject.items[1], 'id', quoteId)
+      if (state.workingObject.items[1].type === 'quote') {
+        Vue.set(state.workingObject.items[1], 'id', quoteId)
+      } else {
+        let count = state.workingObject.items.length
+        if (state.workingObject.items[count-1].type==='quote') {
+          Vue.set(state.workingObject.items[count-1], 'id', quoteId)
+        } else {
+          state.workingObject.items.push({
+            'id': quoteId,
+            'type': 'quote'
+          })
+        }
+      }
+
     }
   },
 

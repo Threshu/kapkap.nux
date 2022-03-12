@@ -15,7 +15,6 @@ function basketItemToProduct (item: Product): ProductObject {
 
 async function changeItemPreview (commit: any, cartItem: Product) {
   const result = await $axios.post('/preview', basketItemToProduct(cartItem))
-
   commit('basket/setPreviewImage', {
     cartItemId: cartItem.cartItemId,
     frontImageUrl: result.data.frontImageUrl,
