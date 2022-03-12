@@ -51,7 +51,7 @@ export default class Cup extends Vue {
   @Getter('defaults/isLoaded') isLoaded!: boolean
   @Getter('basket/basket') basket!: BasketContainer
 
-  @Mutation('cup/prepareRandomProduct') prepareRandomProduct!: Function
+  @Mutation('cup/prepareProductForCup') prepareProductForCup!: Function
   @Mutation('cup/resetWorkingObject') resetWorkingObject!: Function
   @Mutation('cup/setEditMode') setEditMode!: Function
   @Mutation('cup/editWorkingObject') editWorkingObject!: Function
@@ -91,7 +91,7 @@ export default class Cup extends Vue {
         this.loadProduct(productId)
       ])
       if (!this.editMode) {
-        this.prepareRandomProduct()
+        this.prepareProductForCup()
       }
     }
 
