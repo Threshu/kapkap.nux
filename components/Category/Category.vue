@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Getter, Mutation, Vue } from 'nuxt-property-decorator'
+import { Action, Component, Getter, Mutation, Vue, Watch } from 'nuxt-property-decorator'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
 import FilterBtn from '~/components/Category/FilterBtn.vue'
 import ThemeCard from '~/components/Category/ThemeCard.vue'
@@ -62,7 +62,13 @@ export default class Category extends Vue {
   @Getter('categories/categories') categories!: CategoryType[]
   @Getter('products/lastVisited') lastVisited!: Product[]
   @Getter('products/products') products!: Product[]
-  @Mutation('products/addLastVisited') addLastVisited!: Function
+
+  @Mutation('products/setPath') setPath!: Function
+
+  @Action('products/addLastVisited') addLastVisited!: Function
+  @Action('categories/loadCategories') loadCategories!: Function
+  @Action('products/loadLastVisited') loadLastVisited!: Function
+  @Action('products/loadProducts') loadProductsInStore!: Function
 
   staticDescription = 'Stwórz własny kubek w parę minut. Dodawaj dowolną liczbę osób dodając własną fryzurę\n' +
     '        oraz rysunek postaci, wybierając wśród wielu szablonów kobiet i mężczyzn.\n' +
@@ -71,6 +77,28 @@ export default class Category extends Vue {
     '        po wybraniu jednego z produktów.'
 
   staticTitle = 'Personalizowane kubki'
+
+  async fetch () {
+    if (!(this.categories || []).length) {
+      await this.loadCategories()
+      await this.loadLastVisited()
+      await this.loadProducts()
+    }
+  }
+
+  mounted () {
+    this.setPath(this.$route)
+  }
+
+  @Watch('$route')
+  async handleRouterChange () {
+    await this.loadProducts()
+  }
+
+  async loadProducts () {
+    const { path } = this.$route
+    await this.loadProductsInStore(path)
+  }
 
   get title (): string {
     const category = this.findCategoryItem()
