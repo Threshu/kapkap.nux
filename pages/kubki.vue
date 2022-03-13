@@ -34,10 +34,11 @@ export default class Cups extends Vue {
     }
   }
 
-  fetch () {
+  async created () {
     const categories = this.$store.dispatch('categories/loadCategories')
     const lastVisited = this.$store.dispatch('products/loadLastVisited')
-    return Promise.all([categories, lastVisited, this.loadProducts()])
+    await Promise.all([categories, lastVisited])
+    await this.loadProducts()
   }
 
   beforeMount () {
@@ -49,9 +50,9 @@ export default class Cups extends Vue {
     await this.loadProducts()
   }
 
-  loadProducts () {
+  async loadProducts () {
     const { path } = this.$route
-    return this.$store.dispatch('products/loadProducts', path)
+    await this.$store.dispatch('products/loadProducts', path)
   }
 }
 </script>
