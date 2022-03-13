@@ -34,11 +34,13 @@ export default class Cups extends Vue {
     }
   }
 
-  async created () {
-    const categories = this.$store.dispatch('categories/loadCategories')
-    const lastVisited = this.$store.dispatch('products/loadLastVisited')
-    await Promise.all([categories, lastVisited])
-    await this.loadProducts()
+  async fetch () {
+    if (process.server) {
+      const categories = this.$store.dispatch('categories/loadCategories')
+      const lastVisited = this.$store.dispatch('products/loadLastVisited')
+      await Promise.all([categories, lastVisited])
+      await this.loadProducts()
+    }
   }
 
   beforeMount () {
