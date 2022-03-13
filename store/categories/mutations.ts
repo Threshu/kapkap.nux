@@ -1,8 +1,9 @@
 import { CategoriesState } from '~/types/store/categories/types'
+import { Vue } from 'nuxt-property-decorator'
 
 export default {
   setStateForCategories (state: CategoriesState, categories: CategoriesState) {
-    state.categories = categories.categories
-    state.success = categories.success
+    Vue.set(state, 'categories', categories.categories)
+    Vue.set(state, 'success', categories.success)
   }
 }

@@ -66,8 +66,6 @@ export default class Category extends Vue {
   @Mutation('products/setPath') setPath!: Function
 
   @Action('products/addLastVisited') addLastVisited!: Function
-  @Action('categories/loadCategories') loadCategories!: Function
-  @Action('products/loadLastVisited') loadLastVisited!: Function
   @Action('products/loadProducts') loadProductsInStore!: Function
 
   staticDescription = 'Stwórz własny kubek w parę minut. Dodawaj dowolną liczbę osób dodając własną fryzurę\n' +
@@ -78,16 +76,9 @@ export default class Category extends Vue {
 
   staticTitle = 'Personalizowane kubki'
 
-  async fetch () {
-    if (!(this.categories || []).length) {
-      await this.loadCategories()
-      await this.loadLastVisited()
-      await this.loadProducts()
-    }
-  }
-
-  mounted () {
+  async mounted () {
     this.setPath(this.$route)
+    await this.loadProducts()
   }
 
   @Watch('$route')

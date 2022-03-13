@@ -39,7 +39,7 @@ export default {
   },
 
   setWomen (state: EditorState, women: Women) {
-    state.women = women
+    Vue.set(state, 'women', women)
   },
 
   setProduct (state: EditorState, product: Product) {
