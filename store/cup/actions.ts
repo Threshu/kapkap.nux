@@ -8,7 +8,7 @@ import { RootState } from '~/types/store/root'
 export default {
   loadCups: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
-      const res = await $axios.get('/cups')
+      const res = await $axios.get('/v1/cups')
       if (res) {
         commit('setCups', res)
       }
@@ -18,7 +18,7 @@ export default {
 
   loadDogs: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
-      const res = await $axios.get('/dogs')
+      const res = await $axios.get('/v1/dogs')
       if (res?.data?.pets) {
         commit('setDogs', res.data.pets)
       }
@@ -28,7 +28,7 @@ export default {
 
   loadCats: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
-      const res = await $axios.get('/cats')
+      const res = await $axios.get('/v1/cats')
       if (res?.data?.pets) {
         commit('setCats', res.data.pets)
       }
@@ -38,7 +38,7 @@ export default {
 
   loadMen: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
-      const res = await $axios.get('/gender/male')
+      const res = await $axios.get('/v1/gender/male')
       if (res?.data) {
         commit('setMen', res.data)
       }
@@ -48,7 +48,7 @@ export default {
 
   loadWomen: async ({ commit }: ActionContext<EditorState, RootState>) => {
     try {
-      const res = await $axios.get('/gender/female')
+      const res = await $axios.get('/v1/gender/female')
       if (res?.data) {
         commit('setWomen', res.data)
       }
@@ -58,7 +58,7 @@ export default {
 
   loadProduct: async ({ commit }: ActionContext<EditorState, RootState>, productId: string) => {
     try {
-      const res = await $axios.get('/product/' + productId)
+      const res = await $axios.get('/v1/product/' + productId)
       if (res?.data) {
         commit('setProduct', res.data)
       }

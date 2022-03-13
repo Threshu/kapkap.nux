@@ -36,7 +36,7 @@ export default class NewsletterSuccessPage extends Vue {
 
   async created () {
     try {
-      await this.$axios.post(`/newsletter/${this.hash}`)
+      await this.$axios.post(`/v1/newsletter/${this.hash}`)
     } catch (err) {
       this.$root.$emit('popup', {
         title: 'Przepraszamy',

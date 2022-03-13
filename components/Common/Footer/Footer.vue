@@ -313,7 +313,7 @@ export default class Footer extends Vue {
 
   async addEmailToNewsletter () {
     try {
-      const res = await this.$axios.post('/newsletter', { email: this.email })
+      const res = await this.$axios.post('/v1/newsletter', { email: this.email })
       this.$root.$emit('popup', {
         title: 'Dziękujemy',
         message: 'Aby korzystać z newslettera aktywuj go z poziomu wiadomości e-mail, którą właśnie do ciebie wysłaliśmy.'
@@ -328,7 +328,7 @@ export default class Footer extends Vue {
 
   async acceptNewsletterRegulations (hash: any) {
     try {
-      const res = await this.$axios.post(`/newsletter/${hash}`)
+      const res = await this.$axios.post(`/v1/newsletter/${hash}`)
     } catch (err) {
       this.$root.$emit('popup', {
         title: 'Przepraszamy',

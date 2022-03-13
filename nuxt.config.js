@@ -43,6 +43,7 @@ export default {
     '~/plugins/preview.client.js',
     '~/plugins/jsonld',
     '~/plugins/axios-accessor',
+    '~/plugins/axios',
     '~/plugins/filters',
     { src: '~plugins/zoom', ssr: false }
   ],
@@ -112,7 +113,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.API_URL
+    proxy: true
   },
 
   env: {
@@ -132,5 +133,11 @@ export default {
 
   googleAnalytics: {
     id: 'UA-194230785-1'
+  },
+
+  proxy: {
+    '/v1/': {
+      target: process.env.API_URL
+    }
   }
 }
