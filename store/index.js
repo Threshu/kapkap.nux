@@ -4,7 +4,6 @@ export const actions = {
     if (matches?.length) {
       await dispatch('categories/loadCategories', null, { root: true })
       await dispatch('products/loadProducts', req.originalUrl, { root: true })
-      await dispatch('products/loadLastVisited', null, { root: true })
     }
   }
 }

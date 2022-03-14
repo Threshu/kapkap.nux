@@ -67,6 +67,8 @@ export default class Category extends Vue {
 
   @Action('products/addLastVisited') addLastVisited!: Function
   @Action('products/loadProducts') loadProductsInStore!: Function
+  @Action('categories/loadCategories') loadCategories!: Function
+  @Action('products/loadLastVisited') loadLastVisited!: Function
 
   staticDescription = 'Stwórz własny kubek w parę minut. Dodawaj dowolną liczbę osób dodając własną fryzurę\n' +
     '        oraz rysunek postaci, wybierając wśród wielu szablonów kobiet i mężczyzn.\n' +
@@ -78,6 +80,10 @@ export default class Category extends Vue {
 
   async mounted () {
     this.setPath(this.$route)
+    await this.loadLastVisited()
+    if (!this.categories?.length) {
+      await this.loadCategories()
+    }
     await this.loadProducts()
   }
 
