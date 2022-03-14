@@ -1,3 +1,4 @@
+import https from 'https'
 import axios from 'axios'
 
 export default {
@@ -146,8 +147,11 @@ export default {
 
   generate: {
     routes (callback) {
+      const agent = new https.Agent({
+        rejectUnauthorized: false
+      })
       axios
-        .get('https://api.kapkap.eu/v1/categories')
+        .get('https://api.kapkap.eu/v1/categories', { httpsAgent: agent })
         .then((res) => {
           const routes = res.data?.categories.map((category) => {
             return category.path
