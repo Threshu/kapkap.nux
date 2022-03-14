@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -139,6 +141,20 @@ export default {
   proxy: {
     '/v1/': {
       target: process.env.API_URL
+    }
+  },
+
+  generate: {
+    routes (callback) {
+      axios
+        .get('https://api.kapkap.eu/v1/categories')
+        .then((res) => {
+          const routes = res.data?.categories.map((category) => {
+            return category.path
+          })
+          callback(null, routes)
+        })
+        .catch(callback)
     }
   }
 }
