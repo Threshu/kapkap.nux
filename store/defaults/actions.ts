@@ -2,7 +2,7 @@ import { $axios } from '~/utils/api'
 
 export default {
   load: async ({ commit }: any) => {
-    const result = await $axios.$get('/defaults', {
+    const result = await $axios.$get('/v1/defaults', {
       headers: {
         token: localStorage.basketToken
       }

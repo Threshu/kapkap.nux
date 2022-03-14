@@ -182,7 +182,7 @@ export default class Contact extends Vue {
 
   async sendMessage () {
     try {
-      const test = await this.$axios.post("/contact/mail", {
+      const test = await this.$axios.post("/v1/contact/mail", {
         firstName: this.firstName,
         lastName: this.lastName,
         phoneNumber: this.phoneNumber,

@@ -3,15 +3,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'nuxt-property-decorator'
 import { useBrowserLocation } from '@vueuse/core'
 
-@Component({
+export default {
   components: {
     Category: () => import(/* webpackChunkName: "Category" */ '~/components/Category/Category.vue')
-  }
-})
-export default class Cups extends Vue {
+  },
   head () {
     const location = useBrowserLocation()
 
@@ -32,26 +29,6 @@ export default class Cups extends Vue {
         }
       ]
     }
-  }
-
-  fetch () {
-    const categories = this.$store.dispatch('categories/loadCategories')
-    const lastVisited = this.$store.dispatch('products/loadLastVisited')
-    return Promise.all([categories, lastVisited, this.loadProducts()])
-  }
-
-  beforeMount () {
-    this.$store.commit('products/setPath', this.$route)
-  }
-
-  @Watch('$route')
-  async handleRouterChange () {
-    await this.loadProducts()
-  }
-
-  loadProducts () {
-    const { path } = this.$route
-    return this.$store.dispatch('products/loadProducts', path)
   }
 }
 </script>

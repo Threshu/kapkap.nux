@@ -14,7 +14,8 @@ function basketItemToProduct (item: Product): ProductObject {
 }
 
 async function changeItemPreview (commit: any, cartItem: Product) {
-  const result = await $axios.post('/preview', basketItemToProduct(cartItem))
+  const result = await $axios.post('/v1/preview', basketItemToProduct(cartItem))
+
   commit('basket/setPreviewImage', {
     cartItemId: cartItem.cartItemId,
     frontImageUrl: result.data.frontImageUrl,
@@ -40,7 +41,7 @@ export default {
 
     let result: any
     try {
-      result = await $axios.post('/preview', apiData)
+      result = await $axios.post('/v1/preview', apiData)
     } catch {
       commit('setLoader', false)
       commit('setLoadCounter', 0)

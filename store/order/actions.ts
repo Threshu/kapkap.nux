@@ -5,7 +5,7 @@ export default {
     try {
       const token = localStorage.basketToken
       if (token) {
-        const res = await $axios.get('/order/' + token)
+        const res = await $axios.get('/v1/order/' + token)
         return res.data
       }
     } catch {
@@ -13,12 +13,12 @@ export default {
   },
 
   makeOrder: async ({ commit }: any, order: any) => {
-    const clientTime = new Date();
-    const formattedClientTime = clientTime.toISOString();
-    const res = await $axios.post('/order', {
-        clientTime: formattedClientTime,
-        token: localStorage.basketToken,
-        ...order,
+    const clientTime = new Date()
+    const formattedClientTime = clientTime.toISOString()
+    const res = await $axios.post('/v1/order', {
+      clientTime: formattedClientTime,
+      token: localStorage.basketToken,
+      ...order
     })
 
     return res

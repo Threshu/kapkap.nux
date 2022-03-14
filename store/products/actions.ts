@@ -15,12 +15,12 @@ export const loadProducts = async ({
   const category = categories.find((c: Category) => c.path === payload)
 
   if (category && typeof category !== 'undefined') {
-    const res = await $axios.get<ProductsState>(`/products/${category.id}`)
+    const res = await $axios.get<ProductsState>(`/v1/products/${category.id}`)
     if (res?.data?.success) {
       commit('setStateForProducts', res.data)
     }
   } else {
-    const res = await $axios.get<ProductsState>('/products')
+    const res = await $axios.get<ProductsState>('/v1/products')
     if (res?.data?.success) {
       commit('setStateForProducts', res.data)
     }
