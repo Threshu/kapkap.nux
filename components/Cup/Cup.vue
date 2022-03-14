@@ -98,18 +98,14 @@ export default class Cup extends Vue {
     this.getProductPreview()
     this.checkDimensions()
 
-    if (process.client) {
-      window.addEventListener('resize', this.checkDimensions)
-    }
+    window.addEventListener('resize', this.checkDimensions)
   }
 
   checkDimensions () {
-    if (process.client) {
-      if (window.innerWidth <= 1350) {
-        document.getElementsByTagName('html')[0].classList.add('no-scroll')
-      } else {
-        document.getElementsByTagName('html')[0].classList.remove('no-scroll')
-      }
+    if (window.innerWidth <= 1350) {
+      document.getElementsByTagName('html')[0].classList.add('no-scroll')
+    } else {
+      document.getElementsByTagName('html')[0].classList.remove('no-scroll')
     }
   }
 
