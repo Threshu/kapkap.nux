@@ -173,7 +173,7 @@ export default class Summary extends Vue {
     this.$router.push('/koszyk')
   }
 
-  saveCartItem () {
+  async saveCartItem () {
     const basket: ProductUpdateRequest = {
       product: this.productObject,
       previewId: this.previewId,
@@ -182,7 +182,7 @@ export default class Summary extends Vue {
       cartItemId: this.cartItemId
     }
 
-    this.editBasket(basket)
+    await this.editBasket(basket)
     this.$router.push('/koszyk')
   }
 
