@@ -45,7 +45,6 @@ export default class CupView extends Vue {
 
   mounted () {
     if (process.client) {
-      console.log(window.innerWidth)
       document.getElementsByTagName('html')[0].classList.add('no-scroll')
     }
   }
