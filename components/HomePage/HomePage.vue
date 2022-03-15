@@ -119,7 +119,7 @@ pl:
                 Nowość
               </span>
               <NuxtLink
-                to="/kubki"
+                :to="image.url"
                 class="nuxt-link-exact-active nuxt-link-active"
               >
                 <Picture
@@ -133,7 +133,7 @@ pl:
 
               <NuxtLink
                 class="ch2-btn ch2-allow-all-btn ch2-btn-primary ch2-btn-text-xs"
-                to="/kubki"
+                :to="image.url"
               >
                 Personalizuj
               </NuxtLink>
@@ -157,7 +157,7 @@ pl:
             <div class="col-lg-6">
               <div class="banner-section">
                 <NuxtLink
-                  to="/ja-i-pies/latem-nad-morzem"
+                  to="/kubki"
                 >
                   <Picture
                     path="/images/main-page/28718_120027_front_clipped_rev_1.png"
@@ -191,7 +191,7 @@ pl:
               >
                 Nowość
               </span>
-              <NuxtLink to="/kubki">
+              <NuxtLink :to="image.url">
                 <Picture
                   :path="`/images/main-page/quotes/${image.filename}`"
                   :alt="image.alt"
