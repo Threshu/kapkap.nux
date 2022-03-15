@@ -1088,6 +1088,7 @@
 				top: 51px;
 				background: #fff;
 				border-bottom: 1px solid #ebebeb;
+				max-width: 100%;
 
 				&.top {
 					position: fixed;
@@ -1551,6 +1552,28 @@
 					}
 				}
 
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px)  {
+	header {
+		&.sticky {
+			.container {
+				padding-right: calc((100% - 960px) / 2);
+				padding-left: calc((100% - 960px) / 2);
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1350px)  {
+	header {
+		&.sticky {
+			.container {
+				padding-right: calc((100% - 1140px) / 2);
+				padding-left: calc((100% - 1140px) / 2);
 			}
 		}
 	}
