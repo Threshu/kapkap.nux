@@ -3,38 +3,38 @@
     <div id="productConfBox" class="productConfBox">
       <div class="confMenu">
         <div
-          :class="`confMenu1 ${confMenu === 1 ? 'active' : ''}`"
+          :class="`confMenu1 ${confMenu === tab.items ? 'active' : ''}`"
           @click="changeConfMenu(1)"
         />
         <div
-          :class="`confMenu2 ${confMenu === 2 ? 'active' : ''}`"
+          :class="`confMenu2 ${confMenu === tab.bgs ? 'active' : ''}`"
           @click="changeConfMenu(2)"
         />
         <div
-          :class="`confMenu3 ${confMenu === 3 ? 'active' : ''}`"
+          :class="`confMenu3 ${confMenu === tab.cups ? 'active' : ''}`"
           @click="changeConfMenu(3)"
         />
         <div
-          :class="`confMenu4 ${confMenu === 4 ? 'active' : ''}`"
+          :class="`confMenu4 ${confMenu === tab.quotes ? 'active' : ''}`"
           @click="changeConfMenu(4)"
         />
       </div>
 
       <div>
         <CupChoice
-          v-show="confMenu === 3"
+          v-show="confMenu === tab.cups"
         />
         <BackgroundChoice
-          v-if="confMenu === 2"
+          v-if="confMenu === tab.bgs"
         />
         <ItemsChoice
-          v-if="confMenu === 1"
+          v-if="confMenu === tab.items"
           :edit-mode="editMode"
           @changeModal="changeModal"
           @changeEditModal="changeEditModal"
         />
         <QuoteChoice
-          v-if="confMenu === 4"
+          v-if="confMenu === tab.quotes"
         />
       </div>
       <Summary
@@ -60,6 +60,8 @@ import ItemsChoice from '~/components/Cup/ItemsChoice.vue'
 import QuoteChoice from '~/components/Cup/QuoteChoice.vue'
 import Summary from '~/components/Cup/Summary.vue'
 import { Side } from '~/store/preview/state'
+import { Tabs } from '~/store/cup/state'
+
 @Component({
   components: {
     CupChoice, BackgroundChoice, ItemsChoice, QuoteChoice, Summary
@@ -71,10 +73,11 @@ export default class EditArea extends Vue {
   @Prop(String) readonly cartItemId!: string
   @Prop(Number) readonly menu!: number
   @Mutation('preview/setActivePreview') setActivePreview!: Function
-  confMenu = 1
+  confMenu = Tabs.items
   showModal = false
   showEditModal = false
-
+  tab = Tabs
+  
   created () {
     this.confMenu = this.menu
   }
@@ -89,7 +92,7 @@ export default class EditArea extends Vue {
 
   changeConfMenu (id: number) {
     this.confMenu = id
-    if (id === 4) {
+    if (id === Tabs.quotes) {
       this.setActivePreview(Side.Back)
     } else {
       this.setActivePreview(Side.Front)
