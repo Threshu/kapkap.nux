@@ -120,6 +120,7 @@ pl:
               </span>
               <NuxtLink
                 :to="image.url"
+                class="nuxt-link-exact-active nuxt-link-active"
               >
                 <Picture
                   :path="`/images/main-page/news/${image.filename}`"
@@ -156,7 +157,7 @@ pl:
             <div class="col-lg-6">
               <div class="banner-section">
                 <NuxtLink
-                  to="/ja-i-pies/latem-nad-morzem"
+                  to="/kubki"
                 >
                   <Picture
                     path="/images/main-page/28718_120027_front_clipped_rev_1.png"
