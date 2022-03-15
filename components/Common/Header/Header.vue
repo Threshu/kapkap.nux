@@ -106,11 +106,13 @@ export default class Header extends MobileSupport {
     const header = document.querySelector('#sticky > .container')
     const headerHeight = 51
 
-    if (header) {
-      if (window.scrollY > headerHeight && !header.className.includes('scrolled')) {
-        header.classList.add('scrolled')
-      } else if (window.scrollY < headerHeight) {
-        header.classList.remove('scrolled')
+    if (process.client) {
+      if (header) {
+        if (window.scrollY > headerHeight && !header.className.includes('scrolled')) {
+          header.classList.add('scrolled')
+        } else if (window.scrollY < headerHeight) {
+          header.classList.remove('scrolled')
+        }
       }
     }
   }

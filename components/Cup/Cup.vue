@@ -98,7 +98,9 @@ export default class Cup extends Vue {
     this.getProductPreview()
     this.checkDimensions()
 
-    window.addEventListener('resize', this.checkDimensions)
+    if (process.client) {
+      window.addEventListener('resize', this.checkDimensions)
+    }
   }
 
   checkDimensions () {
