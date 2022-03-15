@@ -119,7 +119,8 @@ pl:
                 Nowość
               </span>
               <NuxtLink
-                :to="image.url"
+                to="/kubki"
+                class="nuxt-link-exact-active nuxt-link-active"
               >
                 <Picture
                   :path="`/images/main-page/news/${image.filename}`"
@@ -132,7 +133,7 @@ pl:
 
               <NuxtLink
                 class="ch2-btn ch2-allow-all-btn ch2-btn-primary ch2-btn-text-xs"
-                :to="image.url"
+                to="/kubki"
               >
                 Personalizuj
               </NuxtLink>
@@ -190,7 +191,7 @@ pl:
               >
                 Nowość
               </span>
-              <NuxtLink :to="image.url">
+              <NuxtLink to="/kubki">
                 <Picture
                   :path="`/images/main-page/quotes/${image.filename}`"
                   :alt="image.alt"

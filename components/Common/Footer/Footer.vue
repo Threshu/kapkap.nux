@@ -273,27 +273,27 @@ export default class Footer extends Vue {
 
   menuOptions: menuItem[] = [
     {
-      link: '/ja-i-pies/latem-nad-morzem',
+      link: '/kubki',
       title: 'Nad morzem'
     },
     {
-      link: '/ja-i-pies/nad-jeziorem',
+      link: '/kubki',
       title: 'Nad jeziorem'
     },
     {
-      link: '/ja-i-pies/zima',
+      link: '/kubki',
       title: 'Zimą'
     },
     {
-      link: '/ja-i-pies/w-lesie',
+      link: '/kubki',
       title: 'W lesie'
     },
     {
-      link: '/ja-i-pies/w-miescie',
+      link: '/kubki',
       title: 'W mieście'
     },
     {
-      link: '/ja-i-pies/na-swieta',
+      link: '/kubki',
       title: 'Na święta'
     }
   ]
