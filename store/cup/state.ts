@@ -138,4 +138,11 @@ export type EditorState = {
   workingObject: WorkingObject,
 }
 
+export enum Tabs {
+  items = 1,
+  bgs = 2,
+  cups = 3,
+  quotes = 4,
+}
+
 export default () => (<EditorState>{})
