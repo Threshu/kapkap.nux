@@ -70,11 +70,14 @@ export default {
     }
 
     const index = state.workingObject.items.map(function (quote) { return quote.type }).indexOf('quote')
-
-    Vue.set(state.workingObject, 'quoteId', quoteId)
     if (state.editMode) {
       if (index !== -1) {
-        Vue.set(state.workingObject.items[index], 'id', quoteId)
+        if (state.workingObject.items[index].id === quoteId) {
+          quoteId = ''
+          state.workingObject.items.splice(index, 2)
+        } else {
+          Vue.set(state.workingObject.items[index], 'id', quoteId)
+        }
       } else {
         state.workingObject.items.push({
           'id': quoteId,
@@ -82,6 +85,8 @@ export default {
         })
       }
     }
+
+    Vue.set(state.workingObject, 'quoteId', quoteId)
   },
 
   setTotal (state: EditorState, total: number) {
