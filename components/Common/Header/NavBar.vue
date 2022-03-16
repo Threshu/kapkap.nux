@@ -3,7 +3,7 @@
     <div id="mainnav">
       <div
         class="toggle-nav"
-        @click="onSwitchNav"
+        @click="mobileNav = true"
       >
         <i class="fa fa-bars sidebar-bar" />
       </div>
@@ -12,7 +12,7 @@
       >
         <li
           class="back-btn"
-          @click="onSwitchNav"
+          @click="mobileNav = false"
         >
           <div class="mobile-back text-right">
             <span>Wróć</span>
@@ -133,7 +133,6 @@ export default class NavBar extends Vue {
       this.isMenuOpened = false
       event.target.parentElement.parentElement.parentElement.classList.remove('open-submenu')
     } else {
-      this.mobileNav = !this.mobileNav
       this.setOverlayShown(false)
     }
   }
