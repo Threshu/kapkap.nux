@@ -34,6 +34,7 @@ import Preview from '~/components/Cup/Preview.vue'
 import RelatedProducts from '~/components/Cup/RelatedProducts.vue'
 import { BasketContainer } from '~/store/basket/state'
 import Breadcrumb from '~/components/Common/Breadcrumb.vue'
+import { Tabs } from '~/store/cup/state'
 
 @Component({
   components: {
@@ -66,7 +67,7 @@ export default class Cup extends Vue {
   @Action('cup/loadProductFromCart') loadProductFromCart!: Function
 
   defaultMenu = 1
-
+  tabs = Tabs
   // old
   showConf = true
 
@@ -74,7 +75,7 @@ export default class Cup extends Vue {
     this.setEditMode(this.editMode)
     let productId
     if (this.editMode) {
-      this.defaultMenu = 3
+      this.defaultMenu = this.tabs.items
       productId = await this.loadProductFromCart(this.cartItemId)
     } else {
       productId = this.productId
