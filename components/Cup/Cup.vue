@@ -64,6 +64,7 @@ export default class Cup extends Vue {
   @Action('cup/loadProduct') loadProduct!: Function
   @Action('preview/getProductPreview') getProductPreview!: Function
   @Action('cup/loadProductFromCart') loadProductFromCart!: Function
+  @Action('cup/saveConfigurationForProduct') saveConfigurationForProduct!: Function
 
   defaultMenu = 1
 
@@ -92,6 +93,7 @@ export default class Cup extends Vue {
       ])
       if (!this.editMode) {
         this.prepareProductForCup()
+        this.saveConfigurationForProduct(this.productId)
       }
     }
 

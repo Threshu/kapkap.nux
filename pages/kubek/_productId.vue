@@ -43,6 +43,12 @@ export default class CupView extends Vue {
     }
   }
 
+  mounted () {
+    if (process.client) {
+      document.getElementsByTagName('html')[0].classList.add('no-scroll')
+    }
+  }
+
   destroyed () {
     this.saveConfigurationForProduct(this.productId)
   }
