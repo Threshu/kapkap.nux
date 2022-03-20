@@ -1,6 +1,5 @@
 import https from 'https'
-import path from 'path'
-import fs from 'fs'
+
 import axios from 'axios'
 
 export default {
@@ -134,11 +133,11 @@ export default {
 
   server: {
     host: '0.0.0.0',
-    port: process.env.PORT,
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
-    }
+    port: process.env.PORT
+    // https: {
+    //   key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
+    //   cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
+    // }
   },
 
   googleAnalytics: {
