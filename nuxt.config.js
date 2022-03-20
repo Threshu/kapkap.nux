@@ -156,7 +156,9 @@ export default {
   generate: {
     routes (callback) {
       const agent = new https.Agent({
-        rejectUnauthorized: false
+        rejectUnauthorized: true,
+        cert: '~/localhost.crt',
+        key: '~/localhost.key'
       })
       axios
         .get('https://api.kapkap.eu/v1/categories', { httpsAgent: agent })
