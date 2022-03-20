@@ -109,12 +109,15 @@ export default {
   loadProductFromCart: async ({ commit, dispatch, rootGetters } : ActionContext<EditorState, RootState>, cartItemId: string): Promise<string> => {
     await dispatch('basket/loadBasket', null, { root: true })
     const basket = rootGetters['basket/basket']
-    const cartItem: CartProduct = basket.products.find((product: CartProduct) => product.cartItemId === cartItemId)
-    commit('setWorkingObjectFromCart', cartItem)
-    commit('setQuantity', cartItem.number)
-    commit('preview/setPreviewId', cartItem.previewId, { root: true })
+    if (basket) {
+      const cartItem: CartProduct = basket.products.find((product: CartProduct) => product.cartItemId === cartItemId)
+      commit('setWorkingObjectFromCart', cartItem)
+      commit('setQuantity', cartItem.number)
+      commit('preview/setPreviewId', cartItem.previewId, { root: true })
 
-    return cartItem.productId
+      return cartItem.productId
+    }
+    return ''
   },
 
   saveConfigurationForProduct: ({ state }: ActionContext<EditorState, RootState>, productId: string): void => {

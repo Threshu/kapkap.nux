@@ -6,6 +6,7 @@ export type Product = {
   productId: string
   sampleImageURL: string
   title: string
+  path: string
 }
 
 export type LastVisited = {

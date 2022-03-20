@@ -134,10 +134,13 @@ export default {
   server: {
     host: '0.0.0.0',
     port: process.env.PORT
-    // https: {
-    //   key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
-    //   cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
-    // }
+    // https:
+    //   process.env.ENV !== 'production'
+    //     ? undefined
+    //     : {
+    //         key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
+    //         cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
+    //       }
   },
 
   googleAnalytics: {

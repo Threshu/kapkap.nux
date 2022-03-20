@@ -2,7 +2,7 @@
   <div class="row">
     <div v-for="product in products" :key="product.productId" class="col-grid-box col-lg-3">
       <NuxtLink
-        :to="`/kubek/` + product.productId"
+        :to="getUrl(product)"
         class="nuxt-link-exact-active nuxt-link-active"
       >
         <div class="product-box" @click="handleItemClick(product)">
@@ -41,8 +41,17 @@ import { Product } from '~/types/store/products/types'
 export default class ProductsList extends Vue {
   @Getter('products/products') products!: Product[]
 
+  getUrl (product: Product): string {
+    return `${product.path}/${product.productId}`
+  }
+
   handleItemClick (product: Product) {
     this.$emit('addLastVisited', { addDate: new Date(), product })
   }
 }
 </script>
+<style scoped>
+.front img {
+  min-height: 150px;
+}
+</style>
