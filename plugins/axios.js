@@ -5,7 +5,7 @@ export default function ({
 }) {
   const agent = new https.Agent({
     rejectUnauthorized: true,
-    cert: '~/localhost.crt',
+    cert: '~/localhost.crt.pem',
     key: '~/localhost.key'
   })
   $axios.onRequest((config) => {

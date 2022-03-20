@@ -139,7 +139,7 @@ export default {
     //     ? undefined
     //     : {
     //         key: fs.readFileSync(path.resolve(__dirname, 'localhost.key')),
-    //         cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt'))
+    //         cert: fs.readFileSync(path.resolve(__dirname, 'localhost.crt.pem'))
     //       }
   },
 
@@ -157,7 +157,7 @@ export default {
     routes (callback) {
       const agent = new https.Agent({
         rejectUnauthorized: true,
-        cert: '~/localhost.crt',
+        cert: '~/localhost.crt.pem',
         key: '~/localhost.key'
       })
       axios
