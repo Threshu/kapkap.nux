@@ -1,6 +1,5 @@
 import https from 'https'
-import path from 'path'
-import fs from 'fs'
+
 import axios from 'axios'
 
 export default {

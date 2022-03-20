@@ -121,7 +121,12 @@ export default {
   },
 
   saveConfigurationForProduct: ({ state }: ActionContext<EditorState, RootState>, productId: string): void => {
-    const data = { items: state.product.items, workingObject: state.workingObject }
-    sessionStorageService.setData(`workingProduct-${productId}`, data)
+    if (state?.product?.items) {
+      const data = {
+        items: state.product.items,
+        workingObject: state.workingObject
+      }
+      sessionStorageService.setData(`workingProduct-${productId}`, data)
+    }
   }
 }
