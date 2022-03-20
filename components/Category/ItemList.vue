@@ -42,7 +42,7 @@ export default class ProductsList extends Vue {
   @Getter('products/products') products!: Product[]
 
   getUrl (product: Product): string {
-    return `/kubek/${product.path}/${product.productId}`
+    return `${product.path}/${product.productId}`
   }
 
   handleItemClick (product: Product) {
