@@ -18,6 +18,15 @@ pl:
         <NuxtLink to="/kubki">
           <div class="infographic" />
         </NuxtLink>
+        <div style="text-align: center;">
+          <NuxtLink
+            class="btn btn-info center-align"
+            style="background-color: #31a745;"
+            to="/kubki"
+          >
+            Zbuduj własny kubek
+          </NuxtLink>
+        </div>
 
       <!--      <VueSlickCarousel-->
       <!--          v-if="topSlider && topSlider.length"-->
