@@ -234,6 +234,10 @@
 						cursor: pointer;
 						transition: all 0.3s;
 
+						&:hover {
+							filter: brightness(1.07) contrast(1.07);
+						}
+
 						img {
 							width: auto;
 							height: 100%;
@@ -269,6 +273,10 @@
 						cursor: pointer;
 						position: relative;
 						transition: all 0.3s;
+
+						&:hover {
+							filter: brightness(1.07) contrast(1.07);
+						}
 
 						&.selected {
 							&:before {
@@ -381,6 +389,10 @@
 									margin-left: 0;
 									height: auto;
 
+									&:hover {
+										filter: brightness(1.07) contrast(1.07);
+									}
+
 									.colorItem {
 										width: 52px;
 										max-height: 52px;
@@ -489,6 +501,10 @@
 								padding-top: 80px;
 								.objItem {
 									margin: 20px;
+
+									&:hover {
+										filter: brightness(1.07) contrast(1.07);
+									}
 									.name {
 										display: block;
 									}
@@ -645,6 +661,10 @@
 						transition: all 0.3s;
 						position: relative;
 						cursor: pointer;
+
+						&:hover {
+							filter: brightness(1.07) contrast(1.07);
+						}
 
 						img {
 							width: 100%;
