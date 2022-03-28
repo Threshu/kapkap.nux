@@ -17,7 +17,7 @@
                 <NuxtLink :to="`/kubek/` + product.productId">
                   <div class="item">
                     <div>
-                      <img :src="product.sampleImageURL" :alt="product.title">
+                      <img :src="product.sampleImageURL" :alt="product.title" class="item-image">
                     </div>
                     <div class="item-content">
 <!--                      <RatingStars :active="5" />-->
@@ -65,19 +65,26 @@ export default class ThemeCard extends Vue {
 .item {
   display: flex;
 
-  .item-content{
+  .item-image {
+    width: auto;
+  }
+
+  .item-content {
     width: 60%;
+    padding-top: 20px;
   }
 }
 .swiper-wrapper {
   transform: translate3d(0px, 0px, 0px)
 }
 
-.item-content {
-  padding-top: 20px;
-}
-
 .title-border {
   border-bottom: 1px solid $round-border;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .item-content {
+    margin-left: -30px
+  }
 }
 </style>
